@@ -15,7 +15,7 @@ class DeathLinkipelagoItemData(NamedTuple):
 item_table: Dict[str, DeathLinkipelagoItemData] = {
     "Death Trap": DeathLinkipelagoItemData(ItemClassification.trap, 1),
     "Death Shield": DeathLinkipelagoItemData(ItemClassification.useful, 2),
-    "Death Filler": DeathLinkipelagoItemData(ItemClassification.filler, 3),
+    "Death Grass": DeathLinkipelagoItemData(ItemClassification.filler, 3),
     "The Urge to Die": DeathLinkipelagoItemData(ItemClassification.progression, 4),
 }
 
