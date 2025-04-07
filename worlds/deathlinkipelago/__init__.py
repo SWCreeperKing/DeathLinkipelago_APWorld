@@ -1,5 +1,5 @@
 import math
-from typing import Dict, Any, Union, ClassVar
+from typing import Dict, Any, Union, ClassVar, Final
 from .Options import DeathLinkipelagoOptions, check_options
 from .Items import DeathLinkipelagoItem, item_table, create_items
 from worlds.AutoWorld import World
@@ -34,6 +34,8 @@ class DeathLinkipelago(World):
         check_options(self)
 
     def create_regions(self) -> None:
+        lambdas = {}
+
         menu_region = Region("Menu", self.player, self.multiworld)
         last_region = menu_region
         shops = math.ceil(self.options.death_check_amount / 10)
@@ -50,14 +52,16 @@ class DeathLinkipelago(World):
                 location = Location(self.player, location_name, self.location_name_to_id[location_name], last_region)
 
                 if i == 0 and shop > 0:
-                    progression_req = shop
-                    location.access_rule = lambda state: state.has("Progressive Death Shop", self.player,
+                    location.access_rule = lambda state, progression_req = shop: state.has("Progressive Death Shop", self.player,
                                                                    progression_req)
 
                 if i < self.options.progressive_items_per_shop:
                     location.progress_type = LocationProgressType.PRIORITY
 
                 last_region.locations.append(location)
+
+        for num, lmbda in lambdas.items():
+            lmbda()
 
         self.multiworld.regions.append(menu_region)
 
