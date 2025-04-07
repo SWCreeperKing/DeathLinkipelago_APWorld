@@ -75,7 +75,8 @@ class DeathLinkipelago(World):
     def fill_slot_data(self) -> Dict[str, Any]:
         slot_data: Dict[str, Any] = {
             "death_check_amount": int(self.options.death_check_amount),
-            "has_funny_button": bool(self.options.has_funny_button and self.settings.allow_funny_button)
+            "send_traps_after_goal": bool(self.options.send_traps_after_goal),
+            "has_funny_button": bool(self.options.has_funny_button and self.settings.allow_funny_button),
         }
 
         return slot_data

@@ -36,6 +36,8 @@ class ProgressiveItemsPerShop(Range):
     range_start = 0
     range_end = 10
 
+class SendDeathTrapsAfterGoal(Toggle):
+    display_name = "Send Death Trap After Goal"
 
 @dataclass
 class DeathLinkipelagoOptions(PerGameCommonOptions):
@@ -43,6 +45,7 @@ class DeathLinkipelagoOptions(PerGameCommonOptions):
     has_funny_button: EnableFunnyButton
     death_trap_percent: DeathTrapPercent
     progressive_items_per_shop: ProgressiveItemsPerShop
+    send_traps_after_goal: SendDeathTrapsAfterGoal
 
 
 def check_options(world):
