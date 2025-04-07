@@ -34,8 +34,6 @@ class DeathLinkipelago(World):
         check_options(self)
 
     def create_regions(self) -> None:
-        lambdas = {}
-
         menu_region = Region("Menu", self.player, self.multiworld)
         last_region = menu_region
         shops = math.ceil(self.options.death_check_amount / 10)
@@ -44,24 +42,21 @@ class DeathLinkipelago(World):
             next_region = Region(f"Shop {shop + 1}", self.player, self.multiworld)
             self.multiworld.regions.append(next_region)
 
-            last_region.connect(next_region)
+            if shop > 0:
+                last_region.connect(next_region, rule=lambda state, progression_req=shop: \
+                        state.has("Progressive Death Shop", self.player, progression_req))
+            else:
+                last_region.connect(next_region)
             last_region = next_region
 
             for i in range(min(10, self.options.death_check_amount - shop * 10)):
                 location_name = f"DeathLinkipelago Death Shop {i + shop * 10 + 1}"
                 location = Location(self.player, location_name, self.location_name_to_id[location_name], last_region)
 
-                if i == 0 and shop > 0:
-                    location.access_rule = lambda state, progression_req = shop: state.has("Progressive Death Shop", self.player,
-                                                                   progression_req)
-
                 if i < self.options.progressive_items_per_shop:
                     location.progress_type = LocationProgressType.PRIORITY
 
                 last_region.locations.append(location)
-
-        for num, lmbda in lambdas.items():
-            lmbda()
 
         self.multiworld.regions.append(menu_region)
 
