@@ -26,7 +26,7 @@ class DeathLinkipelago(World):
     options_dataclass = DeathLinkipelagoOptions
     options: DeathLinkipelagoOptions
     settings: ClassVar[DeathLinkipelagoSettings]
-    location_name_to_id = {f"DeathLinkipelago Death Shop {id_offset + 1}": uuid_offset + id_offset for id_offset in
+    location_name_to_id = {f"Death Shop {id_offset + 1}": uuid_offset + id_offset for id_offset in
                            range(999)}
     item_name_to_id = {name: uuid_offset + data.id_offset for name, data in item_table.items()}
 
@@ -50,7 +50,7 @@ class DeathLinkipelago(World):
             last_region = next_region
 
             for i in range(min(10, self.options.death_check_amount - shop * 10)):
-                location_name = f"DeathLinkipelago Death Shop {i + shop * 10 + 1}"
+                location_name = f"Death Shop {i + shop * 10 + 1}"
                 location = Location(self.player, location_name, self.location_name_to_id[location_name], last_region)
 
                 if i < self.options.progressive_items_per_shop:
