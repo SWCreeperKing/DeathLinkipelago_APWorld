@@ -34,7 +34,6 @@ def create_items(world):
         world.multiworld.itempool.append(world.create_item("Death Trap"))
         item_count -= 1
 
-    print(f"Checks: {shop_items} + {trap_amount} + {item_count} = {shop_items + trap_amount + item_count}")
     for i in range(item_count):
         world.multiworld.itempool.append(world.create_item("Death Shield"))
         item_count -= 1
