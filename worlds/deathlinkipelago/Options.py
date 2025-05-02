@@ -28,6 +28,18 @@ class DeathTrapPercent(Range):
     range_start = 0
     range_end = 100
 
+class SecondsPerLifeCoin(Range):
+    """How long in seconds can no death occur to gain a life coin? 0 = disabled, 7min default, 2hr max"""
+    display_name = "Seconds Per Life Coin"
+    default = 420
+    range_start = 0
+    range_end = 7200
+
+
+class UseGlobalDeathCounter(Toggle):
+    """Will store death counts in the global slot and sync with anyone else with this enabled (might be a bit strange with overriding)"""
+    display_name = "Use Global Death Counter"
+
 
 class ProgressiveItemsPerShop(Range):
     """How many items in the shop will be priority"""
@@ -46,6 +58,8 @@ class DeathLinkipelagoOptions(PerGameCommonOptions):
     death_trap_percent: DeathTrapPercent
     progressive_items_per_shop: ProgressiveItemsPerShop
     send_traps_after_goal: SendDeathTrapsAfterGoal
+    seconds_per_life_coin: SecondsPerLifeCoin
+    use_global_counter: UseGlobalDeathCounter
 
 
 def check_options(world):

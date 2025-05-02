@@ -24,7 +24,7 @@ def create_items(world):
     item_count = world.options.death_check_amount
     if item_count == 0: return
 
-    shop_items = math.ceil(item_count / 10) - 1
+    shop_items = max(0, math.ceil(item_count / 10) - 1)
     for i in range(shop_items):
         world.multiworld.itempool.append(world.create_item("Progressive Death Shop"))
         item_count -= 1

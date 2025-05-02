@@ -44,7 +44,7 @@ class DeathLinkipelago(World):
 
             if shop > 0:
                 last_region.connect(next_region, rule=lambda state, progression_req=shop: \
-                        state.has("Progressive Death Shop", self.player, progression_req))
+                        state.has("Progressive Death Shop", self.player, progression_req + 1))
             else:
                 last_region.connect(next_region)
             last_region = next_region
@@ -65,18 +65,22 @@ class DeathLinkipelago(World):
         return DeathLinkipelagoItem(name, item.type, item.id_offset + uuid_offset, self.player)
 
     def create_items(self) -> None:
+        self.push_precollected(self.create_item("Progressive Death Shop"))
         create_items(self)
 
     def set_rules(self) -> None:
         self.multiworld.completion_condition[self.player] = \
             lambda state: state.has("Progressive Death Shop", self.player,
-                                    math.ceil(self.options.death_check_amount / 10) - 1)
+                                    max(1, math.ceil(self.options.death_check_amount / 10)))
 
     def fill_slot_data(self) -> Dict[str, Any]:
         slot_data: Dict[str, Any] = {
+            "seconds_per_life_coin": int(self.options.seconds_per_life_coin),
             "death_check_amount": int(self.options.death_check_amount),
             "send_traps_after_goal": bool(self.options.send_traps_after_goal),
             "has_funny_button": bool(self.options.has_funny_button and self.settings.allow_funny_button),
+            "use_global_counter": bool(self.options.use_global_counter),
+            "compatibility_version": "v.0.12"
         }
 
         return slot_data
