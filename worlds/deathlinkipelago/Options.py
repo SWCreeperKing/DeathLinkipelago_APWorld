@@ -11,7 +11,8 @@ class CheckCount(Range):
     extend_death_limit in the host yaml will remove the 50 check limit
     """
     display_name = "Death Check Count"
-    default = 5
+    # default = 5
+    default = 50
     range_start = 0
     range_end = 999
 
@@ -44,7 +45,8 @@ class UseGlobalDeathCounter(Toggle):
 class ProgressiveItemsPerShop(Range):
     """How many items in the shop will be priority"""
     display_name = "Progressive Items Per Shop"
-    default = 3
+    # default = 3
+    default = 1
     range_start = 0
     range_end = 10
 
