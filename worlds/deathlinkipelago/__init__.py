@@ -26,8 +26,8 @@ class DeathLinkipelago(World):
     options_dataclass = DeathLinkipelagoOptions
     options: DeathLinkipelagoOptions
     settings: ClassVar[DeathLinkipelagoSettings]
-    location_name_to_id = {f"Death Shop {id_offset + 1}": uuid_offset + id_offset for id_offset in
-                           range(999)}
+    shop_locations = {f"Death Shop {id_offset + 1}": uuid_offset + id_offset + 1 for id_offset in range(999)}
+    location_name_to_id = {"Starting Check": uuid_offset, **shop_locations}
     item_name_to_id = {name: uuid_offset + data.id_offset for name, data in item_table.items()}
 
     def generate_early(self) -> None:
@@ -35,8 +35,11 @@ class DeathLinkipelago(World):
 
     def create_regions(self) -> None:
         menu_region = Region("Menu", self.player, self.multiworld)
-        last_region = menu_region
+        last_region = Region("Starting Region", self.player, self.multiworld)
         shops = math.ceil(self.options.death_check_amount / 10)
+
+        last_region.locations.append(Location(self.player, "Starting Check", self.location_name_to_id["Starting Check"], last_region))
+        menu_region.connect(last_region)
 
         for shop in range(shops):
             next_region = Region(f"Shop {shop + 1}", self.player, self.multiworld)
@@ -44,7 +47,7 @@ class DeathLinkipelago(World):
 
             if shop > 0:
                 last_region.connect(next_region, rule=lambda state, progression_req=shop: \
-                        state.has("Progressive Death Shop", self.player, progression_req + 1))
+                        state.has("Progressive Death Shop", self.player, progression_req))
             else:
                 last_region.connect(next_region)
             last_region = next_region
@@ -65,22 +68,25 @@ class DeathLinkipelago(World):
         return DeathLinkipelagoItem(name, item.type, item.id_offset + uuid_offset, self.player)
 
     def create_items(self) -> None:
-        self.push_precollected(self.create_item("Progressive Death Shop"))
         create_items(self)
 
     def set_rules(self) -> None:
-        self.multiworld.completion_condition[self.player] = \
-            lambda state: state.has("Progressive Death Shop", self.player,
-                                    max(1, math.ceil(self.options.death_check_amount / 10)))
+        if self.options.death_check_amount <= 10:
+            self.multiworld.completion_condition[self.player] = lambda state: state.has("Death Grass", self.player)
+        else:
+            self.multiworld.completion_condition[self.player] = \
+                lambda state: state.has("Progressive Death Shop", self.player,
+                                        math.ceil(self.options.death_check_amount / 10) - 1) and state.has("Death Grass", self.player)
 
     def fill_slot_data(self) -> Dict[str, Any]:
         slot_data: Dict[str, Any] = {
             "seconds_per_life_coin": int(self.options.seconds_per_life_coin),
             "death_check_amount": int(self.options.death_check_amount),
             "send_traps_after_goal": bool(self.options.send_traps_after_goal),
-            "has_funny_button": bool(self.options.has_funny_button and self.settings.allow_funny_button),
+            "has_funny_button": (bool(self.options.has_funny_button) and bool(self.settings.allow_funny_button)),
             "use_global_counter": bool(self.options.use_global_counter),
-            "compatibility_version": "v.0.12"
+            "send_scout_hints": bool(self.options.send_scout_hints),
+            "compatibility_version": "v.0.13.0"
         }
 
         return slot_data

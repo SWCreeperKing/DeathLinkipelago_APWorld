@@ -15,12 +15,14 @@ class DeathLinkipelagoItemData(NamedTuple):
 item_table: Dict[str, DeathLinkipelagoItemData] = {
     "Death Trap": DeathLinkipelagoItemData(ItemClassification.trap, 1),
     "Death Shield": DeathLinkipelagoItemData(ItemClassification.useful, 2),
-    "Death Grass": DeathLinkipelagoItemData(ItemClassification.filler, 3),
+    "Death Grass": DeathLinkipelagoItemData(ItemClassification.progression, 3),
     "The Urge to Die": DeathLinkipelagoItemData(ItemClassification.progression, 4),
     "Progressive Death Shop": DeathLinkipelagoItemData(ItemClassification.progression, 5)
 }
 
 def create_items(world):
+    world.multiworld.itempool.append(world.create_item("Death Grass"))
+
     item_count = world.options.death_check_amount
     if item_count == 0: return
 

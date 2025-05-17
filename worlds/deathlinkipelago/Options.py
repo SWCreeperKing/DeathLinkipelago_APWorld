@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from Options import Range, Toggle, PerGameCommonOptions
+from Options import Range, Toggle, PerGameCommonOptions, DefaultOnToggle
 
 
 class CheckCount(Range):
@@ -8,7 +8,7 @@ class CheckCount(Range):
     How many death checks there will be
     max is 50
 
-    remove_death_limit in the host yaml will remove the 50 check limit
+    extend_death_limit in the host yaml will remove the 50 check limit
     """
     display_name = "Death Check Count"
     default = 5
@@ -49,7 +49,12 @@ class ProgressiveItemsPerShop(Range):
     range_end = 10
 
 class SendDeathTrapsAfterGoal(Toggle):
+    """Send deathlinks from traps after goal"""
     display_name = "Send Death Trap After Goal"
+
+class SendScoutHints(DefaultOnToggle):
+    """Sends scout hints about progressive items in the death shop"""
+    display_name = "Send Scout Hints"
 
 @dataclass
 class DeathLinkipelagoOptions(PerGameCommonOptions):
@@ -60,6 +65,7 @@ class DeathLinkipelagoOptions(PerGameCommonOptions):
     send_traps_after_goal: SendDeathTrapsAfterGoal
     seconds_per_life_coin: SecondsPerLifeCoin
     use_global_counter: UseGlobalDeathCounter
+    send_scout_hints: SendScoutHints
 
 
 def check_options(world):
