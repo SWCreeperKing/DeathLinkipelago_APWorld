@@ -24,28 +24,20 @@ item_table: Dict[str, DeathLinkipelagoItemData] = {
 
 def create_items(world):
     world.multiworld.itempool.append(world.create_item("Death Grass"))
-    placed_items = 1;
 
     item_count = world.options.death_check_amount
-    print(f"generating with: {item_count}")
     if item_count == 0: return
 
     shop_items = max(0, math.ceil(item_count / 10) - 1)
     for i in range(shop_items):
         world.multiworld.itempool.append(world.create_item("Progressive Death Shop"))
-        placed_items += 1
         item_count -= 1
 
     trap_amount = math.ceil(item_count * (world.options.death_trap_percent / 100))
     for i in range(trap_amount):
         world.multiworld.itempool.append(world.create_item("Death Trap"))
-        placed_items += 1
         item_count -= 1
 
     for i in range(item_count):
         world.multiworld.itempool.append(world.create_item("Death Shield"))
-        placed_items += 1
         item_count -= 1
-
-    print(
-        f"final count: [{item_count}], shop:[{shop_items}], trap:[{trap_amount}], shield:[{placed_items - (1 + shop_items + trap_amount)}], placed: [{placed_items}]")

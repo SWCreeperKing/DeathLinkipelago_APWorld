@@ -34,15 +34,12 @@ class DeathLinkipelago(World):
         check_options(self)
 
     def create_regions(self) -> None:
-        location_count = 0
-        priority_locs = 0
         menu_region = Region("Menu", self.player, self.multiworld)
         last_region = Region("Starting Region", self.player, self.multiworld)
 
         shops = math.ceil(self.options.death_check_amount / 10)
 
         last_region.locations.append(Location(self.player, "Starting Check", self.location_name_to_id["Starting Check"], last_region))
-        location_count += 1
         menu_region.connect(last_region)
         self.multiworld.regions.append(menu_region)
         self.multiworld.regions.append(last_region)
@@ -62,14 +59,10 @@ class DeathLinkipelago(World):
                 location_name = f"Death Shop {i + shop * 10 + 1}"
                 location = Location(self.player, location_name, self.location_name_to_id[location_name], last_region)
 
-                if i < self.options.progressive_items_per_shop:
-                    priority_locs += 1
+                if i < self.options.progressive_items_per_shop and shop < shops - 1:
                     location.progress_type = LocationProgressType.PRIORITY
 
                 last_region.locations.append(location)
-                location_count += 1
-
-        print(f"location count:[{location_count}]; priority:[{priority_locs}]")
 
     def create_item(self, name: str) -> DeathLinkipelagoItem:
         item = item_table[name]
