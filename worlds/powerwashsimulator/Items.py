@@ -21,15 +21,16 @@ raw_items = progression_items + filler_items
 
 def create_items(world):
     options: PowerwashSimulatorOptions = world.options
+    pool = world.multiworld.itempool
 
     for location in options.get_locations():
-        world.multiworld.itempool.append(world.create_item("A Job Well Done"))
+        pool.append(world.create_item("A Job Well Done"))
         world.location_counter -= 1
 
         if location == world.starting_location: continue
-        world.multiworld.itempool.append(world.create_item(f"{location} Unlock"))
+        pool.append(world.create_item(f"{location} Unlock"))
         world.location_counter -= 1
 
     while world.location_counter > 0:
-        world.multiworld.itempool.append(world.create_item(world.random.choice(filler_items)))
+        pool.append(world.create_item(world.random.choice(filler_items)))
         world.location_counter -= 1

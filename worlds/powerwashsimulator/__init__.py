@@ -9,6 +9,9 @@ from .Options import PowerwashSimulatorOptions, check_options
 
 uuid_offset = 0x3AF4F1BC
 class PowerwashSimulator(World):
+    """
+    Powerwash Simulator
+    """
     game = "Powerwash Simulator"
     options_dataclass = PowerwashSimulatorOptions
     options: PowerwashSimulatorOptions
@@ -30,19 +33,15 @@ class PowerwashSimulator(World):
         self.multiworld.regions.append(menu_region)
 
         for location in option_locations:
-            print(f"loading: [{location}]")
-
             next_region = Region(f"Clean the {location}", self.player, self.multiworld)
             self.multiworld.regions.append(next_region)
-            location_percentage = locations_percentages[location]
 
-            for percent_location in location_percentage:
+            for percent_location in locations_percentages[location]:
                 self.location_counter += 1
-                location = Location(self.player, percent_location, self.location_name_to_id[percent_location], next_region)
-                next_region.locations.append(location)
+                location_check = Location(self.player, percent_location, self.location_name_to_id[percent_location], next_region)
+                next_region.locations.append(location_check)
 
             if location == self.starting_location:
-                print(f"starting location: {location}")
                 menu_region.connect(next_region)
             else:
                 menu_region.connect(next_region, rule=lambda state: state.has(f"{location} Unlock", self.player))
