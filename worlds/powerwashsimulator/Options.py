@@ -1,7 +1,7 @@
 import logging
 from typing import List
 from dataclasses import dataclass
-from Options import Range, Toggle, PerGameCommonOptions, DefaultOnToggle, OptionSet, OptionList
+from Options import Range, Toggle, PerGameCommonOptions, OptionSet
 from .Locations import raw_location_dict
 
 

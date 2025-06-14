@@ -1,8 +1,6 @@
-import math
-from typing import Dict, Any, Union, ClassVar, Final
+from typing import Dict, Any
 from worlds.AutoWorld import World
-from BaseClasses import Location, Region, LocationProgressType
-from settings import Group, Bool
+from BaseClasses import Location, Region
 from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items
 from .Locations import location_dict, raw_location_dict, locations_percentages, land_vehicles
 from .Options import PowerwashSimulatorOptions, check_options

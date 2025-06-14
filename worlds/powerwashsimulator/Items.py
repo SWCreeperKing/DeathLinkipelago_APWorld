@@ -1,7 +1,7 @@
 import math
 
-from BaseClasses import Item, ItemClassification, Optional
-from typing import NamedTuple, Dict
+from BaseClasses import Item, ItemClassification
+from typing import Dict
 
 from .Locations import raw_location_dict
 from .Options import PowerwashSimulatorOptions
