@@ -5,7 +5,7 @@ from BaseClasses import Location, Region, LocationProgressType
 from settings import Group, Bool
 from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items
 from .Locations import location_dict, raw_location_dict, locations_percentages
-from .Options import PowerwashSimulatorOptions, check_options
+from .Options import PowerwashSimulatorOptions
 
 uuid_offset = 0x3AF4F1BC
 class PowerwashSimulator(World):
@@ -21,8 +21,6 @@ class PowerwashSimulator(World):
     location_counter = 0
 
     def generate_early(self) -> None:
-        check_options(self)
-
         if self.options.start_with_van: return
         option_locations = self.options.get_locations()
         self.starting_location = self.random.choice(option_locations)
@@ -55,3 +53,11 @@ class PowerwashSimulator(World):
     def set_rules(self) -> None:
         location_count = len(self.options.get_locations())
         self.multiworld.completion_condition[self.player] = lambda state: state.has("A Job Well Done", self.player, location_count)
+
+    def fill_slot_data(self) -> Dict[str, Any]:
+        slot_data: Dict[str, Any] = {
+            "starting_location": str(self.starting_location),
+            "jobs_done": int(len(self.options.get_locations()))
+        }
+
+        return slot_data
