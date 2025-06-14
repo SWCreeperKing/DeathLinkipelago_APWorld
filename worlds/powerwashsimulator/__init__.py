@@ -5,7 +5,7 @@ from BaseClasses import Location, Region, LocationProgressType
 from settings import Group, Bool
 from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items
 from .Locations import location_dict, raw_location_dict, locations_percentages, land_vehicles
-from .Options import PowerwashSimulatorOptions
+from .Options import PowerwashSimulatorOptions, check_options
 
 uuid_offset = 0x3AF4F1BC
 class PowerwashSimulator(World):
@@ -21,6 +21,8 @@ class PowerwashSimulator(World):
     location_counter = 0
 
     def generate_early(self) -> None:
+        check_options(self)
+
         option_locations = self.options.get_locations()
         if self.options.start_with_van and "Van" in option_locations: return
         self.starting_location = self.random.choice(option_locations)
@@ -40,9 +42,10 @@ class PowerwashSimulator(World):
                 next_region.locations.append(location_check)
 
             if location == self.starting_location:
+                print(f"PWS starting location: {self.starting_location}")
                 menu_region.connect(next_region)
             else:
-                menu_region.connect(next_region, rule=lambda state: state.has(f"{location} Unlock", self.player))
+                menu_region.connect(next_region, rule=lambda state, location_lock=location: state.has(f"{location_lock} Unlock", self.player))
             next_region.connect(menu_region)
 
     def create_item(self, name: str) -> PowerwashSimulatorItem:

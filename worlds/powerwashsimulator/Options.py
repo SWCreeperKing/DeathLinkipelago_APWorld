@@ -44,3 +44,13 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
 
     def get_locations(self) -> List[str]:
         return [loc for loc in self.locations]
+
+def check_options(world):
+    options: PowerwashSimulatorOptions = world.options
+
+    if options.start_with_van and "Van" not in options:
+        logging.warning(f"Powerwash Simulator: {world.player_name} Has 'start_with_van' on but doesn't have 'Van' as an option in their locations, a random location will be picked")
+
+    if len(options.get_locations()) > 0: return
+    logging.error(
+        f"Powerwash Simulator: {world.player_name} Does not have locations listed in their yaml, PLEASE FIX YOUR YAML")
