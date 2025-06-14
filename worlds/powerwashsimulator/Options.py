@@ -43,13 +43,15 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
     filler_to_mcguffin: FillerToMcGuffin
 
     def get_locations(self) -> List[str]:
-        return [loc for loc in self.locations]
+        locations = [loc for loc in self.locations]
+
+        if self.start_with_van and "Van" not in locations:
+            locations.append("Van")
+
+        return locations
 
 def check_options(world):
     options: PowerwashSimulatorOptions = world.options
-
-    if options.start_with_van and "Van" not in options.get_locations():
-        logging.warning(f"Powerwash Simulator: {world.player_name} Has 'start_with_van' on but doesn't have 'Van' as an option in their locations, a random location will be picked")
 
     if len(options.get_locations()) > 0: return
     logging.error(

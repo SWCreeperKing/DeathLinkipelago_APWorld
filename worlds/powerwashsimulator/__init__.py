@@ -40,7 +40,6 @@ class PowerwashSimulator(World):
                 next_region.locations.append(location_check)
 
             if location == self.starting_location:
-                print(f"PWS starting location: {self.starting_location}")
                 menu_region.connect(next_region)
             else:
                 menu_region.connect(next_region, rule=lambda state, location_lock=location: state.has(f"{location_lock} Unlock", self.player))
