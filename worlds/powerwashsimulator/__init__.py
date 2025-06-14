@@ -4,7 +4,7 @@ from worlds.AutoWorld import World
 from BaseClasses import Location, Region, LocationProgressType
 from settings import Group, Bool
 from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items
-from .Locations import location_dict, raw_location_dict, locations_percentages
+from .Locations import location_dict, raw_location_dict, locations_percentages, land_vehicles
 from .Options import PowerwashSimulatorOptions
 
 uuid_offset = 0x3AF4F1BC
@@ -17,12 +17,12 @@ class PowerwashSimulator(World):
     options: PowerwashSimulatorOptions
     location_name_to_id = {value: location_dict.index(value) + uuid_offset for value in location_dict}
     item_name_to_id = {value: raw_items.index(value) + uuid_offset for value in raw_items}
-    starting_location = "Van"
+    starting_location = land_vehicles[0]
     location_counter = 0
 
     def generate_early(self) -> None:
-        if self.options.start_with_van: return
         option_locations = self.options.get_locations()
+        if self.options.start_with_van and "Van" in option_locations: return
         self.starting_location = self.random.choice(option_locations)
 
     def create_regions(self) -> None:

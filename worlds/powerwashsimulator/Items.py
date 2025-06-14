@@ -31,7 +31,7 @@ def create_items(world):
         pool.append(world.create_item(f"{location} Unlock"))
         world.location_counter -= 1
 
-    extra_mcguffins = math.ceil(world.location_counter*(options.filler_to_mcguffin/100.))
+    extra_mcguffins = math.floor(world.location_counter*(options.filler_to_mcguffin/100.))
     world.location_counter -= extra_mcguffins
     while extra_mcguffins > 0:
         pool.append(world.create_item("A Job Well Done"))
