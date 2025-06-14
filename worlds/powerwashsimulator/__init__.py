@@ -43,6 +43,7 @@ class PowerwashSimulator(World):
                 menu_region.connect(next_region)
             else:
                 menu_region.connect(next_region, rule=lambda state: state.has(f"{location} Unlock", self.player))
+            next_region.connect(menu_region)
 
     def create_item(self, name: str) -> PowerwashSimulatorItem:
         return PowerwashSimulatorItem(name, item_table[name], self.item_name_to_id[name], self.player)
