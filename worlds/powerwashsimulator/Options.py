@@ -138,6 +138,12 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
 
         return locations
 
+    def has_percentsanity(self):
+        return "Percentsanity" in self.sanities
+
+    def has_objectsanity(self):
+        return "Objectsanity" in self.sanities
+
     def flatten_locations(self, list, self_list) -> List[str]:
         return list if "All" in self_list else [loc for loc in self_list]
 
@@ -162,9 +168,12 @@ def check_options(world):
             f"Powerwash Simulator: {world.player_name} has {options.percentsanity} < 7 for percentsanity. since the host has allow_percentsanity_below_7 {settings.allow_percentsanity_below_7} percentsanity will be set to 7")
         options.percentsanity = Percentsanity(7)
 
-    if "Objectsanity" in options.sanities and not settings.allow_objectsanity:
+    if options.has_objectsanity() and not settings.allow_objectsanity:
         RaiseYamlError(world.player_name,
                        "Objectsanity can not be enabled unless the host setting 'allow_objectsanity' is also enabled")
+
+    if not options.has_objectsanity() and not options.has_percentsanity():
+        RaiseYamlError(world.player_name, "No sanities are listed, you must have one either: `Percentsanity` or `Objectsanity`")
 
     if len(options.get_locations()) > 0: return
     RaiseYamlError(world.player_name, "Does not have locations listed in their yaml")

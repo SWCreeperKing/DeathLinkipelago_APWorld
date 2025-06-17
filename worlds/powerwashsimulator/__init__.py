@@ -2,7 +2,7 @@ import math
 from typing import Dict, Any, Union, ClassVar, List
 from worlds.AutoWorld import World
 from BaseClasses import Location, Region, LocationProgressType
-from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items
+from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items, unlock_items
 from .Locations import location_dict, raw_location_dict, locations_percentages, land_vehicles, objectsanity_dict
 from .Options import PowerwashSimulatorOptions, PowerwashSimulatorSettings, check_options
 
@@ -22,6 +22,9 @@ class PowerwashSimulator(World):
     starting_location = land_vehicles[0]
     location_counter: int = 0
     mcguffin_requirement = 0
+    item_name_groups = {
+        "unlocks": unlock_items
+    }
 
     def generate_early(self) -> None:
         check_options(self)
@@ -39,8 +42,8 @@ class PowerwashSimulator(World):
         option_location_count = len(option_locations)
         percentsanity_location_count = (len(range(percentsanity, 100, percentsanity)) + 1) * option_location_count
         objectsanity_location_count = sum(len(objectsanity_dict[loc]) for loc in option_locations)
-        self.location_counter = (percentsanity_location_count if ("Percentsanity" in self.options.sanities) else 0) + (
-            objectsanity_location_count if ("Objectsanity" in self.options.sanities) else 0)
+        self.location_counter = (percentsanity_location_count if self.options.has_percentsanity() else 0) + (
+            objectsanity_location_count if self.options.has_objectsanity() else 0)
 
         important_item_count = option_location_count * 2 - 1
         added_mcguffin = math.floor((self.location_counter - important_item_count) * .075)
@@ -48,7 +51,7 @@ class PowerwashSimulator(World):
         remaining_location_count = self.location_counter - important_item_count
         location_list: List[Location] = []
 
-        if "Percentsanity" in self.options.sanities and "Objectsanity" in self.options.sanities:
+        if self.options.has_percentsanity() and self.options.has_objectsanity():
             remaining_location_count *= .97
         elif "Objectsanity" in self.options.sanities:
             remaining_location_count *= .6
@@ -62,7 +65,7 @@ class PowerwashSimulator(World):
             next_region = Region(f"Clean the {location}", self.player, self.multiworld)
             self.multiworld.regions.append(next_region)
 
-            if "Percentsanity" in self.options.sanities:
+            if self.options.has_percentsanity():
                 for i in range(percentsanity, 100, percentsanity):
                     percent_location = f"{location} {i}%"
                     percentsanity_location = Location(self.player, percent_location,
@@ -78,7 +81,7 @@ class PowerwashSimulator(World):
                 location_list.append(percentsanity_location)
                 theoretical_locations += 1
 
-            if "Objectsanity" in self.options.sanities:
+            if self.options.has_objectsanity():
                 for part in objectsanity_dict[location]:
                     objectsanity_location = Location(self.player, part, self.location_name_to_id[part], next_region)
                     next_region.locations.append(objectsanity_location)
