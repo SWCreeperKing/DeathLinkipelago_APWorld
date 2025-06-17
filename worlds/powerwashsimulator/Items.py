@@ -10,7 +10,7 @@ class PowerwashSimulatorItem(Item):
     game = "Powerwash Simulator"
 
 progression_items = [f"{location} Unlock" for location in raw_location_dict] + ["A Job Well Done"]
-filler_items = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews"]
+filler_items = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa"]
 
 item_table: Dict[str, ItemClassification] = {
     **{item: ItemClassification.progression for item in progression_items},
@@ -31,7 +31,7 @@ def create_items(world):
         pool.append(world.create_item(f"{location} Unlock"))
         world.location_counter -= 1
 
-    extra_mcguffins = math.floor(world.location_counter*(options.filler_to_mcguffin/100.))
+    extra_mcguffins = math.floor(world.location_counter*.1)
     world.location_counter -= extra_mcguffins
     while extra_mcguffins > 0:
         pool.append(world.create_item("A Job Well Done"))
