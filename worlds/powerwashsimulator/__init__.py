@@ -43,9 +43,20 @@ class PowerwashSimulator(World):
             objectsanity_location_count if ("Objectsanity" in self.options.sanities) else 0)
 
         important_item_count = option_location_count * 2 - 1
-        important_item_count += math.floor((self.location_counter - important_item_count) * .1)
-        remaining_location_count = math.floor(self.location_counter - important_item_count * .98)
+        added_mcguffin = math.floor((self.location_counter - important_item_count) * .075)
+        important_item_count += added_mcguffin
+        remaining_location_count = self.location_counter - important_item_count
         location_list: List[Location] = []
+
+        if "Percentsanity" in self.options.sanities and "Objectsanity" in self.options.sanities:
+            remaining_location_count *= .97
+        elif "Objectsanity" in self.options.sanities:
+            remaining_location_count *= .6
+        else:
+            remaining_location_count *= .5
+
+
+        theoretical_locations = 0
 
         for location in option_locations:
             next_region = Region(f"Clean the {location}", self.player, self.multiworld)
@@ -58,18 +69,21 @@ class PowerwashSimulator(World):
                                                       self.location_name_to_id[percent_location], next_region)
                     next_region.locations.append(percentsanity_location)
                     location_list.append(percentsanity_location)
+                    theoretical_locations += 1
 
                 percent_location = f"{location} 100%"
                 percentsanity_location = Location(self.player, percent_location,
                                                   self.location_name_to_id[percent_location], next_region)
                 next_region.locations.append(percentsanity_location)
                 location_list.append(percentsanity_location)
+                theoretical_locations += 1
 
             if "Objectsanity" in self.options.sanities:
                 for part in objectsanity_dict[location]:
                     objectsanity_location = Location(self.player, part, self.location_name_to_id[part], next_region)
                     next_region.locations.append(objectsanity_location)
                     location_list.append(objectsanity_location)
+                    theoretical_locations += 1
 
             if location == self.starting_location:
                 menu_region.connect(next_region)
@@ -81,12 +95,14 @@ class PowerwashSimulator(World):
 
         self.multiworld.random.shuffle(location_list)
 
-        for i in range(remaining_location_count):
+        for i in range(math.floor(remaining_location_count)):
             location_list[i].progress_type = LocationProgressType.EXCLUDED
 
         self.mcguffin_requirement = max(
-            min(math.floor(self.location_counter * .05), self.location_counter - len(option_locations) * 2),
+            min(math.floor(self.location_counter * .05), self.location_counter - option_location_count * 2),
             len(option_locations))
+
+        # print(f"total: [{self.location_counter}], real: [{theoretical_locations}], remain: [{remaining_location_count}], mcguffin: [{option_location_count + added_mcguffin}]/[{self.mcguffin_requirement}]")
 
     def create_item(self, name: str) -> PowerwashSimulatorItem:
         return PowerwashSimulatorItem(name, item_table[name], self.item_name_to_id[name], self.player)
@@ -95,9 +111,7 @@ class PowerwashSimulator(World):
         create_items(self)
 
     def set_rules(self) -> None:
-        location_count = len(self.options.get_locations())
-        self.multiworld.completion_condition[self.player] = lambda state: state.has("A Job Well Done", self.player,
-                                                                                    location_count)
+        self.multiworld.completion_condition[self.player] = lambda state: state.has("A Job Well Done", self.player, self.mcguffin_requirement)
 
     def fill_slot_data(self) -> Dict[str, Any]:
         slot_data: Dict[str, Any] = {
