@@ -268,8 +268,7 @@ def check_options(world):
 
             possible_locations = locations
 
-        world.starting_location = world.random.choice(possible_locations)
-        logging.info(world.starting_location)
+        world.player_starting_location[world.player_name] = world.random.choice(possible_locations)
 
 
 def set_local_fill(player_name, options, amount):
