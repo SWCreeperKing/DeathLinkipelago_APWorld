@@ -13,9 +13,10 @@ class PlacidPlasticDuckSimulator(World):
     game = "Placid Plastic Duck Simulator"
     location_name_to_id = {name: uuid_offset + id_offset for name, id_offset in locations.items()}
     item_name_to_id = {name: uuid_offset + data.id_offset for name, data in item_table.items()}
-    locations_to_fill = 0
+    player_locations_to_fill: Dict[str, int] = {}
 
     def create_regions(self) -> None:
+        self.player_locations_to_fill[self.player_name] = 0
         menu_region = Region("Menu", self.player, self.multiworld)
         last_region = menu_region
 
@@ -31,7 +32,7 @@ class PlacidPlasticDuckSimulator(World):
             last_region = next_region
 
             for duck in columns[column]:
-                self.locations_to_fill += 1
+                self.player_locations_to_fill[self.player_name] += 1
                 location = Location(self.player, duck, self.location_name_to_id[duck], last_region)
                 last_region.locations.append(location)
 

@@ -21,5 +21,5 @@ def create_items(world):
         world.multiworld.itempool.append(world.create_item("Progressive Column Unlock"))
         world.multiworld.itempool.append(world.create_item("Progressive Spawn Speed Upgrade"))
 
-    for i in range(world.locations_to_fill - 18):
+    for i in range(world.player_locations_to_fill[world.player_name] - 18):
         world.multiworld.itempool.append(world.create_item("Random Duck"))

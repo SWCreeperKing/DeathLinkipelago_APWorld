@@ -153,8 +153,6 @@ class PowerwashSimulator(World):
         location_map: Dict[str, Location] = {loc.name: loc for loc in
                                              self.multiworld.get_locations(self.player)}
 
-        # print(location_map.keys())
-
         for _ in range(self.player_item_steps[self.player_name]["filler"]):
             location_map[self.player_filler_locations[self.player_name].pop()].place_locked_item(
                 self.create_item(self.random.choice(filler_items)))
