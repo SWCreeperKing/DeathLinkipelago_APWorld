@@ -9,7 +9,7 @@ class PowerwashSimulatorItem(Item):
 
 unlock_items = [f"{location} Unlock" for location in raw_location_dict]
 progression_items = unlock_items + ["A Job Well Done"]
-filler_items = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa"]
+filler_items = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa", "Dust Bnuy", "Dust Bunny", "$WashCoin", "Suds"]
 
 item_table: Dict[str, ItemClassification] = {
     **{item: ItemClassification.progression for item in progression_items},

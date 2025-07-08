@@ -67,7 +67,7 @@ class PowerwashSimulator(World):
             levels = self.options.get_goal_levels()
             level_count = len(levels)
             if amount_to_goal == 0 or amount_to_goal == level_count:
-                self.player_goal_levels[self.player_name] = levels
+                self.player_goal_levels[self.player_name] = level_count
             elif 0 < amount_to_goal <= len(levels):
                 self.player_goal_levels[self.player_name] = self.random.sample(levels, amount_to_goal)
             else:
@@ -75,6 +75,7 @@ class PowerwashSimulator(World):
                 self.player_goal_levels[self.player_name] = self.random.sample(levels, amount_to_goal)
             item_steps["goal level count"] = amount_to_goal
         else:
+            item_steps["goal level count"] = -1
             self.player_goal_levels[self.player_name] = ["None"]
 
         self.player_item_steps[self.player_name] = item_steps
@@ -141,7 +142,7 @@ class PowerwashSimulator(World):
     def set_rules(self) -> None:
         if self.options.goal_type == 0:
             self.multiworld.completion_condition[self.player] = lambda state: state.has("A Job Well Done", self.player,
-                                                                                        self.mcguffin_requirement)
+                                                                                        self.player_item_steps[self.player_name]["mcguffin requirement"])
         else:
             level_requirements = [f"Cleaned the {loc}" for loc in self.player_goal_levels[self.player_name]]
             level_amount_requirements = len(level_requirements)

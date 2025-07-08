@@ -3,7 +3,7 @@ from typing import List, Union
 from dataclasses import dataclass
 from Options import Range, Toggle, PerGameCommonOptions, OptionSet, OptionError, Choice
 from .Locations import land_vehicles, water_vehicles, air_vehicles, places, bonus_jobs, midgar, tomb_raider, \
-    raw_location_dict
+    raw_location_dict, wallace_and_gromit, shrek, alice, warhammer_40k, back_to_the_future, spongebob
 from settings import Group, Bool
 
 
@@ -16,6 +16,7 @@ class StartWithVan(Toggle):
 
 class LandVehicleLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Van", "Vintage Car", "Grandpa Miller's Car", "Fire Truck", "Dirt Bike", "Golf Cart", "Motorbike and Sidecar", "SUV", "Penny Farthing", "Recreation Vehicle", "Drill", "Monster Truck"]
     "All" - adds all locations above
@@ -27,6 +28,7 @@ class LandVehicleLocations(OptionSet):
 
 class WaterVehicleLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Frolic Boat", "Fishing Boat"]
     "All" - adds all locations above
@@ -38,6 +40,7 @@ class WaterVehicleLocations(OptionSet):
 
 class AirVehicleLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Fire Helicopter", "Private Jet", "Stunt Plane", "Recreational Vehicle (Again)"]
     "All" - adds all locations above
@@ -49,6 +52,7 @@ class AirVehicleLocations(OptionSet):
 
 class PlaceLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Back Garden", "Bungalow", "Playground", "Detached House", "Shoe House", "Fire Station", "Skatepark", "Forest Cottage", "Mayor's Mansion", "Carousel", "Tree House", "Temple", "Washroom", "Helter Skelter", "Ferris Wheel", "Subway Platform", "Fortune Teller's Wagon", "Ancient Statue", "Ancient Monument", "Lost City Palace"]
     "All" - adds all locations above
@@ -70,6 +74,7 @@ class BonusJobLocations(OptionSet):
 
 class MidgarLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Scorpion Sentinel", "Hardy-Daytona & Shinra Hauler", "Seventh Heaven", "Mako Energy Exhibit", "Airbuster"]
     "All" - adds all locations above
@@ -80,12 +85,79 @@ class MidgarLocations(OptionSet):
 
 class TombRaiderLocations(OptionSet):
     """
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
     ["Croft Manor", "Lara Croft's Obstacle Course and Quad Bike", "Lara Croft's Jeep and Motorboat", "Croft Manor's Maze", "Croft Manor's Treasure Room"]
     "All" - adds all locations above
     """
     display_name = "Tomb Raider Locations"
     valid_keys = frozenset(tomb_raider + ["All"])
+
+class WallaceAndGromitLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Wallace & Gromit's Dining Room & Kitchen", "Wallace & Gromit's House", "The Knit-O-Matic", "Wallace & Gromit's Vehicles", "The Moon Rocket"]
+    "All" - adds all locations above
+    """
+    display_name = "Wallace and Gromit Locations"
+    valid_keys = frozenset(wallace_and_gromit + ["All"])
+
+class ShrekLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Shrek's Swamp", "Duloc", "Fairy Godmother's Potion Factory", "Dragon's Lair", "Hansel's Honeymoon Hideaway"]
+    "All" - adds all locations above
+    """
+    display_name = "Shrek Locations"
+    valid_keys = frozenset(shrek + ["All"])
+
+class AliceInWonderlandLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Wonderland Entrance Hall", "White Rabbit's House", "Caterpillar's Mushroom", "Mad Tea Party", "Queen of Hearts' Court"]
+    "All" - adds all locations above
+    """
+    display_name = "Alice in Wonderland Locations"
+    valid_keys = frozenset(alice + ["All"])
+
+class Warhammer40kLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Land Raider", "Redemptor Dreadnought", "Imperial Knight Paladin", "Rogal Dorn Battle Tank", "Thunderhawk"]
+    "All" - adds all locations above
+    """
+    display_name = "Warhammer 40k Locations"
+    valid_keys = frozenset(warhammer_40k + ["All"])
+
+class BackToTheFutureLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Doc Brown's Van", "The Time Machine", "Hill Valley Clocktower", "The Holomax Theater", "Doc's Time Train"]
+    "All" - adds all locations above
+    """
+    display_name = "Back to the Future Locations"
+    valid_keys = frozenset(back_to_the_future + ["All"])
+
+class SpongebobLocations(OptionSet):
+    """
+    DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
+    REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
+    Locations:
+    ["Conch Street", "Bikini Bottom Buss", "Krusty Krab", "Patty Wagon", "The Invisible Boatmobile", "The Mermalair"]
+    "All" - adds all locations above
+    """
+    display_name = "Spongebob Locations"
+    valid_keys = frozenset(spongebob + ["All"])
 
 
 class Sanities(OptionSet):
@@ -171,6 +243,12 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
     bonus_jobs: BonusJobLocations
     midgar: MidgarLocations
     tomb_raider: TombRaiderLocations
+    wallace_and_gromit_dlc: WallaceAndGromitLocations
+    shrek_dlc: ShrekLocations
+    alice_in_wonderland_dlc: AliceInWonderlandLocations
+    warhammer_40k_dlc: Warhammer40kLocations
+    back_to_the_future_dlc: BackToTheFutureLocations
+    spongebob_dlc: SpongebobLocations
     sanities: Sanities
     percentsanity: Percentsanity
     local_fill: LocalFill
