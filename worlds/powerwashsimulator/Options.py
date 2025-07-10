@@ -324,7 +324,7 @@ def check_options(world):
     if options.goal_type == 1:
         raw_goal_levels = options.get_goal_levels()
 
-        if len(raw_goal_levels) == 0:
+        if len(raw_goal_levels) == 0 and "Random" not in options.levels_to_goal:
             raise_yaml_error(world.player_name,
                              "Can't pick goal levels from 0 possible levels, make sure goal levels are included in their respective locations")
 
