@@ -5,6 +5,7 @@ from Options import Range, Toggle, PerGameCommonOptions, OptionSet, OptionError,
 from .Locations import land_vehicles, water_vehicles, air_vehicles, places, bonus_jobs, midgar, tomb_raider, \
     raw_location_dict, wallace_and_gromit, shrek, alice, warhammer_40k, back_to_the_future, spongebob
 from settings import Group, Bool
+from random import Random
 
 
 class StartWithVan(Toggle):
@@ -93,6 +94,7 @@ class TombRaiderLocations(OptionSet):
     display_name = "Tomb Raider Locations"
     valid_keys = frozenset(tomb_raider + ["All"])
 
+
 class WallaceAndGromitLocations(OptionSet):
     """
     DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
@@ -103,6 +105,7 @@ class WallaceAndGromitLocations(OptionSet):
     """
     display_name = "Wallace and Gromit Locations"
     valid_keys = frozenset(wallace_and_gromit + ["All"])
+
 
 class ShrekLocations(OptionSet):
     """
@@ -115,6 +118,7 @@ class ShrekLocations(OptionSet):
     display_name = "Shrek Locations"
     valid_keys = frozenset(shrek + ["All"])
 
+
 class AliceInWonderlandLocations(OptionSet):
     """
     DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
@@ -125,6 +129,7 @@ class AliceInWonderlandLocations(OptionSet):
     """
     display_name = "Alice in Wonderland Locations"
     valid_keys = frozenset(alice + ["All"])
+
 
 class Warhammer40kLocations(OptionSet):
     """
@@ -137,6 +142,7 @@ class Warhammer40kLocations(OptionSet):
     display_name = "Warhammer 40k Locations"
     valid_keys = frozenset(warhammer_40k + ["All"])
 
+
 class BackToTheFutureLocations(OptionSet):
     """
     DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
@@ -147,6 +153,7 @@ class BackToTheFutureLocations(OptionSet):
     """
     display_name = "Back to the Future Locations"
     valid_keys = frozenset(back_to_the_future + ["All"])
+
 
 class SpongebobLocations(OptionSet):
     """
@@ -263,7 +270,13 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
                      + self.flatten_locations(places, self.places)
                      + self.flatten_locations(bonus_jobs, self.bonus_jobs)
                      + self.flatten_locations(midgar, self.midgar)
-                     + self.flatten_locations(tomb_raider, self.tomb_raider))
+                     + self.flatten_locations(tomb_raider, self.tomb_raider)
+                     + self.flatten_locations(wallace_and_gromit, self.wallace_and_gromit_dlc)
+                     + self.flatten_locations(shrek, self.shrek_dlc)
+                     + self.flatten_locations(alice, self.alice_in_wonderland_dlc)
+                     + self.flatten_locations(warhammer_40k, self.warhammer_40k_dlc)
+                     + self.flatten_locations(back_to_the_future, self.back_to_the_future_dlc)
+                     + self.flatten_locations(spongebob, self.spongebob_dlc))
 
         if self.start_with_van and "Van" not in locations:
             locations.append("Van")
@@ -272,10 +285,7 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
 
     def get_goal_levels(self) -> List[str]:
         locations = self.get_locations()
-        is_random = "Random" in self.levels_to_goal
-        raw = self.flatten_locations(raw_location_dict, self.levels_to_goal)
-        return raw if not is_random else [loc for loc in raw_location_dict if
-                                          loc in raw or (is_random and loc in locations)]
+        return self.flatten_locations(locations, self.levels_to_goal)
 
     def has_percentsanity(self) -> bool:
         return "Percentsanity" in self.sanities
@@ -305,16 +315,34 @@ class PowerwashSimulatorSettings(Group):
 def check_options(world):
     options: PowerwashSimulatorOptions = world.options
     settings: PowerwashSimulatorSettings = world.settings
-    locations = options.get_locations()
+    locations: List[str] = options.get_locations()
+    random: Random = world.random
 
     if len(locations) < 0:
         raise_yaml_error(world.player_name, "Does not have locations listed in their yaml")
 
     if options.goal_type == 1:
-        goalable_levels = options.get_goal_levels()
-        if len(goalable_levels) == 0:
+        raw_goal_levels = options.get_goal_levels()
+
+        if len(raw_goal_levels) == 0:
             raise_yaml_error(world.player_name,
                              "Can't pick goal levels from 0 possible levels, make sure goal levels are included in their respective locations")
+
+        amount_to_goal: int = options.amount_of_levels_to_goal.value
+
+        if amount_to_goal == 0:
+            amount_to_goal = len(raw_goal_levels)
+
+        if amount_to_goal < 0 or amount_to_goal > len(locations):
+            amount_to_goal = random.randint(1, min(7,
+                                                   len(locations) if "Random" not in options.levels_to_goal else len(
+                                                       locations)))
+
+        levels_to_goal = random.sample(locations, random.randint(amount_to_goal,
+                                                                 len(locations))) if "Random" in options.levels_to_goal else raw_location_dict
+
+        options.levels_to_goal = LevelsToGoal(levels_to_goal)
+        options.amount_of_levels_to_goal = AmountOfLevelsToGoal(amount_to_goal)
 
     if not settings.allow_below_localfill_minimums:
         if options.has_percentsanity() and options.has_objectsanity() and options.local_fill < 97:
