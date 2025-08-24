@@ -7,15 +7,18 @@ class PowerwashSimulatorItem(Item):
     game = "Powerwash Simulator"
 
 unlock_items = [f"{location} Unlock" for location in raw_location_dict]
-progression_items: List[str] = unlock_items + ["A Job Well Done"]
+# progression_items: List[str] = unlock_items + ["A Job Well Done"]
+progression_b_items: List[str] = unlock_items
+progression_a_items: List[str] =  ["A Job Well Done"]
 filler_items: List[str] = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa", "Dust Bnuy", "Dust Bunny", "$WashCoin", "Suds"]
 
 item_table: Dict[str, ItemClassification] = {
-    **{item: ItemClassification.progression for item in progression_items},
+    **{item: ItemClassification.progression for item in progression_a_items},
+    **{item: ItemClassification.progression_deprioritized for item in progression_b_items},
     **{item: ItemClassification.filler for item in filler_items}
 }
 
-raw_items = progression_items + filler_items
+raw_items = progression_a_items + progression_b_items + filler_items
 
 def create_items(world):
     options: PowerwashSimulatorOptions = world.options
