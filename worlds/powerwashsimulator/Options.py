@@ -227,7 +227,6 @@ class LevelsToGoal(OptionSet):
     valid_keys = frozenset(raw_location_dict + ["Random", "All"])
 
 
-# todo: 50% min of total levels
 class AmountOfLevelsToGoal(Range):
     """
     How many levels needed to goal
@@ -286,7 +285,7 @@ class PowerwashSimulatorOptions(PerGameCommonOptions):
 
     def get_goal_levels(self) -> List[str]:
         locations = self.get_locations()
-        return self.flatten_locations(locations, self.levels_to_goal)
+        return [loc for loc in self.flatten_locations(locations, self.levels_to_goal) if loc in locations]
 
     def has_percentsanity(self) -> bool:
         return "Percentsanity" in self.sanities
@@ -308,9 +307,13 @@ class PowerwashSimulatorSettings(Group):
     class AllowBelowLocalfillMinimums(Bool):
         """Allow players to have local fill below the defined minimums"""
 
+    class AllowPotentiallyExcessiveReleases(Bool):
+        """Allow players to have less than 50% levels be required for level hunt, this can cause very large releases"""
+
     allow_percentsanity_below_7: Union[AllowPercentsanityBelow7, bool] = False
     allow_objectsanity: Union[AllowObjectsanity, bool] = False
     allow_below_localfill_minimums: Union[AllowBelowLocalfillMinimums, bool] = False
+    allow_potentially_excessive_releases: Union[AllowPotentiallyExcessiveReleases, bool] = False
 
 
 def check_options(world):
@@ -338,13 +341,17 @@ def check_options(world):
         if amount_to_goal == 0:
             amount_to_goal = len(raw_goal_levels)
 
-        if amount_to_goal < 0 or amount_to_goal > len(locations):
-            amount_to_goal = random.randint(1, min(7,
-                                                   len(locations) if "Random" not in options.levels_to_goal else len(
-                                                       locations)))
+        max_random = len(locations)
+        allow_below_50 = settings.allow_potentially_excessive_releases
+        if amount_to_goal < max_random / 2 or (amount_to_goal > len(locations) and not allow_below_50):
+            amount_to_goal = random.randint(int(max_random / 2), max_random)
 
-        levels_to_goal = random.sample(locations, random.randint(amount_to_goal,
-                                                                 len(locations))) if "Random" in options.levels_to_goal else raw_location_dict
+        if "Random" in options.levels_to_goal or amount_to_goal > len(raw_goal_levels):
+            levels_to_goal = random.sample(locations, random.randint(amount_to_goal, max_random))
+        elif "All" in options.levels_to_goal:
+            levels_to_goal = locations
+        else:
+            levels_to_goal = raw_goal_levels
 
         options.levels_to_goal = LevelsToGoal(levels_to_goal)
         options.amount_of_levels_to_goal = AmountOfLevelsToGoal(amount_to_goal)
@@ -379,7 +386,7 @@ def check_options(world):
 
             possible_locations = locations
 
-        world.player_starting_location[world.player_name] = world.random.choice(possible_locations)
+        world.starting_location = world.random.choice(possible_locations)
 
 
 def set_local_fill(player_name, options, amount):
