@@ -1,5 +1,7 @@
 import math
 from typing import Dict, Any, ClassVar, List, Set
+
+from Options import OptionError
 from worlds.AutoWorld import World
 from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType
 from .Items import raw_items, PowerwashSimulatorItem, item_table, create_items, unlock_items, filler_items
@@ -8,7 +10,6 @@ from .Options import PowerwashSimulatorOptions, PowerwashSimulatorSettings, chec
 
 uuid_offset = 0x3AF4F1BC
 
-# todo: try https://github.com/Mysteryem/Archipelago-TCS/blob/v1.1.3/lego_star_wars_tcs/__init__.py#L1850-L1886
 class PowerwashSimulator(World):
     """
     Powerwash Simulator
@@ -19,6 +20,7 @@ class PowerwashSimulator(World):
     settings: ClassVar[PowerwashSimulatorSettings]
     location_name_to_id = {value: location_dict.index(value) + uuid_offset for value in location_dict}
     item_name_to_id = {value: raw_items.index(value) + uuid_offset for value in raw_items}
+    # todo: place in init
     player_item_steps: Dict[str, Dict[str, int]] = {}
     player_filler_locations: Dict[str, List[str]] = {}
     player_goal_levels: Dict[str, List[str]] = {}
@@ -84,20 +86,6 @@ class PowerwashSimulator(World):
         percentsanity = self.options.percentsanity
         starting_location = self.player_starting_location[self.player_name]
 
-        # planned_placement = {}
-        # if self.options.goal_type == 0:
-        #     placement_queue = [starting_location]
-        #     unlock_queue = [loc for loc in option_locations if loc != starting_location]
-        #     self.random.shuffle(unlock_queue)
-        #
-        #     while len(placement_queue) > 0 and len(unlock_queue) > 0:
-        #         place_next = placement_queue.pop()
-        #         place_random_queue = min(3, len(unlock_queue))
-        #         place_next_queue = self.random.sample(unlock_queue, self.random.randint(1, place_random_queue))
-        #         unlock_queue = [loc for loc in unlock_queue if loc not in place_next_queue]
-        #         placement_queue += place_next_queue
-        #         planned_placement[place_next] = place_next_queue
-
         for location in option_locations:
             location_list: List[str] = []
             next_region = Region(f"Clean the {location}", self.player, self.multiworld)
@@ -113,11 +101,11 @@ class PowerwashSimulator(World):
                 for part in objectsanity_dict[location]:
                     location_list.append(self.make_location(part, next_region).name)
 
-            # if location in self.options.levels_to_goal:
-            #     level_completion_loc = Location(self.player, f"Urge to clean the {location}", None, next_region)
-            #     level_completion_loc.place_locked_item(
-            #         Item("Satisfied the Urge to clean the {location}", ItemClassification.progression, None, self.player))
-            #     next_region.locations.append(level_completion_loc)
+            if location in self.options.levels_to_goal:
+                level_completion_loc = Location(self.player, f"Urge to clean the {location}", None, next_region)
+                level_completion_loc.place_locked_item(
+                    Item("Satisfied the Urge", ItemClassification.progression, None, self.player))
+                next_region.locations.append(level_completion_loc)
 
             if location == starting_location:
                 menu_region.connect(next_region)
@@ -128,13 +116,8 @@ class PowerwashSimulator(World):
 
             self.random.shuffle(location_list)
 
-            # if self.options.goal_type == 0 and location in planned_placement:
-            #     for loc in planned_placement[location]:
-            #         self.multiworld.get_location(location_list.pop(), self.player).place_locked_item(self.create_item(f"{loc} Unlock"))
-            # elif self.options.goal_type == 1:
             location_list.pop()
             self.multiworld.get_location(location_list.pop(), self.player).progress_type = LocationProgressType.PRIORITY
-
             self.player_filler_locations[self.player_name] += location_list
 
         item_steps = self.player_item_steps[self.player_name]
@@ -145,10 +128,11 @@ class PowerwashSimulator(World):
         self.player_item_steps[self.player_name] = item_steps
 
         # from Utils import visualize_regions
-        # visualize_regions(self.multiworld.get_region("Menu", self.player), f"{self.player_name}_world.puml",
+        # state = self.multiworld.get_all_state(False)
+        # state.update_reachable_regions(self.player)
+        # visualize_regions(self.get_region("Menu"), f"{self.player_name}_world.puml",
         #                   show_entrance_names=True,
-        #                   regions_to_highlight=self.multiworld.get_all_state(self.player).reachable_regions[
-        #                       self.player])
+        #                   regions_to_highlight=state.reachable_regions[self.player])
 
 
     def create_item(self, name: str) -> PowerwashSimulatorItem:
@@ -178,9 +162,8 @@ class PowerwashSimulator(World):
                 location.place_locked_item(self.create_item(self.random.choice(filler_items)))
                 filler_size -= 1
 
-        if filler_size >= 0:
-            pass
-    #         todo: throw error
+        if filler_size > 0:
+            raise OptionError("ㄟ( ▔, ▔ )ㄏ blame other games for touching my speget (aka. other worlds are stealing powerwash's prefill locations)")
 
 
     def fill_slot_data(self) -> Dict[str, Any]:

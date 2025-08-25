@@ -1,7 +1,7 @@
 import logging
 from typing import List, Union
 from dataclasses import dataclass
-from Options import Range, Toggle, PerGameCommonOptions, OptionSet, OptionError, Choice
+from Options import Range, Toggle, PerGameCommonOptions, OptionSet, OptionError, Choice, Accessibility
 from .Locations import land_vehicles, water_vehicles, air_vehicles, places, bonus_jobs, midgar, tomb_raider, \
     raw_location_dict, wallace_and_gromit, shrek, alice, warhammer_40k, back_to_the_future, spongebob
 from settings import Group, Bool
@@ -227,6 +227,7 @@ class LevelsToGoal(OptionSet):
     valid_keys = frozenset(raw_location_dict + ["Random", "All"])
 
 
+# todo: 50% min of total levels
 class AmountOfLevelsToGoal(Range):
     """
     How many levels needed to goal
@@ -317,6 +318,10 @@ def check_options(world):
     settings: PowerwashSimulatorSettings = world.settings
     locations: List[str] = options.get_locations()
     random: Random = world.random
+
+    if options.accessibility == Accessibility.option_minimal:
+        print("Powerwash simulator doesn't support accessibility minimal, defaulting accessibility to full")
+        options.accessibility = Accessibility(Accessibility.option_full)
 
     if len(locations) < 0:
         raise_yaml_error(world.player_name, "Does not have locations listed in their yaml")
