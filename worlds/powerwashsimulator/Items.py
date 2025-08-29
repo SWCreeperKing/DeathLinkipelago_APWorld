@@ -9,7 +9,7 @@ class PowerwashSimulatorItem(Item):
 unlock_items = [f"{location} Unlock" for location in raw_location_dict]
 progression_a_items: List[str] = unlock_items
 progression_b_items: List[str] = ["A Job Well Done"]
-filler_items: List[str] = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa", "Dust Bnuy", "Dust Bunny", "$WashCoin", "Suds"]
+filler_items: List[str] = ["Dirt", "Grime", "Satisfaction", "Water", "Sponge", "Bubblegum Flavored Soap", "H2O", "Positive Reviews", "C17H35COONa", "Dust Bnuy", "Dust Bunny", "$WashCoin", "Suds", "Washed Grass"]
 
 item_table: Dict[str, ItemClassification] = {
     **{item: ItemClassification.progression for item in progression_a_items},
@@ -32,8 +32,4 @@ def create_items(world):
         pool.append(world.create_item("A Job Well Done"))
 
     for _ in range(world.check_total_count - world.check_total_filler_count - world.check_total_progression_count):
-        pool.append(world.create_item(world.random.choice(filler_items)))
-
-    if world.check_total_filler_count <= 0: return
-    for _ in range(world.check_total_filler_count):
         pool.append(world.create_item(world.random.choice(filler_items)))
