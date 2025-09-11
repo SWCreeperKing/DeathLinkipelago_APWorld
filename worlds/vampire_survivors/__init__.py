@@ -83,7 +83,7 @@ class VampireSurvivors(World):
 
             self.make_location(f"{stage} Beaten", stage_region)
 
-            for i in range(5):
+            for i in range(10):
                 self.make_location(f"Open Chest #{i + 1} on {stage}", stage_region)
 
             self.multiworld.regions.append(stage_region)

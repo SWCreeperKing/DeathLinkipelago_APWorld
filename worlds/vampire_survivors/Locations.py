@@ -84,7 +84,7 @@ unfair_characters = ["Peppino", "MissingN▯", "Space Dette", "Megalo Menya Moon
 location_dictionary: List[str] = [
     *[f"{stage} Beaten" for stage in all_stages],
     *[f"Beat with {character}" for character in all_characters],
-    *[f"Open Chest #{i + 1} on {stage}" for i in range(5) for stage in all_stages]
+    *[f"Open Chest #{i + 1} on {stage}" for i in range(10) for stage in all_stages]
 ]
 
 # Extra
