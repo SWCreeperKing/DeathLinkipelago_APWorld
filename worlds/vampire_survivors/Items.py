@@ -9,7 +9,7 @@ class VampireSurvivorsItem(Item):
 unlock_character_items = [f"Character Unlock: {character}" for character in all_characters]
 unlock_stage_items = [f"Stage Unlock: {stage}" for stage in all_stages]
 unlock_gamemodes = [f"Gamemode Unlock: {gamemode}" for gamemode in ["Hyper", "Hurry", "Arcanas", "Eggs"]]
-filler_items = ["Empty Coffins", "Floor Chickens", "Suspiciously Clean Skull", "Easter Eggs"]
+filler_items = ["Empty Coffins", "Floor Chickens", "Suspiciously Clean Skull", "Easter Eggs", "Progressive Nothing"]
 
 item_table: Dict[str, ItemClassification] = {
     **{item: ItemClassification.progression for item in unlock_character_items},

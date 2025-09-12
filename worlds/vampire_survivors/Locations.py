@@ -48,8 +48,12 @@ all_characters = base_characters + moonspell_characters + foscari_characters + a
 normal_stages = ["Mad Forest", "Inlaid Library", "Dairy Plant", "Gallo Tower", "Cappella Magna"]
 bonus_stages = ["Il Molise", "Moongolow", "Whiteout", "The Coop", "Space 54", "Carlo Cart"]
 
-challenge_stages = ["Green Acres", "The Bone Zone", "Boss Rash", "Eudaimonia M.", "Laborratory", "Bat Country",
-                    "Astral Stair", "Tiny Bridge", "Room 1665"]
+challenge_stages = ["Green Acres", "The Bone Zone", "Boss Rash",
+                    # "Eudaimonia M.",
+                    "Laborratory", "Bat Country",
+                    "Astral Stair", "Tiny Bridge",
+                    "Room 1665"
+                    ]
 
 moonspell_stages = ["Mt.Moonspell"]
 foscari_stages = ["Lake Foscari", "Abyss Foscari"]

@@ -10,6 +10,16 @@ from .Locations import base_characters, moonspell_characters, foscari_characters
     megalo_characters, unfair_characters
 
 
+class ChestChecksPerStage(Range):
+    """
+    how many chest checks per stage
+    from 5 to 10
+    default: 7
+    """
+    default = 7
+    range_start = 5
+    range_end = 10
+
 class EggInclusion(Choice):
     """
     how to include eggs:
@@ -262,6 +272,7 @@ class IncludedEmeraldStages(OptionSet):
 
 @dataclass
 class VampireSurvivorsOptions(PerGameCommonOptions):
+    chest_checks_per_stage: ChestChecksPerStage
     egg_inclusion: EggInclusion
     lock_hyper_behind_item: LockHyperBehindItem
     lock_hurry_behind_item: LockHurryBehindItem

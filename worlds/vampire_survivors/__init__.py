@@ -72,6 +72,7 @@ class VampireSurvivors(World):
     def create_regions(self) -> None:
         stages = self.final_included_stages_list
         characters = self.final_included_characters_list
+        chest_checks = self.options.chest_checks_per_stage
 
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)
@@ -83,7 +84,7 @@ class VampireSurvivors(World):
 
             self.make_location(f"{stage} Beaten", stage_region)
 
-            for i in range(10):
+            for i in range(chest_checks):
                 self.make_location(f"Open Chest #{i + 1} on {stage}", stage_region)
 
             self.multiworld.regions.append(stage_region)
@@ -101,7 +102,7 @@ class VampireSurvivors(World):
 
             character_item_name = f"Character Unlock: {character}"
             character_location.access_rule = lambda state, character_item=character_item_name: state.has(character_item, self.player)
-        self.check_count += len(characters) + len(stages) * 6
+        self.check_count += len(characters) + len(stages) * (chest_checks + 1)
 
         self.multiworld.regions.append(character_region)
         menu_region.connect(character_region)
@@ -123,7 +124,8 @@ class VampireSurvivors(World):
             "stages_to_beat": str(self.final_included_stages_list),
             "is_hyper_locked": bool(self.options.lock_hyper_behind_item),
             "is_hurry_locked": bool(self.options.lock_hurry_behind_item),
-            "is_arcanas_locked": bool(self.options.lock_arcanas_behind_item)
+            "is_arcanas_locked": bool(self.options.lock_arcanas_behind_item),
+            "chest_checks_per_stage": int(self.options.chest_checks_per_stage)
         }
 
         return slot_data
