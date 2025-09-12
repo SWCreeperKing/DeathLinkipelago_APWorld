@@ -75,8 +75,6 @@ class VampireSurvivors(World):
         chest_checks = self.options.chest_checks_per_stage
 
         menu_region = Region("Menu", self.player, self.multiworld)
-        self.multiworld.regions.append(menu_region)
-
         character_region = Region("Characters", self.player, self.multiworld)
 
         for stage in stages:
@@ -87,13 +85,14 @@ class VampireSurvivors(World):
             for i in range(chest_checks):
                 self.make_location(f"Open Chest #{i + 1} on {stage}", stage_region)
 
+            if stage != self.starting_stage:
+                stage_item_name = f"Stage Unlock: {stage}"
+                menu_region.connect(stage_region, f"Menu FISH -> {stage}",
+                                    lambda state, stage_item=stage_item_name: state.has(stage_item, self.player))
+            else:
+                menu_region.connect(stage_region)
+
             self.multiworld.regions.append(stage_region)
-            menu_region.connect(stage_region)
-
-            if stage == self.starting_stage: continue
-
-            stage_item_name = f"Stage Unlock: {stage}"
-            stage_region.access_rule = lambda state, stage_item=stage_item_name: state.has(stage_item, self.player)
 
         for character in characters:
             character_location = self.make_location(f"Beat with {character}", character_region)
@@ -101,11 +100,20 @@ class VampireSurvivors(World):
             if character == self.starting_character: continue
 
             character_item_name = f"Character Unlock: {character}"
-            character_location.access_rule = lambda state, character_item=character_item_name: state.has(character_item, self.player)
+            character_location.access_rule = lambda state, character_item=character_item_name: state.has(character_item,
+                                                                                                         self.player)
         self.check_count += len(characters) + len(stages) * (chest_checks + 1)
 
-        self.multiworld.regions.append(character_region)
         menu_region.connect(character_region)
+        self.multiworld.regions.append(character_region)
+        self.multiworld.regions.append(menu_region)
+
+        from Utils import visualize_regions
+        state = self.multiworld.get_all_state(False)
+        state.update_reachable_regions(self.player)
+        visualize_regions(self.get_region("Menu"), f"{self.player_name}_world.puml",
+                          show_entrance_names=True,
+                          regions_to_highlight=state.reachable_regions[self.player])
 
     def create_item(self, name: str) -> VampireSurvivorsItem:
         return VampireSurvivorsItem(name, item_table[name], self.item_name_to_id[name], self.player)
@@ -114,7 +122,9 @@ class VampireSurvivors(World):
         create_items(self)
 
     def set_rules(self) -> None:
-        self.multiworld.completion_condition[self.player] = lambda state: state.has_from_list_unique(unlock_stage_items, self.player, self.stage_goal_amount)
+        self.multiworld.completion_condition[self.player] = lambda state: state.has_from_list_unique(unlock_stage_items,
+                                                                                                     self.player,
+                                                                                                     self.stage_goal_amount)
 
     def fill_slot_data(self) -> Dict[str, Any]:
         slot_data: Dict[str, Any] = {
