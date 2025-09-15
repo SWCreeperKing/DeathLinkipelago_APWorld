@@ -20,6 +20,7 @@ class ChestChecksPerStage(Range):
     range_start = 5
     range_end = 10
 
+
 class EggInclusion(Choice):
     """
     how to include eggs:
@@ -86,6 +87,7 @@ class IncludedBaseCharacters(OptionSet):
     possible options:
     ["Antonio Belpaese", "Imelda Belpaese", "Pasqualina Belpaese", "Gennaro Belpaese", "Arca Ladonna", "Porta Ladonna", "Lama Ladonna", "Poe Ratcho", "Suor Clerici", "Dommario", "Krochi Freetto", "Christine Davain", "Pugnala Provola", "Giovanna Grana", "Poppea Pecorina", "Concetta Caciotta", "Mortaccio", "Yatta Cavallo", "Bianca Ramba", "O'Sole Meeo", "Sir Ambrojoe", "Iguana Gallo Valleto", "Divano Thelma", "Zi'Assunta Belpaese", "Exdash Exiviiq", "Toastie", "Smith IV", "Random", "Boon Marrabbio", "Avatar Infernas", "Minnah Mannarah", "Leda", "Cosmo Pavone", "Peppino", "Big Trouser", "MissingN▯", "Gains Boros", "Gyorunton", "Mask of the Red Death", "Queen Sigma", "Bat Robbert", "She-Moon Eeta", "Santa Ladonna", "Gazebo", "Space Dude", "Bats Bats Bats", "Rose De Infernas", "Scorej-Oni", "Gyoruntin", "Space Dette"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Base Characters"
     valid_keys = frozenset(base_characters + ["All"])
@@ -98,9 +100,10 @@ class IncludedMoonspellCharacters(OptionSet):
     possible options:
     ["Miang Moonspell", "Menya Moonspell", "Syuuto Moonspell", "Babi-Onna", "McCoy-Oni", "Megalo Menya Moonspell", "Megalo Syuuto Moonspell", "Gav'Et-Oni"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Moonspell Characters"
-    valid_keys = frozenset(moonspell_characters + ["All"])
+    valid_keys = frozenset(moonspell_characters + ["All", "Random"])
     default = []
 
 
@@ -110,9 +113,10 @@ class IncludedFoscariCharacters(OptionSet):
     possible options:
     ["Eleanor Uziron", "Maruto Cuts", "Keitha Muort", "Luminaire Foscari", "Genevieve Gruyére", "Je-Ne-Viv", "Sammy", "Rottin'Ghoul"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Foscari Characters"
-    valid_keys = frozenset(foscari_characters + ["All"])
+    valid_keys = frozenset(foscari_characters + ["All", "Random"])
     default = []
 
 
@@ -122,9 +126,10 @@ class IncludedAmongusCharacters(OptionSet):
     possible options:
     ["Crewmate Dino", "Engineer Gino", "Ghost Lino", "Shapeshifter Nino", "Guardian Pina", "Impostor Rina", "Scientist Mina", "Horse", "Megalo Impostor Rina"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Amongus Characters"
-    valid_keys = frozenset(amogus_characters + ["All"])
+    valid_keys = frozenset(amogus_characters + ["All", "Random"])
     default = []
 
 
@@ -134,9 +139,10 @@ class IncludedOperationGunsCharacters(OptionSet):
     possible options:
     ["Bill Rizer", "Lance Bean", "Ariana", "Lucia Zero", "Brad Fang", "Browny", "Sheena Etranzi", "Probotector", "Stanley", "Newt Plissken", "Colonel Bahamut", "Simondo Belmont"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Operation Guns Characters"
-    valid_keys = frozenset(guns_characters + ["All"])
+    valid_keys = frozenset(guns_characters + ["All", "Random"])
     default = []
 
 
@@ -146,9 +152,10 @@ class IncludedCastlevaniaCharacters(OptionSet):
     possible options:
     ["Leon Belmont", "Sonia Belmont", "Trevor Belmont", "Christopher Belmont", "Simon Belmont", "Juste Belmont", "Richter Belmont", "Julius Belmont", "Grant Danasty", "Quincy Morris", "John Morris", "Jonathan Morris", "Maxim Kischine", "Henry", "Soma Cruz", "Vlad Tepes Dracula", "Charlotte Aulin", "Sypha Belnades", "Julia Laforeze", "Carrie Fernandez", "Yoko Belnades", "Rinaldo Gandolfi", "Mina Hakuba", "Elizabeth Bartley", "Alucard", "Reinhardt Schneider", "Eric Lecarde", "Isaac", "Hector", "Sara Trantoul", "Vincent Dorin", "Maria Renard", "Shanoa", "Albus", "Lisa Tepes", "Shaft", "Saint Germain", "Nathan Graves", "Cornell", "Barlowe", "Young Maria Renard", "Familiar", "Innocent Devil", "Blue Crescent Moon Cornell", "Ferryman", "Master Librarian", "Hammer", "Wind", "Jonathan & Charlotte", "Charlotte & Jonathan", "Stella & Loretta Lecarde", "Loretta & Stella Lecarde", "Stella Lecarde", "Loretta Lecarde", "Brauner", "Soleil Belmont", "Dario Bossi", "Dmitrii Blinov", "Celia Fortner", "Graham Jones", "Joachim Armster", "Walter Bernhard", "Carmilla", "Count Olrox", "Cave Troll", "Fleaman", "Axe Armor", "Frozenshade", "Succubus", "Keremet", "Alamaric Sniper", "Blackmore", "Malphas", "Death", "Galamoth", "Megalo Elizabeth Bartley", "Megalo Olrox", "Megalo Death", "Megalo Dracula", "Chaos"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Castlevania Characters"
-    valid_keys = frozenset(castlevania_characters + ["All"])
+    valid_keys = frozenset(castlevania_characters + ["All", "Random"])
     default = []
 
 
@@ -158,9 +165,10 @@ class IncludedEmeraldCharacters(OptionSet):
     possible options:
     ["Tsunanori Mido", "Bonnie Blair", "Formina Franklyn", "Diva No. 5", "Ameya Aisling", "Siugnas", "Final Emperor", "Dolores", "Macha Alter Ego", "Lita Caryx", "Kugutsu", "Mr. S", "Lolo, Hiss, Meow, and Purr", "Kina", "Imakoo", "Malevolent Door Spirit"]
     "All" - adds all locations above
+    "Random" - picks a random # of characters b/t list's max size / 2 and list's max size
     """
     display_name = "Included Emerald Characters"
-    valid_keys = frozenset(emerald_characters + ["All"])
+    valid_keys = frozenset(emerald_characters + ["All", "Random"])
     default = []
 
 
@@ -170,10 +178,12 @@ class IncludedNormalStages(OptionSet):
     possible options:
     ["Mad Forest", "Inlaid Library", "Dairy Plant", "Gallo Tower", "Cappella Magna"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Normal Stages"
-    valid_keys = frozenset(normal_stages + ["All"])
+    valid_keys = frozenset(normal_stages + ["All", "Random"])
     default = "All"
+
 
 class IncludedBonusStages(OptionSet):
     """
@@ -181,10 +191,12 @@ class IncludedBonusStages(OptionSet):
     possible options:
     ["Il Molise", "Moongolow", "Whiteout", "The Coop", "Space 54", "Carlo Cart"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Bonus Stages"
-    valid_keys = frozenset(bonus_stages + ["All"])
+    valid_keys = frozenset(bonus_stages + ["All", "Random"])
     default = "All"
+
 
 class IncludedChallengeStages(OptionSet):
     """
@@ -192,9 +204,10 @@ class IncludedChallengeStages(OptionSet):
     possible options:
     ["Green Acres", "The Bone Zone", "Boss Rash", "Eudaimonia M.", "Laborratory", "Bat Country", "Astral Stair", "Tiny Bridge", "Room 1665"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Challenge Stages"
-    valid_keys = frozenset(challenge_stages + ["All"])
+    valid_keys = frozenset(challenge_stages + ["All", "Random"])
     default = "All"
 
 
@@ -204,9 +217,10 @@ class IncludedMoonspellStages(OptionSet):
     possible options:
     ["Mt.Moonspell"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Moonspell Stages"
-    valid_keys = frozenset(moonspell_stages + ["All"])
+    valid_keys = frozenset(moonspell_stages + ["All", "Random"])
     default = []
 
 
@@ -216,9 +230,10 @@ class IncludedFoscariStages(OptionSet):
     possible options:
     ["Lake Foscari", "Abyss Foscari"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Foscari Stages"
-    valid_keys = frozenset(foscari_stages + ["All"])
+    valid_keys = frozenset(foscari_stages + ["All", "Random"])
     default = []
 
 
@@ -228,9 +243,10 @@ class IncludedAmongusStages(OptionSet):
     possible options:
     ["Polus Replica"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Amongus Stages"
-    valid_keys = frozenset(amogus_stages + ["All"])
+    valid_keys = frozenset(amogus_stages + ["All", "Random"])
     default = []
 
 
@@ -240,9 +256,10 @@ class IncludedOperationGunsStages(OptionSet):
     possible options:
     ["Neo Galuga", "Hectic Highway"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Operation Guns Stages"
-    valid_keys = frozenset(guns_stages + ["All"])
+    valid_keys = frozenset(guns_stages + ["All", "Random"])
     default = []
 
 
@@ -252,9 +269,10 @@ class IncludedCastlevaniaStages(OptionSet):
     possible options:
     ["Ode to Castlevania"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Castlevania Stages"
-    valid_keys = frozenset(castlevania_stages + ["All"])
+    valid_keys = frozenset(castlevania_stages + ["All", "Random"])
     default = []
 
 
@@ -264,9 +282,10 @@ class IncludedEmeraldStages(OptionSet):
     possible options:
     ["Emerald Diorama"]
     "All" - adds all locations above
+    "Random" - picks a random # of stages b/t list's max size / 2 and list's max size
     """
     display_name = "Included Emerald Stages"
-    valid_keys = frozenset(emerald_stages + ["All"])
+    valid_keys = frozenset(emerald_stages + ["All", "Random"])
     default = []
 
 
@@ -297,27 +316,30 @@ class VampireSurvivorsOptions(PerGameCommonOptions):
     included_castlevania_stages: IncludedCastlevaniaStages
     included_emerald_stages: IncludedEmeraldStages
 
-    def get_included_characters(self) -> List[str]:
-        return (self.flatten_locations(base_characters, self.included_base_characters)
-                + self.flatten_locations(moonspell_characters, self.included_moonspell_characters)
-                + self.flatten_locations(foscari_characters, self.included_foscari_characters)
-                + self.flatten_locations(amogus_characters, self.included_amongus_characters)
-                + self.flatten_locations(guns_characters, self.included_operation_guns_characters)
-                + self.flatten_locations(castlevania_characters, self.included_castlevania_characters)
-                + self.flatten_locations(emerald_characters, self.included_emerald_characters))
+    def get_included_characters(self, world) -> List[str]:
+        return (self.flatten_locations(world, base_characters, self.included_base_characters)
+                + self.flatten_locations(world, moonspell_characters, self.included_moonspell_characters)
+                + self.flatten_locations(world, foscari_characters, self.included_foscari_characters)
+                + self.flatten_locations(world, amogus_characters, self.included_amongus_characters)
+                + self.flatten_locations(world, guns_characters, self.included_operation_guns_characters)
+                + self.flatten_locations(world, castlevania_characters, self.included_castlevania_characters)
+                + self.flatten_locations(world, emerald_characters, self.included_emerald_characters))
 
-    def get_included_stages(self) -> List[str]:
-        return (self.flatten_locations(normal_stages, self.included_normal_stages)
-                + self.flatten_locations(bonus_stages, self.included_bonus_stages)
-                + self.flatten_locations(challenge_stages, self.included_challenge_stages)
-                + self.flatten_locations(moonspell_stages, self.included_moonspell_stages)
-                + self.flatten_locations(foscari_stages, self.included_foscari_stages)
-                + self.flatten_locations(amogus_stages, self.included_amongus_stages)
-                + self.flatten_locations(guns_stages, self.included_operation_guns_stages)
-                + self.flatten_locations(castlevania_stages, self.included_castlevania_stages)
-                + self.flatten_locations(emerald_stages, self.included_emerald_stages))
+    def get_included_stages(self, world) -> List[str]:
+        return (self.flatten_locations(world, normal_stages, self.included_normal_stages)
+                + self.flatten_locations(world, bonus_stages, self.included_bonus_stages)
+                + self.flatten_locations(world, challenge_stages, self.included_challenge_stages)
+                + self.flatten_locations(world, moonspell_stages, self.included_moonspell_stages)
+                + self.flatten_locations(world, foscari_stages, self.included_foscari_stages)
+                + self.flatten_locations(world, amogus_stages, self.included_amongus_stages)
+                + self.flatten_locations(world, guns_stages, self.included_operation_guns_stages)
+                + self.flatten_locations(world, castlevania_stages, self.included_castlevania_stages)
+                + self.flatten_locations(world, emerald_stages, self.included_emerald_stages))
 
-    def flatten_locations(self, list, self_list) -> List[str]:
+    def flatten_locations(self, world, list, self_list) -> List[str]:
+        if "Random" in self_list:
+            return world.random.sample(list, world.random.randint(int(len(list) / 2), len(list)))
+
         return list if "All" in self_list else [loc for loc in self_list if loc != "Random"]
 
 
@@ -331,8 +353,8 @@ class VampireSurvivorsSettings(Group):
 def check_options(world):
     options: VampireSurvivorsOptions = world.options
     settings: VampireSurvivorsSettings = world.settings
-    characters = options.get_included_characters()
-    stages = options.get_included_stages()
+    characters = options.get_included_characters(world)
+    stages = options.get_included_stages(world)
 
     if not options.allow_secret_characters:
         characters = [character for character in characters if character not in secret_characters]

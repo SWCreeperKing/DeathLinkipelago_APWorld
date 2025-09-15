@@ -108,13 +108,6 @@ class VampireSurvivors(World):
         self.multiworld.regions.append(character_region)
         self.multiworld.regions.append(menu_region)
 
-        from Utils import visualize_regions
-        state = self.multiworld.get_all_state(False)
-        state.update_reachable_regions(self.player)
-        visualize_regions(self.get_region("Menu"), f"{self.player_name}_world.puml",
-                          show_entrance_names=True,
-                          regions_to_highlight=state.reachable_regions[self.player])
-
     def create_item(self, name: str) -> VampireSurvivorsItem:
         return VampireSurvivorsItem(name, item_table[name], self.item_name_to_id[name], self.player)
 
