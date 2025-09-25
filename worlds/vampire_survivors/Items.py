@@ -1,13 +1,14 @@
 from BaseClasses import Item, ItemClassification
 from typing import Dict, List
 from .Options import VampireSurvivorsOptions
-from .Locations import all_characters, all_stages
+from .Locations import all_characters, all_stages, EUDAI
+
 
 class VampireSurvivorsItem(Item):
     game = "Vampire Survivors"
 
 unlock_character_items = [f"Character Unlock: {character}" for character in all_characters]
-unlock_stage_items = [f"Stage Unlock: {stage}" for stage in all_stages]
+unlock_stage_items = [f"Stage Unlock: {stage}" for stage in (all_stages + [EUDAI])]
 unlock_gamemodes = [f"Gamemode Unlock: {gamemode}" for gamemode in ["Hyper", "Hurry", "Arcanas", "Eggs"]]
 filler_items = ["Empty Coffins", "Floor Chickens", "Suspiciously Clean Skull", "Easter Eggs", "Progressive Nothing"]
 
@@ -48,7 +49,7 @@ def create_items(world):
 
     if options.egg_inclusion == 1:
         world.check_count -= 1
-        pool.append(world.create_item("Gamemode Unlock: Arcanas"))
+        pool.append(world.create_item("Gamemode Unlock: Eggs"))
 
     world.check_count -= (len(stages) - 1) + (len(characters) - 1)
 

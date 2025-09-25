@@ -7,7 +7,17 @@ from random import Random
 from .Locations import base_characters, moonspell_characters, foscari_characters, amogus_characters, guns_characters, \
     castlevania_characters, emerald_characters, normal_stages, bonus_stages, challenge_stages, moonspell_stages, \
     foscari_stages, amogus_stages, guns_stages, castlevania_stages, emerald_stages, secret_characters, \
-    megalo_characters, unfair_characters
+    megalo_characters, unfair_characters, EUDAI
+
+class GoalRequirement(Choice):
+    """
+    0 = Stage hunt (beat/loop all stages)
+    1 = Kill Director (required ~75% of stages beaten)
+    """
+    display_name = "Goal Requirement"
+    default = 0
+    option_stage_hunt = 0
+    option_director = 1
 
 
 class ChestChecksPerStage(Range):
@@ -45,6 +55,7 @@ class LockHyperBehindItem(Toggle):
 class LockHurryBehindItem(Toggle):
     """
     Lock the `Hurry` gamemode behind an item
+    This will lock `Beat with [character]` and `[stage] beaten` checks until hurry is found
     """
     display_name = "Lock Hurry Behind Item"
 
@@ -54,6 +65,13 @@ class LockArcanasBehindItem(Toggle):
     Lock the `Arcanas` gamemode behind an item
     """
     display_name = "Lock Arcanas Behind Item"
+
+
+class Enemysanity(Toggle):
+    """
+    the first kill of an enemy is a check
+    """
+    display_name = "Enemysanity"
 
 
 class AllowSecretCharacters(DefaultOnToggle):
@@ -291,11 +309,13 @@ class IncludedEmeraldStages(OptionSet):
 
 @dataclass
 class VampireSurvivorsOptions(PerGameCommonOptions):
+    goal_requirement: GoalRequirement
     chest_checks_per_stage: ChestChecksPerStage
     egg_inclusion: EggInclusion
     lock_hyper_behind_item: LockHyperBehindItem
     lock_hurry_behind_item: LockHurryBehindItem
     lock_arcanas_behind_item: LockArcanasBehindItem
+    enemysanity: Enemysanity
     allow_secret_characters: AllowSecretCharacters
     allow_megalo_characters: AllowMegaloCharacters
     allow_unfair_characters: AllowUnfairCharacters
@@ -376,6 +396,14 @@ def check_options(world):
     if len(characters) == 0:
         raise_yaml_error(world.player_name, "You must have more than 0 eligible characters included")
 
+    if EUDAI not in stages and options.goal_requirement == 1:
+        stages.append(EUDAI)
+
+    if len(stages) == 1 and stages[0] == EUDAI:
+        raise_yaml_error(world.player_name, f"{EUDAI} CAN NOT BE YOUR ONLY STAGE")
+
+    world.random.shuffle(characters)
+    world.random.shuffle(stages)
     world.final_included_characters_list = characters
     world.final_included_stages_list = stages
 
