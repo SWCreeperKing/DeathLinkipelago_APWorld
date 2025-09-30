@@ -5,9 +5,11 @@ from worlds.AutoWorld import World
 from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType, MultiWorld, CollectionState
 from .Options import VampireSurvivorsOptions, VampireSurvivorsSettings, check_options
 from .Locations import location_dictionary, non_special_characters, secret_characters, megalo_characters, \
-	unfair_characters, normal_stages, bonus_stages, challenge_stages, EUDAI, enemy_map
+	unfair_characters, normal_stages, bonus_stages, challenge_stages, EUDAI
 from .Items import raw_items, VampireSurvivorsItem, item_table, create_items, unlock_stage_items, \
 	unlock_character_items, unlock_gamemodes
+from .EnemyList import enemy_map
+from .EnemyHurryList import enemy_hurry_map
 
 
 class VampireSurvivors(World):
@@ -101,6 +103,9 @@ class VampireSurvivors(World):
 		self.multiworld.push_precollected(self.create_item(f"Stage Unlock: {self.starting_stage}"))
 		self.multiworld.push_precollected(self.create_item(f"Character Unlock: {self.starting_character}"))
 
+		if not self.options.lock_hurry_behind_item.value:
+			self.multiworld.push_precollected(self.create_item("Gamemode Unlock: Hurry"))
+
 	def create_regions(self) -> None:
 		stages = self.final_included_stages_list
 		characters = self.final_included_characters_list
@@ -147,23 +152,27 @@ class VampireSurvivors(World):
 		if self.options.enemysanity:
 			enemy_region = Region("Enemies", self.player, self.multiworld)
 
-			for enemy, find_locs in enemy_map.items():
+			for enemy, raw_find_locs in enemy_map.items():
 				if enemy == "Death" and ("Ode to Castlevania" not in stages or "Richter Belmont" not in characters):
 					continue
 
-				if not any(loc in stages for loc in find_locs):
+				if not any(loc in stages for loc in raw_find_locs):
 					continue
 
-				enemy_location = self.make_location(f"Kill {enemy}", enemy_region)
-				if self.starting_stage not in find_locs:
-					enemy_stage_items = [f"Stage Unlock: {stage}" for stage in find_locs]
+				hurry_map = enemy_hurry_map[enemy] if enemy in enemy_hurry_map else []
+				find_locs = [loc for loc in raw_find_locs if loc not in hurry_map]
+				find_locs_hurry = [loc for loc in raw_find_locs if loc in hurry_map]
 
-					if enemy != "Death":
-						enemy_location.access_rule = lambda state, items=enemy_stage_items: state.has_any(items,
-							self.player)
-					else:
-						enemy_location.access_rule = lambda state: state.has("Stage Unlock: Ode to Castlevania",
-							self.player) and state.has("Character Unlock: Richter Belmont", self.player)
+				enemy_location = self.make_location(f"Kill {enemy}", enemy_region)
+				enemy_stage_items = [f"Stage Unlock: {stage}" for stage in find_locs]
+				enemy_stage_items_hurry = [f"Stage Unlock: {stage}" for stage in find_locs_hurry]
+
+				if enemy != "Death":
+					enemy_location.access_rule = lambda state, items=enemy_stage_items, items_hurry=enemy_stage_items_hurry:\
+						state.has_any(items, self.player) or (state.has_any(items_hurry, self.player) and state.has("Gamemode Unlock: Hurry", self.player))
+				else:
+					enemy_location.access_rule = lambda state: state.has("Stage Unlock: Ode to Castlevania",
+						self.player) and state.has("Character Unlock: Richter Belmont", self.player) and state.has("Gamemode Unlock: Hurry", self.player)
 
 				self.check_count += 1
 
