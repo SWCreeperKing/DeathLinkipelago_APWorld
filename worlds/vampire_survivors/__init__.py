@@ -40,9 +40,10 @@ class VampireSurvivors(World):
 		self.ending_stage_count = 0
 
 	def generate_early(self) -> None:
-		if hasattr(self.multiworld, "re_gen_passthrough"):
+		if hasattr(self.multiworld, "re_gen_passthrough"): # If UT then
 			if "Vampire Survivors" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Vampire Survivors"]
+			# UT yaml-less support
 			self.options.enemysanity.value = passthrough["enemysanity"]
 			self.options.chest_checks_per_stage.value = passthrough["chest_checks_per_stage"]
 			self.options.goal_requirement.value = passthrough["goal_requirement"]
@@ -51,6 +52,7 @@ class VampireSurvivors(World):
 			self.options.lock_hurry_behind_item.value = passthrough["is_hurry_locked"]
 			self.options.lock_arcanas_behind_item.value = passthrough["is_arcanas_locked"]
 
+			# simple UT support
 			self.starting_character = passthrough["starting_character"]
 			self.starting_stage = passthrough["starting_stage"]
 			self.final_included_stages_list = passthrough["final_stages"]
