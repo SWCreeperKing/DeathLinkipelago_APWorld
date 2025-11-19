@@ -54,8 +54,9 @@ class SlimeRancher(World):
 
 			for back_connection in backwards_connections[zone]:
 				back_region = region_map[back_connection]
+				print(f"{back_connection} -> {zone}")
 				back_region.connect(zone_region, f"{back_connection} -> {zone}",
-					lambda state: state.has(f"Region Unlock: {zone}", self.player))
+					lambda state, region_unlock=zone: state.has(f"Region Unlock: {region_unlock}", self.player))
 
 			region_map[zone] = zone_region
 
