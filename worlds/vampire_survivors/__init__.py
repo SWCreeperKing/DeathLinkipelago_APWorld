@@ -25,6 +25,7 @@ class VampireSurvivors(World):
 	item_name_groups = {
 		"unlocks": unlock_character_items + unlock_stage_items + unlock_gamemodes
 	}
+
 	ut_can_gen_without_yaml = True
 	gen_puml = False
 

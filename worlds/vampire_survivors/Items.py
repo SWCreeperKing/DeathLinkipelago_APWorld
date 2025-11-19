@@ -19,7 +19,7 @@ item_table: Dict[str, ItemClassification] = {
     **{item: ItemClassification.filler for item in filler_items},
 }
 
-raw_items = unlock_character_items + unlock_stage_items + unlock_gamemodes + filler_items
+raw_items = [item for item, classification in item_table.items()]
 
 def create_items(world):
     options: VampireSurvivorsOptions = world.options
