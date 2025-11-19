@@ -5,8 +5,8 @@ zones = [
 	"Dry Reef",
 	"Indigo Quarry",
 	"Moss Blanket",
-	"Ruins Transition",
-	"Ruins",
+	"Ancient Ruins Transition",
+	"Ancient Ruins",
 	"Glass Desert",
 	# "The Slime Sea",
 ]
@@ -18,7 +18,7 @@ backwards_connections = {
 	"Dry Reef": ["The Ranch"],
 	"Indigo Quarry": ["Dry Reef"],
 	"Moss Blanket": ["Dry Reef"],
-	"Ruins Transition": ["Indigo Quarry", "Moss Blanket"],
-	"Ruins": ["Ruins Transition"],
-	"Glass Desert": ["Ruins"],
+	"Ancient Ruins Transition": ["Indigo Quarry", "Moss Blanket"],
+	"Ancient Ruins": ["Ancient Ruins Transition"],
+	"Glass Desert": ["Ancient Ruins"],
 }

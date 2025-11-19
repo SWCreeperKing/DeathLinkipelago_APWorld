@@ -103,7 +103,7 @@ class SlimeRancher(World):
 		create_items(self)
 
 	def set_rules(self) -> None:
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 23)
+		self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
 
 	def fill_slot_data(self) -> Dict[str, Any]:
 		slot_data: Dict[str, Any] = {
