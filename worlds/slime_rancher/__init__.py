@@ -54,7 +54,6 @@ class SlimeRancher(World):
 
 			for back_connection in backwards_connections[zone]:
 				back_region = region_map[back_connection]
-				print(f"{back_connection} -> {zone}")
 				back_region.connect(zone_region, f"{back_connection} -> {zone}",
 					lambda state, region_unlock=zone: state.has(f"Region Unlock: {region_unlock}", self.player))
 
@@ -106,8 +105,12 @@ class SlimeRancher(World):
 		self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
 
 	def fill_slot_data(self) -> Dict[str, Any]:
+		characters = [char for char in f"{self.random.choice(zones)}{self.multiworld.seed}{self.player_name}"]
+		self.random.shuffle(characters)
+		shuffled = ''.join(characters).replace(" ", "_")
 		slot_data: Dict[str, Any] = {
-			"enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods)
+			"enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods),
+			"uuid": str(f"ap_uuid_{shuffled}")
 		}
 
 		return slot_data
