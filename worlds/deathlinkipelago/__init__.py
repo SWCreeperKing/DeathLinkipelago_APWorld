@@ -29,6 +29,7 @@ class DeathLinkipelago(World):
     shop_locations = {f"Death Shop {id_offset + 1}": uuid_offset + id_offset + 1 for id_offset in range(999)}
     location_name_to_id = {"Starting Check": uuid_offset, **shop_locations}
     item_name_to_id = {name: uuid_offset + data.id_offset for name, data in item_table.items()}
+    topology_present = True
 
     def generate_early(self) -> None:
         check_options(self)

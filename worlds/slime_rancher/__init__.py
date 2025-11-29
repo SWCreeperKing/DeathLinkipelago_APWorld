@@ -23,6 +23,7 @@ class SlimeRancher(World):
 		"unlocks": region_unlocks
 	}
 
+	topology_present = True
 	ut_can_gen_without_yaml = True
 	gen_puml = False
 

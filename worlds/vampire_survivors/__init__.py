@@ -26,6 +26,7 @@ class VampireSurvivors(World):
 		"unlocks": unlock_character_items + unlock_stage_items + unlock_gamemodes
 	}
 
+	topology_present = True
 	ut_can_gen_without_yaml = True
 	gen_puml = False
 
