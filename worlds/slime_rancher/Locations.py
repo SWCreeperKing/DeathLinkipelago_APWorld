@@ -76,7 +76,7 @@ interactables = [
 	["Treasure Pod - Through Crystal Slime Cave", "Indigo Quarry"],
 	["Treasure Pod - In the Quarry Pond", "Indigo Quarry"],
 	["Hobson's Note - Indigo Quarry Pond", "Indigo Quarry"],
-	["Hobson's Note - The Docks", "The Ranch"],
+	["Hobson's Note - The Docks", "The Overgrowth"],
 	["Treasure Pod - Moss Blanket Alcove Cliff", "Moss Blanket"],
 	["Hobson's Note - Indigo Quarry Entry", "Indigo Quarry"],
 	["Treasure Pod - Alcove Above Moss Teleporter", "Moss Blanket"],

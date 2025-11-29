@@ -6,8 +6,13 @@ from .Connections import zones
 class SlimeRancherItem(Item):
 	game = "Slime Rancher"
 
-
 region_unlocks = [f"Region Unlock: {zone}" for zone in zones]
+
+non_progressive_useful_items = [
+	"Air Burst",
+	"Liquid Slot",
+	"Golden Sure Shot"
+]
 
 progressive_useful_item_count = {
 	"Progressive Max Health": 4,
@@ -27,6 +32,7 @@ filler_items = ["Slime Plush"]
 item_table: Dict[str, ItemClassification] = {
 	**{item: ItemClassification.progression for item in region_unlocks},
 	**{item: ItemClassification.progression for item in progressive_progression_item_count},
+	**{item: ItemClassification.useful for item in non_progressive_useful_items},
 	**{item: ItemClassification.useful for item in progressive_useful_item_count},
 	**{item: ItemClassification.filler for item in filler_items},
 }
@@ -40,6 +46,10 @@ def create_items(world):
 	for zone in region_unlocks:
 		world.location_count -= 1
 		pool.append(world.create_item(zone))
+
+	for u_progressive in non_progressive_useful_items:
+		world.location_count -= 1
+		pool.append(world.create_item(u_progressive))
 
 	for p_useful, amt in progressive_useful_item_count.items():
 		world.location_count -= amt
