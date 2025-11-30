@@ -6,7 +6,7 @@ from BaseClasses import Location, Region, Item, ItemClassification, LocationProg
 from .Locations import location_dict, interactables, dlc_interactables, upgrades
 from .Connections import zones, backwards_connections
 from .Rules import get_rule_map
-from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods
+from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7zUpgrades
 from .Items import raw_items, region_unlocks, create_items, SlimeRancherItem, item_table
 
 class SlimeRancher(World):
@@ -36,6 +36,11 @@ class SlimeRancher(World):
 			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
 			self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_dlc"])
+			self.options.start_with_dry_reef = StartWithDryReef(passthrough("start_with_dry_reef"))
+			self.options.include_7z_upgrades = Include7zUpgrades(passthrough["include_7z_upgrades"])
+
+		if self.options.start_with_dry_reef:
+			self.multiworld.push_precollected(self.create_item(f"Region Unlock: Dry Reef"))
 
 	def create_regions(self) -> None:
 		menu_region = Region("Menu", self.player, self.multiworld)
@@ -60,13 +65,13 @@ class SlimeRancher(World):
 
 			region_map[zone] = zone_region
 
-		rule_map = get_rule_map(self.player)
+		rule_map = get_rule_map(self.player, self.options)
 
 		for upgrade in upgrades:
 			location = self.make_location(upgrade, upgrade_region)
 
-			if "Treasure Cracker" not in upgrade: continue
-			location.access_rule = lambda state: state.has("Region Unlock: The Lab", self.player)
+			if upgrade not in rule_map: continue
+			location.access_rule = rule_map[upgrade]
 
 		for location_data in interactables:
 			location_name = location_data[0]
@@ -110,7 +115,9 @@ class SlimeRancher(World):
 		self.random.shuffle(characters)
 		shuffled = ''.join(characters).replace(" ", "_")
 		slot_data: Dict[str, Any] = {
+			"start_with_dry_reef": bool(self.options.start_with_dry_reef),
 			"enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods),
+			"include_7z_upgrades": bool(self.options.include_7z_upgrades),
 			"uuid": str(f"ap_uuid_{shuffled}")
 		}
 

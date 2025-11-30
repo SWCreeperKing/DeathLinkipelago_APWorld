@@ -20,8 +20,7 @@ upgrades = [
 	"Buy Personal Upgrade (Jetpack)",
 	"Buy Personal Upgrade (Jetpack Efficiency)",
 	"Buy Personal Upgrade (Air Burst)",
-	"Buy Personal Upgrade (Liquid Slot)",
-	"Buy Personal Upgrade (Golden Sure Shot)"
+	"Buy Personal Upgrade (Liquid Slot)"
 ]
 
 interactables = [
