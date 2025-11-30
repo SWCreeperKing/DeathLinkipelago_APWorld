@@ -3,7 +3,7 @@ from typing import Dict, Any, ClassVar, List, Set
 from Options import OptionError
 from worlds.AutoWorld import World
 from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType, MultiWorld
-from .Locations import location_dict, interactables, dlc_interactables, upgrades
+from .Locations import location_dict, interactables, dlc_interactables, upgrades, upgrades_7z
 from .Connections import zones, backwards_connections
 from .Rules import get_rule_map
 from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7zUpgrades
@@ -68,6 +68,7 @@ class SlimeRancher(World):
 		rule_map = get_rule_map(self.player, self.options)
 
 		for upgrade in upgrades:
+			if upgrade in upgrades_7z: continue
 			location = self.make_location(upgrade, upgrade_region)
 
 			if upgrade not in rule_map: continue

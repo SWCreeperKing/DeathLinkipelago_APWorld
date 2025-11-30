@@ -23,6 +23,12 @@ upgrades = [
 	"Buy Personal Upgrade (Liquid Slot)"
 ]
 
+upgrades_7z = [
+    "Buy Personal Upgrade (Max Health lv.4)",
+	"Buy Personal Upgrade (Max Ammo lv.4)",
+	"Buy Personal Upgrade (Run Efficiency lv.2)"
+]
+
 interactables = [
     ["Hobson's Note - Outside Ranch", "Dry Reef"],
 	["Treasure Pod - Hidden Cave near Ranch Entry", "Dry Reef"],
