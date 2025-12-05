@@ -30,6 +30,25 @@ upgrades_7z = [
 ]
 
 interactables = [
+    ["Treasure Pod - Slime Sea Cosmetic (Angelic)", "The Grotto"],
+	["Treasure Pod - Dry Reef Cosmetic (Sparkly)", "Dry Reef"],
+	["Treasure Pod - Dry Reef Cosmetic (Heavy Metal)", "Dry Reef"],
+	["Treasure Pod - Moss Blanket Cosmetic (Arcane)", "Moss Blanket"],
+	["Treasure Pod - Moss Blanket Cosmetic (Cheshire)", "Moss Blanket"],
+	["Treasure Pod - Moss Blanket Cosmetic (Royal Jelly)", "Moss Blanket"],
+	["Treasure Pod - Ring Island Cosmetic (Gilded)", "Dry Reef"],
+	["Treasure Pod - Dry Reef Cosmetic (Tiger)", "Dry Reef"],
+	["Treasure Pod - End of Ancient Ruins Cosmetic (Monochrome)", "Ancient Ruins"],
+	["Treasure Pod - Ancient Ruins Cosmetic (Guardian)", "Ancient Ruins"],
+	["Treasure Pod - Glass Desert Cosmetic (Nebula)", "Glass Desert"],
+	["Treasure Pod - Glass Desert Leftside Ruins Secret Style", "Glass Desert"],
+	["Treasure Pod - Glass Desert Western Secret Style", "Glass Desert"],
+	["Treasure Pod - Glass Desert Northern", "Glass Desert"],
+	["Treasure Pod - Indigo Quarry Cosmetic (Lilypad)", "Indigo Quarry"],
+	["Treasure Pod - Indigo Quarry Cosmetic (Radiant)", "Ancient Ruins"]
+]
+
+dlc_interactables = [
     ["Hobson's Note - Outside Ranch", "Dry Reef"],
 	["Treasure Pod - Hidden Cave near Ranch Entry", "Dry Reef"],
 	["Treasure Pod - Dry Reef Entrance", "Dry Reef"],
@@ -144,26 +163,8 @@ interactables = [
 	["Treasure Pod - Glass Desert Northern Steeple", "Glass Desert"],
 	["Hobson's Note - Glass Desert Northern Ruins", "Glass Desert"],
 	["Hobson's Note - Glass Desert Slime Statue", "Glass Desert"],
-	["Hobson's Note - Doors Like These", "Glass Desert"]
-]
-
-dlc_interactables = [
-    ["Treasure Pod - Slime Sea Cosmetic (Angelic)", "The Grotto"],
-	["Treasure Pod - Dry Reef Cosmetic (Sparkly)", "Dry Reef"],
-	["Treasure Pod - Dry Reef Cosmetic (Heavy Metal)", "Dry Reef"],
-	["Treasure Pod - Moss Blanket Cosmetic (Arcane)", "Moss Blanket"],
-	["Treasure Pod - Moss Blanket Cosmetic (Cheshire)", "Moss Blanket"],
-	["Treasure Pod - Moss Blanket Cosmetic (Royal Jelly)", "Moss Blanket"],
-	["Treasure Pod - Ring Island Cosmetic (Gilded)", "Dry Reef"],
-	["Treasure Pod - Dry Reef Cosmetic (Tiger)", "Dry Reef"],
-	["Treasure Pod - End of Ancient Ruins Cosmetic (Monochrome)", "Ancient Ruins"],
-	["Treasure Pod - Ancient Ruins Cosmetic (Guardian)", "Ancient Ruins"],
-	["Treasure Pod - Glass Desert Cosmetic (Nebula)", "Glass Desert"],
-	["Treasure Pod - Glass Desert Leftside Ruins Secret Style", "Glass Desert"],
-	["Treasure Pod - Glass Desert Western Secret Style", "Glass Desert"],
-	["Treasure Pod - Glass Desert Northern", "Glass Desert"],
-	["Treasure Pod - Indigo Quarry Cosmetic (Lilypad)", "Indigo Quarry"],
-	["Treasure Pod - Indigo Quarry Cosmetic (Radiant)", "Indigo Quarry"]
+	["Hobson's Note - Doors Like These", "Glass Desert"],
+	["Map Fragment - Ancient Ruins", "Ancient Ruins"]
 ]
 
 location_dict = [

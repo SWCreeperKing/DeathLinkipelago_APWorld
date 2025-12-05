@@ -27,7 +27,7 @@ progressive_progression_item_count = {
 	"Progressive Treasure Cracker": 3,
 }
 
-filler_items = ["Slime Plush"]
+filler_items = ["Slime Plush", "25x Newbucks", "50x Newbucks", "75x Newbucks", "100x Newbucks"]
 
 item_table: Dict[str, ItemClassification] = {
 	**{item: ItemClassification.progression for item in region_unlocks},
@@ -39,11 +39,12 @@ item_table: Dict[str, ItemClassification] = {
 
 raw_items: List[str] = [item for item, classification in item_table.items()]
 
-
 def create_items(world):
 	pool = world.multiworld.itempool
+	options = world.options
 
 	for zone in region_unlocks:
+		if "Reef" in zone and options.start_with_dry_reef: continue
 		world.location_count -= 1
 		pool.append(world.create_item(zone))
 

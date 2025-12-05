@@ -2,7 +2,16 @@
 
 def get_rule_map(player, world):
     return {
-        "Treasure Pod - Hidden Cave near Ranch Entry": lambda state: has_cracker(state, player, 3),
+        "Treasure Pod - Slime Sea Cosmetic (Angelic)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Moss Blanket Cosmetic (Cheshire)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Ring Island Cosmetic (Gilded)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Dry Reef Cosmetic (Tiger)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - End of Ancient Ruins Cosmetic (Monochrome)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Glass Desert Cosmetic (Nebula)": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Glass Desert Leftside Ruins Secret Style": lambda state: has_jetpack(state, player) and has_energy(state, player, 3),
+		"Treasure Pod - Glass Desert Western Secret Style": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Glass Desert Northern": lambda state: has_jetpack(state, player),
+		"Treasure Pod - Hidden Cave near Ranch Entry": lambda state: has_cracker(state, player, 3),
 		"Treasure Pod - Dry Reef Entrance": lambda state: has_cracker(state, player, 1),
 		"Treasure Pod - Dry Reef Arch Island": lambda state: has_cracker(state, player, 2) and has_jetpack(state, player),
 		"Treasure Pod - Next to Slime Gate Ring Isle": lambda state: has_cracker(state, player, 1),
@@ -100,25 +109,19 @@ def get_rule_map(player, world):
 		"Hobson's Note - Glass Desert Northern Ruins": lambda state: has_jetpack(state, player),
 		"Hobson's Note - Glass Desert Slime Statue": lambda state: has_jetpack(state, player),
 		"Hobson's Note - Doors Like These": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Slime Sea Cosmetic (Angelic)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Moss Blanket Cosmetic (Cheshire)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Ring Island Cosmetic (Gilded)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Dry Reef Cosmetic (Tiger)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - End of Ancient Ruins Cosmetic (Monochrome)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Glass Desert Cosmetic (Nebula)": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Glass Desert Leftside Ruins Secret Style": lambda state: has_jetpack(state, player) and has_energy(state, player, 3),
-		"Treasure Pod - Glass Desert Western Secret Style": lambda state: has_jetpack(state, player),
-		"Treasure Pod - Glass Desert Northern": lambda state: has_jetpack(state, player),
         "Buy Personal Upgrade (Max Health lv.2)": lambda state: has_region(state, player, "Dry Reef"),
 		"Buy Personal Upgrade (Max Health lv.3)": lambda state: has_region(state, player, "Dry Reef"),
 		"Buy Personal Upgrade (Max Ammo lv.2)": lambda state: has_region(state, player, "Dry Reef"),
 		"Buy Personal Upgrade (Max Ammo lv.3)": lambda state: has_region(state, player, "Dry Reef"),
 		"Buy Personal Upgrade (Max Energy lv.2)": lambda state: has_region(state, player, "Dry Reef"),
 		"Buy Personal Upgrade (Max Energy lv.3)": lambda state: has_region(state, player, "Dry Reef"),
-		"Buy Personal Upgrade (Treasure Cracker lv.1)": lambda state: has_region(state, player, "The Lab"),
-		"Buy Personal Upgrade (Treasure Cracker lv.2)": lambda state: has_region(state, player, "The Lab"),
-		"Buy Personal Upgrade (Treasure Cracker lv.3)": lambda state: has_region(state, player, "The Lab"),
+		"Buy Personal Upgrade (Treasure Cracker lv.1)": lambda state: has_region(state, player, "The Lab") and has_region(state, player, "Indigo Quarry"),
+		"Buy Personal Upgrade (Treasure Cracker lv.2)": lambda state: has_region(state, player, "The Lab") and has_region(state, player, "Indigo Quarry"),
+		"Buy Personal Upgrade (Treasure Cracker lv.3)": lambda state: has_region(state, player, "The Lab") and has_region(state, player, "Indigo Quarry"),
 		"Buy Personal Upgrade (Jetpack Efficiency)": lambda state: has_region(state, player, "Dry Reef"),
+        "Buy Personal Upgrade (Max Health lv.4)": lambda state: has_region(state, player, "Indigo Quarry"),
+		"Buy Personal Upgrade (Max Ammo lv.4)": lambda state: has_region(state, player, "Indigo Quarry"),
+		"Buy Personal Upgrade (Run Efficiency lv.2)": lambda state: has_region(state, player, "Indigo Quarry"),
     }
 
 def has_cracker(state, player, level) -> bool:
@@ -129,9 +132,6 @@ def has_energy(state, player, amount) -> bool:
 
 def has_jetpack(state, player) -> bool:
     return state.has("Progressive Jetpack", player)
-    
-def has_7z_checks(world) -> bool:
-    return world.include_7z_upgrades
     
 def has_region(state, player, region) -> bool:
     return state.has(f"Region Unlock: {region}", player) 

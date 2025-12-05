@@ -6,8 +6,10 @@ from BaseClasses import Location, Region, Item, ItemClassification, LocationProg
 from .Locations import location_dict, interactables, dlc_interactables, upgrades, upgrades_7z
 from .Connections import zones, backwards_connections
 from .Rules import get_rule_map
-from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7zUpgrades
+from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7zUpgrades, \
+	TreasureCrackerChecks
 from .Items import raw_items, region_unlocks, create_items, SlimeRancherItem, item_table
+
 
 class SlimeRancher(World):
 	"""
@@ -36,8 +38,9 @@ class SlimeRancher(World):
 			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
 			self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_dlc"])
-			self.options.start_with_dry_reef = StartWithDryReef(passthrough("start_with_dry_reef"))
+			self.options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
 			self.options.include_7z_upgrades = Include7zUpgrades(passthrough["include_7z_upgrades"])
+			self.options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
 
 		if self.options.start_with_dry_reef:
 			self.multiworld.push_precollected(self.create_item(f"Region Unlock: Dry Reef"))
@@ -58,17 +61,30 @@ class SlimeRancher(World):
 		for zone in zones:
 			zone_region = region_map[zone] = Region(zone, self.player, self.multiworld)
 
-			for back_connection in backwards_connections[zone]:
-				back_region = region_map[back_connection]
-				back_region.connect(zone_region, f"{back_connection} -> {zone}",
-					lambda state, region_unlock=zone: state.has(f"Region Unlock: {region_unlock}", self.player))
+			if zone is not "Ancient Ruins":
+				for back_connection in backwards_connections[zone]:
+					back_region = region_map[back_connection]
+					back_region.connect(zone_region, f"{back_connection} -> {zone}",
+						lambda state, region_unlock=zone: state.has(f"Region Unlock: {region_unlock}", self.player))
+			else:
+				back_region = region_map["Ancient Ruins Transition"]
+				back_region.connect(zone_region, f"Ancient Ruins Transition -> {zone}",
+					lambda state :
+					state.has(f"Region Unlock: Ancient Ruins Transition", self.player)
+					and state.has("Region Unlock: Indigo Quarry", self.player)
+					and state.has("Region Unlock: Moss Blanket", self.player)
+				)
 
 			region_map[zone] = zone_region
 
 		rule_map = get_rule_map(self.player, self.options)
 
 		for upgrade in upgrades:
-			if upgrade in upgrades_7z: continue
+			if ("Treasure Cracker" in upgrade and
+					upgrade > f"Buy Personal Upgrade (Treasure Cracker lv.{self.options.treasure_cracker_checks})"):
+				continue
+
+			if upgrade in upgrades_7z and not self.options.include_7z_upgrades: continue
 			location = self.make_location(upgrade, upgrade_region)
 
 			if upgrade not in rule_map: continue
@@ -119,6 +135,7 @@ class SlimeRancher(World):
 			"start_with_dry_reef": bool(self.options.start_with_dry_reef),
 			"enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods),
 			"include_7z_upgrades": bool(self.options.include_7z_upgrades),
+			"treasure_cracker_checks": bool(self.options.treasure_cracker_checks),
 			"uuid": str(f"ap_uuid_{shuffled}")
 		}
 

@@ -18,6 +18,19 @@ class EnableStylishDlcTreasurePods(Toggle):
 	"""
 	display_name = "Enable Stylish Dlc Treasure Pods"
 
+class TreasureCrackerChecks(Range):
+	"""
+	which levels of the treasure cracker is considered as checks
+	default: level 1
+	level 1 requires crafting 1 gadget
+	level 2 requires crafting 20 gadgets
+	level 3 requires crafting 50 gadgets
+	"""
+	display_name = "Treasure Cracker Checks"
+	range_start = 0
+	range_end = 3
+	default = 1
+
 class Include7zUpgrades(Toggle):
 	"""
 	Include the upgrades locked behind 7z as checks?
@@ -29,4 +42,5 @@ class Include7zUpgrades(Toggle):
 class SlimeRancherOptions(PerGameCommonOptions):
 	start_with_dry_reef: StartWithDryReef
 	enable_stylish_dlc_treasure_pods: EnableStylishDlcTreasurePods
+	treasure_cracker_checks: TreasureCrackerChecks
 	include_7z_upgrades: Include7zUpgrades
