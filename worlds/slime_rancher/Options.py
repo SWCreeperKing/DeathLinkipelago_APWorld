@@ -31,16 +31,25 @@ class TreasureCrackerChecks(Range):
 	range_end = 3
 	default = 1
 
-class Include7zUpgrades(Toggle):
+class Include7z(Toggle):
 	"""
-	Include the upgrades locked behind 7z as checks?
+	Include unlockables behind 7z as checks
 	estimated to appear in sphere 2 and above
 	"""
-	display_name = "Include 7z Upgrades"
+	display_name = "Include 7z"
+
+class FixMarketRates(DefaultOnToggle):
+	"""
+	Overrides the default market behavior:
+	instead of https://slimerancher.fandom.com/wiki/Plort_Market_(Slime_Rancher)
+	it will make all plort prices 150% base value, base value listed in the above link
+	"""
+	display_name = "Fix Market Rates"
 
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
 	start_with_dry_reef: StartWithDryReef
 	enable_stylish_dlc_treasure_pods: EnableStylishDlcTreasurePods
 	treasure_cracker_checks: TreasureCrackerChecks
-	include_7z_upgrades: Include7zUpgrades
+	include_7z: Include7z
+	fix_market_rates: FixMarketRates

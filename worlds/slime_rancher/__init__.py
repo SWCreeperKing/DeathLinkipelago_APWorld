@@ -6,8 +6,8 @@ from BaseClasses import Location, Region, Item, ItemClassification, LocationProg
 from .Locations import location_dict, interactables, dlc_interactables, upgrades, upgrades_7z
 from .Connections import zones, backwards_connections
 from .Rules import get_rule_map
-from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7zUpgrades, \
-	TreasureCrackerChecks
+from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7z, \
+	TreasureCrackerChecks, FixMarketRates
 from .Items import raw_items, region_unlocks, create_items, SlimeRancherItem, item_table
 
 
@@ -39,8 +39,11 @@ class SlimeRancher(World):
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
 			self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_dlc"])
 			self.options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
-			self.options.include_7z_upgrades = Include7zUpgrades(passthrough["include_7z_upgrades"])
+			self.options.include_7z = Include7z(passthrough["include_7z_upgrades"])
 			self.options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
+
+			if "fix_market_rates" in passthrough:
+				self.options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
 
 		if self.options.start_with_dry_reef:
 			self.multiworld.push_precollected(self.create_item(f"Region Unlock: Dry Reef"))
@@ -61,7 +64,7 @@ class SlimeRancher(World):
 		for zone in zones:
 			zone_region = region_map[zone] = Region(zone, self.player, self.multiworld)
 
-			if zone is not "Ancient Ruins":
+			if zone != "Ancient Ruins":
 				for back_connection in backwards_connections[zone]:
 					back_region = region_map[back_connection]
 					back_region.connect(zone_region, f"{back_connection} -> {zone}",
@@ -84,7 +87,7 @@ class SlimeRancher(World):
 					upgrade > f"Buy Personal Upgrade (Treasure Cracker lv.{self.options.treasure_cracker_checks})"):
 				continue
 
-			if upgrade in upgrades_7z and not self.options.include_7z_upgrades: continue
+			if upgrade in upgrades_7z and not self.options.include_7z: continue
 			location = self.make_location(upgrade, upgrade_region)
 
 			if upgrade not in rule_map: continue
@@ -136,7 +139,8 @@ class SlimeRancher(World):
 			"enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods),
 			"include_7z_upgrades": bool(self.options.include_7z_upgrades),
 			"treasure_cracker_checks": bool(self.options.treasure_cracker_checks),
-			"uuid": str(f"ap_uuid_{shuffled}")
+			"uuid": str(f"ap_uuid_{shuffled}"),
+			"fix_market_rates": bool(self.options.fix_market_rates),
 		}
 
 		return slot_data

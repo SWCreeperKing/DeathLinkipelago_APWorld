@@ -18,6 +18,7 @@ progressive_useful_item_count = {
 	"Progressive Max Health": 4,
 	"Progressive Max Ammo": 4,
 	"Progressive Run Efficiency": 2,
+	"Progressive Market Stonks": 5, # increase final market value by 5% per
 }
 
 progressive_progression_item_count = {
@@ -27,7 +28,7 @@ progressive_progression_item_count = {
 	"Progressive Treasure Cracker": 3,
 }
 
-filler_items = ["Slime Plush", "25x Newbucks", "50x Newbucks", "75x Newbucks", "100x Newbucks"]
+filler_items = ["75x Newbucks", "81x Newbucks", "99x Newbucks", "100x Newbucks"]
 
 item_table: Dict[str, ItemClassification] = {
 	**{item: ItemClassification.progression for item in region_unlocks},
