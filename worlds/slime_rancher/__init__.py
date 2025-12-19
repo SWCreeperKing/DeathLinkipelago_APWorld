@@ -32,7 +32,7 @@ class SlimeRancher(World):
 
     topology_present = True
     ut_can_gen_without_yaml = True
-    gen_puml = True
+    gen_puml = False
 
     def __init__(self, multiworld: "MultiWorld", player: int):
         super().__init__(multiworld, player)
