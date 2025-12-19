@@ -8,11 +8,13 @@ class SlimeRancherItem(Item):
 
 region_unlocks = [f"Region Unlock: {zone}" for zone in zones]
 
-non_progressive_useful_items = [
-	"Air Burst",
-	"Liquid Slot",
-	"Golden Sure Shot"
-]
+non_progressive_useful_items = {
+	"Air Burst": 1,
+	"Liquid Slot": 1,
+	"Golden Sure Shot": 1,
+	"Drone": 4,
+	"Advanced Drone": 4
+}
 
 progressive_useful_item_count = {
 	"Progressive Max Health": 4,
@@ -49,9 +51,10 @@ def create_items(world):
 		world.location_count -= 1
 		pool.append(world.create_item(zone))
 
-	for u_progressive in non_progressive_useful_items:
-		world.location_count -= 1
-		pool.append(world.create_item(u_progressive))
+	for u_progressive, amt in non_progressive_useful_items.items():
+		world.location_count -= amt
+		for _ in range(amt):
+			pool.append(world.create_item(u_progressive))
 
 	for p_useful, amt in progressive_useful_item_count.items():
 		world.location_count -= amt

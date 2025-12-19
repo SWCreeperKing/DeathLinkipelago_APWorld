@@ -1,32 +1,30 @@
 # File is Auto-generated, see: https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs
 
 upgrades = [
-    "Buy Personal Upgrade (Max Health lv.1)",
-	"Buy Personal Upgrade (Max Health lv.2)",
-	"Buy Personal Upgrade (Max Health lv.3)",
-	"Buy Personal Upgrade (Max Health lv.4)",
-	"Buy Personal Upgrade (Max Ammo lv.1)",
-	"Buy Personal Upgrade (Max Ammo lv.2)",
-	"Buy Personal Upgrade (Max Ammo lv.3)",
-	"Buy Personal Upgrade (Max Ammo lv.4)",
-	"Buy Personal Upgrade (Run Efficiency lv.1)",
-	"Buy Personal Upgrade (Run Efficiency lv.2)",
-	"Buy Personal Upgrade (Max Energy lv.1)",
-	"Buy Personal Upgrade (Max Energy lv.2)",
-	"Buy Personal Upgrade (Max Energy lv.3)",
+    "Buy Personal Upgrade (Heart Module lv.1)",
+	"Buy Personal Upgrade (Heart Module lv.2)",
+	"Buy Personal Upgrade (Heart Module lv.3)",
+	"Buy Personal Upgrade (Heart Module lv.4)",
+	"Buy Personal Upgrade (Tank Booster lv.1)",
+	"Buy Personal Upgrade (Tank Booster lv.2)",
+	"Buy Personal Upgrade (Tank Booster lv.3)",
+	"Buy Personal Upgrade (Tank Booster lv.4)",
+	"Buy Personal Upgrade (Dash Boots lv. 1)",
+	"Buy Personal Upgrade (Dash Boots lv.2)",
+	"Buy Personal Upgrade (Power Core lv.1)",
+	"Buy Personal Upgrade (Power Core lv.2)",
+	"Buy Personal Upgrade (Power Core lv.3)",
 	"Buy Personal Upgrade (Treasure Cracker lv.1)",
 	"Buy Personal Upgrade (Treasure Cracker lv.2)",
 	"Buy Personal Upgrade (Treasure Cracker lv.3)",
 	"Buy Personal Upgrade (Jetpack)",
-	"Buy Personal Upgrade (Jetpack Efficiency)",
-	"Buy Personal Upgrade (Air Burst)",
+	"Buy Personal Upgrade (Air Drive)",
+	"Buy Personal Upgrade (Pulse Wave)",
 	"Buy Personal Upgrade (Liquid Slot)"
 ]
 
 upgrades_7z = [
-    "Buy Personal Upgrade (Max Health lv.4)",
-	"Buy Personal Upgrade (Max Ammo lv.4)",
-	"Buy Personal Upgrade (Run Efficiency lv.2)"
+    
 ]
 
 interactables = [
@@ -61,7 +59,7 @@ interactables = [
 	["Treasure Pod - Moss Blanket Back Island", "Moss Blanket"],
 	["Hobson's Note - Moss Blanket Mushroom Island", "Moss Blanket"],
 	["Treasure Pod - Moss Blanket Underwater Pond", "Moss Blanket"],
-	["Treasure Pod -  Moss Blanket Wooden Ramps", "Moss Blanket"],
+	["Treasure Pod - Moss Blanket Wooden Ramps", "Moss Blanket"],
 	["Treasure Pod - Quarry Cave Stalagmite near Rock Gordo", "Indigo Quarry"],
 	["Treasure Pod - Moss Blanket Ledge Near Flower Area", "Moss Blanket"],
 	["Treasure Pod - Moss Blanket Flower Area", "Moss Blanket"],
@@ -144,8 +142,7 @@ interactables = [
 	["Treasure Pod - Glass Desert Northern Steeple", "Glass Desert"],
 	["Hobson's Note - Glass Desert Northern Ruins", "Glass Desert"],
 	["Hobson's Note - Glass Desert Slime Statue", "Glass Desert"],
-	["Hobson's Note - Doors Like These", "Glass Desert"],
-	["Map Fragment - Ancient Ruins", "Ancient Ruins"]
+	["Hobson's Note - Doors Like These", "Glass Desert"]
 ]
 
 dlc_interactables = [
@@ -162,13 +159,68 @@ dlc_interactables = [
 	["Treasure Pod - Glass Desert Cosmetic (Nebula)", "Glass Desert"],
 	["Treasure Pod - Glass Desert Leftside Ruins Secret Style", "Glass Desert"],
 	["Treasure Pod - Glass Desert Western Secret Style", "Glass Desert"],
-	["Treasure Pod - Glass Desert Northern", "Glass Desert"],
-	["Treasure Pod - Indigo Quarry Cosmetic (Lilypad)", "Indigo Quarry"],
-	["Treasure Pod - Indigo Quarry Cosmetic (Radiant)", "Ancient Ruins"]
+	["Treasure Pod - Glass Desert Northern", "Glass Desert"]
+]
+
+corporate_locations = [
+    ["7Zee lv.1: Roostro Weathervane", "Menu"],
+	["7Zee lv.2: Fence Upgrade", "Menu"],
+	["7Zee lv.3: Path Upgrade", "Dry Reef"],
+	["7Zee lv.4: Porch Upgrade", "Dry Reef"],
+	["7Zee lv.5: Chroma Station", "Dry Reef"],
+	["7Zee lv.5: Cobalt Chroma", "Dry Reef"],
+	["7Zee lv.5: Milkshake Chroma", "Dry Reef"],
+	["7Zee lv.6: Arch Upgrade", "Dry Reef"],
+	["7Zee lv.7: Firecracker Chroma", "Dry Reef"],
+	["7Zee lv.7: Grapeshot Chroma", "Dry Reef"],
+	["7Zee lv.8: Slime Toy Shop", "Dry Reef"],
+	["7Zee lv.9: Robo Ranger Chroma", "Dry Reef"],
+	["7Zee lv.9: Maidatron Chroma", "Dry Reef"],
+	["7Zee lv.10: Advanced Slime Toys", "Dry Reef"],
+	["7Zee lv.11: Gingersnap Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.11: Peapod Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.11: Market Link", "Ancient Ruins Transition"],
+	["7Zee lv.12: Grotto Upgrade", "Ancient Ruins Transition"],
+	["7Zee lv.13: Decorizer", "Ancient Ruins Transition"],
+	["7Zee lv.13: Vanguard Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.13: Willow Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.14: Slime Trophy I", "Ancient Ruins Transition"],
+	["7Zee lv.15: Daybreak Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.15: Eventide Chroma", "Ancient Ruins Transition"],
+	["7Zee lv.16: Overgrowth Upgrade", "Ancient Ruins"],
+	["7Zee lv.17: Salamander Chroma", "Ancient Ruins"],
+	["7Zee lv.17: Royalton Chroma", "Ancient Ruins"],
+	["7Zee lv.18: Slime Trophy II", "Ancient Ruins"],
+	["7Zee lv.19: Neopolitan Chroma", "Ancient Ruins"],
+	["7Zee lv.19: Min Chip Chroma", "Ancient Ruins"],
+	["7Zee lv.19: Ultra Dash Boots", "Ancient Ruins"],
+	["7Zee lv.20: Tank Booster Ultra", "Ancient Ruins"],
+	["7Zee lv.20: Master Gordo Snare Blueprint", "Ancient Ruins"],
+	["7Zee lv.21: Ghost Wine Chroma", "Ancient Ruins"],
+	["7Zee lv.21: Volcanic Chroma", "Ancient Ruins"],
+	["7Zee lv.21: Heart Module Ultra", "Ancient Ruins"],
+	["7Zee lv.22: Lab Upgrade", "Ancient Ruins"],
+	["7Zee lv.22: Golden Sureshot", "Ancient Ruins"],
+	["7Zee lv.23: Knight Light Chroma", "Ancient Ruins"],
+	["7Zee lv.23: Pretty Loud Chroma", "Ancient Ruins"],
+	["7Zee lv.23: Titan Drill Blueprint", "Ancient Ruins"],
+	["7Zee lv.24: Slime Trophy III", "Glass Desert"],
+	["7Zee lv.24: Abyssal Pump Blueprint", "Glass Desert"],
+	["7Zee lv.25: Silverfox Chroma", "Glass Desert"],
+	["7Zee lv.25: Frozen Violet Chroma", "Glass Desert"],
+	["7Zee lv.25: Royal Apiary Blueprint", "Glass Desert"],
+	["7Zee lv.26: Docks Upgrade", "Glass Desert"],
+	["7Zee lv.26: Gold Slime Lamp Blueprint", "Glass Desert"],
+	["7Zee lv.27: Goldleaf Chroma", "Glass Desert"],
+	["7Zee lv.27: Astro Pearl Chroma", "Glass Desert"],
+	["7Zee lv.27: Gold Warp Depot Blueprint", "Glass Desert"],
+	["7Zee lv.28: Slime Trophy IV", "Glass Desert"],
+	["7Zee lv.28: Gold Teleporter Blueprint", "Glass Desert"]
 ]
 
 location_dict = [
 	*[items for items in upgrades],
 	*[items[0] for items in interactables],
 	*[items[0] for items in dlc_interactables],
+	*[items[0] for items in corporate_locations],
 ]
