@@ -166,8 +166,10 @@ class SlimeRancher(World):
     def set_rules(self) -> None:
         if self.options.goal_type == 0:
             self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
-        else:
+        elif self.options.goal_type == 1:
             self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player, len(corporate_locations))
+        elif self.options.goal_type == 2:
+            self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:], self.player)
 
     def fill_slot_data(self) -> Dict[str, Any]:
         characters = [char for char in f"{self.random.choice(zones)}{self.multiworld.seed}{self.player_name}"]

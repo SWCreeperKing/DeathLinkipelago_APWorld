@@ -24,7 +24,9 @@ upgrades = [
 ]
 
 upgrades_7z = [
-    
+    "Buy Personal Upgrade (Heart Module lv.4)",
+	"Buy Personal Upgrade (Tank Booster lv.4)",
+	"Buy Personal Upgrade (Dash Boots lv.2)"
 ]
 
 interactables = [
@@ -39,6 +41,7 @@ interactables = [
 	["Treasure Pod - Cliff Near Tabby Slimes", "Dry Reef"],
 	["Treasure Pod - Tabby Gordo", "Dry Reef"],
 	["Treasure Pod - Phosphor Gordo", "Dry Reef"],
+	["Slime Sea - The Mustache Shrine", "Dry Reef"],
 	["Hobson's Note - Ancient Ruins Entrance", "Ancient Ruins"],
 	["Hobson's Note - The Grotto", "The Grotto"],
 	["Treasure Pod - The Grotto", "The Grotto"],
@@ -116,6 +119,9 @@ interactables = [
 	["Treasure Pod - Ancient Ruins '???'", "Ancient Ruins"],
 	["Treasure Pod - Boom Gordo", "Ancient Ruins"],
 	["Treasure Pod - On Top of Ancient Ruins", "Ancient Ruins"],
+	["Ancient Ruins - Follow the Upper Brick Road", "Ancient Ruins"],
+	["Ancient Ruins - At the End of a Broken Pillar Path", "Ancient Ruins"],
+	["Ancient Ruins - Hidden Room Behind a Leaf Drape", "Ancient Ruins"],
 	["Treasure Pod - Outside The Desert Teleporter Room", "Glass Desert"],
 	["Treasure Pod - Inside The Desert Teleporter Room", "Glass Desert"],
 	["Hobson's Note - Entrance to Glass Desert", "Glass Desert"],
@@ -142,7 +148,11 @@ interactables = [
 	["Treasure Pod - Glass Desert Northern Steeple", "Glass Desert"],
 	["Hobson's Note - Glass Desert Northern Ruins", "Glass Desert"],
 	["Hobson's Note - Glass Desert Slime Statue", "Glass Desert"],
-	["Hobson's Note - Doors Like These", "Glass Desert"]
+	["Hobson's Note - Doors Like These", "Glass Desert"],
+	["Glass Desert - Two Doors", "Glass Desert"],
+	["Glass Desert - Sold the Ranch", "Glass Desert"],
+	["Glass Desert - Hover from One Tower to Another", "Glass Desert"],
+	["Glass Desert - Hidden High Above the Ancient Fountain", "Glass Desert"]
 ]
 
 dlc_interactables = [
@@ -152,14 +162,17 @@ dlc_interactables = [
 	["Treasure Pod - Moss Blanket Cosmetic (Arcane)", "Moss Blanket"],
 	["Treasure Pod - Moss Blanket Cosmetic (Cheshire)", "Moss Blanket"],
 	["Treasure Pod - Moss Blanket Cosmetic (Royal Jelly)", "Moss Blanket"],
+	["Indigo Quarry - Ashore Near Puddle Lake - Secret Style", "Indigo Quarry"],
 	["Treasure Pod - Ring Island Cosmetic (Gilded)", "Dry Reef"],
 	["Treasure Pod - Dry Reef Cosmetic (Tiger)", "Dry Reef"],
+	["Ancient Ruins Transition - Hidden In a Cave Outside the Garden", "Ancient Ruins Transition"],
 	["Treasure Pod - End of Ancient Ruins Cosmetic (Monochrome)", "Ancient Ruins"],
 	["Treasure Pod - Ancient Ruins Cosmetic (Guardian)", "Ancient Ruins"],
 	["Treasure Pod - Glass Desert Cosmetic (Nebula)", "Glass Desert"],
 	["Treasure Pod - Glass Desert Leftside Ruins Secret Style", "Glass Desert"],
 	["Treasure Pod - Glass Desert Western Secret Style", "Glass Desert"],
-	["Treasure Pod - Glass Desert Northern", "Glass Desert"]
+	["Treasure Pod - Glass Desert Northern", "Glass Desert"],
+	["Ash Isle - Blooming From Fire Flowers", "Indigo Quarry"]
 ]
 
 corporate_locations = [

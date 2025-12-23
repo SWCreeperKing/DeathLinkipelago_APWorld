@@ -11,10 +11,12 @@ class GoalType(Choice):
     What criteria to goal
     0 = read all notes
     1 = buy all 7Zee ranks
+    2 = get credits
     """
     display_name = "Goal Type"
     option_notes = 0
     option_7Zee = 1
+    option_credits = 2
 
 
 class StartWithDryReef(DefaultOnToggle):
@@ -68,7 +70,15 @@ class StartWithDrone(DefaultOnToggle):
     Start with a Drone
     """
     display_name = "Start With Drone"
-
+    
+class TrapPercent(Range):
+    """
+    what percent of filler should be replaced with traps
+    """
+    display_name = "Trap Percent"
+    default = 15
+    range_start = 0
+    range_end = 100
 
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
@@ -79,6 +89,7 @@ class SlimeRancherOptions(PerGameCommonOptions):
     include_7z: Include7z
     fix_market_rates: FixMarketRates
     start_with_drone: StartWithDrone
+    trap_percent: TrapPercent
     
 def check_options(world):
     options: SlimeRancherOptions = world.options
