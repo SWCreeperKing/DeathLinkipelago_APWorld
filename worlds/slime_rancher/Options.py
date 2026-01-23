@@ -9,9 +9,9 @@ from random import Random
 class GoalType(Choice):
     """
     What criteria to goal
-    0 = read all notes
-    1 = buy all 7Zee ranks
-    2 = get credits
+    notes = read all notes
+    7Zee = buy all 7Zee ranks
+    credits = get credits
     """
     display_name = "Goal Type"
     option_notes = 0
