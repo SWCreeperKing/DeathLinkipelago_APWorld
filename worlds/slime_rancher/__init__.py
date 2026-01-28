@@ -10,12 +10,10 @@ from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWit
     TreasureCrackerChecks, FixMarketRates, StartWithDrone, check_options, GoalType
 from .Items import raw_items, region_unlocks, create_items, SlimeRancherItem, item_table
 
+
 # TODO:
-# - make credits goal
-# - hide opening cutsceen
 # - make fake emails
 # - make email mcguffins for 7zee
-# 
 class SlimeRancher(World):
     """
     Slime Rancher
@@ -37,10 +35,10 @@ class SlimeRancher(World):
     def __init__(self, multiworld: "MultiWorld", player: int):
         super().__init__(multiworld, player)
         self.location_count = 0
-		
+
     def generate_early(self) -> None:
         check_options(self)
-        
+
         if hasattr(self.multiworld, "re_gen_passthrough"):
             if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
             passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
@@ -54,7 +52,7 @@ class SlimeRancher(World):
 
             if "start_with_drone" in passthrough:
                 self.options.start_with_drone = StartWithDrone(passthrough["start_with_drone"])
-                
+
             if "goal_type" in passthrough:
                 self.options.goal_type = GoalType(passthrough["goal_type"])
 
@@ -69,8 +67,8 @@ class SlimeRancher(World):
         ranch_region = Region("The Ranch", self.player, self.multiworld)
         upgrade_region = Region("Personal Upgrades", self.player, self.multiworld)
 
-        menu_region.connect(ranch_region, "Menu -> The Ranch")
-        ranch_region.connect(upgrade_region, "The Ranch -> Personal Upgrades")
+        menu_region.connect(ranch_region)
+        ranch_region.connect(upgrade_region)
         region_map: Dict[str, Region] = {
             "Menu": menu_region,
             "The Ranch": ranch_region,
@@ -83,21 +81,18 @@ class SlimeRancher(World):
             if zone != "Ancient Ruins":
                 for back_connection in backwards_connections[zone]:
                     back_region = region_map[back_connection]
-                    back_region.connect(zone_region, f"{back_connection} -> {zone}",
-                                        lambda state, region_unlock=zone: state.has(f"Region Unlock: {region_unlock}",
-                                                                                    self.player))
+                    back_region.connect(zone_region, rule=lambda state, region_unlock=zone: state.has(
+                        f"Region Unlock: {region_unlock}", self.player))
             else:
                 back_region = region_map["Ancient Ruins Transition"]
-                back_region.connect(zone_region, f"Ancient Ruins Transition -> {zone}",
-                                    lambda state:
-                                    state.has(f"Region Unlock: Ancient Ruins", self.player)
-                                    and state.has("Region Unlock: Indigo Quarry", self.player)
-                                    and state.has("Region Unlock: Moss Blanket", self.player)
-                                    )
+                back_region.connect(zone_region, rule=lambda state:
+                state.has(f"Region Unlock: Ancient Ruins", self.player)
+                and state.has("Region Unlock: Indigo Quarry", self.player)
+                and state.has("Region Unlock: Moss Blanket", self.player))
 
             region_map[zone] = zone_region
 
-        rule_map = get_rule_map(self.player, self.options)
+        rule_map = get_rule_map(self.player)
 
         for upgrade in upgrades:
             if ("Treasure Cracker" in upgrade and
@@ -139,7 +134,7 @@ class SlimeRancher(World):
             for corp_loc in corporate_locations:
                 location_region = region_map[corp_loc[1]]
                 location_name = corp_loc[0]
-                
+
                 if self.options.goal_type == 1:
                     event_location = Location(self.player, f"Bought: {location_name}", None, location_region)
                     event_location.place_locked_item(
@@ -150,7 +145,7 @@ class SlimeRancher(World):
                         event_location.access_rule = rule_map[location_name]
 
                 location = self.make_location(location_name, location_region)
-                
+
                 if location_name not in rule_map: continue
                 location.access_rule = rule_map[location_name]
 
@@ -167,9 +162,11 @@ class SlimeRancher(World):
         if self.options.goal_type == 0:
             self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
         elif self.options.goal_type == 1:
-            self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player, len(corporate_locations))
+            self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player,
+                                                                                        len(corporate_locations))
         elif self.options.goal_type == 2:
-            self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:], self.player)
+            self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:],
+                                                                                            self.player)
 
     def fill_slot_data(self) -> Dict[str, Any]:
         characters = [char for char in f"{self.random.choice(zones)}{self.multiworld.seed}{self.player_name}"]

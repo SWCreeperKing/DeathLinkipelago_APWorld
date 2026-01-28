@@ -1,7 +1,7 @@
-# File is Auto-generated, see: https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
 
 upgrades = [
-    "Buy Personal Upgrade (Heart Module lv.1)",
+	"Buy Personal Upgrade (Heart Module lv.1)",
 	"Buy Personal Upgrade (Heart Module lv.2)",
 	"Buy Personal Upgrade (Heart Module lv.3)",
 	"Buy Personal Upgrade (Heart Module lv.4)",
@@ -24,13 +24,13 @@ upgrades = [
 ]
 
 upgrades_7z = [
-    "Buy Personal Upgrade (Heart Module lv.4)",
+	"Buy Personal Upgrade (Heart Module lv.4)",
 	"Buy Personal Upgrade (Tank Booster lv.4)",
 	"Buy Personal Upgrade (Dash Boots lv.2)"
 ]
 
 interactables = [
-    ["Hobson's Note - Outside Ranch", "Dry Reef"],
+	["Hobson's Note - Outside Ranch", "Dry Reef"],
 	["Treasure Pod - Hidden Cave near Ranch Entry", "Dry Reef"],
 	["Treasure Pod - Dry Reef Entrance", "Dry Reef"],
 	["Treasure Pod - Dry Reef Arch Island", "Dry Reef"],
@@ -133,7 +133,7 @@ interactables = [
 	["Treasure Pod - Above Tangle Gordo", "Glass Desert"],
 	["Treasure Pod - Glass Desert Cliff Above Secret Style", "Glass Desert"],
 	["Treasure Pod - Glass Desert Leftside Ruins", "Glass Desert"],
-	["Treasure Pod - Glass Desert Leftside Isle ", "Glass Desert"],
+	["Treasure Pod - Glass Desert Leftside Isle", "Glass Desert"],
 	["Treasure Pod - Edge of Glass Desert Cliff", "Glass Desert"],
 	["Treasure Pod - Glass Desert Cliff Above Tangle Gordo", "Glass Desert"],
 	["Treasure Pod - Under Glass Desert Western Ruins", "Glass Desert"],
@@ -141,7 +141,7 @@ interactables = [
 	["Treasure Pod - Glass Desert Cliff Ruins", "Glass Desert"],
 	["Treasure Pod - Glass Desert Northern Ruins", "Glass Desert"],
 	["Hobson's Note - Glass Desert Northern Courtyard", "Glass Desert"],
-	["Treasure Pod - Glass Desert Western Ruins ", "Glass Desert"],
+	["Treasure Pod - Glass Desert Western Ruins", "Glass Desert"],
 	["Treasure Pod - Firey Glass Cliff", "Glass Desert"],
 	["Treasure Pod - Glass Desert Western", "Glass Desert"],
 	["Treasure Pod - Glass Desert Northern Cliff", "Glass Desert"],
@@ -156,7 +156,7 @@ interactables = [
 ]
 
 dlc_interactables = [
-    ["Treasure Pod - Slime Sea Cosmetic (Angelic)", "The Grotto"],
+	["Treasure Pod - Slime Sea Cosmetic (Angelic)", "The Grotto"],
 	["Treasure Pod - Dry Reef Cosmetic (Sparkly)", "Dry Reef"],
 	["Treasure Pod - Dry Reef Cosmetic (Heavy Metal)", "Dry Reef"],
 	["Treasure Pod - Moss Blanket Cosmetic (Arcane)", "Moss Blanket"],
@@ -176,7 +176,7 @@ dlc_interactables = [
 ]
 
 corporate_locations = [
-    ["7Zee lv.1: Roostro Weathervane", "Menu"],
+	["7Zee lv.1: Roostro Weathervane", "Menu"],
 	["7Zee lv.2: Fence Upgrade", "Menu"],
 	["7Zee lv.3: Path Upgrade", "Dry Reef"],
 	["7Zee lv.4: Porch Upgrade", "Dry Reef"],
@@ -235,5 +235,5 @@ location_dict = [
 	*[items for items in upgrades],
 	*[items[0] for items in interactables],
 	*[items[0] for items in dlc_interactables],
-	*[items[0] for items in corporate_locations],
+	*[items[0] for items in corporate_locations]
 ]

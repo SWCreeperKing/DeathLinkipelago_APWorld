@@ -45,7 +45,6 @@ item_table: Dict[str, ItemClassification] = {
 
 raw_items: List[str] = [item for item, classification in item_table.items()]
 
-
 def create_items(world):
     pool = world.multiworld.itempool
     options: SlimeRancherOptions = world.options
