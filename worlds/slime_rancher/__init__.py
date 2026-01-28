@@ -1,201 +1,104 @@
-import math
-from typing import Dict, Any, ClassVar, List, Set
-from Options import OptionError
 from worlds.AutoWorld import World
-from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType, MultiWorld
-from .Locations import location_dict, interactables, dlc_interactables, upgrades, upgrades_7z, corporate_locations
-from .Connections import zones, backwards_connections
-from .Rules import get_rule_map
-from .Options import SlimeRancherOptions, EnableStylishDlcTreasurePods, StartWithDryReef, Include7z, \
-    TreasureCrackerChecks, FixMarketRates, StartWithDrone, check_options, GoalType
-from .Items import raw_items, region_unlocks, create_items, SlimeRancherItem, item_table
+from .Locations import *
+from .Rules import *
+from .Options import *
+from .Items import *
+from .Regions import *
 
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
 
-# TODO:
-# - make fake emails
-# - make email mcguffins for 7zee
 class SlimeRancher(World):
-    """
-    Slime Rancher
-    """
-    game = "Slime Rancher"
-    options_dataclass = SlimeRancherOptions
-    options: SlimeRancherOptions
-    location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
-    item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	"""
+	Slime Rancher
+	"""
+	game = "Slime Rancher"
+	options_dataclass = SlimeRancherOptions
+	options: SlimeRancherOptions
+	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
+	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	topology_present = True
+	item_name_groups = {
+		"unlocks": region_unlocks
+	}
+	gen_puml = False
 
-    item_name_groups = {
-        "unlocks": region_unlocks
-    }
+	def __init__(self, multiworld: "MultiWorld", player: int):
+		super().__init__(multiworld, player)
+		self.location_count = 0
 
-    topology_present = True
-    ut_can_gen_without_yaml = True
-    gen_puml = False
+	def generate_early(self):
+		check_options(self)
+		if hasattr(self.multiworld, "re_gen_passthrough"):
+			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
+			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
+			if "goal_type" in passthrough:
+				self.options.goal_type = GoalType(passthrough["goal_type"])
+			
+			if "start_with_dry_reef" in passthrough:
+				self.options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
+			
+			if "enable_stylish_dlc_treasure_pods" in passthrough:
+				self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_stylish_dlc_treasure_pods"])
+			
+			if "treasure_cracker_checks" in passthrough:
+				self.options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
+			
+			if "include_7z" in passthrough:
+				self.options.include_7z = Include7z(passthrough["include_7z"])
+			
+			if "fix_market_rates" in passthrough:
+				self.options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
+			
+			if "start_with_drone" in passthrough:
+				self.options.start_with_drone = StartWithDrone(passthrough["start_with_drone"])
+			
+			if "trap_percent" in passthrough:
+				self.options.trap_percent = TrapPercent(passthrough["trap_percent"])
+			
+		if self.options.start_with_dry_reef:
+		    self.multiworld.push_precollected(self.create_item("Region Unlock: Dry Reef"))
+		if self.options.start_with_drone:
+		    self.multiworld.push_precollected(self.create_item("Drone"))
 
-    def __init__(self, multiworld: "MultiWorld", player: int):
-        super().__init__(multiworld, player)
-        self.location_count = 0
+	def create_regions(self):
+		gen_create_regions(self)
 
-    def generate_early(self) -> None:
-        check_options(self)
+	def create_item(self, name: str):
+		return Item(name, item_table[name], self.item_name_to_id[name], self.player)
 
-        if hasattr(self.multiworld, "re_gen_passthrough"):
-            if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
-            passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
-            self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_dlc"])
-            self.options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
-            self.options.include_7z = Include7z(passthrough["include_7z_upgrades"])
-            self.options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
+	def create_items(self):
+		gen_create_items(self)
 
-            if "fix_market_rates" in passthrough:
-                self.options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
+	def set_rules(self):
+		if self.options.goal_type == 0:
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
+		elif self.options.goal_type == 1:
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player, len(corporate_locations))
+		elif self.options.goal_type == 2:
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:],self.player)
 
-            if "start_with_drone" in passthrough:
-                self.options.start_with_drone = StartWithDrone(passthrough["start_with_drone"])
+	def fill_slot_data(self):
+		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]
+		self.random.shuffle(characters)
+		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
+		slot_data = {
+			"goal_type": int(self.options.goal_type),
+			"start_with_dry_reef": bool(self.options.start_with_dry_reef),
+			"enable_stylish_dlc_treasure_pods": bool(self.options.enable_stylish_dlc_treasure_pods),
+			"treasure_cracker_checks": int(self.options.treasure_cracker_checks),
+			"include_7z": bool(self.options.include_7z),
+			"fix_market_rates": bool(self.options.fix_market_rates),
+			"start_with_drone": bool(self.options.start_with_drone),
+			"trap_percent": int(self.options.trap_percent),
+			"uuid": str(shuffled)
+		}
+		return slot_data
 
-            if "goal_type" in passthrough:
-                self.options.goal_type = GoalType(passthrough["goal_type"])
-
-        if self.options.start_with_dry_reef:
-            self.multiworld.push_precollected(self.create_item("Region Unlock: Dry Reef"))
-
-        if self.options.start_with_drone:
-            self.multiworld.push_precollected(self.create_item("Drone"))
-
-    def create_regions(self) -> None:
-        menu_region = Region("Menu", self.player, self.multiworld)
-        ranch_region = Region("The Ranch", self.player, self.multiworld)
-        upgrade_region = Region("Personal Upgrades", self.player, self.multiworld)
-
-        menu_region.connect(ranch_region)
-        ranch_region.connect(upgrade_region)
-        region_map: Dict[str, Region] = {
-            "Menu": menu_region,
-            "The Ranch": ranch_region,
-            "Upgrades": upgrade_region
-        }
-
-        for zone in zones:
-            zone_region = region_map[zone] = Region(zone, self.player, self.multiworld)
-
-            if zone != "Ancient Ruins":
-                for back_connection in backwards_connections[zone]:
-                    back_region = region_map[back_connection]
-                    back_region.connect(zone_region, rule=lambda state, region_unlock=zone: state.has(
-                        f"Region Unlock: {region_unlock}", self.player))
-            else:
-                back_region = region_map["Ancient Ruins Transition"]
-                back_region.connect(zone_region, rule=lambda state:
-                state.has(f"Region Unlock: Ancient Ruins", self.player)
-                and state.has("Region Unlock: Indigo Quarry", self.player)
-                and state.has("Region Unlock: Moss Blanket", self.player))
-
-            region_map[zone] = zone_region
-
-        rule_map = get_rule_map(self.player)
-
-        for upgrade in upgrades:
-            if ("Treasure Cracker" in upgrade and
-                    upgrade > f"Buy Personal Upgrade (Treasure Cracker lv.{self.options.treasure_cracker_checks})"):
-                continue
-
-            if upgrade in upgrades_7z and not self.options.include_7z: continue
-            location = self.make_location(upgrade, upgrade_region)
-
-            if upgrade not in rule_map: continue
-            location.access_rule = rule_map[upgrade]
-
-        for location_data in interactables:
-            location_name = location_data[0]
-            location_region = region_map[location_data[1]]
-            location = self.make_location(location_name, location_region)
-
-            if "Hobson's Note" in location_name and self.options.goal_type == 0:
-                event_location = Location(self.player, f"Read: {location_name}", None, location_region)
-                event_location.place_locked_item(Item("Note Read", ItemClassification.progression, None, self.player))
-                location_region.locations.append(event_location)
-
-                if location_name in rule_map:
-                    event_location.access_rule = rule_map[location_name]
-
-            if location_name not in rule_map: continue
-            location.access_rule = rule_map[location_name]
-
-        if self.options.enable_stylish_dlc_treasure_pods:
-            for location_data in dlc_interactables:
-                location_name = location_data[0]
-                location_region = region_map[location_data[1]]
-                location = self.make_location(location_name, location_region)
-
-                if location_name not in rule_map: continue
-                location.access_rule = rule_map[location_name]
-
-        if self.options.include_7z:
-            for corp_loc in corporate_locations:
-                location_region = region_map[corp_loc[1]]
-                location_name = corp_loc[0]
-
-                if self.options.goal_type == 1:
-                    event_location = Location(self.player, f"Bought: {location_name}", None, location_region)
-                    event_location.place_locked_item(
-                        Item("7Zee Bought", ItemClassification.progression, None, self.player))
-                    location_region.locations.append(event_location)
-
-                    if location_name in rule_map:
-                        event_location.access_rule = rule_map[location_name]
-
-                location = self.make_location(location_name, location_region)
-
-                if location_name not in rule_map: continue
-                location.access_rule = rule_map[location_name]
-
-        for region in region_map.values():
-            self.multiworld.regions.append(region)
-
-    def create_item(self, name: str) -> SlimeRancherItem:
-        return SlimeRancherItem(name, item_table[name], self.item_name_to_id[name], self.player)
-
-    def create_items(self) -> None:
-        create_items(self)
-
-    def set_rules(self) -> None:
-        if self.options.goal_type == 0:
-            self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
-        elif self.options.goal_type == 1:
-            self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player,
-                                                                                        len(corporate_locations))
-        elif self.options.goal_type == 2:
-            self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:],
-                                                                                            self.player)
-
-    def fill_slot_data(self) -> Dict[str, Any]:
-        characters = [char for char in f"{self.random.choice(zones)}{self.multiworld.seed}{self.player_name}"]
-        self.random.shuffle(characters)
-        shuffled = ''.join(characters).replace(" ", "_")
-        slot_data: Dict[str, Any] = {
-            "start_with_dry_reef": bool(self.options.start_with_dry_reef),
-            "enable_dlc": bool(self.options.enable_stylish_dlc_treasure_pods),
-            "include_7z_upgrades": bool(self.options.include_7z),
-            "treasure_cracker_checks": bool(self.options.treasure_cracker_checks),
-            "uuid": str(f"ap_uuid_{shuffled}"),
-            "fix_market_rates": bool(self.options.fix_market_rates),
-            "start_with_drone": bool(self.options.start_with_drone),
-            "goal_type": int(self.options.goal_type)
-        }
-
-        return slot_data
-
-    def generate_output(self, output_directory: str) -> None:
-        if not self.gen_puml: return
-        from Utils import visualize_regions
-        state = self.multiworld.get_all_state(False)
-        state.update_reachable_regions(self.player)
-        visualize_regions(self.get_region("Menu"), f"{self.player_name}_world.puml",
-                          show_entrance_names=True,
-                          regions_to_highlight=state.reachable_regions[self.player])
-
-    def make_location(self, location_name, region) -> Location:
-        location = Location(self.player, location_name, self.location_name_to_id[location_name], region)
-        region.locations.append(location)
-        self.location_count += 1
-        return location
+	def generate_output(self, output_directory: str):
+		if self.gen_puml: 
+		    from Utils import visualize_regions
+		    state = self.multiworld.get_all_state(False)
+		    state.update_reachable_regions(self.player)
+		    visualize_regions(self.get_region("Menu"), f"{self.player_name}_world.puml",
+		                      show_entrance_names=True,
+		                      regions_to_highlight=state.reachable_regions[self.player])

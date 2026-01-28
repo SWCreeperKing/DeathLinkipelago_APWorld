@@ -1,3 +1,5 @@
+from .Locations import *
+
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
 
 def get_rule_map(player):
@@ -132,19 +134,22 @@ def get_rule_map(player):
 	}
 
 def has_cracker(state, player, level) -> bool:
-	return state.has('Progressive Treasure Cracker', player, level)
+	return state.has("Progressive Treasure Cracker", player, level)
 
 def has_energy(state, player, amount) -> bool:
-	return state.has('Progressive Max Energy', player, amount)
+	return state.has("Progressive Max Energy", player, amount)
 
 def has_jetpack(state, player) -> bool:
-	return state.has('Progressive Jetpack', player)
+	return state.has("Progressive Jetpack", player, 1)
 
 def has_region(state, player, region) -> bool:
-	return state.has(f'Region Unlock: {region}', player)
+	return state.has(f'Region Unlock: {region}', player, 1)
 
 def can_access_dry_reef(state, player) -> bool:
 	return has_region(state, player, 'Dry Reef')
+
+def can_access_to_ruins_from_trans(state, player) -> bool:
+	return has_region(state, player, 'Indigo Quarry') and has_region(state, player, 'Moss Blanket') and has_region(state, player, 'Ancient Ruins')
 
 def can_access_7zee(state, player) -> bool:
 	return can_access_dry_reef(state, player) and has_region(state, player, 'Indigo Quarry') and has_region(state, player, 'Moss Blanket') and has_region(state, player, 'Ancient Ruins')

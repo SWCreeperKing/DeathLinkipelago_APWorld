@@ -26,7 +26,7 @@ class StartWithDryReef(DefaultOnToggle):
 class EnableStylishDlcTreasurePods(Toggle):
 	"""
 	note: THIS WILL NOT GIVE YOU DLC
-		YOU MUST __***OWN***__ THE DLC
+	YOU MUST __***OWN***__ THE DLC
 	"""
 	display_name = "Enable Stylish Dlc Treasure Pods"
 
@@ -48,7 +48,7 @@ class TreasureCrackerChecks(Range):
 class Include7z(Toggle):
 	"""
 	Include unlockables behind 7z as checks
-	    estimated to appear in sphere 2 and above
+	estimated to appear in sphere 2 and above
 	"""
 	display_name = "Include 7z"
 
