@@ -393,136 +393,136 @@ def copper_ore(state, player) -> bool:
 	return has_frame(state, player, 'Copper Mine')
 
 def iron_ingot(state, player) -> bool:
-	return iron_ore(state, player)
+	return has_frame(state, player, "Iron Smelter") and iron_ore(state, player)
 
 def basic_widget(state, player) -> bool:
-	return iron_ingot(state, player)
+	return has_frame(state, player, "Widget Factory") and iron_ingot(state, player)
 
 def glass(state, player) -> bool:
-	return sand(state, player)
+	return has_frame(state, player, "Glass Kiln") and sand(state, player)
 
 def gyroscope(state, player) -> bool:
-	return glass(state, player) and basic_widget(state, player)
+	return has_frame(state, player, "Gyroscope Fabricator") and glass(state, player) and basic_widget(state, player)
 
 def power(state, player) -> bool:
-	return oil(state, player)
+	return has_frame(state, player, "Oil Power Plant") and oil(state, player)
 
 def spinning_widget(state, player) -> bool:
-	return gyroscope(state, player) and basic_widget(state, player)
+	return has_frame(state, player, "Widget Spinner") and gyroscope(state, player) and basic_widget(state, player)
 
 def battery(state, player) -> bool:
-	return iron_ingot(state, player) and basic_widget(state, player) and power(state, player)
+	return has_frame(state, player, "Battery Assembler") and iron_ingot(state, player) and basic_widget(state, player) and power(state, player)
 
 def capacitor_widget(state, player) -> bool:
-	return spinning_widget(state, player) and battery(state, player)
+	return has_frame(state, player, "Capacitor Bank") and spinning_widget(state, player) and battery(state, player)
 
 def copper_ingot(state, player) -> bool:
-	return copper_ore(state, player)
+	return has_frame(state, player, "Copper Forge") and copper_ore(state, player)
 
 def plastic(state, player) -> bool:
-	return oil(state, player)
+	return has_frame(state, player, "Plastic Extractor") and oil(state, player)
 
 def circuit_board(state, player) -> bool:
-	return copper_ingot(state, player) and plastic(state, player)
+	return has_frame(state, player, "Circuit Fab") and copper_ingot(state, player) and plastic(state, player)
 
 def computational_widget(state, player) -> bool:
-	return circuit_board(state, player) and capacitor_widget(state, player) and spinning_widget(state, player)
+	return has_frame(state, player, "Computational Engine") and circuit_board(state, player) and capacitor_widget(state, player) and spinning_widget(state, player)
 
 def bottled_lightning(state, player) -> bool:
-	return glass(state, player) and power(state, player)
+	return has_frame(state, player, "Tesla Coil") and glass(state, player) and power(state, player)
 
 def thinking_core(state, player) -> bool:
-	return capacitor_widget(state, player) and computational_widget(state, player)
+	return has_frame(state, player, "Core Foundry") and capacitor_widget(state, player) and computational_widget(state, player)
 
 def integrated_widget(state, player) -> bool:
-	return bottled_lightning(state, player) and capacitor_widget(state, player) and thinking_core(state, player)
+	return has_frame(state, player, "Integrator") and bottled_lightning(state, player) and capacitor_widget(state, player) and thinking_core(state, player)
 
 def silicon(state, player) -> bool:
-	return sand(state, player) and power(state, player)
+	return has_frame(state, player, "Silicon Extruder") and sand(state, player) and power(state, player)
 
 def microprocessors(state, player) -> bool:
-	return silicon(state, player) and circuit_board(state, player) and thinking_core(state, player)
+	return has_frame(state, player, "Processor Lab") and silicon(state, player) and circuit_board(state, player) and thinking_core(state, player)
 
 def mainframe_widget(state, player) -> bool:
-	return microprocessors(state, player) and integrated_widget(state, player)
+	return has_frame(state, player, "Mainframe Assembler") and microprocessors(state, player) and integrated_widget(state, player)
 
 def uranium(state, player) -> bool:
-	return power(state, player)
+	return has_frame(state, player, "Uranium Mine") and power(state, player)
 
 def fuel_rod(state, player) -> bool:
-	return iron_ingot(state, player) and uranium(state, player) and power(state, player) and gyroscope(state, player)
+	return has_frame(state, player, "Fuel Rod Assembler") and iron_ingot(state, player) and uranium(state, player) and power(state, player) and gyroscope(state, player)
 
 def cloud_widget(state, player) -> bool:
-	return mainframe_widget(state, player) and power(state, player)
+	return has_frame(state, player, "Cloud Digitizer") and mainframe_widget(state, player) and power(state, player)
 
 def widget_particle(state, player) -> bool:
-	return basic_widget(state, player) and power(state, player)
+	return has_frame(state, player, "Widget Minitizers") and basic_widget(state, player) and power(state, player)
 
 def nanoprocessor(state, player) -> bool:
-	return microprocessors(state, player) and widget_particle(state, player)
+	return has_frame(state, player, "Nanoscale Lab") and microprocessors(state, player) and widget_particle(state, player)
 
 def portable_reactor(state, player) -> bool:
-	return fuel_rod(state, player) and battery(state, player)
+	return has_frame(state, player, "Reactor Foundry") and fuel_rod(state, player) and battery(state, player)
 
 def quantum_widget(state, player) -> bool:
-	return nanoprocessor(state, player) and portable_reactor(state, player) and cloud_widget(state, player)
+	return has_frame(state, player, "Quantum Tunneler") and nanoprocessor(state, player) and portable_reactor(state, player) and cloud_widget(state, player)
 
 def helium(state, player) -> bool:
-	return power(state, player)
+	return has_frame(state, player, "Helium Extractor") and power(state, player)
 
 def superconductor(state, player) -> bool:
-	return helium(state, player) and nanoprocessor(state, player) and iron_ingot(state, player)
+	return has_frame(state, player, "Conductor Foundry") and helium(state, player) and nanoprocessor(state, player) and iron_ingot(state, player)
 
 def ai_core(state, player) -> bool:
-	return superconductor(state, player) and silicon(state, player) and thinking_core(state, player)
+	return has_frame(state, player, "AI Laboratory") and superconductor(state, player) and silicon(state, player) and thinking_core(state, player)
 
 def unshackled_widget(state, player) -> bool:
-	return ai_core(state, player) and quantum_widget(state, player)
+	return has_frame(state, player, "AI Delimiter") and ai_core(state, player) and quantum_widget(state, player)
 
 def ai_training_data(state, player) -> bool:
-	return unshackled_widget(state, player)
+	return has_frame(state, player, "Training Center") and unshackled_widget(state, player)
 
 def ascension_matrix(state, player) -> bool:
-	return ai_training_data(state, player) and superconductor(state, player) and gyroscope(state, player)
+	return has_frame(state, player, "Data Transformer") and ai_training_data(state, player) and superconductor(state, player) and gyroscope(state, player)
 
 def ascended_widget(state, player) -> bool:
-	return ascension_matrix(state, player) and nanoprocessor(state, player) and unshackled_widget(state, player)
+	return has_frame(state, player, "Ascension Facility") and ascension_matrix(state, player) and nanoprocessor(state, player) and unshackled_widget(state, player)
 
 def sentience_core(state, player) -> bool:
-	return ai_core(state, player) and ai_training_data(state, player) and power(state, player)
+	return has_frame(state, player, "Sentience Facility") and ai_core(state, player) and ai_training_data(state, player) and power(state, player)
 
 def picoprocessor(state, player) -> bool:
-	return superconductor(state, player) and nanoprocessor(state, player) and ai_training_data(state, player)
+	return has_frame(state, player, "Picoscale Lab") and superconductor(state, player) and nanoprocessor(state, player) and ai_training_data(state, player)
 
 def sentient_widget(state, player) -> bool:
-	return sentience_core(state, player) and picoprocessor(state, player) and ascended_widget(state, player)
+	return has_frame(state, player, "Sentience Aggregator") and sentience_core(state, player) and picoprocessor(state, player) and ascended_widget(state, player)
 
 def processor_amalgamation(state, player) -> bool:
-	return microprocessors(state, player) and circuit_board(state, player) and nanoprocessor(state, player) and picoprocessor(state, player)
+	return has_frame(state, player, "Omega Processor Lab") and microprocessors(state, player) and circuit_board(state, player) and nanoprocessor(state, player) and picoprocessor(state, player)
 
 def core_amalgamation(state, player) -> bool:
-	return thinking_core(state, player) and ai_core(state, player) and sentience_core(state, player)
+	return has_frame(state, player, "Omega Core Foundry") and thinking_core(state, player) and ai_core(state, player) and sentience_core(state, player)
 
 def widget_amalgamation(state, player) -> bool:
-	return basic_widget(state, player) and spinning_widget(state, player) and capacitor_widget(state, player) and computational_widget(state, player) and integrated_widget(state, player) and mainframe_widget(state, player) and cloud_widget(state, player) and quantum_widget(state, player) and unshackled_widget(state, player) and ascended_widget(state, player) and sentient_widget(state, player)
+	return has_frame(state, player, "Omega Widget Distiller") and basic_widget(state, player) and spinning_widget(state, player) and capacitor_widget(state, player) and computational_widget(state, player) and integrated_widget(state, player) and mainframe_widget(state, player) and cloud_widget(state, player) and quantum_widget(state, player) and unshackled_widget(state, player) and ascended_widget(state, player) and sentient_widget(state, player)
 
 def omega_project_casing(state, player) -> bool:
-	return iron_ingot(state, player) and copper_ingot(state, player) and superconductor(state, player) and sentient_widget(state, player)
+	return has_frame(state, player, "Omega Casing Factory") and iron_ingot(state, player) and copper_ingot(state, player) and superconductor(state, player) and sentient_widget(state, player)
 
 def omega_project_shielding(state, player) -> bool:
-	return plastic(state, player) and bottled_lightning(state, player) and portable_reactor(state, player) and sentient_widget(state, player)
+	return has_frame(state, player, "Omega Shielding Plant") and plastic(state, player) and bottled_lightning(state, player) and portable_reactor(state, player) and sentient_widget(state, player)
 
 def omega_widget(state, player) -> bool:
-	return widget_amalgamation(state, player) and core_amalgamation(state, player) and processor_amalgamation(state, player) and omega_project_casing(state, player) and omega_project_shielding(state, player)
+	return has_frame(state, player, "Omega Project Assembler") and widget_amalgamation(state, player) and core_amalgamation(state, player) and processor_amalgamation(state, player) and omega_project_casing(state, player) and omega_project_shielding(state, player)
 
 def rocket_electronics(state, player) -> bool:
-	return processor_amalgamation(state, player) and core_amalgamation(state, player)
+	return has_frame(state, player, "Rocket Electronics Lab") and processor_amalgamation(state, player) and core_amalgamation(state, player)
 
 def rocket_fuel(state, player) -> bool:
-	return oil(state, player) and fuel_rod(state, player) and power(state, player)
+	return has_frame(state, player, "Rocket Fuel Distiller") and oil(state, player) and fuel_rod(state, player) and power(state, player)
 
 def rocket_hull(state, player) -> bool:
-	return omega_project_casing(state, player) and omega_project_shielding(state, player)
+	return has_frame(state, player, "Rocket Part Assembler") and omega_project_casing(state, player) and omega_project_shielding(state, player)
 
 def rocket_segment(state, player) -> bool:
-	return omega_widget(state, player) and rocket_hull(state, player) and rocket_electronics(state, player) and rocket_fuel(state, player)
+	return has_frame(state, player, "Omega Launch Facility") and omega_widget(state, player) and rocket_hull(state, player) and rocket_electronics(state, player) and rocket_fuel(state, player)
