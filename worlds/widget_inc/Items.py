@@ -378,7 +378,7 @@ def gen_create_items(world):
 		for _ in range(amt):
 			pool.append(world.create_item(item))
 	for item, classification in item_table.items():
-	    world.location_count -= 1
-	    pool.append(world.create_item(item))
+		world.location_count -= 1
+		pool.append(world.create_item(item))
 	for _ in range(world.location_count):
 		pool.append(world.create_item("Motivational Poster"))

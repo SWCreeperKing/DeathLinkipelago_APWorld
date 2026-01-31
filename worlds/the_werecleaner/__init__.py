@@ -5,15 +5,15 @@ from .Options import *
 from .Items import *
 from .Regions import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Widgitpelago/blob/master/Widgitpelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/Werepelago/blob/master/Werepelago/Archipelago/ApShenanigans.cs]
 
-class WidgetInc(World):
+class TheWereCleaner(World):
 	"""
-	Widget Inc
+	The WereCleaner
 	"""
-	game = "Widget Inc"
-	options_dataclass = WidgetIncOptions
-	options: WidgetIncOptions
+	game = "The WereCleaner"
+	options_dataclass = TheWereCleanerOptions
+	options: TheWereCleanerOptions
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
@@ -22,19 +22,14 @@ class WidgetInc(World):
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.starting_stage = ""
 
 	def generate_early(self):
 		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
-			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
-			passthrough = self.multiworld.re_gen_passthrough["Widget Inc"]
-			if "production_multiplier" in passthrough:
-				self.options.production_multiplier = ProductionMultiplier(passthrough["production_multiplier"])
-			
-			if "hand_crafting_multiplier" in passthrough:
-				self.options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
-			
-		self.multiworld.push_precollected(self.create_item("Widget Factory"))
+			if "The WereCleaner" not in self.multiworld.re_gen_passthrough: return
+			passthrough = self.multiworld.re_gen_passthrough["The WereCleaner"]
+		self.multiworld.push_precollected(self.create_item("Unlock Monday Night"))
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -46,17 +41,11 @@ class WidgetInc(World):
 		gen_create_items(self)
 
 	def set_rules(self):
-		player = self.player
-		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player)
+		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", self.player, 7)
 
 	def fill_slot_data(self):
-		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]
-		self.random.shuffle(characters)
-		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
 		slot_data = {
-			"production_multiplier": int(self.options.production_multiplier),
-			"hand_crafting_multiplier": int(self.options.hand_crafting_multiplier),
-			"uuid": str(shuffled)
+			"Kyle": str("Best Boi")
 		}
 		return slot_data
 

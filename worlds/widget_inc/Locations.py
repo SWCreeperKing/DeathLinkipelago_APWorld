@@ -367,7 +367,10 @@ tech_tree = [
 	["Omega Crystal Stabilizer", "Tier 12"],
 	["Omega Logic Amplifier", "Tier 12"],
 	["Omega Circuit Weaver", "Tier 12"],
-	["Omega Assembly Core", "Tier 12"]
+	["Omega Assembly Core", "Tier 12"],
+	["Starting Check (1)", "Menu"],
+	["Starting Check (2)", "Menu"],
+	["Starting Check (3)", "Menu"]
 ]
 
 location_dict = [
