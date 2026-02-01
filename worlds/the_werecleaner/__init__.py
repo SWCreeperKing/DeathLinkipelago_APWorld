@@ -17,6 +17,7 @@ class TheWereCleaner(World):
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
+	ut_can_gen_without_yaml = True
 	gen_puml = False
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
@@ -29,7 +30,6 @@ class TheWereCleaner(World):
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "The WereCleaner" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["The WereCleaner"]
-		self.multiworld.push_precollected(self.create_item("Unlock Monday Night"))
 
 	def create_regions(self):
 		gen_create_regions(self)

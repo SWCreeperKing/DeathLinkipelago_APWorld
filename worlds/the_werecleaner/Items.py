@@ -24,8 +24,7 @@ def gen_create_items(world):
 	pool = world.multiworld.itempool
 	options = world.options
 	for item, classification in item_table.items():
-	    world.location_count -= 1
-	    if item != "Unlock Monday Night":
-	        pool.append(world.create_item(item))
+		world.location_count -= 1
+		pool.append(world.create_item(item))
 	for _ in range(world.location_count):
 		pool.append(world.create_item("Floor Penny"))
