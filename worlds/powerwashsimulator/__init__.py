@@ -1,5 +1,5 @@
 import math
-from typing import Dict, Any, ClassVar, List, Set
+from typing import *
 from Options import OptionError
 from worlds.AutoWorld import World
 from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType, MultiWorld

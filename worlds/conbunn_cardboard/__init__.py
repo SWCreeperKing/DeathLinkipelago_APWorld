@@ -4,16 +4,19 @@ from .Rules import *
 from .Options import *
 from .Items import *
 from .Regions import *
+from .Settings import *
+from typing import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Widgitpelago/blob/master/Widgitpelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [No Link Given]
 
-class WidgetInc(World):
+class ConbunnCardboard(World):
 	"""
-	Widget Inc
+	Conbunn Cardboard
 	"""
-	game = "Widget Inc"
-	options_dataclass = WidgetIncOptions
-	options: WidgetIncOptions
+	game = "Conbunn Cardboard"
+	options_dataclass = ConbunnCardboardOptions
+	options: ConbunnCardboardOptions
+	settings: ClassVar[ConbunnCardboardSettings]
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
@@ -27,15 +30,11 @@ class WidgetInc(World):
 	def generate_early(self):
 		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
-			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
-			passthrough = self.multiworld.re_gen_passthrough["Widget Inc"]
-			if "production_multiplier" in passthrough:
-				self.options.production_multiplier = ProductionMultiplier(passthrough["production_multiplier"])
+			if "Conbunn Cardboard" not in self.multiworld.re_gen_passthrough: return
+			passthrough = self.multiworld.re_gen_passthrough["Conbunn Cardboard"]
+			if "cds_required_to_goal" in passthrough:
+				self.options.cds_required_to_goal = CDsRequiredToGoal(passthrough["cds_required_to_goal"])
 			
-			if "hand_crafting_multiplier" in passthrough:
-				self.options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
-			
-		self.multiworld.push_precollected(self.create_item("Widget Factory"))
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -48,15 +47,14 @@ class WidgetInc(World):
 
 	def set_rules(self):
 		player = self.player
-		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player)
+		self.multiworld.completion_condition[self.player] = lambda state: state.has("CD", player, self.options.cds_required_to_goal)
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]
 		self.random.shuffle(characters)
 		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
 		slot_data = {
-			"production_multiplier": int(self.options.production_multiplier),
-			"hand_crafting_multiplier": int(self.options.hand_crafting_multiplier),
+			"cds_required_to_goal": int(self.options.cds_required_to_goal),
 			"uuid": str(shuffled)
 		}
 		return slot_data
