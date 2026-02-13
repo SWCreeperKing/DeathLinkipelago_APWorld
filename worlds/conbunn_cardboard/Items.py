@@ -5,24 +5,24 @@ from .Options import *
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 unlocks = [
-	"Transition Unlock: Connie's Garden",
+	"Transition Unlock: Connie's Garden (Cutout Forest)",
 	"Transition Unlock: Ribbon Village",
-	"Transition Unlock: Origami Tree",
+	"Transition Unlock: Origami Tree (Ribbon Village)",
 	"Transition Unlock: Paper Bay",
-	"Transition Unlock: Cardbun Viewing Area",
-	"Transition Unlock: Ink Beach",
-	"Transition Unlock: Bunny Circuit",
-	"Transition Unlock: IBee's Honeycomb",
-	"Transition Unlock: Cardbun Museum",
-	"Transition Unlock: Graffiti Panels",
-	"Transition Unlock: Cotten Skies",
+	"Transition Unlock: Cardbun Viewing Area (Paper Bay)",
+	"Transition Unlock: Ink Beach (Paper Bay)",
+	"Transition Unlock: Bunny Circuit (Ribbon Village)",
+	"Transition Unlock: IBee's Honeycomb (Ribbon Village)",
+	"Transition Unlock: Cardbun Museum (Ribbon Village)",
+	"Transition Unlock: Graffiti Panels (Paint Hills)",
+	"Transition Unlock: Cotton Skies (Mountain Confetti)",
 	"Transition Unlock: Clay Canyon",
-	"Transition Unlock: Samual Golf",
+	"Transition Unlock: Samual Golf (Clay Canyon)",
 	"Transition Unlock: Sticker Park",
-	"Transition Unlock: Dragon Raceway",
-	"Transition Unlock: Cardboard Station",
+	"Transition Unlock: Dragon Raceway (Sticker Park)",
+	"Transition Unlock: Cardboard Station (Sticker Park)",
 	"Transition Unlock: Polystyrene Peak",
-	"Transition Unlock: Glue Summit",
+	"Transition Unlock: Glue Summit (Polystyrene Peak)",
 	"Transition Unlock: Cardbun Festival"
 ]
 

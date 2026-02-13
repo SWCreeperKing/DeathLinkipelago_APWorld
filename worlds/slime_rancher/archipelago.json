@@ -1,6 +1,6 @@
 {
   "game": "Slime Rancher",
-  "minimum_ap_version": "0.6.4",
+  "minimum_ap_version": "0.6.5",
   "world_version": "0.2.3",
   "authors": ["SW_CreeperKing"]
 }

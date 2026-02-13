@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from Options import Range, Toggle, DefaultOnToggle, PerGameCommonOptions, OptionSet, OptionError, Choice, Accessibility
+from Options import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 class GoalType(Choice):
 	"""
@@ -92,8 +92,9 @@ class SlimeRancherOptions(PerGameCommonOptions):
 
 
 def check_options(world):
-	options: SlimeRancherOptions = world.options
-	
+	options = world.options
+	random = world.random
+	settings = world.settings
 	if options.goal_type == 1 and not options.include_7z:
 	    raise_yaml_error(world.player, "7Zee goal type requires you to include 7Zee locations")
 

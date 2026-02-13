@@ -4,8 +4,10 @@ from .Rules import *
 from .Options import *
 from .Items import *
 from .Regions import *
+from .Settings import *
+from typing import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 class SlimeRancher(World):
 	"""
@@ -14,12 +16,14 @@ class SlimeRancher(World):
 	game = "Slime Rancher"
 	options_dataclass = SlimeRancherOptions
 	options: SlimeRancherOptions
+	settings: ClassVar[SlimeRancherSettings]
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
 	item_name_groups = {
 		"unlocks": region_unlocks
 	}
+	ut_can_gen_without_yaml = True
 	gen_puml = False
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
@@ -70,12 +74,13 @@ class SlimeRancher(World):
 		gen_create_items(self)
 
 	def set_rules(self):
+		player = self.player
 		if self.options.goal_type == 0:
-		    self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", self.player, 28)
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", player, 28)
 		elif self.options.goal_type == 1:
-		    self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", self.player, len(corporate_locations))
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", player, len(corporate_locations))
 		elif self.options.goal_type == 2:
-		    self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:],self.player)
+		    self.multiworld.completion_condition[self.player] = lambda state: state.has_all(region_unlocks[3:], player)
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]

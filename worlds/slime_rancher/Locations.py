@@ -1,4 +1,4 @@
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 upgrades = [
 	"Buy Personal Upgrade (Heart Module lv.1)",

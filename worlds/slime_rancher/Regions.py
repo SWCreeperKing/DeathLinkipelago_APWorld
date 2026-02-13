@@ -1,8 +1,10 @@
-from BaseClasses import Location, Region, Item, ItemClassification
+from BaseClasses import Location, Region, Item, ItemClassification, LocationProgressType
 from .Locations import *
 from .Rules import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
+
+priority_map = []
 
 def gen_create_regions(world):
 	player = world.player
@@ -117,6 +119,7 @@ def gen_create_regions(world):
 		world.multiworld.regions.append(region)
 
 def make_location(world, location_name, region, rule_map):
+	world.location_count += 1
 	return make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region, rule_map)
 
 def make_event_location(world, location_name_a, location_name_b, item_name, id, region, rule_map):
@@ -128,7 +131,9 @@ def make_location_adv(world, location_name_a, location_name_b, id, region, rule_
 	region.locations.append(location)
 	
 	if location_name_b in rule_map:
-	     location.access_rule = rule_map[location_name_b]
+	   location.access_rule = rule_map[location_name_b]
 	
-	world.location_count += 1
+	if location_name_a in priority_map:
+	   location.progress_type = priority_map[location_name_a]
+	
 	return location

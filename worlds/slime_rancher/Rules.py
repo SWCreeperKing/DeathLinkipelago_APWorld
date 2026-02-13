@@ -1,6 +1,7 @@
+import math
 from .Locations import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 def get_rule_map(player):
 	return {
@@ -152,7 +153,7 @@ def can_access_to_ruins_from_trans(state, player) -> bool:
 	return has_region(state, player, 'Indigo Quarry') and has_region(state, player, 'Moss Blanket') and has_region(state, player, 'Ancient Ruins')
 
 def can_access_7zee(state, player) -> bool:
-	return can_access_dry_reef(state, player) and has_region(state, player, 'Indigo Quarry') and has_region(state, player, 'Moss Blanket') and has_region(state, player, 'Ancient Ruins')
+	return can_access_dry_reef(state, player) and can_access_to_ruins_from_trans(state, player)
 
 def can_access_lab(state, player) -> bool:
 	return can_access_dry_reef(state, player) and has_region(state, player, 'Indigo Quarry') and has_region(state, player, 'The Lab')

@@ -2,7 +2,7 @@ from BaseClasses import ItemClassification
 from .Locations import *
 from .Options import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Slimipelago/blob/master/Slimipelago/ApWorldShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 region_unlocks = [
 	"Region Unlock: The Lab",
