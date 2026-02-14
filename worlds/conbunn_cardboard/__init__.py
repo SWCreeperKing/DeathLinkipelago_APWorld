@@ -29,6 +29,7 @@ class ConbunnCardboard(World):
 
 	def generate_early(self):
 		check_options(self)
+		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Conbunn Cardboard" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Conbunn Cardboard"]

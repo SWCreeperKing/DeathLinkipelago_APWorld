@@ -36,8 +36,8 @@ def get_rule_map(player):
 		"Skin from Ara #1": lambda state: has_unlock(state, player, "Ribbon Village") and has_coin_count(state, player, 50),
 		"Skin from Ara #2": lambda state: has_unlock(state, player, "Ribbon Village") and has_coin_count(state, player, 150),
 		"Conbunn Suit": lambda state: has_unlock(state, player, "Cardbun Festival"),
-		"Space Suit": lambda state: has_unlock(state, player, "Cardboard Station"),
-		"Skin from Fuya": lambda state: has_unlock(state, player, "Connie's Garden"),
+		"Space Suit": lambda state: has_unlock(state, player, "Cardboard Station (Sticker Park)"),
+		"Skin from Fuya": lambda state: has_unlock(state, player, "Connie's Garden (Cutout Forest)"),
 	}
 
 def has_unlock(state, player, transition) -> bool:
