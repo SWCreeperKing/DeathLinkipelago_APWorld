@@ -14,6 +14,7 @@ class GoalType(Choice):
 	option_notes = 0
 	option_7Zee = 1
 	option_credits = 2
+	default = 0
 
 
 class StartWithDryReef(DefaultOnToggle):

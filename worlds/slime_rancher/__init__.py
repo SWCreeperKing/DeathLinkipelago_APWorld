@@ -37,28 +37,28 @@ class SlimeRancher(World):
 			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
 			if "goal_type" in passthrough:
-				self.options.goal_type = GoalType(passthrough["goal_type"])
+				options.goal_type = GoalType(passthrough["goal_type"])
 			
 			if "start_with_dry_reef" in passthrough:
-				self.options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
+				options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
 			
 			if "enable_stylish_dlc_treasure_pods" in passthrough:
-				self.options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_stylish_dlc_treasure_pods"])
+				options.enable_stylish_dlc_treasure_pods = EnableStylishDlcTreasurePods(passthrough["enable_stylish_dlc_treasure_pods"])
 			
 			if "treasure_cracker_checks" in passthrough:
-				self.options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
+				options.treasure_cracker_checks = TreasureCrackerChecks(passthrough["treasure_cracker_checks"])
 			
 			if "include_7z" in passthrough:
-				self.options.include_7z = Include7z(passthrough["include_7z"])
+				options.include_7z = Include7z(passthrough["include_7z"])
 			
 			if "fix_market_rates" in passthrough:
-				self.options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
+				options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
 			
 			if "start_with_drone" in passthrough:
-				self.options.start_with_drone = StartWithDrone(passthrough["start_with_drone"])
+				options.start_with_drone = StartWithDrone(passthrough["start_with_drone"])
 			
 			if "trap_percent" in passthrough:
-				self.options.trap_percent = TrapPercent(passthrough["trap_percent"])
+				options.trap_percent = TrapPercent(passthrough["trap_percent"])
 			
 		if self.options.start_with_dry_reef:
 		    self.multiworld.push_precollected(self.create_item("Region Unlock: Dry Reef"))

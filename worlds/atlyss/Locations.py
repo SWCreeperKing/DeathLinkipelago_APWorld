@@ -1,24 +1,5 @@
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
-levels = [
-	"Reach Level 2",
-	"Reach Level 4",
-	"Reach Level 6",
-	"Reach Level 8",
-	"Reach Level 10",
-	"Reach Level 12",
-	"Reach Level 14",
-	"Reach Level 16",
-	"Reach Level 18",
-	"Reach Level 20",
-	"Reach Level 22",
-	"Reach Level 24",
-	"Reach Level 26",
-	"Reach Level 28",
-	"Reach Level 30",
-	"Reach Level 32"
-]
-
 quests = [
 	["A Warm Welcome", "Sanctum"],
 	["Communing Catacombs", "Sanctum"],
@@ -43,7 +24,7 @@ quests = [
 	["Call of Fury", "Sanctum"],
 	["Mastery of Strength", "Sanctum"],
 	["Beckoning Foes", "Sanctum"],
-	["Ghostly Goodes", "Sanctum"],
+	["Ghostly Goods", "Sanctum"],
 	["Makin' a Mekspear", "Sanctum"],
 	["Makin' a Wizwand", "Sanctum"],
 	["Makin' a Vile Blade", "Sanctum"],
@@ -80,6 +61,25 @@ quests = [
 	["Dense Ingots", "Sanctum"],
 	["Amberite Ingots", "Sanctum"],
 	["Sapphite Ingots", "Sanctum"]
+]
+
+levels = [
+	["Reach Level 2", "Menu"],
+	["Reach Level 4", "Menu"],
+	["Reach Level 6", "Menu"],
+	["Reach Level 8", "Menu"],
+	["Reach Level 10", "Menu"],
+	["Reach Level 12", "Menu"],
+	["Reach Level 14", "Menu"],
+	["Reach Level 16", "Menu"],
+	["Reach Level 18", "Menu"],
+	["Reach Level 20", "Menu"],
+	["Reach Level 22", "Menu"],
+	["Reach Level 24", "Menu"],
+	["Reach Level 26", "Menu"],
+	["Reach Level 28", "Menu"],
+	["Reach Level 30", "Menu"],
+	["Reach Level 32", "Menu"]
 ]
 
 merchants = [
@@ -145,10 +145,34 @@ merchants = [
 	["Buy Item #5 from Mad Statue's Gift", "Sanctum"]
 ]
 
+professions = [
+	["Fishing Lv. 1", "Menu"],
+	["Fishing Lv. 2", "Menu"],
+	["Fishing Lv. 3", "Menu"],
+	["Fishing Lv. 4", "Menu"],
+	["Fishing Lv. 5", "Menu"],
+	["Fishing Lv. 6", "Menu"],
+	["Fishing Lv. 7", "Menu"],
+	["Fishing Lv. 8", "Menu"],
+	["Fishing Lv. 9", "Menu"],
+	["Fishing Lv. 10", "Menu"],
+	["Mining Lv. 1", "Menu"],
+	["Mining Lv. 2", "Menu"],
+	["Mining Lv. 3", "Menu"],
+	["Mining Lv. 4", "Menu"],
+	["Mining Lv. 5", "Menu"],
+	["Mining Lv. 6", "Menu"],
+	["Mining Lv. 7", "Menu"],
+	["Mining Lv. 8", "Menu"],
+	["Mining Lv. 9", "Menu"],
+	["Mining Lv. 10", "Menu"]
+]
+
 location_dict = [
 	*[items[0] for items in quests],
-	*[items for items in levels],
-	*[items[0] for items in merchants]
+	*[items[0] for items in levels],
+	*[items[0] for items in merchants],
+	*[items[0] for items in professions]
 ]
 
 location_grind_data = [
@@ -169,7 +193,7 @@ location_grind_data = [
 	["Cresent Grove lvl 2", 20, 25],
 	["Gate of the Moon", 0, 0],
 	["Wall of the Stars", 0, 0],
-	["Redwoud", 30, 30],
+	["Redwoud", 26, 30],
 	["Trial of the Stars", 0, 0]
 ]
 
@@ -191,3 +215,82 @@ mining_grind_data = [
 	["Cresent Keep", 3, 6],
 	["Tuul Enclave", 6, 10]
 ]
+
+enemy_data = {
+	"Lesser Wisp": [1, ["Outer Sanctum", "Arcwood Pass", "Sanctum Catacombs lvl 1"]],
+	"Slime": [1, ["Outer Sanctum", "Arcwood Pass", "Effold Terrace"]],
+	"Tar Spawn": [3, ["Effold Terrace", "Tuul Valley"]],
+	"Greater Wisp": [4, ["Arcwood Pass", "Effold Terrace", "Sanctum Catacombs lvl 1", "Sanctum Catacombs lvl 2"]],
+	"Mini Geist": [4, ["Sanctum Catacombs lvl 1", "Cresent Road", "Cresent Keep"]],
+	"Slimek": [5, ["Effold Terrace"]],
+	"Deathgel": [6, ["Sanctum Catacombs lvl 2"]],
+	"Geist": [7, ["Sanctum Catacombs lvl 1", "Sanctum Catacombs lvl 2", "Sanctum Catacombs lvl 3"]],
+	"Mekboar": [8, ["Tuul Valley", "Cresent Keep"]],
+	"Mini Golem": [8, ["Cresent Road", "Cresent Keep"]],
+	"Toxin": [8, ["Sanctum Catacombs lvl 2", "Sanctum Catacombs lvl 3"]],
+	"Blightwood": [9, ["Cresent Road", "Cresent Keep"]],
+	"Mouth": [10, ["Cresent Road", "Cresent Keep"]],
+	"Golem": [12, ["Cresent Road", "Cresent Keep"]],
+	"Hellsludge": [13, ["Sanctum Catacombs lvl 3"]],
+	"Klamkull": [13, ["Arcwood Pass", "Cresent Road"]],
+	"Wizboar": [13, ["Tuul Valley", "Tuul Enclave", "Cresent Keep"]],
+	"Miasma": [14, ["Sanctum Catacombs lvl 3"]],
+	"Vout": [14, ["Tuul Enclave"]],
+	"Deadwood": [15, ["Cresent Grove lvl 1"]],
+	"Stezza": [16, ["Cresent Grove lvl 1"]],
+	"Alshar": [16, ["Cresent Grove lvl 1"]],
+	"Blue Minichroom": [16, ["Cresent Grove lvl 1"]],
+	"Red Minichroom": [16, ["Cresent Grove lvl 1"]],
+	"Rageboar": [17, ["Bularr Fortress"]],
+	"Maw": [17, ["Cresent Grove lvl 1"]],
+	"Mandragora": [18, ["Luvora Garden"]],
+	"Gale Muchroom": [20, ["Cresent Grove lvl 2"]],
+	"Aqua Muchroom": [20, ["Cresent Grove lvl 2"]],
+	"Firebreath": [24, ["Cresent Grove lvl 2"]],
+	"Sinroot": [30, ["Redwoud"]],
+	"Poltergeist": [16, ["Sanctum Catacombs lvl 3"]],
+	"Vultia": [16, ["Tuul Enclave"]],
+	"Boomboar": [18, ["Bularr Fortress"]],
+	"Carbuncle": [18, ["Cresent Grove lvl 1"]],
+	"Monolith": [19, ["Cresent Grove lvl 1"]],
+	"Nagrath": [20, ["Cresent Grove lvl 2"]],
+	"Barknaught": [22, ["Cresent Grove lvl 2"]],
+	"Warboar": [23, ["Bularr Fortress"]],
+	"Sirius": [23, ["Cresent Grove lvl 2"]],
+	"Death Knight": [24, ["Cresent Grove lvl 2"]],
+	"Demigolem": [24, ["Cresent Grove lvl 2"]],
+	"Biggun": [4, ["Arcwood Pass"]],
+	"Nograd": [4, ["Arcwood Pass"]],
+	"Rokkamek": [14, ["Tuul Valley"]],
+	"Dolkin": [14, ["Arcwood Pass"]],
+	"Gahool": [15, ["Tuul Valley"]],
+	"Kruole": [21, ["Tuul Enclave"]],
+	"Slime Diva": [10, ["Effold Terrace"]],
+	"Lord Zuulneruda": [12, ["Sanctum Catacombs lvl 2"]],
+	"Lord Kaluuz": [18, ["Sanctum Catacombs lvl 3"]],
+	"Colossus": [20, ["Cresent Grove lvl 1"]],
+	"Valdur": [25, ["Cresent Grove lvl 2"]],
+	"Galius": [26, ["Bularr Fortress"]]
+}
+
+portal_counts = {
+	"Sanctum": 0,
+	"Outer Sanctum": 1,
+	"Arcwood Pass": 2,
+	"Effold Terrace": 4,
+	"Tuul Valley": 5,
+	"Sanctum Catacombs lvl 1": 3,
+	"Sanctum Catacombs lvl 2": 3,
+	"Sanctum Catacombs lvl 3": 3,
+	"Cresent Road": 6,
+	"Tuul Enclave": 9,
+	"Luvora Garden": 7,
+	"Cresent Keep": 8,
+	"Bularr Fortress": 11,
+	"Cresent Grove lvl 1": 10,
+	"Cresent Grove lvl 2": 10,
+	"Gate of the Moon": 0,
+	"Wall of the Stars": 0,
+	"Redwoud": 0,
+	"Trial of the Stars": 0
+}

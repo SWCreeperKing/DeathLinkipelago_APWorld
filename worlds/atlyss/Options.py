@@ -40,21 +40,6 @@ class RandomPortals(Toggle):
 	display_name = "Random Portals"
 
 
-class EquipmentProgression(Choice):
-	"""
-	How equipment is distributed.
-	Gated (default): Equipment has level requirements. Higher tier gear only
-	appears at locations accessible at appropriate levels. Tier 1 gear (lv 1-5)
-	can appear anywhere; Tier 5 gear (lv 21-26) only at endgame locations.
-	Random: Equipment can appear anywhere with no level gating. You may find
-	endgame weapons in early spheres — chaotic but fun.
-	"""
-	display_name = "Equipment Progression"
-	option_gated = 0
-	option_random = 1
-	default = 0
-
-
 class ShopSanity(DefaultOnToggle):
 	"""
 	Whether shop items can contain Archipelago items from other worlds.
@@ -68,10 +53,9 @@ class MainClass(Choice):
 	What you chose to be as your main class
 	"""
 	display_name = "Main Class"
-	option_random = 0
-	option_fighter = 1
-	option_bandit = 2
-	option_mystic = 3
+	option_fighter = 0
+	option_bandit = 1
+	option_mystic = 2
 	default = 0
 
 
@@ -80,11 +64,10 @@ class SecondaryClass(Choice):
 	What you chose to be as your secondary class
 	"""
 	display_name = "Secondary Class"
-	option_random = 0
-	option_fighter = 1
-	option_bandit = 2
-	option_mystic = 3
-	option_none = 4
+	option_fighter = 0
+	option_bandit = 1
+	option_mystic = 2
+	option_none = 3
 	default = 0
 
 
@@ -92,7 +75,6 @@ class SecondaryClass(Choice):
 class AtlyssOptions(PerGameCommonOptions):
 	goal: Goal
 	random_portals: RandomPortals
-	equipment_progression: EquipmentProgression
 	shop_sanity: ShopSanity
 	main_class: MainClass
 	secondary_class: SecondaryClass
@@ -100,20 +82,15 @@ class AtlyssOptions(PerGameCommonOptions):
 	def is_class(self, class_name):
 		class_name_lower = class_name.lower()
 		if class_name_lower == 'any': return True
-		return class_name_lower == self.main_class or class_name_lower == self.secondary_class
+		return class_name_lower == self.main_class.value or class_name_lower == self.secondary_class.value
 
 def check_options(world):
 	options = world.options
 	random = world.random
 	settings = world.settings
 	classes = ['fighter', 'mystic', 'bandit']
-	if options.main_class == 'random':
-	    options.main_class = MainClass(random.choice(classes))
 	
-	if options.secondary_class == 'random':
-	    options.secondary_class = SecondaryClass(random.choice([clas for clas in classes if clas != options.main_class]))
-	    
-	if options.main_class == options.secondary_class:
+	if options.main_class.value == options.secondary_class.value:
 	    raise_yaml_error(world.player, "You cannot have the same class selected for main_class and secondary_class")
 
 def raise_yaml_error(player_name, error):
