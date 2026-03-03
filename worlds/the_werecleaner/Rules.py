@@ -1,7 +1,7 @@
 import math
 from .Locations import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Werepelago/blob/master/Werepelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 def get_rule_map(player):
 	return {

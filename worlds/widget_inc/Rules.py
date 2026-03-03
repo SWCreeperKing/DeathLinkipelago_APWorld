@@ -1,7 +1,7 @@
 import math
 from .Locations import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Widgitpelago/blob/master/Widgitpelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 def get_rule_map(player):
 	return {
@@ -56,7 +56,7 @@ def get_rule_map(player):
 		"Supercharged Array": lambda state: has_frame(state, player, 'Capacitor Bank') and capacitor_widget(state, player) and has_tier(state, player, 3),
 		"Logistics Hub": lambda state: has_frame(state, player, 'Capacitor Bank') and capacitor_widget(state, player) and has_tier(state, player, 3),
 		"Coordinated Logistics": lambda state: has_frame(state, player, 'Logistics Hub') and capacitor_widget(state, player) and has_tier(state, player, 3),
-		"Napalm Charge": lambda state: has_frame(state, player, 'Logistics Hub') and oil(state, player) and has_tier(state, player, 3),
+		"Napalm Charge": lambda state: has_frame(state, player, 'Logistics Hub') and oil(state, player) and spinning_widget(state, player) and has_tier(state, player, 3),
 		"Beach Harvest": lambda state: has_frame(state, player, 'Sand Pit') and capacitor_widget(state, player) and has_tier(state, player, 3),
 		"Molten Conveyor System": lambda state: has_frame(state, player, 'Kiln Governor') and capacitor_widget(state, player) and has_tier(state, player, 3),
 		"Superheated Crucible (Glass)": lambda state: has_frame(state, player, 'Glass Kiln') and capacitor_widget(state, player) and has_tier(state, player, 3),
@@ -286,7 +286,7 @@ def get_rule_map(player):
 		"Rapid Rod Fabricator": lambda state: has_frame(state, player, 'Accelerated Molding Unit') and ascended_widget(state, player) and has_tier(state, player, 10),
 		"Quantum Efficiency Reactor": lambda state: has_frame(state, player, 'Superconducting Fuel Chamber') and ascended_widget(state, player) and has_tier(state, player, 10),
 		"Yield Maximization Reactor": lambda state: has_frame(state, player, 'Rapid Crystal Formation Chamber') and ascended_widget(state, player) and has_tier(state, player, 10),
-		"N-Step Branch Prediction": lambda state: has_frame(state, player, 'Microfine Engraving') and ascended_widget(state, player) and has_tier(state, player, 10),
+		"N-Step Branch Prediction": lambda state: has_frame(state, player, 'Microfine Engraving') and unshackled_widget(state, player) and has_tier(state, player, 10),
 		"Lightning Data Bus": lambda state: has_frame(state, player, 'Hyper-Speed Compiler') and ascended_widget(state, player) and has_tier(state, player, 10),
 		"High Intensity Furnace": lambda state: has_frame(state, player, 'Incinerator') and ascended_widget(state, player) and has_tier(state, player, 10),
 		"Remnants of Humanity": lambda state: has_frame(state, player, 'Efficient Value Extraction') and ascended_widget(state, player) and has_tier(state, player, 10),

@@ -4,8 +4,10 @@ from .Rules import *
 from .Options import *
 from .Items import *
 from .Regions import *
+from .Settings import *
+from typing import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Widgitpelago/blob/master/Widgitpelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 class WidgetInc(World):
 	"""
@@ -14,6 +16,7 @@ class WidgetInc(World):
 	game = "Widget Inc"
 	options_dataclass = WidgetIncOptions
 	options: WidgetIncOptions
+	settings: ClassVar[WidgetIncSettings]
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
@@ -26,6 +29,7 @@ class WidgetInc(World):
 
 	def generate_early(self):
 		check_options(self)
+		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Widget Inc"]
@@ -35,7 +39,15 @@ class WidgetInc(World):
 			if "hand_crafting_multiplier" in passthrough:
 				self.options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
 			
-		self.multiworld.push_precollected(self.create_item("Widget Factory"))
+			if "starting_tier_producers" in passthrough:
+				self.options.starting_tier_producers = StartingTierProducers(passthrough["starting_tier_producers"])
+			
+		if options.starting_tier_producers == 1:
+			self.multiworld.push_precollected(self.create_item("Iron Mine"))
+			self.multiworld.push_precollected(self.create_item("Iron Smelter"))
+			self.multiworld.push_precollected(self.create_item("Widget Factory"))
+		else:
+			self.multiworld.push_precollected(self.create_item("Widget Factory"))
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -48,6 +60,7 @@ class WidgetInc(World):
 
 	def set_rules(self):
 		player = self.player
+		player = self.player
 		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player)
 
 	def fill_slot_data(self):
@@ -57,6 +70,7 @@ class WidgetInc(World):
 		slot_data = {
 			"production_multiplier": int(self.options.production_multiplier),
 			"hand_crafting_multiplier": int(self.options.hand_crafting_multiplier),
+			"starting_tier_producers": int(self.options.starting_tier_producers),
 			"uuid": str(shuffled)
 		}
 		return slot_data

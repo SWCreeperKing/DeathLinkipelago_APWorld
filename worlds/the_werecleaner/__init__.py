@@ -4,8 +4,10 @@ from .Rules import *
 from .Options import *
 from .Items import *
 from .Regions import *
+from .Settings import *
+from typing import *
 
-# File is Auto-generated, see: [https://github.com/SWCreeperKing/Werepelago/blob/master/Werepelago/Archipelago/ApShenanigans.cs]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 class TheWereCleaner(World):
 	"""
@@ -14,6 +16,7 @@ class TheWereCleaner(World):
 	game = "The WereCleaner"
 	options_dataclass = TheWereCleanerOptions
 	options: TheWereCleanerOptions
+	settings: ClassVar[TheWereCleanerSettings]
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
@@ -27,6 +30,7 @@ class TheWereCleaner(World):
 
 	def generate_early(self):
 		check_options(self)
+		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "The WereCleaner" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["The WereCleaner"]
@@ -41,7 +45,8 @@ class TheWereCleaner(World):
 		gen_create_items(self)
 
 	def set_rules(self):
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", self.player, 7)
+		player = self.player
+		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", player, 7)
 
 	def fill_slot_data(self):
 		slot_data = {
