@@ -161,6 +161,22 @@ def get_rule_map(player):
 		"Mining Lv. 8": lambda state: can_grind_mine(state, player, 8),
 		"Mining Lv. 9": lambda state: can_grind_mine(state, player, 9),
 		"Mining Lv. 10": lambda state: can_grind_mine(state, player, 10),
+		"A New Journey": lambda state: can_grind_level(state, player, 0),
+		"Clearing Catacombs (1-6)": lambda state: can_grind_level(state, player, 1) and has_area(state, player, "Sanctum Catacombs lvl 1"),
+		"Clearing Catacombs (6-12)": lambda state: can_grind_level(state, player, 6) and has_area(state, player, "Sanctum Catacombs lvl 2"),
+		"Becoming a Fighter": lambda state: can_grind_level(state, player, 10),
+		"Becoming a Mystic": lambda state: can_grind_level(state, player, 10),
+		"Becoming a Bandit": lambda state: can_grind_level(state, player, 10),
+		"Clearing Catacombs (12-18)": lambda state: can_grind_level(state, player, 12) and has_area(state, player, "Sanctum Catacombs lvl 3"),
+		"Clearing Grove (15-20)": lambda state: can_grind_level(state, player, 15) and has_area(state, player, "Cresent Grove lvl 1"),
+		"Clearing Grove (20-25)": lambda state: can_grind_level(state, player, 20) and has_area(state, player, "Cresent Grove lvl 2"),
+		"Judgement": lambda state: can_grind_level(state, player, 28) and has_item(state, player, "Experience Bond", 1),
+		"Corrupted Arcana": lambda state: can_grind_level(state, player, 28) and has_item(state, player, "Experience Bond", 1),
+		"Holier than Thou": lambda state: can_grind_level(state, player, 28) and has_item(state, player, "Experience Bond", 1),
+		"Altered Vision": lambda state: can_grind_level(state, player, 0) and has_item(state, player, "Illusion Stone", 1),
+		"Scaling the Tower": lambda state: can_grind_level(state, player, 0),
+		"Scaling Stars": lambda state: can_grind_level(state, player, 15) and has_area(state, player, "Trial of the Stars"),
+		"Rude!": lambda state: can_grind_level(state, player, 0),
 	}
 
 def has_area(state, player, area) -> bool:
@@ -201,3 +217,6 @@ def can_grind_mine(state, player, level) -> bool:
 
 def can_beat_enemy(state, player, enemy_name) -> bool:
 	return can_grind_level(state, player, enemy_data[enemy_name][0]) and has_any_area(state, player, enemy_data[enemy_name][1])
+
+def has_item(state, player, item, count) -> bool:
+	return state.has(item, player, count)

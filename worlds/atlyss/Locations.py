@@ -168,11 +168,31 @@ professions = [
 	["Mining Lv. 10", "Menu"]
 ]
 
+achievements = [
+	["A New Journey", "Sanctum"],
+	["Clearing Catacombs (1-6)", "Sanctum Catacombs lvl 1"],
+	["Clearing Catacombs (6-12)", "Sanctum Catacombs lvl 2"],
+	["Becoming a Fighter", "Sanctum"],
+	["Becoming a Mystic", "Sanctum"],
+	["Becoming a Bandit", "Sanctum"],
+	["Clearing Catacombs (12-18)", "Sanctum Catacombs lvl 3"],
+	["Clearing Grove (15-20)", "Cresent Grove lvl 1"],
+	["Clearing Grove (20-25)", "Cresent Grove lvl 2"],
+	["Judgement", "Sanctum"],
+	["Corrupted Arcana", "Sanctum"],
+	["Holier than Thou", "Sanctum"],
+	["Altered Vision", "Sanctum"],
+	["Scaling the Tower", "Sanctum"],
+	["Scaling Stars", "Trial of the Stars"],
+	["Rude!", "Sanctum"]
+]
+
 location_dict = [
 	*[items[0] for items in quests],
 	*[items[0] for items in levels],
 	*[items[0] for items in merchants],
-	*[items[0] for items in professions]
+	*[items[0] for items in professions],
+	*[items[0] for items in achievements]
 ]
 
 location_grind_data = [

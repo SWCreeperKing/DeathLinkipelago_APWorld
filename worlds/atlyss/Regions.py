@@ -63,8 +63,34 @@ def gen_create_regions(world):
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	for location in professions:
 		make_location(world, location[0], region_map[location[1]], rule_map)
+	make_location(world, "A New Journey", region_map["Sanctum"], rule_map)
+	make_location(world, "Clearing Catacombs (1-6)", region_map["Sanctum Catacombs lvl 1"], rule_map)
+	make_location(world, "Clearing Catacombs (6-12)", region_map["Sanctum Catacombs lvl 2"], rule_map)
+	make_location(world, "Clearing Catacombs (12-18)", region_map["Sanctum Catacombs lvl 3"], rule_map)
+	make_location(world, "Clearing Grove (15-20)", region_map["Cresent Grove lvl 1"], rule_map)
+	make_location(world, "Clearing Grove (20-25)", region_map["Cresent Grove lvl 2"], rule_map)
+	make_location(world, "Altered Vision", region_map["Sanctum"], rule_map)
+	make_location(world, "Scaling the Tower", region_map["Sanctum"], rule_map)
+	make_location(world, "Scaling Stars", region_map["Trial of the Stars"], rule_map)
+	make_location(world, "Rude!", region_map["Sanctum"], rule_map)
+	
 	for location in quests:
 		make_event_location(world, f"Quest Completion: {location[0]}", location[0], f"Complete: {location[0]}", None, region_map[location[1]], rule_map)
+	if options.is_class("fighter"):
+		make_location(world, "Becoming a Fighter", region_map["Sanctum"], rule_map)
+		make_location(world, "Judgement", region_map["Sanctum"], rule_map)
+		
+	
+	if options.is_class("mystic"):
+		make_location(world, "Becoming a Mystic", region_map["Sanctum"], rule_map)
+		make_location(world, "Corrupted Arcana", region_map["Sanctum"], rule_map)
+		make_location(world, "Holier than Thou", region_map["Sanctum"], rule_map)
+		
+	
+	if options.is_class("bandit"):
+		make_location(world, "Becoming a Bandit", region_map["Sanctum"], rule_map)
+		
+	
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

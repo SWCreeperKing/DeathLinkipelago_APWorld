@@ -29,11 +29,11 @@ class TheWereCleaner(World):
 		self.starting_stage = ""
 
 	def generate_early(self):
-		check_options(self)
 		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "The WereCleaner" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["The WereCleaner"]
+		check_options(self)
 
 	def create_regions(self):
 		gen_create_regions(self)

@@ -352,7 +352,6 @@ def check_options(world, locations: List[str]):
         if amount_to_goal < 0:
             max_levels_to_goal = len(levels_to_goal)
             amount_to_goal = random.randint(int(max_levels_to_goal / 2), max_levels_to_goal)
-            print(f"rand: [{amount_to_goal},{int(max_levels_to_goal / 2)},{max_levels_to_goal},{levels_to_goal}]")
 
         allow_below_50 = settings.allow_potentially_excessive_releases
         if amount_to_goal > len(locations):

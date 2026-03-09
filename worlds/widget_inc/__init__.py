@@ -34,13 +34,13 @@ class WidgetInc(World):
 			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Widget Inc"]
 			if "production_multiplier" in passthrough:
-				self.options.production_multiplier = ProductionMultiplier(passthrough["production_multiplier"])
+				options.production_multiplier = ProductionMultiplier(passthrough["production_multiplier"])
 			
 			if "hand_crafting_multiplier" in passthrough:
-				self.options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
+				options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
 			
 			if "starting_tier_producers" in passthrough:
-				self.options.starting_tier_producers = StartingTierProducers(passthrough["starting_tier_producers"])
+				options.starting_tier_producers = StartingTierProducers(passthrough["starting_tier_producers"])
 			
 		if options.starting_tier_producers == 1:
 			self.multiworld.push_precollected(self.create_item("Iron Mine"))

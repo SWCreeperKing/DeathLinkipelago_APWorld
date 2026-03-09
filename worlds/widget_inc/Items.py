@@ -2,7 +2,7 @@ from BaseClasses import ItemClassification
 from .Locations import *
 from .Options import *
 
-# File is Auto-generated, see: [No Link Given]
+# File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 progressive_tier = {
 	"Progressive Tier": 12

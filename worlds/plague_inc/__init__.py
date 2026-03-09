@@ -36,28 +36,28 @@ class PlagueInc(World):
 			if "Plague Inc" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Plague Inc"]
 			if "bacteria" in passthrough:
-				self.options.bacteria = Bacteria(passthrough["bacteria"])
+				options.bacteria = Bacteria(passthrough["bacteria"])
 			
 			if "virus" in passthrough:
-				self.options.virus = Virus(passthrough["virus"])
+				options.virus = Virus(passthrough["virus"])
 			
 			if "fungus" in passthrough:
-				self.options.fungus = Fungus(passthrough["fungus"])
+				options.fungus = Fungus(passthrough["fungus"])
 			
 			if "parasite" in passthrough:
-				self.options.parasite = Parasite(passthrough["parasite"])
+				options.parasite = Parasite(passthrough["parasite"])
 			
 			if "prion" in passthrough:
-				self.options.prion = Prion(passthrough["prion"])
+				options.prion = Prion(passthrough["prion"])
 			
 			if "nano_virus" in passthrough:
-				self.options.nano_virus = NanoVirus(passthrough["nano_virus"])
+				options.nano_virus = NanoVirus(passthrough["nano_virus"])
 			
 			if "bio_weapon" in passthrough:
-				self.options.bio_weapon = BioWeapon(passthrough["bio_weapon"])
+				options.bio_weapon = BioWeapon(passthrough["bio_weapon"])
 			
 			if "normal_difficulty" in passthrough:
-				self.options.normal_difficulty = NormalDifficulty(passthrough["normal_difficulty"])
+				options.normal_difficulty = NormalDifficulty(passthrough["normal_difficulty"])
 			
 			if "victories_needed" in passthrough:
 				victories_needed = passthrough["victories_needed"]
