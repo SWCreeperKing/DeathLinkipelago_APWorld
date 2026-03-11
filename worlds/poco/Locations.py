@@ -51,9 +51,9 @@ locations = [
 	["Rat Skull #9", "Mountain Top"],
 	["Pickup Golden Key", "Mountain Top"],
 	["Pickup Cymbal Button", "Mountain Top"],
-	["Pickup Dog Treat", "Motley Crew"],
-	["Pickup Bug Steak", "Motley Crew"],
-	["Pickup Pacifier", "Motley Crew"],
+	["Pickup Dog Treat", "Tunnels Cave"],
+	["Pickup Bug Steak", "Tunnels Cave"],
+	["Pickup Pacifier", "Tunnels Cave"],
 	["Pickup Photo #4", "Tunnels Cave"]
 ]
 

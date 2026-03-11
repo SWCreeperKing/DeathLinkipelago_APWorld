@@ -27,7 +27,6 @@ def gen_create_regions(world):
 		"Backrooms #3": Region("Backrooms #3", world.player, world.multiworld),
 		"Garden Cave": Region("Garden Cave", world.player, world.multiworld),
 		"Mountain Top": Region("Mountain Top", world.player, world.multiworld),
-		"Motley Crew": Region("Motley Crew", world.player, world.multiworld),
 		"Tunnels Cave": Region("Tunnels Cave", world.player, world.multiworld)
 	}
 	
@@ -46,14 +45,17 @@ def gen_create_regions(world):
 	region_map["Backrooms #2"].connect(region_map["Backrooms #3"], rule = lambda state: has_item(state, player, "Golden Key"))
 	region_map["Garden"].connect(region_map["Garden Cave"], rule = lambda state: has_item(state, player, "Machete"))
 	region_map["Mountain"].connect(region_map["Mountain Top"], rule = lambda state: has_item(state, player, "Rope"))
-	region_map["Mountain Top"].connect(region_map["Motley Crew"], rule = lambda state: has_item(state, player, "Cymbal Button") and has_item(state, player, "Golden Key") and has_item(state, player, "Old Key") and has_item(state, player, "Bone Key") and has_item(state, player, "Cog") and has_item(state, player, "Basic Button") and has_item(state, player, "Fancy Button") and has_item(state, player, "Cute Button"))
-	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: has_item(state, player, "Pacifier") and has_item(state, player, "Bug Steak") and has_item(state, player, "Dog Treat"))
+	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: done_quest(state, player, "Dungsworth") and done_quest(state, player, "Weevilton") and done_quest(state, player, "Scuttlesby"))
 	for location in locations:
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	make_event_location(world, "Complete Nari's Quest", "Complete Nari's Quest", "Nari's Quest Completion", None, region_map["Garden"], rule_map)
 	make_event_location(world, "Complete Ojet's Quest", "Complete Ojet's Quest", "Ojet's Quest Completion", None, region_map["Water Gate"], rule_map)
 	make_event_location(world, "Complete Gultch's Quest", "Complete Gultch's Quest", "Gultch's Quest Completion", None, region_map["Mountain"], rule_map)
-	make_event_location(world, "Complete Jaz's Quest", "Complete Jaz's Quest", "Jaz's Quest Completion", None, region_map["Motley Crew"], rule_map)
+	make_event_location(world, "Complete Jaz's Quest", "Complete Jaz's Quest", "Jaz's Quest Completion", None, region_map["Lake Path"], rule_map)
+	make_event_location(world, "Complete Dungsworth's Quest", "Complete Dungsworth's Quest", "Dungsworth's Quest Completion", None, region_map["Lake Path"], rule_map)
+	make_event_location(world, "Complete Weevilton's Quest", "Complete Weevilton's Quest", "Weevilton's Quest Completion", None, region_map["Mountain Top"], rule_map)
+	make_event_location(world, "Complete Scuttlesby's Quest", "Complete Scuttlesby's Quest", "Scuttlesby's Quest Completion", None, region_map["Backrooms #3"], rule_map)
+	make_event_location(world, "Complete Cerberus's Quest", "Complete Cerberus's Quest", "Cerberus's Quest Completion", None, region_map["Tunnels Cave"], rule_map)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)
