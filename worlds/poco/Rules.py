@@ -16,6 +16,7 @@ def get_rule_map(player):
 		"Craft Green Paint": lambda state: has_item(state, player, "Snail Slime") and has_item(state, player, "Yellow Pigment") and has_item(state, player, "Magenta Pigment") and has_item(state, player, "Cyan Pigment"),
 		"Milk Beetle": lambda state: has_item(state, player, "Bucket"),
 		"Craft Cooked Fish Dinner": lambda state: has_item(state, player, "Coal") and has_item(state, player, "Match") and has_item(state, player, "Frying Pan") and has_item(state, player, "Fish") and has_item(state, player, "Carrot") and has_item(state, player, "Beetle Milk"),
+		"Pickup Cymbal Button": lambda state: done_quest(state, player, "Weevilton"),
 		"Complete Nari's Quest": lambda state: has_item(state, player, "Magenta Blossom"),
 		"Complete Ojet's Quest": lambda state: has_item(state, player, "Red Paint") and has_item(state, player, "Blue Paint") and has_item(state, player, "Green Paint"),
 		"Complete Gultch's Quest": lambda state: has_item(state, player, "Cooked Fish Dinner"),

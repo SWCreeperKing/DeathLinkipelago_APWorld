@@ -42,22 +42,6 @@ item_counts_useful = {
 	"Soul Pearl": 1
 }
 
-item_counts_filler = {
-	"Black Dye": 1,
-	"Blue Dye": 1,
-	"Brown Dye": 1,
-	"Cyan Dye": 1,
-	"Green Dye": 1,
-	"Grey Dye": 1,
-	"Lime Dye": 1,
-	"Orange Dye": 1,
-	"Pink Dye": 1,
-	"Purple Dye": 1,
-	"Red Dye": 1,
-	"White Dye": 1,
-	"Yellow Dye": 1
-}
-
 item_counts_progression = {
 	"Epic Carrot": 1,
 	"Experience Bond": 1,
