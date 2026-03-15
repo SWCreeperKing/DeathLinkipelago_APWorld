@@ -45,7 +45,7 @@ def gen_create_regions(world):
 	region_map["Backrooms #2"].connect(region_map["Backrooms #3"], rule = lambda state: has_item(state, player, "Golden Key"))
 	region_map["Garden"].connect(region_map["Garden Cave"], rule = lambda state: has_item(state, player, "Machete"))
 	region_map["Mountain"].connect(region_map["Mountain Top"], rule = lambda state: has_item(state, player, "Rope"))
-	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: done_quest(state, player, "Dungsworth") and done_quest(state, player, "Weevilton") and done_quest(state, player, "Scuttlesby"))
+	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: done_quest(state, player, "Cerberus"))
 	for location in locations:
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	make_event_location(world, "Complete Nari's Quest", "Complete Nari's Quest", "Nari's Quest Completion", None, region_map["Garden"], rule_map)
@@ -55,7 +55,7 @@ def gen_create_regions(world):
 	make_event_location(world, "Complete Dungsworth's Quest", "Complete Dungsworth's Quest", "Dungsworth's Quest Completion", None, region_map["Lake Path"], rule_map)
 	make_event_location(world, "Complete Weevilton's Quest", "Complete Weevilton's Quest", "Weevilton's Quest Completion", None, region_map["Mountain Top"], rule_map)
 	make_event_location(world, "Complete Scuttlesby's Quest", "Complete Scuttlesby's Quest", "Scuttlesby's Quest Completion", None, region_map["Backrooms #3"], rule_map)
-	make_event_location(world, "Complete Cerberus's Quest", "Complete Cerberus's Quest", "Cerberus's Quest Completion", None, region_map["Tunnels Cave"], rule_map)
+	make_event_location(world, "Complete Cerberus's Quest", "Complete Cerberus's Quest", "Cerberus's Quest Completion", None, region_map["Tunnels"], rule_map)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

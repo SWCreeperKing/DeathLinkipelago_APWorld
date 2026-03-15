@@ -23,7 +23,7 @@ def get_rule_map(player):
 		"Complete Jaz's Quest": lambda state: has_item(state, player, "Pacifier") and has_item(state, player, "Bug Steak") and has_item(state, player, "Dog Treat") and done_quest(state, player, "Cerberus"),
 		"Complete Dungsworth's Quest": lambda state: has_item(state, player, "Cymbal Button"),
 		"Complete Weevilton's Quest": lambda state: has_item(state, player, "Fancy Button") and has_item(state, player, "Cute Button") and has_item(state, player, "Basic Button"),
-		"Complete Cerberus's Quest": lambda state: has_item(state, player, "Pacifier") and has_item(state, player, "Bug Steak") and has_item(state, player, "Dog Treat"),
+		"Complete Cerberus's Quest": lambda state: has_item(state, player, "Pacifier") and has_item(state, player, "Bug Steak") and has_item(state, player, "Dog Treat") and done_quest(state, player, "Dungsworth") and done_quest(state, player, "Weevilton") and done_quest(state, player, "Scuttlesby"),
 	}
 
 def has_item(state, player, item) -> bool:
