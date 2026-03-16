@@ -187,14 +187,6 @@ achievements = [
 	["Rude!", "Sanctum"]
 ]
 
-location_dict = [
-	*[items[0] for items in quests],
-	*[items[0] for items in levels],
-	*[items[0] for items in merchants],
-	*[items[0] for items in professions],
-	*[items[0] for items in achievements]
-]
-
 location_grind_data = [
 	["Sanctum", 0, 0],
 	["Outer Sanctum", 1, 4],
@@ -314,3 +306,11 @@ portal_counts = {
 	"Redwoud": 0,
 	"Trial of the Stars": 0
 }
+
+location_dict = [
+	*[items[0] for items in quests],
+	*[items[0] for items in levels],
+	*[items[0] for items in merchants],
+	*[items[0] for items in professions],
+	*[items[0] for items in achievements]
+]

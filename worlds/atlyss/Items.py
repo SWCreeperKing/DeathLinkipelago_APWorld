@@ -38,14 +38,14 @@ item_counts_useful = {
 	"Agility Stone": 1,
 	"Angela's Tear": 1,
 	"Flux Stone": 1,
+	"Illusion Stone": 1,
 	"Might Stone": 1,
 	"Soul Pearl": 1
 }
 
 item_counts_progression = {
 	"Epic Carrot": 1,
-	"Experience Bond": 1,
-	"Illusion Stone": 1
+	"Experience Bond": 1
 }
 
 filler_items = [
@@ -484,14 +484,14 @@ useful_items = [
 	"Agility Stone",
 	"Angela's Tear",
 	"Flux Stone",
+	"Illusion Stone",
 	"Might Stone",
 	"Soul Pearl"
 ]
 
 progression_items = [
 	"Epic Carrot",
-	"Experience Bond",
-	"Illusion Stone"
+	"Experience Bond"
 ]
 
 filler_weights = {
