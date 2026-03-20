@@ -17,7 +17,6 @@ def gen_create_regions(world):
 		"Enemies": Region("Enemies", world.player, world.multiworld),
 		"Mad Forest": Region("Mad Forest", world.player, world.multiworld),
 		"Eudaimonia M.": Region("Eudaimonia M.", world.player, world.multiworld),
-		"Holy Forbidden": Region("Holy Forbidden", world.player, world.multiworld),
 		"Inlaid Library": Region("Inlaid Library", world.player, world.multiworld),
 		"Dairy Plant": Region("Dairy Plant", world.player, world.multiworld),
 		"Gallo Tower": Region("Gallo Tower", world.player, world.multiworld),
@@ -40,7 +39,6 @@ def gen_create_regions(world):
 		"Mt.Moonspell": Region("Mt.Moonspell", world.player, world.multiworld),
 		"Lake Foscari": Region("Lake Foscari", world.player, world.multiworld),
 		"Abyss Foscari": Region("Abyss Foscari", world.player, world.multiworld),
-		"Profane Chapel": Region("Profane Chapel", world.player, world.multiworld),
 		"Ante Chamber": Region("Ante Chamber", world.player, world.multiworld),
 		"Room 1665": Region("Room 1665", world.player, world.multiworld),
 		"Neo Galuga": Region("Neo Galuga", world.player, world.multiworld),
@@ -63,13 +61,14 @@ def gen_create_regions(world):
 				make_location(world, f"Open Chest #{i + 1} on {stage}", region_map[stage], rule_map)
 		region_map["Menu"].connect(region_map[stage], rule = lambda state, stage_name=stage: state.has(f"Stage Unlock: {stage_name}", player, 1))
 	for character in characters:
-		make_location(world, f"Beat with {character}", region_map["Characters"], rule_map)
-	for enemy, raw_find_locs in enemy_map.items():
-		if enemy == "Death" and ("Ode to Castlevania" not in stages or "Richter Belmont" not in characters):
-			continue
-		if not any(loc in stages for loc in raw_find_locs):
-			continue
-		make_location(world, f"Kill {enemy}", region_map["Enemies"], rule_map)
+		make_location(world, f'Beat with {character}', region_map['Characters'], rule_map)
+	if options.enemysanity:
+		for enemy, raw_find_locs in enemy_map.items():
+			if enemy == 'Death' and ('Ode to Castlevania' not in stages or 'Richter Belmont' not in characters):
+				continue
+			if not any(loc in stages for loc in raw_find_locs):
+				continue
+			make_location(world, f'Kill {enemy}', region_map['Enemies'], rule_map)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

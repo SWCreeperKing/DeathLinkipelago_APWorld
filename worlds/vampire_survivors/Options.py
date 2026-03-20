@@ -189,7 +189,7 @@ class IncludedBalatroCharacters(OptionSet):
 	"""
 	Balatro Characters to be randomized
 	possible options:
-	[Jimbo, Canio, Chicot, Perkeo, Outer Saboteur]
+	[Jimbo, Canio, Chicot, Perkeo]
 	"All" - adds all locations above
 	"Random" - picks a random # of characters b/t list's max size / 2 and list's max size
 	"""
@@ -202,7 +202,7 @@ class IncludedNormalStages(OptionSet):
 	"""
 	Normal Stages to be randomized
 	possible options:
-	[Mad Forest, Holy Forbidden, Inlaid Library, Dairy Plant, Gallo Tower, Cappella Magna, Westwoods, Mazerella]
+	[Mad Forest, Inlaid Library, Dairy Plant, Gallo Tower, Cappella Magna, Westwoods, Mazerella]
 	"All" - adds all locations above
 	"Random" - picks a random # of characters b/t list's max size / 2 and list's max size
 	"""
@@ -293,7 +293,7 @@ class IncludedCastlevaniaStages(OptionSet):
 	"""
 	Castlevania Stages to be randomized
 	possible options:
-	[Profane Chapel, Ode to Castlevania]
+	[Ode to Castlevania]
 	"All" - adds all locations above
 	"Random" - picks a random # of characters b/t list's max size / 2 and list's max size
 	"""

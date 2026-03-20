@@ -1,6 +1,9 @@
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 tech_tree = [
+	["Starting Check (1)", "Menu"],
+	["Starting Check (2)", "Menu"],
+	["Starting Check (3)", "Menu"],
 	["Tier 1", "Menu"],
 	["Tier 1 Mastery", "Tier 1"],
 	["Deconstruct", "Tier 1"],
@@ -367,10 +370,7 @@ tech_tree = [
 	["Omega Crystal Stabilizer", "Tier 12"],
 	["Omega Logic Amplifier", "Tier 12"],
 	["Omega Circuit Weaver", "Tier 12"],
-	["Omega Assembly Core", "Tier 12"],
-	["Starting Check (1)", "Menu"],
-	["Starting Check (2)", "Menu"],
-	["Starting Check (3)", "Menu"]
+	["Omega Assembly Core", "Tier 12"]
 ]
 
 location_dict = [

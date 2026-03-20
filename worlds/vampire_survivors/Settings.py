@@ -9,4 +9,4 @@ class VampireSurvivorsSettings(Group):
 		"""
 
 
-	allowunfaircharacters = False
+	allow_unfair_characters = False

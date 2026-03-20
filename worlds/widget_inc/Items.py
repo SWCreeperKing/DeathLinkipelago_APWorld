@@ -11,6 +11,9 @@ progressive_tier = {
 item_table = {
 	"Motivational Poster": ItemClassification.filler,
 	**{item: ItemClassification.progression for item in progressive_tier},
+	"Starting Check (1)": ItemClassification.filler,
+	"Starting Check (2)": ItemClassification.filler,
+	"Starting Check (3)": ItemClassification.filler,
 	"Tier 1 Mastery": ItemClassification.filler,
 	"Frame Relocation": ItemClassification.filler,
 	"Fortress": ItemClassification.filler,
