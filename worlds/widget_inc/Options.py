@@ -24,21 +24,22 @@ class HandCraftingMultiplier(Range):
 	default = 2
 
 
-class StartingTierProducers(Range):
+class ScoutHintTierProducers(Range):
 	"""
-	Starts with upto X Tier producers
+	Scout hint upto [1-13] Tier resource producers
+	0 is off
 	"""
-	display_name = "Starting Tier Producers"
+	display_name = "Scout Hint Tier Producers"
 	range_start = 0
-	range_end = 3
-	default = 1
+	range_end = 12
+	default = 3
 
 
 @dataclass
 class WidgetIncOptions(PerGameCommonOptions):
 	production_multiplier: ProductionMultiplier
 	hand_crafting_multiplier: HandCraftingMultiplier
-	starting_tier_producers: StartingTierProducers
+	scout_hint_tier_producers: ScoutHintTierProducers
 
 
 def check_options(world):
