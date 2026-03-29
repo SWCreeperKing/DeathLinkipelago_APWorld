@@ -79,6 +79,7 @@ class WidgetInc(World):
 
 	def set_rules(self):
 		player = self.player
+		options = self.options
 		player = self.player
 		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player)
 

@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -28,16 +28,16 @@ def gen_create_regions(world):
 	
 	region_map["Menu"].connect(region_map["The Ranch"])
 	region_map["Menu"].connect(region_map["Upgrades"])
-	region_map["The Ranch"].connect(region_map["The Lab"], rule = lambda state: has_region(state, player, "The Lab"))
-	region_map["The Ranch"].connect(region_map["The Overgrowth"], rule = lambda state: has_region(state, player, "The Overgrowth"))
-	region_map["The Ranch"].connect(region_map["The Grotto"], rule = lambda state: has_region(state, player, "The Grotto"))
-	region_map["The Ranch"].connect(region_map["Dry Reef"], rule = lambda state: has_region(state, player, "Dry Reef"))
-	region_map["Dry Reef"].connect(region_map["Indigo Quarry"], rule = lambda state: has_region(state, player, "Indigo Quarry"))
-	region_map["Dry Reef"].connect(region_map["Moss Blanket"], rule = lambda state: has_region(state, player, "Moss Blanket"))
-	region_map["Indigo Quarry"].connect(region_map["Ancient Ruins Transition"], rule = lambda state: has_region(state, player, "Ancient Ruins Transition"))
-	region_map["Moss Blanket"].connect(region_map["Ancient Ruins Transition"], rule = lambda state: has_region(state, player, "Ancient Ruins Transition"))
-	region_map["Ancient Ruins Transition"].connect(region_map["Ancient Ruins"], rule = lambda state: can_access_to_ruins_from_trans(state, player))
-	region_map["Ancient Ruins"].connect(region_map["Glass Desert"], rule = lambda state: has_region(state, player, "Glass Desert"))
+	region_map["The Ranch"].connect(region_map["The Lab"], rule = lambda state: has_region(state, player, options, "The Lab"))
+	region_map["The Ranch"].connect(region_map["The Overgrowth"], rule = lambda state: has_region(state, player, options, "The Overgrowth"))
+	region_map["The Ranch"].connect(region_map["The Grotto"], rule = lambda state: has_region(state, player, options, "The Grotto"))
+	region_map["The Ranch"].connect(region_map["Dry Reef"], rule = lambda state: has_region(state, player, options, "Dry Reef"))
+	region_map["Dry Reef"].connect(region_map["Indigo Quarry"], rule = lambda state: has_region(state, player, options, "Indigo Quarry"))
+	region_map["Dry Reef"].connect(region_map["Moss Blanket"], rule = lambda state: has_region(state, player, options, "Moss Blanket"))
+	region_map["Indigo Quarry"].connect(region_map["Ancient Ruins Transition"], rule = lambda state: has_region(state, player, options, "Ancient Ruins Transition"))
+	region_map["Moss Blanket"].connect(region_map["Ancient Ruins Transition"], rule = lambda state: has_region(state, player, options, "Ancient Ruins Transition"))
+	region_map["Ancient Ruins Transition"].connect(region_map["Ancient Ruins"], rule = lambda state: can_access_to_ruins_from_trans(state, player, options))
+	region_map["Ancient Ruins"].connect(region_map["Glass Desert"], rule = lambda state: has_region(state, player, options, "Glass Desert"))
 	make_location(world, "Buy Personal Upgrade (Heart Module lv.1)", region_map["Upgrades"], rule_map)
 	make_location(world, "Buy Personal Upgrade (Heart Module lv.2)", region_map["Upgrades"], rule_map)
 	make_location(world, "Buy Personal Upgrade (Heart Module lv.3)", region_map["Upgrades"], rule_map)

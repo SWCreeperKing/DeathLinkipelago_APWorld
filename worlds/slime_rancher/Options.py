@@ -92,6 +92,25 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	start_with_drone: StartWithDrone
 	trap_percent: TrapPercent
 
+	def get_options_map(self, option):
+		match option:
+			case "goal_type":
+				return self.goal_type
+			case "start_with_dry_reef":
+				return self.start_with_dry_reef
+			case "enable_stylish_dlc_treasure_pods":
+				return self.enable_stylish_dlc_treasure_pods
+			case "treasure_cracker_checks":
+				return self.treasure_cracker_checks
+			case "include_7z":
+				return self.include_7z
+			case "fix_market_rates":
+				return self.fix_market_rates
+			case "start_with_drone":
+				return self.start_with_drone
+			case "trap_percent":
+				return self.trap_percent
+		
 
 def check_options(world):
 	options = world.options

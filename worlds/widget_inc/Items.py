@@ -381,7 +381,7 @@ def gen_create_items(world):
 		for _ in range(amt):
 			pool.append(world.create_item(item))
 	for item, classification in item_table.items():
-		if item == "Widget Factory":
+		if item == "Widget Factor" or item == "Progressive Tier" or item == "Motivational Poster":
 			continue
 		world.location_count -= 1
 		pool.append(world.create_item(item))
