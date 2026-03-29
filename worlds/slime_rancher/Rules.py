@@ -134,17 +134,29 @@ def get_rule_map(player):
 		"Buy Personal Upgrade (Air Drive)": lambda state: can_access_dry_reef(state, player),
 	}
 
+def has_amount(state, player, item, amount) -> bool:
+	return state.has(item, player, amount)
+
+def has(state, player, item) -> bool:
+	return has_amount(state, player, item, 1)
+
+def has_any(state, player, items) -> bool:
+	return any(has(state, player, item) for item in items)
+
+def has_all(state, player, items) -> bool:
+	return all(has(state, player, item) for item in items)
+
 def has_cracker(state, player, level) -> bool:
-	return state.has("Progressive Treasure Cracker", player, level)
+	return has_amount(state, player, 'Progressive Treasure Cracker', level)
 
 def has_energy(state, player, amount) -> bool:
-	return state.has("Progressive Max Energy", player, amount)
+	return has_amount(state, player, 'Progressive Max Energy', amount)
 
 def has_jetpack(state, player) -> bool:
-	return state.has("Progressive Jetpack", player, 1)
+	return has(state, player, 'Progressive Jetpack')
 
 def has_region(state, player, region) -> bool:
-	return state.has(f'Region Unlock: {region}', player, 1)
+	return has(state, player, f"Region Unlock: {region}")
 
 def can_access_dry_reef(state, player) -> bool:
 	return has_region(state, player, 'Dry Reef')

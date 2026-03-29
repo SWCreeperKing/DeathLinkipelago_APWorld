@@ -76,6 +76,7 @@ class SlimeRancher(World):
 
 	def set_rules(self):
 		player = self.player
+		options = self.options
 		if self.options.goal_type == 0:
 		    self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", player, 28)
 		elif self.options.goal_type == 1:
