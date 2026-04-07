@@ -60,6 +60,24 @@ class SlimeRancher(World):
 			if "trap_percent" in passthrough:
 				options.trap_percent = TrapPercent(passthrough["trap_percent"])
 			
+			if "easy_skips" in passthrough:
+				options.easy_skips = EasySkips(passthrough["easy_skips"])
+			
+			if "precise_movement" in passthrough:
+				options.precise_movement = PreciseMovement(passthrough["precise_movement"])
+			
+			if "dangerous_skips" in passthrough:
+				options.dangerous_skips = DangerousSkips(passthrough["dangerous_skips"])
+			
+			if "obscure_locations" in passthrough:
+				options.obscure_locations = ObscureLocations(passthrough["obscure_locations"])
+			
+			if "largo_jumps" in passthrough:
+				options.largo_jumps = LargoJumps(passthrough["largo_jumps"])
+			
+			if "jetpack_boosts" in passthrough:
+				options.jetpack_boosts = JetpackBoosts(passthrough["jetpack_boosts"])
+			
 		if self.options.start_with_dry_reef:
 		    self.multiworld.push_precollected(self.create_item("Region Unlock: Dry Reef"))
 		if self.options.start_with_drone:
@@ -97,6 +115,12 @@ class SlimeRancher(World):
 			"fix_market_rates": bool(self.options.fix_market_rates),
 			"start_with_drone": bool(self.options.start_with_drone),
 			"trap_percent": int(self.options.trap_percent),
+			"easy_skips": bool(self.options.easy_skips),
+			"precise_movement": bool(self.options.precise_movement),
+			"dangerous_skips": bool(self.options.dangerous_skips),
+			"obscure_locations": bool(self.options.obscure_locations),
+			"largo_jumps": bool(self.options.largo_jumps),
+			"jetpack_boosts": bool(self.options.jetpack_boosts),
 			"uuid": str(shuffled)
 		}
 		return slot_data

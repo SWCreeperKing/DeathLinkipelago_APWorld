@@ -81,6 +81,48 @@ class TrapPercent(Range):
 	default = 15
 
 
+class EasySkips(Toggle):
+	"""
+	Enable Skips that many new players end up finding on their first playthrough
+	"""
+	display_name = "Easy Skips"
+
+
+class PreciseMovement(Toggle):
+	"""
+	Enable Skips that require tighter movement than average
+	"""
+	display_name = "Precise Movement"
+
+
+class DangerousSkips(Toggle):
+	"""
+	Enable Skips that have a high chance of taking damage or getting killed
+	"""
+	display_name = "Dangerous Skips"
+
+
+class ObscureLocations(Toggle):
+	"""
+	Enable Skips that abuse the terrain, usually in unintuitive ways
+	"""
+	display_name = "Obscure Locations"
+
+
+class LargoJumps(Toggle):
+	"""
+	EnableSkips where you jump off a largo midair
+	"""
+	display_name = "Largo Jumps"
+
+
+class JetpackBoosts(Toggle):
+	"""
+	Enable Skips where you use the ability to get rid of jetpack's startup times through careful jumping, allowing for more energy conservation
+	"""
+	display_name = "Jetpack Boosts"
+
+
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
 	goal_type: GoalType
@@ -91,6 +133,12 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	fix_market_rates: FixMarketRates
 	start_with_drone: StartWithDrone
 	trap_percent: TrapPercent
+	easy_skips: EasySkips
+	precise_movement: PreciseMovement
+	dangerous_skips: DangerousSkips
+	obscure_locations: ObscureLocations
+	largo_jumps: LargoJumps
+	jetpack_boosts: JetpackBoosts
 
 	def get_options_map(self, option):
 		match option:
@@ -110,6 +158,18 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.start_with_drone
 			case "trap_percent":
 				return self.trap_percent
+			case "easy_skips":
+				return self.easy_skips
+			case "precise_movement":
+				return self.precise_movement
+			case "dangerous_skips":
+				return self.dangerous_skips
+			case "obscure_locations":
+				return self.obscure_locations
+			case "largo_jumps":
+				return self.largo_jumps
+			case "jetpack_boosts":
+				return self.jetpack_boosts
 		
 
 def check_options(world):

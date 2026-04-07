@@ -45,7 +45,8 @@ class Poco(World):
 
 	def set_rules(self):
 		player = self.player
-		self.multiworld.completion_condition[self.player] = lambda state: has_item(state, player, "Nari's Quest Completion") and has_item(state, player, "Ojet's Quest Completion") and has_item(state, player, "Gultch's Quest Completion") and has_item(state, player, "Jaz's Quest Completion") and has_item(state, player, "Dungsworth's Quest Completion") and has_item(state, player, "Weevilton's Quest Completion") and has_item(state, player, "Scuttlesby's Quest Completion") and has_item(state, player, "Cerberus's Quest Completion")
+		options = self.options
+		self.multiworld.completion_condition[self.player] = lambda state: has(state, player, options, "Nari's Quest Completion") and has(state, player, options, "Ojet's Quest Completion") and has(state, player, options, "Gultch's Quest Completion") and has(state, player, options, "Jaz's Quest Completion") and has(state, player, options, "Dungsworth's Quest Completion") and has(state, player, options, "Weevilton's Quest Completion") and has(state, player, options, "Scuttlesby's Quest Completion") and has(state, player, options, "Cerberus's Quest Completion")
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]

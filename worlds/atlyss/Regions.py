@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -35,24 +35,24 @@ def gen_create_regions(world):
 	}
 	
 	region_map["Menu"].connect(region_map["Sanctum"], rule = lambda state: True)
-	region_map["Sanctum"].connect(region_map["Outer Sanctum"], rule = lambda state: has_area(state, player, "Outer Sanctum"))
-	region_map["Outer Sanctum"].connect(region_map["Arcwood Pass"], rule = lambda state: has_area(state, player, "Arcwood Pass"))
-	region_map["Outer Sanctum"].connect(region_map["Effold Terrace"], rule = lambda state: has_area(state, player, "Effold Terrace") and has_quest(state, player, "Diva Must Die"))
-	region_map["Outer Sanctum"].connect(region_map["Tuul Valley"], rule = lambda state: has_area(state, player, "Tuul Valley"))
-	region_map["Arcwood Pass"].connect(region_map["Sanctum Catacombs lvl 1"], rule = lambda state: has_area(state, player, "Sanctum Catacombs lvl 1") and has_quest(state, player, "Communing Catacombs"))
-	region_map["Sanctum Catacombs lvl 1"].connect(region_map["Sanctum Catacombs lvl 2"], rule = lambda state: has_area(state, player, "Sanctum Catacombs lvl 2"))
-	region_map["Sanctum Catacombs lvl 2"].connect(region_map["Sanctum Catacombs lvl 3"], rule = lambda state: has_area(state, player, "Sanctum Catacombs lvl 3"))
-	region_map["Arcwood Pass"].connect(region_map["Cresent Road"], rule = lambda state: has_area(state, player, "Cresent Road") and has_quest(state, player, "The Keep Within"))
-	region_map["Tuul Valley"].connect(region_map["Tuul Enclave"], rule = lambda state: has_area(state, player, "Tuul Enclave"))
-	region_map["Cresent Road"].connect(region_map["Luvora Garden"], rule = lambda state: has_area(state, player, "Luvora Garden"))
-	region_map["Cresent Road"].connect(region_map["Cresent Keep"], rule = lambda state: has_area(state, player, "Cresent Keep"))
-	region_map["Tuul Enclave"].connect(region_map["Bularr Fortress"], rule = lambda state: has_area(state, player, "Bularr Fortress") and has_quest(state, player, "Finding Ammagon"))
-	region_map["Cresent Keep"].connect(region_map["Cresent Grove lvl 1"], rule = lambda state: has_area(state, player, "Cresent Grove lvl 1") and has_quest(state, player, "The Keep Within"))
-	region_map["Cresent Grove lvl 1"].connect(region_map["Cresent Grove lvl 2"], rule = lambda state: has_area(state, player, "Cresent Grove lvl 2"))
-	region_map["Cresent Keep"].connect(region_map["Gate of the Moon"], rule = lambda state: has_area(state, player, "Gate of the Moon") and has_quest(state, player, "Tethering Grove"))
-	region_map["Gate of the Moon"].connect(region_map["Wall of the Stars"], rule = lambda state: has_area(state, player, "Wall of the Stars"))
-	region_map["Gate of the Moon"].connect(region_map["Redwoud"], rule = lambda state: has_area(state, player, "Redwoud"))
-	region_map["Wall of the Stars"].connect(region_map["Trial of the Stars"], rule = lambda state: has_area(state, player, "Trial of the Stars") and has_quest(state, player, "Up and Over It"))
+	region_map["Sanctum"].connect(region_map["Outer Sanctum"], rule = lambda state: has_area(state, player, options, "Outer Sanctum"))
+	region_map["Outer Sanctum"].connect(region_map["Arcwood Pass"], rule = lambda state: has_area(state, player, options, "Arcwood Pass"))
+	region_map["Outer Sanctum"].connect(region_map["Effold Terrace"], rule = lambda state: has_area(state, player, options, "Effold Terrace") and has_quest(state, player, options, "Diva Must Die"))
+	region_map["Outer Sanctum"].connect(region_map["Tuul Valley"], rule = lambda state: has_area(state, player, options, "Tuul Valley"))
+	region_map["Arcwood Pass"].connect(region_map["Sanctum Catacombs lvl 1"], rule = lambda state: has_area(state, player, options, "Sanctum Catacombs lvl 1") and has_quest(state, player, options, "Communing Catacombs"))
+	region_map["Sanctum Catacombs lvl 1"].connect(region_map["Sanctum Catacombs lvl 2"], rule = lambda state: has_area(state, player, options, "Sanctum Catacombs lvl 2"))
+	region_map["Sanctum Catacombs lvl 2"].connect(region_map["Sanctum Catacombs lvl 3"], rule = lambda state: has_area(state, player, options, "Sanctum Catacombs lvl 3"))
+	region_map["Arcwood Pass"].connect(region_map["Cresent Road"], rule = lambda state: has_area(state, player, options, "Cresent Road") and has_quest(state, player, options, "The Keep Within"))
+	region_map["Tuul Valley"].connect(region_map["Tuul Enclave"], rule = lambda state: has_area(state, player, options, "Tuul Enclave"))
+	region_map["Cresent Road"].connect(region_map["Luvora Garden"], rule = lambda state: has_area(state, player, options, "Luvora Garden"))
+	region_map["Cresent Road"].connect(region_map["Cresent Keep"], rule = lambda state: has_area(state, player, options, "Cresent Keep"))
+	region_map["Tuul Enclave"].connect(region_map["Bularr Fortress"], rule = lambda state: has_area(state, player, options, "Bularr Fortress") and has_quest(state, player, options, "Finding Ammagon"))
+	region_map["Cresent Keep"].connect(region_map["Cresent Grove lvl 1"], rule = lambda state: has_area(state, player, options, "Cresent Grove lvl 1") and has_quest(state, player, options, "The Keep Within"))
+	region_map["Cresent Grove lvl 1"].connect(region_map["Cresent Grove lvl 2"], rule = lambda state: has_area(state, player, options, "Cresent Grove lvl 2"))
+	region_map["Cresent Keep"].connect(region_map["Gate of the Moon"], rule = lambda state: has_area(state, player, options, "Gate of the Moon") and has_quest(state, player, options, "Tethering Grove"))
+	region_map["Gate of the Moon"].connect(region_map["Wall of the Stars"], rule = lambda state: has_area(state, player, options, "Wall of the Stars"))
+	region_map["Gate of the Moon"].connect(region_map["Redwoud"], rule = lambda state: has_area(state, player, options, "Redwoud"))
+	region_map["Wall of the Stars"].connect(region_map["Trial of the Stars"], rule = lambda state: has_area(state, player, options, "Trial of the Stars") and has_quest(state, player, options, "Up and Over It"))
 	if options.shop_sanity:
 		for location in merchants:
 			make_location(world, location[0], region_map[location[1]], rule_map)

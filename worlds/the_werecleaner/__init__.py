@@ -46,6 +46,7 @@ class TheWereCleaner(World):
 
 	def set_rules(self):
 		player = self.player
+		options = self.options
 		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", player, 7)
 
 	def fill_slot_data(self):

@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -31,21 +31,21 @@ def gen_create_regions(world):
 	}
 	
 	region_map["Menu"].connect(region_map["Gripp's Hoard"], rule = lambda state: True)
-	region_map["Gripp's Hoard"].connect(region_map["Junk Rivers"], rule = lambda state: has_item(state, player, "Axe"))
+	region_map["Gripp's Hoard"].connect(region_map["Junk Rivers"], rule = lambda state: has(state, player, options, "Axe"))
 	region_map["Junk Rivers"].connect(region_map["Launch Pad"], rule = lambda state: True)
 	region_map["Launch Pad"].connect(region_map["Tunnels"], rule = lambda state: True)
-	region_map["Launch Pad"].connect(region_map["Garden"], rule = lambda state: has_item(state, player, "Coin"))
+	region_map["Launch Pad"].connect(region_map["Garden"], rule = lambda state: has(state, player, options, "Coin"))
 	region_map["Launch Pad"].connect(region_map["Lake Path"], rule = lambda state: True)
-	region_map["Lake Path"].connect(region_map["Water Gate"], rule = lambda state: has_item(state, player, "Valve Handle"))
+	region_map["Lake Path"].connect(region_map["Water Gate"], rule = lambda state: has(state, player, options, "Valve Handle"))
 	region_map["Water Gate"].connect(region_map["Garden"], rule = lambda state: True)
-	region_map["Launch Pad"].connect(region_map["Mountain"], rule = lambda state: has_item(state, player, "Potato Battery"))
-	region_map["Lake Path"].connect(region_map["Fisherman's Island"], rule = lambda state: has_item(state, player, "Spoon"))
-	region_map["Gripp's Hoard"].connect(region_map["Backrooms #1"], rule = lambda state: has_item(state, player, "Old Key"))
-	region_map["Backrooms #1"].connect(region_map["Backrooms #2"], rule = lambda state: has_item(state, player, "Bone Key"))
-	region_map["Backrooms #2"].connect(region_map["Backrooms #3"], rule = lambda state: has_item(state, player, "Golden Key"))
-	region_map["Garden"].connect(region_map["Garden Cave"], rule = lambda state: has_item(state, player, "Machete"))
-	region_map["Mountain"].connect(region_map["Mountain Top"], rule = lambda state: has_item(state, player, "Rope"))
-	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: done_quest(state, player, "Cerberus"))
+	region_map["Launch Pad"].connect(region_map["Mountain"], rule = lambda state: has(state, player, options, "Potato Battery"))
+	region_map["Lake Path"].connect(region_map["Fisherman's Island"], rule = lambda state: has(state, player, options, "Spoon"))
+	region_map["Gripp's Hoard"].connect(region_map["Backrooms #1"], rule = lambda state: has(state, player, options, "Old Key"))
+	region_map["Backrooms #1"].connect(region_map["Backrooms #2"], rule = lambda state: has(state, player, options, "Bone Key"))
+	region_map["Backrooms #2"].connect(region_map["Backrooms #3"], rule = lambda state: has(state, player, options, "Golden Key"))
+	region_map["Garden"].connect(region_map["Garden Cave"], rule = lambda state: has(state, player, options, "Machete"))
+	region_map["Mountain"].connect(region_map["Mountain Top"], rule = lambda state: has(state, player, options, "Rope"))
+	region_map["Tunnels"].connect(region_map["Tunnels Cave"], rule = lambda state: done_quest(state, player, options, "Cerberus"))
 	for location in locations:
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	make_event_location(world, "Complete Nari's Quest", "Complete Nari's Quest", "Nari's Quest Completion", None, region_map["Garden"], rule_map)

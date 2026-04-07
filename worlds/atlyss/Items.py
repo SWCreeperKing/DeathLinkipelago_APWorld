@@ -583,10 +583,6 @@ def gen_create_items(world):
 		world.location_count -= amt
 		for _ in range(amt):
 			pool.append(world.create_item(item))
-	for item, amt in item_counts_filler.items():
-		world.location_count -= amt
-		for _ in range(amt):
-			pool.append(world.create_item(item))
 	for item, amt in item_counts_progression.items():
 		world.location_count -= amt
 		for _ in range(amt):

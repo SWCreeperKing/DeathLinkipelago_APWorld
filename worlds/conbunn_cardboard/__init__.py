@@ -48,6 +48,7 @@ class ConbunnCardboard(World):
 
 	def set_rules(self):
 		player = self.player
+		options = self.options
 		self.multiworld.completion_condition[self.player] = lambda state: state.has("CD", player, self.options.cds_required_to_goal)
 
 	def fill_slot_data(self):

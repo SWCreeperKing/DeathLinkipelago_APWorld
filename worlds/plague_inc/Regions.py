@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -23,7 +23,7 @@ def gen_create_regions(world):
 	}
 	
 	if options.bacteria:
-		region_map["Menu"].connect(region_map["Bacteria"], rule = lambda state: has_item(state, player, "Bacteria"))
+		region_map["Menu"].connect(region_map["Bacteria"], rule = lambda state: has(state, player, options, "Bacteria"))
 	
 	if options.bacteria:
 		for location in bacteria_techs:
@@ -34,7 +34,7 @@ def gen_create_regions(world):
 		
 	
 	if options.virus:
-		region_map["Menu"].connect(region_map["Virus"], rule = lambda state: has_item(state, player, "Virus"))
+		region_map["Menu"].connect(region_map["Virus"], rule = lambda state: has(state, player, options, "Virus"))
 	
 	if options.virus:
 		for location in virus_techs:
@@ -45,7 +45,7 @@ def gen_create_regions(world):
 		
 	
 	if options.fungus:
-		region_map["Menu"].connect(region_map["Fungus"], rule = lambda state: has_item(state, player, "Fungus"))
+		region_map["Menu"].connect(region_map["Fungus"], rule = lambda state: has(state, player, options, "Fungus"))
 	
 	if options.fungus:
 		for location in fungus_techs:
@@ -56,7 +56,7 @@ def gen_create_regions(world):
 		
 	
 	if options.parasite:
-		region_map["Menu"].connect(region_map["Parasite"], rule = lambda state: has_item(state, player, "Parasite"))
+		region_map["Menu"].connect(region_map["Parasite"], rule = lambda state: has(state, player, options, "Parasite"))
 	
 	if options.parasite:
 		for location in parasite_techs:
@@ -67,7 +67,7 @@ def gen_create_regions(world):
 		
 	
 	if options.prion:
-		region_map["Menu"].connect(region_map["Prion"], rule = lambda state: has_item(state, player, "Prion"))
+		region_map["Menu"].connect(region_map["Prion"], rule = lambda state: has(state, player, options, "Prion"))
 	
 	if options.prion:
 		for location in prion_techs:
@@ -78,7 +78,7 @@ def gen_create_regions(world):
 		
 	
 	if options.nano_virus:
-		region_map["Menu"].connect(region_map["Nano Virus"], rule = lambda state: has_item(state, player, "Nano Virus"))
+		region_map["Menu"].connect(region_map["Nano Virus"], rule = lambda state: has(state, player, options, "Nano Virus"))
 	
 	if options.nano_virus:
 		for location in nano_virus_techs:
@@ -89,7 +89,7 @@ def gen_create_regions(world):
 		
 	
 	if options.bio_weapon:
-		region_map["Menu"].connect(region_map["Bio Weapon"], rule = lambda state: has_item(state, player, "Bio Weapon"))
+		region_map["Menu"].connect(region_map["Bio Weapon"], rule = lambda state: has(state, player, options, "Bio Weapon"))
 	
 	if options.bio_weapon:
 		for location in bio_weapon_techs:

@@ -62,24 +62,25 @@ class Atlyss(World):
 		player = self.player
 		options = self.options
 		match options.goal:
-		   case 0: #silme_diva
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Slime Diva')
-		   case 1: #lord_zuulneruda
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Lord Zuulneruda')
-		   case 2: #colossus
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Colossus')
-		   case 3: #galius
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Galius')
-		   case 4: #lord_kaluuz
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Lord Kaluuz')
-		   case 5: #valdur
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, 'Valdur')
-		   case 6: #all_bosses
-		       self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, "Slime Diva") and can_beat_enemy(state, player, "Lord Zuulneruda") and can_beat_enemy(state, player, "Lord Kaluuz") and can_beat_enemy(state, player, "Colossus") and can_beat_enemy(state, player, "Valdur") and can_beat_enemy(state, player, "Galius")
-		   case 7: #all_quests
-		       self.multiworld.completion_condition[self.player] = lambda state: has_quest(state, player, "The Glyphik Booklet") and has_quest(state, player, "Cleaning Terrace") and has_quest(state, player, "Ancient Beings") and has_quest(state, player, "Wicked Wizboars") and has_quest(state, player, "Spiraling In The Grove") and has_quest(state, player, "Hell In The Grove") and has_quest(state, player, "Nulversa Magica") and has_quest(state, player, "Night Spirits") and has_quest(state, player, "Ridding Slimes") and has_quest(state, player, "Huntin' Hogs") and has_quest(state, player, "Purging the Grove") and has_quest(state, player, "Cleansing the Grove") and has_quest(state, player, "Nulversa Viscera") and has_quest(state, player, "Call of Fury") and has_quest(state, player, "Mastery of Strength") and has_quest(state, player, "Beckoning Foes") and has_quest(state, player, "Summore' Spectral Powder!") and has_quest(state, player, "Makin' More Mekspears") and has_quest(state, player, "Makin' More Wizwands") and has_quest(state, player, "Makin' More Vile Blades") and has_quest(state, player, "Summore' Golem Chestpieces") and has_quest(state, player, "Makin' More Ragespears") and has_quest(state, player, "Summore' Monolith Chestpieces") and has_quest(state, player, "Nulversa, Greenversa!") and has_quest(state, player, "Summore' Firebreath Blades") and has_quest(state, player, "Makin' More Follycannons") and has_quest(state, player, "Focusin' in") and has_quest(state, player, "Mastery of Dexterity") and has_quest(state, player, "Whatta' Rush!") and has_quest(state, player, "Purging the Undead") and has_quest(state, player, "Rattlecage Rage") and has_quest(state, player, "Consumed Madness") and has_quest(state, player, "Eradicating the Undead") and has_quest(state, player, "Reviling more Rageboars") and has_quest(state, player, "Facing Foes") and has_quest(state, player, "The Gall of Galius") and has_quest(state, player, "Up and Over It") and has_quest(state, player, "Sapphite Ingots")
-		   case 8: #level_32
-		       self.multiworld.completion_condition[self.player] = lambda state: can_grind_level(state, player, 32)
+			case 0:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Slime Diva')
+			case 1:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Lord Zuulneruda')
+			case 2:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Colossus')
+			case 3:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Galius')
+			case 4:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Lord Kaluuz')
+			case 5:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, 'Valdur')
+			case 6:
+				self.multiworld.completion_condition[self.player] = lambda state: can_beat_enemy(state, player, options, "Slime Diva") and can_beat_enemy(state, player, options, "Lord Zuulneruda") and can_beat_enemy(state, player, options, "Lord Kaluuz") and can_beat_enemy(state, player, options, "Colossus") and can_beat_enemy(state, player, options, "Valdur") and can_beat_enemy(state, player, options, "Galius")
+			case 7:
+				self.multiworld.completion_condition[self.player] = lambda state: has_quest(state, player, options, "The Glyphik Booklet") and has_quest(state, player, options, "Cleaning Terrace") and has_quest(state, player, options, "Ancient Beings") and has_quest(state, player, options, "Wicked Wizboars") and has_quest(state, player, options, "Spiraling In The Grove") and has_quest(state, player, options, "Hell In The Grove") and has_quest(state, player, options, "Nulversa Magica") and has_quest(state, player, options, "Night Spirits") and has_quest(state, player, options, "Ridding Slimes") and has_quest(state, player, options, "Huntin' Hogs") and has_quest(state, player, options, "Purging the Grove") and has_quest(state, player, options, "Cleansing the Grove") and has_quest(state, player, options, "Nulversa Viscera") and has_quest(state, player, options, "Call of Fury") and has_quest(state, player, options, "Mastery of Strength") and has_quest(state, player, options, "Beckoning Foes") and has_quest(state, player, options, "Summore' Spectral Powder!") and has_quest(state, player, options, "Makin' More Mekspears") and has_quest(state, player, options, "Makin' More Wizwands") and has_quest(state, player, options, "Makin' More Vile Blades") and has_quest(state, player, options, "Summore' Golem Chestpieces") and has_quest(state, player, options, "Makin' More Ragespears") and has_quest(state, player, options, "Summore' Monolith Chestpieces") and has_quest(state, player, options, "Nulversa, Greenversa!") and has_quest(state, player, options, "Summore' Firebreath Blades") and has_quest(state, player, options, "Makin' More Follycannons") and has_quest(state, player, options, "Focusin' in") and has_quest(state, player, options, "Mastery of Dexterity") and has_quest(state, player, options, "Whatta' Rush!") and has_quest(state, player, options, "Purging the Undead") and has_quest(state, player, options, "Rattlecage Rage") and has_quest(state, player, options, "Consumed Madness") and has_quest(state, player, options, "Eradicating the Undead") and has_quest(state, player, options, "Reviling more Rageboars") and has_quest(state, player, options, "Facing Foes") and has_quest(state, player, options, "The Gall of Galius") and has_quest(state, player, options, "Up and Over It") and has_quest(state, player, options, "Sapphite Ingots")
+			case 8:
+				self.multiworld.completion_condition[self.player] = lambda state: can_grind_level(state, player, options, 32)
+		
 
 	def fill_slot_data(self):
 		slot_data = {

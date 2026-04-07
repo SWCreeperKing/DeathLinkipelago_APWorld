@@ -79,6 +79,7 @@ class PlagueInc(World):
 
 	def set_rules(self):
 		player = self.player
+		options = self.options
 		self.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", player, self.victories_needed)
 
 	def fill_slot_data(self):

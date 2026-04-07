@@ -5,15 +5,22 @@ from .Options import *
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 region_unlocks = [
-	"Region Unlock: The Lab",
-	"Region Unlock: The Overgrowth",
-	"Region Unlock: The Grotto",
 	"Region Unlock: Dry Reef",
 	"Region Unlock: Indigo Quarry",
 	"Region Unlock: Moss Blanket",
-	"Region Unlock: Ancient Ruins Transition",
+	"Region Unlock: Glass Desert",
 	"Region Unlock: Ancient Ruins",
-	"Region Unlock: Glass Desert"
+	"Region Unlock: Ancient Ruins Transition",
+	"Region Unlock: The Wilds",
+	"Region Unlock: Ogden's Retreat",
+	"Region Unlock: Nimble Valley",
+	"Region Unlock: Mochi's Manor",
+	"Region Unlock: The Slimeulations",
+	"Region Unlock: Viktor's Workshop",
+	"Region Unlock: The Grotto",
+	"Region Unlock: The Overgrowth",
+	"Region Unlock: The Lab",
+	"Region Unlock: The Docks"
 ]
 
 non_progressive_useful_items = {

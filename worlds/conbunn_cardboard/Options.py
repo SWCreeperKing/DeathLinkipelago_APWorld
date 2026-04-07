@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from Options import *
+from .Locations import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
@@ -17,6 +18,11 @@ class CDsRequiredToGoal(Range):
 class ConbunnCardboardOptions(PerGameCommonOptions):
 	cds_required_to_goal: CDsRequiredToGoal
 
+	def get_options_map(self, option):
+		match option:
+			case "cds_required_to_goal":
+				return self.cds_required_to_goal
+		
 
 def check_options(world):
 	options = world.options

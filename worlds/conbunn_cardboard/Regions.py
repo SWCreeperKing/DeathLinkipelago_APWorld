@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -38,27 +38,27 @@ def gen_create_regions(world):
 	}
 	
 	region_map["Menu"].connect(region_map["Cutout Forest"])
-	region_map["Cutout Forest"].connect(region_map["Connie's Garden (Cutout Forest)"], rule = lambda state: has_unlock(state, player, "Connie's Garden (Cutout Forest)"))
-	region_map["Cutout Forest"].connect(region_map["Ribbon Village"], rule = lambda state: has_dash(state, player) and has_unlock(state, player, "Ribbon Village"))
-	region_map["Ribbon Village"].connect(region_map["Origami Tree (Ribbon Village)"], rule = lambda state: has_unlock(state, player, "Origami Tree (Ribbon Village)"))
-	region_map["Ribbon Village"].connect(region_map["Paper Bay"], rule = lambda state: has_unlock(state, player, "Paper Bay"))
-	region_map["Paper Bay"].connect(region_map["Cardbun Viewing Area (Paper Bay)"], rule = lambda state: has_unlock(state, player, "Cardbun Viewing Area (Paper Bay)"))
-	region_map["Paper Bay"].connect(region_map["Ink Beach (Paper Bay)"], rule = lambda state: has_bounce_pads(state, player) and has_unlock(state, player, "Ink Beach (Paper Bay)"))
-	region_map["Ribbon Village"].connect(region_map["Bunny Circuit (Ribbon Village)"], rule = lambda state: has_unlock(state, player, "Bunny Circuit (Ribbon Village)"))
-	region_map["Ribbon Village"].connect(region_map["IBee's Honeycomb (Ribbon Village)"], rule = lambda state: has_unlock(state, player, "IBee's Honeycomb (Ribbon Village)"))
-	region_map["Ribbon Village"].connect(region_map["Cardbun Museum (Ribbon Village)"], rule = lambda state: has_unlock(state, player, "Cardbun Museum (Ribbon Village)"))
-	region_map["Ribbon Village"].connect(region_map["Paint Hills"], rule = lambda state: has_bounce_pads(state, player))
-	region_map["Paint Hills"].connect(region_map["Graffiti Panels (Paint Hills)"], rule = lambda state: has_unlock(state, player, "Graffiti Panels (Paint Hills)"))
+	region_map["Cutout Forest"].connect(region_map["Connie's Garden (Cutout Forest)"], rule = lambda state: has_unlock(state, player, options, "Connie's Garden (Cutout Forest)"))
+	region_map["Cutout Forest"].connect(region_map["Ribbon Village"], rule = lambda state: has_dash(state, player, options) and has_unlock(state, player, options, "Ribbon Village"))
+	region_map["Ribbon Village"].connect(region_map["Origami Tree (Ribbon Village)"], rule = lambda state: has_unlock(state, player, options, "Origami Tree (Ribbon Village)"))
+	region_map["Ribbon Village"].connect(region_map["Paper Bay"], rule = lambda state: has_unlock(state, player, options, "Paper Bay"))
+	region_map["Paper Bay"].connect(region_map["Cardbun Viewing Area (Paper Bay)"], rule = lambda state: has_unlock(state, player, options, "Cardbun Viewing Area (Paper Bay)"))
+	region_map["Paper Bay"].connect(region_map["Ink Beach (Paper Bay)"], rule = lambda state: has_bounce_pads(state, player, options) and has_unlock(state, player, options, "Ink Beach (Paper Bay)"))
+	region_map["Ribbon Village"].connect(region_map["Bunny Circuit (Ribbon Village)"], rule = lambda state: has_unlock(state, player, options, "Bunny Circuit (Ribbon Village)"))
+	region_map["Ribbon Village"].connect(region_map["IBee's Honeycomb (Ribbon Village)"], rule = lambda state: has_unlock(state, player, options, "IBee's Honeycomb (Ribbon Village)"))
+	region_map["Ribbon Village"].connect(region_map["Cardbun Museum (Ribbon Village)"], rule = lambda state: has_unlock(state, player, options, "Cardbun Museum (Ribbon Village)"))
+	region_map["Ribbon Village"].connect(region_map["Paint Hills"], rule = lambda state: has_bounce_pads(state, player, options))
+	region_map["Paint Hills"].connect(region_map["Graffiti Panels (Paint Hills)"], rule = lambda state: has_unlock(state, player, options, "Graffiti Panels (Paint Hills)"))
 	region_map["Paint Hills"].connect(region_map["Mountain Confetti"])
-	region_map["Mountain Confetti"].connect(region_map["Cotton Skies (Mountain Confetti)"], rule = lambda state: has_unlock(state, player, "Cotton Skies (Mountain Confetti)"))
-	region_map["Mountain Confetti"].connect(region_map["Clay Canyon"], rule = lambda state: has_unlock(state, player, "Clay Canyon"))
-	region_map["Clay Canyon"].connect(region_map["Samual Golf (Clay Canyon)"], rule = lambda state: has_unlock(state, player, "Samual Golf (Clay Canyon)"))
-	region_map["Clay Canyon"].connect(region_map["Sticker Park"], rule = lambda state: has_unlock(state, player, "Sticker Park"))
-	region_map["Sticker Park"].connect(region_map["Dragon Raceway (Sticker Park)"], rule = lambda state: has_unlock(state, player, "Dragon Raceway (Sticker Park)"))
-	region_map["Sticker Park"].connect(region_map["Cardboard Station (Sticker Park)"], rule = lambda state: has_unlock(state, player, "Cardboard Station (Sticker Park)"))
-	region_map["Clay Canyon"].connect(region_map["Polystyrene Peak"], rule = lambda state: has_unlock(state, player, "Polystyrene Peak"))
-	region_map["Polystyrene Peak"].connect(region_map["Glue Summit (Polystyrene Peak)"], rule = lambda state: has_unlock(state, player, "Glue Summit (Polystyrene Peak)"))
-	region_map["Polystyrene Peak"].connect(region_map["Cardbun Festival"], rule = lambda state: has_unlock(state, player, "Cardbun Festival"))
+	region_map["Mountain Confetti"].connect(region_map["Cotton Skies (Mountain Confetti)"], rule = lambda state: has_unlock(state, player, options, "Cotton Skies (Mountain Confetti)"))
+	region_map["Mountain Confetti"].connect(region_map["Clay Canyon"], rule = lambda state: has_unlock(state, player, options, "Clay Canyon"))
+	region_map["Clay Canyon"].connect(region_map["Samual Golf (Clay Canyon)"], rule = lambda state: has_unlock(state, player, options, "Samual Golf (Clay Canyon)"))
+	region_map["Clay Canyon"].connect(region_map["Sticker Park"], rule = lambda state: has_unlock(state, player, options, "Sticker Park"))
+	region_map["Sticker Park"].connect(region_map["Dragon Raceway (Sticker Park)"], rule = lambda state: has_unlock(state, player, options, "Dragon Raceway (Sticker Park)"))
+	region_map["Sticker Park"].connect(region_map["Cardboard Station (Sticker Park)"], rule = lambda state: has_unlock(state, player, options, "Cardboard Station (Sticker Park)"))
+	region_map["Clay Canyon"].connect(region_map["Polystyrene Peak"], rule = lambda state: has_unlock(state, player, options, "Polystyrene Peak"))
+	region_map["Polystyrene Peak"].connect(region_map["Glue Summit (Polystyrene Peak)"], rule = lambda state: has_unlock(state, player, options, "Glue Summit (Polystyrene Peak)"))
+	region_map["Polystyrene Peak"].connect(region_map["Cardbun Festival"], rule = lambda state: has_unlock(state, player, options, "Cardbun Festival"))
 	for location in coins:
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	for location in cds:

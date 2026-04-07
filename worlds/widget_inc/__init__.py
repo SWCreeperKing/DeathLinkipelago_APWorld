@@ -28,7 +28,6 @@ class WidgetInc(World):
 		self.location_count = 0
 
 	def generate_early(self):
-		check_options(self)
 		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
@@ -42,6 +41,7 @@ class WidgetInc(World):
 			if "scout_hint_tier_producers" in passthrough:
 				options.scout_hint_tier_producers = ScoutHintTierProducers(passthrough["scout_hint_tier_producers"])
 			
+		check_options(self)
 		self.multiworld.push_precollected(self.create_item("Widget Factory"))
 		if options.scout_hint_tier_producers > 0:
 			options.start_hints = StartHints([*options.start_hints, "Iron Mine", "Iron Smelter", "Widget Factory"])
@@ -81,7 +81,7 @@ class WidgetInc(World):
 		player = self.player
 		options = self.options
 		player = self.player
-		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player)
+		self.multiworld.completion_condition[self.player] = lambda state: rocket_segment(state, player, options)
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]

@@ -41,6 +41,15 @@ class WidgetIncOptions(PerGameCommonOptions):
 	hand_crafting_multiplier: HandCraftingMultiplier
 	scout_hint_tier_producers: ScoutHintTierProducers
 
+	def get_options_map(self, option):
+		match option:
+			case "production_multiplier":
+				return self.production_multiplier
+			case "hand_crafting_multiplier":
+				return self.hand_crafting_multiplier
+			case "scout_hint_tier_producers":
+				return self.scout_hint_tier_producers
+		
 
 def check_options(world):
 	options = world.options

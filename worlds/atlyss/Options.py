@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from Options import *
+from .Locations import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
@@ -84,6 +85,20 @@ class AtlyssOptions(PerGameCommonOptions):
 		if class_name_lower == 'any': return True
 		return class_name_lower == self.main_class.value or class_name_lower == self.secondary_class.value
 
+	def get_options_map(self, option):
+		match option:
+			case "goal":
+				return self.goal
+			case "random_portals":
+				return self.random_portals
+			case "shop_sanity":
+				return self.shop_sanity
+			case "main_class":
+				return self.main_class
+			case "secondary_class":
+				return self.secondary_class
+		
+
 def check_options(world):
 	options = world.options
 	random = world.random
@@ -91,7 +106,7 @@ def check_options(world):
 	classes = ['fighter', 'mystic', 'bandit']
 	
 	if options.main_class.value == options.secondary_class.value:
-	    raise_yaml_error(world.player, "You cannot have the same class selected for main_class and secondary_class")
+	    options.secondary_class = SecondaryClass('none')
 
 def raise_yaml_error(player_name, error):
 	raise OptionError(f'\n\n=== Atlyss YAML ERROR ===\nAtlyss: {player_name} {error}, PLEASE FIX YOUR YAML\n\n')

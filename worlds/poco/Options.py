@@ -6,7 +6,9 @@ from .Locations import *
 
 @dataclass
 class PocoOptions(PerGameCommonOptions):
-	pass
+	# def get_options_map(self, option):
+	# 	match option:
+			pass
 
 def check_options(world):
 	options = world.options

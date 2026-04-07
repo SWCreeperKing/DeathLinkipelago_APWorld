@@ -9,7 +9,7 @@ priority_map = []
 def gen_create_regions(world):
 	player = world.player
 	options = world.options
-	rule_map = get_rule_map(world.player)
+	rule_map = get_rule_map(player, options)
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
@@ -27,18 +27,18 @@ def gen_create_regions(world):
 		"Tier 12": Region("Tier 12", world.player, world.multiworld)
 	}
 	
-	region_map["Menu"].connect(region_map["Tier 1"], rule = lambda state: has_tier(state, player, 1))
-	region_map["Tier 1"].connect(region_map["Tier 2"], rule = lambda state: has_tier(state, player, 2))
-	region_map["Tier 2"].connect(region_map["Tier 3"], rule = lambda state: has_tier(state, player, 3))
-	region_map["Tier 3"].connect(region_map["Tier 4"], rule = lambda state: has_tier(state, player, 4))
-	region_map["Tier 4"].connect(region_map["Tier 5"], rule = lambda state: has_tier(state, player, 5))
-	region_map["Tier 5"].connect(region_map["Tier 6"], rule = lambda state: has_tier(state, player, 6))
-	region_map["Tier 6"].connect(region_map["Tier 7"], rule = lambda state: has_tier(state, player, 7))
-	region_map["Tier 7"].connect(region_map["Tier 8"], rule = lambda state: has_tier(state, player, 8))
-	region_map["Tier 8"].connect(region_map["Tier 9"], rule = lambda state: has_tier(state, player, 9))
-	region_map["Tier 9"].connect(region_map["Tier 10"], rule = lambda state: has_tier(state, player, 10))
-	region_map["Tier 10"].connect(region_map["Tier 11"], rule = lambda state: has_tier(state, player, 11))
-	region_map["Tier 11"].connect(region_map["Tier 12"], rule = lambda state: has_tier(state, player, 12))
+	region_map["Menu"].connect(region_map["Tier 1"], rule = lambda state: has_tier(state, player, options, 1))
+	region_map["Tier 1"].connect(region_map["Tier 2"], rule = lambda state: has_tier(state, player, options, 2))
+	region_map["Tier 2"].connect(region_map["Tier 3"], rule = lambda state: has_tier(state, player, options, 3))
+	region_map["Tier 3"].connect(region_map["Tier 4"], rule = lambda state: has_tier(state, player, options, 4))
+	region_map["Tier 4"].connect(region_map["Tier 5"], rule = lambda state: has_tier(state, player, options, 5))
+	region_map["Tier 5"].connect(region_map["Tier 6"], rule = lambda state: has_tier(state, player, options, 6))
+	region_map["Tier 6"].connect(region_map["Tier 7"], rule = lambda state: has_tier(state, player, options, 7))
+	region_map["Tier 7"].connect(region_map["Tier 8"], rule = lambda state: has_tier(state, player, options, 8))
+	region_map["Tier 8"].connect(region_map["Tier 9"], rule = lambda state: has_tier(state, player, options, 9))
+	region_map["Tier 9"].connect(region_map["Tier 10"], rule = lambda state: has_tier(state, player, options, 10))
+	region_map["Tier 10"].connect(region_map["Tier 11"], rule = lambda state: has_tier(state, player, options, 11))
+	region_map["Tier 11"].connect(region_map["Tier 12"], rule = lambda state: has_tier(state, player, options, 12))
 	for location in tech_tree:
 		make_location(world, location[0], region_map[location[1]], rule_map)
 	

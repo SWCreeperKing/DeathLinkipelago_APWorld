@@ -6,13 +6,11 @@ from worlds.AutoWorld import World
 from BaseClasses import Location, Region, LocationProgressType
 from settings import Group, Bool
 
-uuid_offset = 0x0BF6E0BB
-
 class PlacidPlasticDuckSimulator(World):
     """A game about funny ducks in a pool"""
     game = "Placid Plastic Duck Simulator"
-    location_name_to_id = {name: uuid_offset + id_offset for name, id_offset in locations.items()}
-    item_name_to_id = {name: uuid_offset + data.id_offset for name, data in item_table.items()}
+    location_name_to_id = {value: locations.index(value) + 1 for value in locations}
+    item_name_to_id = {name: data.id_offset + 1 for name, data in item_table.items()}
     player_locations_to_fill: Dict[str, int] = {}
 
     def create_regions(self) -> None:
@@ -39,8 +37,7 @@ class PlacidPlasticDuckSimulator(World):
         self.multiworld.regions.append(menu_region)
 
     def create_item(self, name: str) -> PPDSItem:
-        item = item_table[name]
-        return PPDSItem(name, item.type, item.id_offset + uuid_offset, self.player)
+        return PPDSItem(name, item.type, self.item_name_to_id[name], self.player)
 
     def create_items(self) -> None:
         create_items(self)

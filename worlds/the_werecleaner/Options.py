@@ -1,11 +1,15 @@
 from dataclasses import dataclass
 from Options import *
+from .Locations import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 @dataclass
 class TheWereCleanerOptions(PerGameCommonOptions):
-	pass
+    pass
+	# def get_options_map(self, option):
+		# match option:
+		# 	pass
 
 def check_options(world):
 	options = world.options
