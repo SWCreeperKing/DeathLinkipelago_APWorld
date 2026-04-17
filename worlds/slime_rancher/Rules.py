@@ -18,8 +18,8 @@ def get_rule_map(player, options):
 		"Dry Reef - Tiny Not-Huge Island": lambda state: ( has_jetpack(state, player, options) ),
 		"Indigo Quarry - Under a Hexium Crystal": lambda state: ( has_cracker(state, player, options, 1) ),
 		"Moss Blanket - Map Data Node": lambda state: ( get_yaml_option(state, player, options, 'easy_skips') ) or ( has_jetpack(state, player, options) ),
-		"Ring Island - King of the Hill": lambda state: ( get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'obscure_locations') ) or ( has_jetpack(state, player, options) ),
-		"Ring Island - Flower Viewing on a Cliff": lambda state: ( has_cracker(state, player, options, 1) and get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'obscure_locations') ) or ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ),
+		"Ring Island - King of the Hill": lambda state: ( get_yaml_option(state, player, options, 'easy_skips') ) or ( has_jetpack(state, player, options) ),
+		"Ring Island - Flower Viewing on a Cliff": lambda state: ( has_cracker(state, player, options, 1) and get_yaml_option(state, player, options, 'easy_skips') ) or ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ),
 		"Ring Island - Naturally Curious": lambda state: ( has_jetpack(state, player, options) ),
 		"Moss Blanket - Overgrown Fungus Pod": lambda state: ( has_cracker(state, player, options, 1) and get_yaml_option(state, player, options, 'obscure_locations') ) or ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ),
 		"Moss Blanket - MOSS BLANKET STUCK": lambda state: ( get_yaml_option(state, player, options, 'largo_jumps') ) or ( has_jetpack(state, player, options) ),
@@ -27,7 +27,7 @@ def get_rule_map(player, options):
 		"Dry Reef - Hidden Away on an ARCH-ipelago": lambda state: ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
 		"Dry Reef - Carrot Chest": lambda state: ( has_cracker(state, player, options, 2) ),
 		"Ring Island - Perilously Perched Pod": lambda state: ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'precise_movement') ) or ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
-		"Dry Reef - Overlooking the Tarr Hotspot": lambda state: ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'obscure_locations') ) or ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'jetpack_boosts') ) or ( has_cracker(state, player, options, 2) ),
+		"Dry Reef - Overlooking the Tarr Hotspot": lambda state: ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'obscure_locations') ) or ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'jetpack_boosts') ) or ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
 		"Indigo Quarry - Above the Smoke and Ashes": lambda state: ( has_cracker(state, player, options, 2) and get_yaml_option(state, player, options, 'easy_skips') ) or ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
 		"Indigo Quarry - Personal Puddle Pod": lambda state: ( has_cracker(state, player, options, 2) ),
 		"Indigo Quarry - Under Crumbled Scaffolding": lambda state: ( has_cracker(state, player, options, 2) ),
@@ -116,7 +116,7 @@ def get_rule_map(player, options):
 		"The Slimeulation - Looking Over the Puddle Slimes": lambda state: ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
 		"The Wilds - Across From the Hunter's Sakura Tree": lambda state: ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ),
 		"The Wilds - Inside a Pink Tree Stump": lambda state: ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) and has_energy(state, player, options, 1) ),
-		"The Wilds - On a Cliff Dividing Two Entrances": lambda state: ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ),
+		"The Wilds - On a Cliff Dividing Two Entrances": lambda state: ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) ) or ( has_cracker(state, player, options, 1) and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'jetpack_boosts') ) or ( has_cracker(state, player, options, 1) and get_yaml_option(state, player, options, 'obscure_locations') and get_yaml_option(state, player, options, 'dangerous_skips') ),
 		"The Wilds - Hidden Bridge Behind a Triangular Staircase": lambda state: ( has_cracker(state, player, options, 2) ),
 		"The Wilds - A Precarious Ledge By the Waterfall": lambda state: ( has_cracker(state, player, options, 1) ),
 		"The Wilds - Double Waterfall Treasure": lambda state: ( has_cracker(state, player, options, 3) and has_jetpack(state, player, options) ),
@@ -128,6 +128,7 @@ def get_rule_map(player, options):
 		"Nimble Valley - Inside the Magneticore Pillar": lambda state: ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) ),
 		"Nimble Valley - Floating Outcropping Above a Crevice": lambda state: ( has_cracker(state, player, options, 2) and has_jetpack(state, player, options) and has_energy(state, player, options, 1) ),
 		"Nimble Valley - Hidden in some Magneticore Ore": lambda state: ( has_cracker(state, player, options, 3) ),
+		"Dry Reef - Stony Hen Hen Coop": lambda state: ( has_cracker(state, player, options, 1) ),
 		"Buy Personal Upgrade (Heart Module lv.2)": lambda state: can_access_dry_reef(state, player, options),
 		"Buy Personal Upgrade (Heart Module lv.3)": lambda state: can_access_dry_reef(state, player, options),
 		"Buy Personal Upgrade (Heart Module lv.4)": lambda state: can_access_7zee(state, player, options),
@@ -169,6 +170,9 @@ def has_jetpack(state, player, options) -> bool:
 
 def has_region(state, player, options, region) -> bool:
 	return has(state, player, options, f"Region Unlock: {region}")
+
+def has_gate(state, player, options, gate) -> bool:
+	return has(state, player, options, f"Opened Gate: {gate}")
 
 def can_access_dry_reef(state, player, options) -> bool:
 	return has_region(state, player, options, 'Dry Reef')

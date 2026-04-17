@@ -203,21 +203,21 @@ def has_area(state, player, options, area) -> bool:
 	return state.has(portal, player, 1)
 
 def has_any_area(state, player, options, areas) -> bool:
-	return any(has_area(state, player, area) for area in areas)
+	return any(has_area(state, player, options, area) for area in areas)
 
 def has_all_areas(state, player, options, areas) -> bool:
-	return all(has_area(state, player, area) for area in areas)
+	return all(has_area(state, player, options, area) for area in areas)
 
 def has_quest(state, player, options, quest) -> bool:
 	return has(state, player, options, f"Complete: {quest}")
 
 def can_grind(state, player, options, level, area_data) -> bool:
-	if level > 30: return can_grind(state, player, 30, area_data)
+	if level > 30: return can_grind(state, player, options, 30, area_data)
 	if level <= 1: return True
 	
 	for area in area_data:
 	    if not has_area(state, player, options, area[0]): continue
-	    if area[1] <= level <= area[2]: return can_grind(state, player, area[1] - 1, area_data)
+	    if area[1] <= level <= area[2]: return can_grind(state, player, options, area[1] - 1, area_data)
 	    
 	return False
 

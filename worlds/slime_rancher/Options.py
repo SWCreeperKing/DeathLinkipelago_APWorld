@@ -81,6 +81,27 @@ class TrapPercent(Range):
 	default = 15
 
 
+class IncludeOgden(Toggle):
+	"""
+	Include Ogden's Retreat
+	"""
+	display_name = "Include Ogden"
+
+
+class IncludeMochi(Toggle):
+	"""
+	Include Mochi's Manor
+	"""
+	display_name = "Include Mochi"
+
+
+class IncludeViktor(Toggle):
+	"""
+	Include Viktor's Workshop
+	"""
+	display_name = "Include Viktor"
+
+
 class EasySkips(Toggle):
 	"""
 	Enable Skips that many new players end up finding on their first playthrough
@@ -133,6 +154,9 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	fix_market_rates: FixMarketRates
 	start_with_drone: StartWithDrone
 	trap_percent: TrapPercent
+	include_ogden: IncludeOgden
+	include_mochi: IncludeMochi
+	include_viktor: IncludeViktor
 	easy_skips: EasySkips
 	precise_movement: PreciseMovement
 	dangerous_skips: DangerousSkips
@@ -158,6 +182,12 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.start_with_drone
 			case "trap_percent":
 				return self.trap_percent
+			case "include_ogden":
+				return self.include_ogden
+			case "include_mochi":
+				return self.include_mochi
+			case "include_viktor":
+				return self.include_viktor
 			case "easy_skips":
 				return self.easy_skips
 			case "precise_movement":
@@ -178,6 +208,9 @@ def check_options(world):
 	settings = world.settings
 	if options.goal_type == 1 and not options.include_7z:
 	    raise_yaml_error(world.player, "7Zee goal type requires you to include 7Zee locations")
+	if options.accessibility == Accessibility.option_minimal:
+	    print("Slime Rancher doesn't support accessibility minimal, defaulting accessibility to full")
+	    options.accessibility = Accessibility(Accessibility.option_full)
 
 def raise_yaml_error(player_name, error):
 	raise OptionError(f'\n\n=== Slime Rancher YAML ERROR ===\nSlime Rancher: {player_name} {error}, PLEASE FIX YOUR YAML\n\n')

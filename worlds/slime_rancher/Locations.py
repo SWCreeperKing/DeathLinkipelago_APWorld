@@ -32,7 +32,7 @@ upgrades_7z = [
 interactables = [
 	["The Overgrowth - Artificial Moss Blanket", "The Overgrowth"],
 	["The Docks - Our Greater Purpose", "The Docks"],
-	["Dry Reef -  Hobson's Greetings", "Dry Reef - Main"],
+	["Dry Reef - Hobson's Greetings", "Dry Reef - Main"],
 	["Dry Reef - Indigo Quarry Entrance", "Dry Reef - Main"],
 	["Dry Reef - Great Big Tree", "Dry Reef - Main"],
 	["Dry Reef - Map Data Node", "Dry Reef - Main"],
@@ -174,7 +174,8 @@ interactables = [
 	["Nimble Valley - Bordering the Slime Sea", "Nimble Valley"],
 	["Nimble Valley - Inside the Magneticore Pillar", "Nimble Valley"],
 	["Nimble Valley - Floating Outcropping Above a Crevice", "Nimble Valley"],
-	["Nimble Valley - Hidden in some Magneticore Ore", "Nimble Valley"]
+	["Nimble Valley - Hidden in some Magneticore Ore", "Nimble Valley"],
+	["Dry Reef - Stony Hen Hen Coop", "Dry Reef - Main"]
 ]
 
 dlc_interactables = [
@@ -256,9 +257,22 @@ corporate_locations = [
 	["7Zee lv.28: Gold Teleporter Blueprint", "Glass Desert - First Half"]
 ]
 
+gates = [
+	["Slime Gate - Dry Reef Beach to Ring Island", "Dry Reef - Ring Island"],
+	["Slime Gate - Dry Reef to Moss Blanket", "Moss Blanket - Main"],
+	["Slime Gate - Dry Reef to Indigo Quarry", "Indigo Quarry - Before First Bridge"],
+	["Slime Gate - Moss Blanket to Ancient Ruins Transition", "Ancient Ruins Transition"],
+	["Slime Gate - Indigo Quarry to Ancient Ruins Transition", "Ancient Ruins Transition"],
+	["Slime Gate - Ancient Ruins to Glass Desert", "Glass Desert - First Half"],
+	["Slime Gate - Glass Desert Central Gate", "Glass Desert - Second Half"],
+	["Slime Gate - Glass Desert Lower Gate", "Glass Desert - Second Half"],
+	["Slime Gate - Ancient Ruins Transition to Ancient Ruins", "Ancient Ruins - Main"]
+]
+
 location_dict = [
 	*[items for items in upgrades],
 	*[items[0] for items in interactables],
 	*[items[0] for items in dlc_interactables],
-	*[items[0] for items in corporate_locations]
+	*[items[0] for items in corporate_locations],
+	*[items[0] for items in gates]
 ]

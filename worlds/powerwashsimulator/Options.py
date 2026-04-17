@@ -161,7 +161,7 @@ class SpongebobLocations(OptionSet):
     DISCLAIMER: YOU NEED TO HAVE BOUGHT THIS DLC TO PLAY IT
     REMEMBER: BEAT THE LEVELS IN VANILLA FIRST FOR THEM TO APPEAR IN FREE PLAY
     Locations:
-    ["Conch Street", "Bikini Bottom Buss", "Krusty Krab", "Patty Wagon", "The Invisible Boatmobile", "The Mermalair"]
+    ["Conch Street", "Bikini Bottom Bus", "Krusty Krab", "Patty Wagon", "The Invisible Boatmobile", "The Mermalair"]
     "All" - adds all locations above
     """
     display_name = "Spongebob Locations"

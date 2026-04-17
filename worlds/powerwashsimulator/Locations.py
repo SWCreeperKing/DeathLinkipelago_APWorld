@@ -128,7 +128,7 @@ back_to_the_future = [
 
 spongebob = [
     "Conch Street",
-    "Bikini Bottom Buss",
+    "Bikini Bottom Bus",
     "Krusty Krab",
     "Patty Wagon",
     "The Invisible Boatmobile",

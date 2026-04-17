@@ -1,9 +1,6 @@
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 tech_tree = [
-	["Starting Check (1)", "Menu"],
-	["Starting Check (2)", "Menu"],
-	["Starting Check (3)", "Menu"],
 	["Tier 1", "Menu"],
 	["Tier 1 Mastery", "Tier 1"],
 	["Deconstruct", "Tier 1"],

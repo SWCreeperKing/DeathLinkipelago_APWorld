@@ -103,10 +103,8 @@ def check_options(world):
 	options = world.options
 	random = world.random
 	settings = world.settings
-	classes = ['fighter', 'mystic', 'bandit']
-	
 	if options.main_class.value == options.secondary_class.value:
-	    options.secondary_class = SecondaryClass('none')
+	    options.secondary_class = SecondaryClass(3)
 
 def raise_yaml_error(player_name, error):
 	raise OptionError(f'\n\n=== Atlyss YAML ERROR ===\nAtlyss: {player_name} {error}, PLEASE FIX YOUR YAML\n\n')

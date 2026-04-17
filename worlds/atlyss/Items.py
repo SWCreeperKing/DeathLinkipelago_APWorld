@@ -38,14 +38,14 @@ item_counts_useful = {
 	"Agility Stone": 1,
 	"Angela's Tear": 1,
 	"Flux Stone": 1,
-	"Illusion Stone": 1,
 	"Might Stone": 1,
 	"Soul Pearl": 1
 }
 
 item_counts_progression = {
 	"Epic Carrot": 1,
-	"Experience Bond": 1
+	"Experience Bond": 1,
+	"Illusion Stone": 1
 }
 
 filler_items = [
@@ -177,7 +177,6 @@ filler_items = [
 	"Coldgeist Badge",
 	"Earthcore Badge",
 	"Geistlord Badge",
-	"Illusion Stone",
 	"Windcore Badge",
 	"Crowns (Small)",
 	"Crowns (Medium)",
@@ -484,14 +483,14 @@ useful_items = [
 	"Agility Stone",
 	"Angela's Tear",
 	"Flux Stone",
-	"Illusion Stone",
 	"Might Stone",
 	"Soul Pearl"
 ]
 
 progression_items = [
 	"Epic Carrot",
-	"Experience Bond"
+	"Experience Bond",
+	"Illusion Stone"
 ]
 
 filler_weights = {

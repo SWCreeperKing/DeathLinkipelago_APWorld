@@ -40,7 +40,8 @@ def gen_create_regions(world):
 	region_map["Tier 10"].connect(region_map["Tier 11"], rule = lambda state: has_tier(state, player, options, 11))
 	region_map["Tier 11"].connect(region_map["Tier 12"], rule = lambda state: has_tier(state, player, options, 12))
 	for location in tech_tree:
-		make_location(world, location[0], region_map[location[1]], rule_map)
+		if location[1] in region_map:
+			make_location(world, location[0], region_map[location[1]], rule_map)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

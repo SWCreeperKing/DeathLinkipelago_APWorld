@@ -52,6 +52,15 @@ filler_items = [
 	"100x Newbucks"
 ]
 
+credits_unlocks = [
+	"Region Unlock: Dry Reef",
+	"Region Unlock: Indigo Quarry",
+	"Region Unlock: Moss Blanket",
+	"Region Unlock: Glass Desert",
+	"Region Unlock: Ancient Ruins",
+	"Region Unlock: Ancient Ruins Transition"
+]
+
 item_table = {
 	**{item: ItemClassification.progression for item in region_unlocks},
 	**{item: ItemClassification.useful for item in non_progressive_useful_items},
@@ -68,6 +77,12 @@ def gen_create_items(world):
 	options = world.options
 	for zone in region_unlocks:
 	    if "Reef" in zone and options.start_with_dry_reef: continue
+	    if "Wilds" in zone and not options.include_ogden: continue
+	    if "Retreat" in zone and not options.include_ogden: continue
+	    if "Nimble" in zone and not options.include_mochi: continue
+	    if "Manor" in zone and not options.include_mochi: continue
+	    if "Slimeulations" in zone and not options.include_viktor: continue
+	    if "Workshop" in zone and not options.include_viktor: continue
 	    world.location_count -= 1
 	    pool.append(world.create_item(zone))
 	
