@@ -13,7 +13,6 @@ def gen_create_regions(world):
 	
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
-		"Upgrades": Region("Upgrades", world.player, world.multiworld),
 		"The Ranch": Region("The Ranch", world.player, world.multiworld),
 		"The Grotto": Region("The Grotto", world.player, world.multiworld),
 		"The Overgrowth": Region("The Overgrowth", world.player, world.multiworld),
@@ -30,8 +29,8 @@ def gen_create_regions(world):
 		"Indigo Quarry - Before First Bridge": Region("Indigo Quarry - Before First Bridge", world.player, world.multiworld),
 		"Indigo Quarry - After The Bridge": Region("Indigo Quarry - After The Bridge", world.player, world.multiworld),
 		"Indigo Quarry - Ancient Ruins Transition Overlap": Region("Indigo Quarry - Ancient Ruins Transition Overlap", world.player, world.multiworld),
-		"Ancient Ruins Transition": Region("Ancient Ruins Transition", world.player, world.multiworld),
 		"Indigo Quarry - Ash Isles": Region("Indigo Quarry - Ash Isles", world.player, world.multiworld),
+		"Ancient Ruins Transition": Region("Ancient Ruins Transition", world.player, world.multiworld),
 		"Moss Blanket - Main": Region("Moss Blanket - Main", world.player, world.multiworld),
 		"Moss Blanket - Mushroom Island": Region("Moss Blanket - Mushroom Island", world.player, world.multiworld),
 		"Ancient Ruins - Main": Region("Ancient Ruins - Main", world.player, world.multiworld),
@@ -40,8 +39,16 @@ def gen_create_regions(world):
 		"Glass Desert - Second Half": Region("Glass Desert - Second Half", world.player, world.multiworld)
 	}
 	
+	if ( options.postgame ) or ( options.easy_skips and options.postgame ) or ( options.postgame ) or ( options.precise_movement and options.postgame ) or ( options.postgame ) or ( options.postgame ):
+		region_map["Post-Game"] = Region("Post-Game", world.player, world.multiworld)
+	if ( options.postgame ) or ( options.easy_skips and options.postgame ):
+		region_map["Dry Reef - H Vault"] = Region("Dry Reef - H Vault", world.player, world.multiworld)
 	if ( options.obscure_locations ):
 		region_map["The Slime Sea - Mustache Shrine"] = Region("The Slime Sea - Mustache Shrine", world.player, world.multiworld)
+	if ( options.postgame ) or ( options.precise_movement and options.postgame ):
+		region_map["Indigo Quarry - H Vault"] = Region("Indigo Quarry - H Vault", world.player, world.multiworld)
+	if ( options.postgame ):
+		region_map["Moss Blanket - H Vault"] = Region("Moss Blanket - H Vault", world.player, world.multiworld)
 	if options.include_ogden:
 		region_map["Ogden's Retreat"] = Region("Ogden's Retreat", world.player, world.multiworld)
 		region_map["The Wilds"] = Region("The Wilds", world.player, world.multiworld)
@@ -51,7 +58,6 @@ def gen_create_regions(world):
 	if options.include_viktor:
 		region_map["Viktor's Workshop"] = Region("Viktor's Workshop", world.player, world.multiworld)
 		region_map["The Slimeulation"] = Region("The Slimeulation", world.player, world.multiworld)
-	connect_region("Menu", "Upgrades", region_map, None, lambda state: True)
 	connect_region("Menu", "The Ranch", region_map, None, lambda state: True)
 	connect_region("The Ranch", "The Grotto", region_map, None, lambda state: ( has_region(state, player, options, "The Grotto") ))
 	connect_region("The Ranch", "The Overgrowth", region_map, None, lambda state: ( has_region(state, player, options, "The Overgrowth") ))
@@ -75,9 +81,9 @@ def gen_create_regions(world):
 	connect_region("Indigo Quarry - After The Bridge", "Indigo Quarry - Before First Bridge", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") and has_jetpack(state, player, options) ))
 	connect_region("Indigo Quarry - Before First Bridge", "Indigo Quarry - After The Bridge", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") and has_jetpack(state, player, options) ))
 	connect_region("Indigo Quarry - Ancient Ruins Transition Overlap", "Indigo Quarry - After The Bridge", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") ))
+	connect_region("Indigo Quarry - After The Bridge", "Indigo Quarry - Ash Isles", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") ))
 	connect_region("Indigo Quarry - After The Bridge", "Indigo Quarry - Ancient Ruins Transition Overlap", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") and has_region(state, player, options, "Ancient Ruins Transition") ))
 	connect_region("Ancient Ruins Transition", "Indigo Quarry - Ancient Ruins Transition Overlap", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") and has_region(state, player, options, "Ancient Ruins Transition") ))
-	connect_region("Indigo Quarry - After The Bridge", "Indigo Quarry - Ash Isles", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") ))
 	connect_region("Dry Reef - Main", "Moss Blanket - Main", region_map, None, lambda state: ( has_region(state, player, options, "Moss Blanket") ) or ( has_region(state, player, options, "Moss Blanket") and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'easy_skips') ))
 	connect_region("Moss Blanket - Main", "Moss Blanket - Mushroom Island", region_map, None, lambda state: ( has_region(state, player, options, "Moss Blanket") and has_jetpack(state, player, options) ) or ( has_region(state, player, options, "Moss Blanket") and get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'obscure_locations') ))
 	connect_region("Moss Blanket - Main", "Moss Blanket - Hunter's Domain", region_map, None, lambda state: ( has_region(state, player, options, "Moss Blanket") and get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'dangerous_skips') ) or ( has_region(state, player, options, "Moss Blanket") and has_jetpack(state, player, options) ))
@@ -96,77 +102,89 @@ def gen_create_regions(world):
 	if ( options.obscure_locations ):
 		connect_region("The Ranch", "Dry Reef - Beach", region_map, None, lambda state: ( has_region(state, player, options, "Dry Reef") and get_yaml_option(state, player, options, 'obscure_locations') ))
 	
+	if ( options.postgame ) or ( options.easy_skips and options.postgame ):
+		connect_region("Post-Game", "Dry Reef - H Vault", region_map, None, lambda state: ( has_region(state, player, options, "Dry Reef") and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'postgame') ) or ( has_region(state, player, options, "Dry Reef") and get_yaml_option(state, player, options, 'easy_skips') and get_yaml_option(state, player, options, 'postgame') ))
+	
 	if ( options.precise_movement ):
 		connect_region("Dry Reef - Main", "Dry Reef - Offshoot", region_map, None, lambda state: ( has_region(state, player, options, "Dry Reef") and get_yaml_option(state, player, options, 'precise_movement') ))
 	
 	if ( options.obscure_locations ):
 		connect_region("Dry Reef - Main", "The Slime Sea - Mustache Shrine", region_map, None, lambda state: ( has_jetpack(state, player, options) and has_energy(state, player, options, 3) and get_yaml_option(state, player, options, 'obscure_locations') ))
 	
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.1)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.2)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.3)", "Upgrades", region_map, rule_map)
-	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Heart Module lv.4)", "Upgrades", region_map, rule_map)
+	if ( options.postgame ) or ( options.precise_movement and options.postgame ):
+		connect_region("Post-Game", "Indigo Quarry - H Vault", region_map, None, lambda state: ( has_region(state, player, options, "Indigo Quarry") and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'postgame') ) or ( has_region(state, player, options, "Indigo Quarry") and get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'postgame') ))
 	
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.1)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.2)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.3)", "Upgrades", region_map, rule_map)
-	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Tank Booster lv.4)", "Upgrades", region_map, rule_map)
+	if ( options.postgame ):
+		connect_region("Post-Game", "Moss Blanket - H Vault", region_map, None, lambda state: ( has_region(state, player, options, "Moss Blanket") and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'postgame') ))
 	
-	make_location(world, "Buy Personal Upgrade (Dash Boots lv.1)", "Upgrades", region_map, rule_map)
-	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Dash Boots lv.2)", "Upgrades", region_map, rule_map)
+	if ( options.postgame ):
+		connect_region("Glass Desert - Second Half", "Post-Game", region_map, None, lambda state: ( get_yaml_option(state, player, options, 'postgame') ))
 	
-	make_location(world, "Buy Personal Upgrade (Power Core lv.1)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Power Core lv.2)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Power Core lv.3)", "Upgrades", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.1)", "Menu", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.2)", "Dry Reef - Main", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.3)", "Dry Reef - Main", region_map, rule_map)
+	if world.options.include_7z:
+		make_location(world, "Buy Personal Upgrade (Heart Module lv.4)", "Ancient Ruins - Main", region_map, rule_map)
+	
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.1)", "Menu", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.2)", "Dry Reef - Main", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.3)", "Dry Reef - Main", region_map, rule_map)
+	if world.options.include_7z:
+		make_location(world, "Buy Personal Upgrade (Tank Booster lv.4)", "Ancient Ruins - Main", region_map, rule_map)
+	
+	make_location(world, "Buy Personal Upgrade (Dash Boots lv.1)", "Menu", region_map, rule_map)
+	if world.options.include_7z:
+		make_location(world, "Buy Personal Upgrade (Dash Boots lv.2)", "Ancient Ruins - Main", region_map, rule_map)
+	
+	make_location(world, "Buy Personal Upgrade (Power Core lv.1)", "Menu", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Power Core lv.2)", "Dry Reef - Main", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Power Core lv.3)", "Dry Reef - Main", region_map, rule_map)
 	if 1 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "Upgrades", region_map, rule_map)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "The Lab", region_map, rule_map)
 	
 	if 2 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "Upgrades", region_map, rule_map)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "The Lab", region_map, rule_map)
 	
 	if 3 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "Upgrades", region_map, rule_map)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "The Lab", region_map, rule_map)
 	
-	make_location(world, "Buy Personal Upgrade (Jetpack)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Air Drive)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Pulse Wave)", "Upgrades", region_map, rule_map)
-	make_location(world, "Buy Personal Upgrade (Liquid Slot)", "Upgrades", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Jetpack)", "Menu", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Air Drive)", "Dry Reef - Main", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Pulse Wave)", "Menu", region_map, rule_map)
+	make_location(world, "Buy Personal Upgrade (Liquid Slot)", "Menu", region_map, rule_map)
 	for location in interactables:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map)
 	if world.options.goal_type == 0:
-		make_event_location(world, "Read: The Overgrowth - Artificial Moss Blanket", "The Overgrowth - Artificial Moss Blanket", "Note Read", None, "The Overgrowth", region_map, rule_map)
+		make_event_location(world, "Read: The Grotto - The Limitless Black of Space", "The Grotto - The Limitless Black of Space", "Note Read", None, "The Grotto", region_map, rule_map)
+		make_event_location(world, "Read: The Overgrowth - Artifical Moss Blanket", "The Overgrowth - Artifical Moss Blanket", "Note Read", None, "The Overgrowth", region_map, rule_map)
+		make_event_location(world, "Read: The Lab - The Wonders of Plort Technology", "The Lab - The Wonders of Plort Technology", "Note Read", None, "The Lab", region_map, rule_map)
 		make_event_location(world, "Read: The Docks - Our Greater Purpose", "The Docks - Our Greater Purpose", "Note Read", None, "The Docks", region_map, rule_map)
 		make_event_location(world, "Read: Dry Reef - Hobson's Greetings", "Dry Reef - Hobson's Greetings", "Note Read", None, "Dry Reef - Main", region_map, rule_map)
 		make_event_location(world, "Read: Dry Reef - Indigo Quarry Entrance", "Dry Reef - Indigo Quarry Entrance", "Note Read", None, "Dry Reef - Main", region_map, rule_map)
 		make_event_location(world, "Read: Dry Reef - Great Big Tree", "Dry Reef - Great Big Tree", "Note Read", None, "Dry Reef - Main", region_map, rule_map)
+		make_event_location(world, "Read: Dry Reef - A Darn Good Boot", "Dry Reef - A Darn Good Boot", "Note Read", None, "Dry Reef - Main", region_map, rule_map)
 		make_event_location(world, "Read: Dry Reef - Ruminating on the Beach", "Dry Reef - Ruminating on the Beach", "Note Read", None, "Dry Reef - Beach", region_map, rule_map)
+		make_event_location(world, "Read: Ring Island - We'd Get Along Just Fine", "Ring Island - We'd Get Along Just Fine", "Note Read", None, "Dry Reef - Ring Island", region_map, rule_map)
 		make_event_location(world, "Read: Indigo Quarry - I Liked Her Laugh", "Indigo Quarry - I Liked Her Laugh", "Note Read", None, "Indigo Quarry - Before First Bridge", region_map, rule_map)
 		make_event_location(world, "Read: Indigo Quarry - Crystal Wind Chime", "Indigo Quarry - Crystal Wind Chime", "Note Read", None, "Indigo Quarry - Before First Bridge", region_map, rule_map)
-		make_event_location(world, "Read: Dry Reef - A Darn Good Boot", "Dry Reef - A Darn Good Boot", "Note Read", None, "Dry Reef - Main", region_map, rule_map)
 		make_event_location(world, "Read: Indigo Quarry - Peeping Puddle Slimes", "Indigo Quarry - Peeping Puddle Slimes", "Note Read", None, "Indigo Quarry - Before First Bridge", region_map, rule_map)
 		make_event_location(world, "Read: Ash Isles - Looking to the Stars", "Ash Isles - Looking to the Stars", "Note Read", None, "Indigo Quarry - Ash Isles", region_map, rule_map)
-		make_event_location(world, "Read: Ring Island - Naturally Curious", "Ring Island - Naturally Curious", "Note Read", None, "Dry Reef - Ring Island", region_map, rule_map)
 		make_event_location(world, "Read: Moss Blanket - New Ancient Jungle", "Moss Blanket - New Ancient Jungle", "Note Read", None, "Moss Blanket - Main", region_map, rule_map)
 		make_event_location(world, "Read: Moss Blanket - MOSS BLANKET STUCK", "Moss Blanket - MOSS BLANKET STUCK", "Note Read", None, "Moss Blanket - Main", region_map, rule_map)
-		make_event_location(world, "Read: The Grotto - The Limitless Black of Space", "The Grotto - The Limitless Black of Space", "Note Read", None, "The Grotto", region_map, rule_map)
 		make_event_location(world, "Read: Moss Blanket - Can't Recommend Love Enough", "Moss Blanket - Can't Recommend Love Enough", "Note Read", None, "Moss Blanket - Mushroom Island", region_map, rule_map)
 		make_event_location(world, "Read: Moss Blanket - Peepers Peeled!", "Moss Blanket - Peepers Peeled!", "Note Read", None, "Moss Blanket - Hunter's Domain", region_map, rule_map)
-		make_event_location(world, "Read: Ancient Ruins - The Purpose of the Ruins", "Ancient Ruins - The Purpose of the Ruins", "Note Read", None, "Ancient Ruins - Main", region_map, rule_map)
+		make_event_location(world, "Read: Ancient Ruins - These Folks Like Slimes", "Ancient Ruins - These Folks Like Slimes", "Note Read", None, "Ancient Ruins - Main", region_map, rule_map)
 		make_event_location(world, "Read: Ancient Ruins - You Gotta Choose a Path", "Ancient Ruins - You Gotta Choose a Path", "Note Read", None, "Ancient Ruins - Main", region_map, rule_map)
 		make_event_location(world, "Read: Ancient Ruins - Ice-Cold Lemonade", "Ancient Ruins - Ice-Cold Lemonade", "Note Read", None, "Ancient Ruins - Main", region_map, rule_map)
 		make_event_location(world, "Read: Ancient Ruins - Truly Untamed Country", "Ancient Ruins - Truly Untamed Country", "Note Read", None, "Ancient Ruins - Teleporter Room", region_map, rule_map)
-		make_event_location(world, "Read: The Lab - The Wonders of Plort Technology", "The Lab - The Wonders of Plort Technology", "Note Read", None, "The Lab", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - You'll Risk Burning Your Tuchus!", "Glass Desert - You'll Risk Burning Your Tuchus!", "Note Read", None, "Glass Desert - First Half", region_map, rule_map)
-		make_event_location(world, "Read: Glass Desert - Two Overlapping Times", "Glass Desert - Two Overlapping Times", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
+		make_event_location(world, "Read: Glass Desert - Life Waiting to Flow", "Glass Desert - Life Waiting to Flow", "Note Read", None, "Glass Desert - First Half", region_map, rule_map)
+		make_event_location(world, "Read: Glass Desert - Flames Burning at an Unperceivable Pace", "Glass Desert - Flames Burning at an Unperceivable Pace", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - Two Doors", "Glass Desert - Two Doors", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - She Stole a Piece of My Heart", "Glass Desert - She Stole a Piece of My Heart", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - Sold the Ranch", "Glass Desert - Sold the Ranch", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - I Wasn't Ready", "Glass Desert - I Wasn't Ready", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
-		make_event_location(world, "Read: Glass Desert - Life Waiting to Flow", "Glass Desert - Life Waiting to Flow", "Note Read", None, "Glass Desert - First Half", region_map, rule_map)
 		make_event_location(world, "Read: Glass Desert - The Sand Sea", "Glass Desert - The Sand Sea", "Note Read", None, "Glass Desert - Second Half", region_map, rule_map)
 		
 	
@@ -242,7 +260,6 @@ def gen_create_regions(world):
 	make_event_location(world, "Boom Slime (Indigo Quarry - Ancient Ruins Transition Overlap)", "''", "Boom Plort", None, "Indigo Quarry - Ancient Ruins Transition Overlap", region_map, rule_map)
 	make_event_location(world, "Boom Slime (Moss Blanket - Main)", "''", "Boom Plort", None, "Moss Blanket - Main", region_map, rule_map)
 	make_event_location(world, "Boom Slime (Ancient Ruins - Main)", "''", "Boom Plort", None, "Ancient Ruins - Main", region_map, rule_map)
-	make_event_location(world, "Boom Slime (The Wilds)", "''", "Boom Plort", None, "The Wilds", region_map, rule_map)
 	make_event_location(world, "Rad Slime (Indigo Quarry - Before First Bridge)", "''", "Rad Plort", None, "Indigo Quarry - Before First Bridge", region_map, rule_map)
 	make_event_location(world, "Rad Slime (Indigo Quarry - After The Bridge)", "''", "Rad Plort", None, "Indigo Quarry - After The Bridge", region_map, rule_map)
 	make_event_location(world, "Rad Slime (The Wilds)", "''", "Rad Plort", None, "The Wilds", region_map, rule_map)
@@ -252,6 +269,7 @@ def gen_create_regions(world):
 	make_event_location(world, "Hunter Slime (Moss Blanket - Mushroom Island)", "''", "Hunter Plort", None, "Moss Blanket - Mushroom Island", region_map, rule_map)
 	make_event_location(world, "Hunter Slime (Moss Blanket - Main)", "''", "Hunter Plort", None, "Moss Blanket - Main", region_map, rule_map)
 	make_event_location(world, "Hunter Slime (The Wilds)", "''", "Hunter Plort", None, "The Wilds", region_map, rule_map)
+	make_event_location(world, "Hunter Slime (Moss Blanket - Hunter's Domain)", "''", "Hunter Plort", None, "Moss Blanket - Hunter's Domain", region_map, rule_map)
 	make_event_location(world, "Quantum Slime (Ancient Ruins - Main)", "''", "Quantum Plort", None, "Ancient Ruins - Main", region_map, rule_map)
 	make_event_location(world, "Dervish Slime (Glass Desert - Second Half)", "''", "Dervish Plort", None, "Glass Desert - Second Half", region_map, rule_map)
 	make_event_location(world, "Dervish Slime (Glass Desert - First Half)", "''", "Dervish Plort", None, "Glass Desert - First Half", region_map, rule_map)
@@ -270,6 +288,30 @@ def gen_create_regions(world):
 	for location in gates:
 		if location[1] in region_map:
 			make_event_location(world, f"Event: {location[0]}", location[0], f"Opened Gate: {location[0]}", None, location[1], region_map, rule_map)
+	if options.plortsanity > 0:
+		make_location(world, "Sell a Pink Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Tabby Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Rock Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Phosphor Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Boom Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Rad Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Crystal Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Honey Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Hunter Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Quantum Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Dervish Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Tangle Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Mosaic Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Puddle Plort", "Menu", region_map, rule_map)
+		make_location(world, "Sell a Fire Plort", "Menu", region_map, rule_map)
+		
+	
+	if options.include_ogden and options.plortsanity > 0:
+		make_location(world, "Sell a Saber Plort", "Menu", region_map, rule_map)
+	
+	if options.plortsanity > 1:
+		make_location(world, "Sell a Gold Plort", "Menu", region_map, rule_map)
+	
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

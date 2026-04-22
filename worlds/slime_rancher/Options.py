@@ -55,6 +55,17 @@ class Include7z(Toggle):
 	display_name = "Include 7z"
 
 
+class Plortsanity(Choice):
+	"""
+	Selling a plort for the first time will send a check
+	"""
+	display_name = "Plortsanity"
+	option_off = 0
+	option_all_except_gold = 1
+	option_all = 2
+	default = 1
+
+
 class FixMarketRates(DefaultOnToggle):
 	"""
 	Overrides the default market behavior:
@@ -100,6 +111,13 @@ class IncludeViktor(Toggle):
 	Include Viktor's Workshop
 	"""
 	display_name = "Include Viktor"
+
+
+class Postgame(Toggle):
+	"""
+	Include Post-Credit Locations, i.e. Item Vaults
+	"""
+	display_name = "Postgame"
 
 
 class EasySkips(Toggle):
@@ -151,12 +169,14 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	enable_stylish_dlc_treasure_pods: EnableStylishDlcTreasurePods
 	treasure_cracker_checks: TreasureCrackerChecks
 	include_7z: Include7z
+	plortsanity: Plortsanity
 	fix_market_rates: FixMarketRates
 	start_with_drone: StartWithDrone
 	trap_percent: TrapPercent
 	include_ogden: IncludeOgden
 	include_mochi: IncludeMochi
 	include_viktor: IncludeViktor
+	postgame: Postgame
 	easy_skips: EasySkips
 	precise_movement: PreciseMovement
 	dangerous_skips: DangerousSkips
@@ -176,6 +196,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.treasure_cracker_checks
 			case "include_7z":
 				return self.include_7z
+			case "plortsanity":
+				return self.plortsanity
 			case "fix_market_rates":
 				return self.fix_market_rates
 			case "start_with_drone":
@@ -188,6 +210,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.include_mochi
 			case "include_viktor":
 				return self.include_viktor
+			case "postgame":
+				return self.postgame
 			case "easy_skips":
 				return self.easy_skips
 			case "precise_movement":
