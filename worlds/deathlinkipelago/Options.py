@@ -71,7 +71,7 @@ class DeathLinkipelagoOptions(PerGameCommonOptions):
 def check_options(world):
     if world.options.death_check_amount > 50 and not world.settings.extend_death_limit:
         logging.info(
-            f"DeathLinkipelago: {world.player_name} has {world.options.death_check_amount} > 50. since the host has remove_death_limit false the check amount will default to 50")
+            f"DeathLinkipelago: {world.player_name} has {world.options.death_check_amount} > 50. since the host has extend_death_limit false the check amount will default to 50")
         world.options.death_check_amount = CheckCount(50)
 
     if world.options.has_funny_button and not world.settings.allow_funny_button:
