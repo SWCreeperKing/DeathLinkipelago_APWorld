@@ -57,6 +57,18 @@ locations = [
 	["Pickup Photo #4", "Tunnels Cave"]
 ]
 
+achievements = [
+	["Honk-Happy", "Mountain"],
+	["Worm Crime", "Tunnels"],
+	["Clownhood Confirmed", "Mountain Top"]
+]
+
+note = [
+	["Read John's Note", "Tunnels Cave"]
+]
+
 location_dict = [
-	*[items[0] for items in locations]
+	*[items[0] for items in locations],
+	*[items[0] for items in achievements],
+	*[items[0] for items in note]
 ]

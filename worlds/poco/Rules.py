@@ -24,6 +24,7 @@ def get_rule_map(player, options):
 		"Complete Dungsworth's Quest": lambda state: has(state, player, options, "Cymbal Button"),
 		"Complete Weevilton's Quest": lambda state: has(state, player, options, "Fancy Button") and has(state, player, options, "Cute Button") and has(state, player, options, "Basic Button"),
 		"Complete Cerberus's Quest": lambda state: has(state, player, options, "Pacifier") and has(state, player, options, "Bug Steak") and has(state, player, options, "Dog Treat") and done_quest(state, player, options, "Dungsworth") and done_quest(state, player, options, "Weevilton") and done_quest(state, player, options, "Scuttlesby"),
+		"Clownhood Confirmed": lambda state: done_quest(state, player, options, "Jaz"),
 	}
 
 def get_yaml_option(state, player, options, option) -> bool:

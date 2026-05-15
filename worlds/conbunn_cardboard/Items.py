@@ -28,7 +28,8 @@ unlocks = [
 
 abilities = [
 	"Bounce Pads",
-	"Dash"
+	"Dash",
+	"Cable Car"
 ]
 
 CDs = {

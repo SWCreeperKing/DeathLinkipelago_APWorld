@@ -11,6 +11,9 @@ def get_rule_map(player, options):
 		"Cutout Forest Coin #13": lambda state: has_dash(state, player, options),
 		"Origami Tree CD #1": lambda state: has_bounce_pads(state, player, options),
 		"Bunny Circuit CD #1": lambda state: has_bounce_pads(state, player, options),
+		"Paint Hills CD #4": lambda state: has_bounce_pads(state, player, options),
+		"Paint Hills Coin #23": lambda state: has_dash(state, player, options),
+		"Paint Hills Coin #24": lambda state: has_dash(state, player, options),
 		"Cardbun Viewing Area Coin #1": lambda state: has_bounce_pads(state, player, options),
 		"Cardbun Viewing Area Coin #2": lambda state: has_bounce_pads(state, player, options),
 		"Cardbun Viewing Area CD #1": lambda state: has_bounce_pads(state, player, options),
@@ -33,6 +36,22 @@ def get_rule_map(player, options):
 		"Paper Bay Coin #27": lambda state: has_bounce_pads(state, player, options),
 		"Paper Bay Coin #28": lambda state: has_bounce_pads(state, player, options),
 		"Paper Bay Coin #29": lambda state: has_bounce_pads(state, player, options),
+		"Sticker Park Coin #5": lambda state: has_bounce_pads(state, player, options),
+		"Sticker Park Coin #6": lambda state: has_bounce_pads(state, player, options),
+		"Sticker Park Coin #7": lambda state: has_bounce_pads(state, player, options),
+		"Sticker Park CD #1": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak CD #4": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #18": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #19": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #20": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #21": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #22": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #23": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak CD #5": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #24": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #25": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #26": lambda state: has_bounce_pads(state, player, options),
+		"Polystyrene Peak Coin #27": lambda state: has_bounce_pads(state, player, options),
 		"Skin from Ara #1": lambda state: has_unlock(state, player, options, "Ribbon Village") and has_coin_count(state, player, options, 50),
 		"Skin from Ara #2": lambda state: has_unlock(state, player, options, "Ribbon Village") and has_coin_count(state, player, options, 150),
 		"Conbunn Suit": lambda state: has_unlock(state, player, options, "Cardbun Festival"),
@@ -57,6 +76,9 @@ def has_all(state, player, options, items) -> bool:
 
 def has_unlock(state, player, options, transition) -> bool:
 	return has(state, player, options, f"Transition Unlock: {transition}")
+
+def has_cable_car(state, player, options) -> bool:
+	return has(state, player, options, 'Cable Car')
 
 def has_dash(state, player, options) -> bool:
 	return has(state, player, options, 'Dash')
