@@ -14,26 +14,26 @@ def gen_create_regions(world):
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
 		"Cutout Forest": Region("Cutout Forest", world.player, world.multiworld),
-		"Connie's Garden": Region("Connie's Garden", world.player, world.multiworld),
+		"Connie's Garden (Cutout Forest)": Region("Connie's Garden (Cutout Forest)", world.player, world.multiworld),
 		"Ribbon Village": Region("Ribbon Village", world.player, world.multiworld),
-		"Origami Tree": Region("Origami Tree", world.player, world.multiworld),
+		"Origami Tree (Ribbon Village)": Region("Origami Tree (Ribbon Village)", world.player, world.multiworld),
 		"Paper Bay": Region("Paper Bay", world.player, world.multiworld),
-		"Cardbun Viewing Area": Region("Cardbun Viewing Area", world.player, world.multiworld),
-		"Ink Beach": Region("Ink Beach", world.player, world.multiworld),
-		"Bunny Circuit": Region("Bunny Circuit", world.player, world.multiworld),
-		"IBee's Honeycomb": Region("IBee's Honeycomb", world.player, world.multiworld),
-		"Cardbun Museum": Region("Cardbun Museum", world.player, world.multiworld),
+		"Cardbun Viewing Area (Paper Bay)": Region("Cardbun Viewing Area (Paper Bay)", world.player, world.multiworld),
+		"Ink Beach (Paper Bay)": Region("Ink Beach (Paper Bay)", world.player, world.multiworld),
+		"Bunny Circuit (Ribbon Village)": Region("Bunny Circuit (Ribbon Village)", world.player, world.multiworld),
+		"IBee's Honeycomb (Ribbon Village)": Region("IBee's Honeycomb (Ribbon Village)", world.player, world.multiworld),
+		"Cardbun Museum (Ribbon Village)": Region("Cardbun Museum (Ribbon Village)", world.player, world.multiworld),
 		"Paint Hills": Region("Paint Hills", world.player, world.multiworld),
-		"Graffiti Panels": Region("Graffiti Panels", world.player, world.multiworld),
+		"Graffiti Panels (Paint Hills)": Region("Graffiti Panels (Paint Hills)", world.player, world.multiworld),
 		"Mountain Confetti": Region("Mountain Confetti", world.player, world.multiworld),
-		"Cotton Skies": Region("Cotton Skies", world.player, world.multiworld),
+		"Cotton Skies (Mountain Confetti)": Region("Cotton Skies (Mountain Confetti)", world.player, world.multiworld),
 		"Clay Canyon": Region("Clay Canyon", world.player, world.multiworld),
-		"Samual Golf": Region("Samual Golf", world.player, world.multiworld),
+		"Samual Golf (Clay Canyon)": Region("Samual Golf (Clay Canyon)", world.player, world.multiworld),
 		"Sticker Park": Region("Sticker Park", world.player, world.multiworld),
-		"Dragon Raceway": Region("Dragon Raceway", world.player, world.multiworld),
-		"Cardboard Station": Region("Cardboard Station", world.player, world.multiworld),
+		"Dragon Raceway (Sticker Park)": Region("Dragon Raceway (Sticker Park)", world.player, world.multiworld),
+		"Cardboard Station (Sticker Park)": Region("Cardboard Station (Sticker Park)", world.player, world.multiworld),
 		"Polystyrene Peak": Region("Polystyrene Peak", world.player, world.multiworld),
-		"Glue Summit": Region("Glue Summit", world.player, world.multiworld),
+		"Glue Summit (Polystyrene Peak)": Region("Glue Summit (Polystyrene Peak)", world.player, world.multiworld),
 		"Cardbun Festival": Region("Cardbun Festival", world.player, world.multiworld)
 	}
 	
@@ -71,6 +71,9 @@ def gen_create_regions(world):
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map)
 	for location in skins:
+		if location[1] in region_map:
+			make_location(world, location[0], location[1], region_map, rule_map)
+	for location in npcs:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map)
 	for location in coins:

@@ -1,8 +1,7 @@
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
 npcs = [
-	"Talk to the Museum Book",
-	"Cardbun Museum"
+	["Talk to the Museum Book", "Cardbun Museum (Ribbon Village)"]
 ]
 
 coins = [
@@ -310,7 +309,7 @@ skins = [
 ]
 
 location_dict = [
-	*[items for items in npcs],
+	*[items[0] for items in npcs],
 	*[items[0] for items in coins],
 	*[items[0] for items in cds],
 	*[items[0] for items in skins]
