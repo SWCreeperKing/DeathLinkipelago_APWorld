@@ -17,14 +17,14 @@ class VampireSurvivors(World):
 	options_dataclass = VampireSurvivorsOptions
 	options: VampireSurvivorsOptions
 	settings: ClassVar[VampireSurvivorsSettings]
-	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
-	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	topology_present = True
 	ut_can_gen_without_yaml = True
 	gen_puml = False
 	item_name_groups = {
 		"unlocks": unlock_character_items + unlock_stage_items + unlock_gamemodes
 	}
+	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
+	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
@@ -45,8 +45,8 @@ class VampireSurvivors(World):
 			if "starting_character" in passthrough:
 				self.starting_character = passthrough["starting_character"]
 			
-			if "self.starting_stage" in passthrough:
-				self.starting_stage = passthrough["self.starting_stage"]
+			if "starting_stage" in passthrough:
+				self.starting_stage = passthrough["starting_stage"]
 			
 			if "final_stages" in passthrough:
 				self.final_included_stages_list = passthrough["final_stages"]

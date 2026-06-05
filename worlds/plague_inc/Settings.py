@@ -1,4 +1,5 @@
-from settings import Group, Bool
+from settings import *
+from typing import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 

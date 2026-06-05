@@ -48,17 +48,17 @@ def gen_create_regions(world):
 		"Emerald Diorama": Region("Emerald Diorama", world.player, world.multiworld)
 	}
 	
-	region_map["Menu"].connect(region_map["Characters"])
-	region_map["Menu"].connect(region_map["Enemies"])
+	connect_region("Menu", "Characters", region_map, None, None)
+	connect_region("Menu", "Enemies", region_map, None, None)
 	stages = world.final_included_stages_list
 	characters = world.final_included_characters_list
 	chest_checks = options.chest_checks_per_stage
 	for stage in stages:
-		make_location(world, f"{stage} Beaten", region_map[stage], rule_map)
-		make_event_location(world, f"Event: [{stage} Beaten]", f"{stage} Beaten", "Beat a Stage", None, region_map[stage], rule_map)
+		make_location(world, f"{stage} Beaten", stage, region_map, rule_map)
+		make_event_location(world, f"Event: [{stage} Beaten]", f"{stage} Beaten", "Beat a Stage", None, stage, region_map, rule_map)
 		if stage != EUDAI:
 			for i in range(chest_checks):
-				make_location(world, f"Open Chest #{i + 1} on {stage}", region_map[stage], rule_map)
+				make_location(world, f"Open Chest #{i + 1} on {stage}", stage, region_map, rule_map)
 		if stage == EUDAI and options.goal_requirement == 1:
 			region_map["Menu"].connect(region_map[stage], rule = lambda state, stage_name=stage: has_stage(state, player, options, EUDAI) and has_amount(state, player, options, "Beat a Stage", world.ending_stage_count))
 		else:
@@ -78,17 +78,26 @@ def gen_create_regions(world):
 	for region in region_map.values():
 		world.multiworld.regions.append(region)
 
-def make_location(world, location_name, region, rule_map):
+def connect_region(from_region, to_region, region_map, name, rule):
+	if from_region not in region_map: return
+	if to_region not in region_map: return
+	region_map[from_region].connect(region_map[to_region], name, rule = rule)
+
+def make_location(world, location_name, region_name, region_map, rule_map):
+	if region_name not in region_map: return None
 	world.location_count += 1
-	return make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region, rule_map)
+	return make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map)
 
-def make_event_location(world, location_name_a, location_name_b, item_name, id, region, rule_map):
-	location = make_location_adv(world, location_name_a, location_name_b, id, region, rule_map)
-	location.place_locked_item(Item(item_name, ItemClassification.progression, None, world.player))
+def make_event_location(world, location_name_a, location_name_b, item_name, id, region_name, region_map, rule_map):
+	if region_name not in region_map: return None
+	location = make_location_adv(world, location_name_a, location_name_b, id, region_name, region_map, rule_map)
+	if location is None: return None
+	return location.place_locked_item(Item(item_name, ItemClassification.progression, None, world.player))
 
-def make_location_adv(world, location_name_a, location_name_b, id, region, rule_map):
-	location = Location(world.player, location_name_a, id, region)
-	region.locations.append(location)
+def make_location_adv(world, location_name_a, location_name_b, id, region_name, region_map, rule_map):
+	if region_name not in region_map: return None
+	location = Location(world.player, location_name_a, id, region_map[region_name])
+	region_map[region_name].locations.append(location)
 	
 	if location_name_b in rule_map:
 	   location.access_rule = rule_map[location_name_b]

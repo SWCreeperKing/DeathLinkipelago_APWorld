@@ -150,7 +150,7 @@ class ObscureLocations(Toggle):
 
 class LargoJumps(Toggle):
 	"""
-	EnableSkips where you jump off a largo midair
+	Enable Skips where you jump off a largo midair
 	"""
 	display_name = "Largo Jumps"
 
@@ -160,6 +160,13 @@ class JetpackBoosts(Toggle):
 	Enable Skips where you use the ability to get rid of jetpack's startup times through careful jumping, allowing for more energy conservation
 	"""
 	display_name = "Jetpack Boosts"
+
+
+class MarketLogic(Toggle):
+	"""
+	Enable Logic tied to early trading when opening slime gates
+	"""
+	display_name = "Market Logic"
 
 
 @dataclass
@@ -183,6 +190,7 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	obscure_locations: ObscureLocations
 	largo_jumps: LargoJumps
 	jetpack_boosts: JetpackBoosts
+	market_logic: MarketLogic
 
 	def get_options_map(self, option):
 		match option:
@@ -224,6 +232,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.largo_jumps
 			case "jetpack_boosts":
 				return self.jetpack_boosts
+			case "market_logic":
+				return self.market_logic
 		
 
 def check_options(world):

@@ -9,14 +9,14 @@ from typing import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
-class TheWereCleaner(World):
+class Dandara(World):
 	"""
-	The WereCleaner
+	Dandara
 	"""
-	game = "The WereCleaner"
-	options_dataclass = TheWereCleanerOptions
-	options: TheWereCleanerOptions
-	settings: ClassVar[TheWereCleanerSettings]
+	game = "Dandara"
+	options_dataclass = DandaraOptions
+	options: DandaraOptions
+	settings: ClassVar[DandaraSettings]
 	topology_present = True
 	ut_can_gen_without_yaml = True
 	gen_puml = False
@@ -26,15 +26,14 @@ class TheWereCleaner(World):
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
-		self.starting_stage = ""
 
 	def generate_early(self):
 		options = self.options
 		if hasattr(self.multiworld, "re_gen_passthrough"):
-			if "The WereCleaner" not in self.multiworld.re_gen_passthrough: return
-			passthrough = self.multiworld.re_gen_passthrough["The WereCleaner"]
-			if "kill_sanity" in passthrough:
-				options.kill_sanity = KillSanity(passthrough["kill_sanity"])
+			if "Dandara" not in self.multiworld.re_gen_passthrough: return
+			passthrough = self.multiworld.re_gen_passthrough["Dandara"]
+			if "goal_type" in passthrough:
+				options.goal_type = GoalType(passthrough["goal_type"])
 			
 		check_options(self)
 
@@ -50,14 +49,12 @@ class TheWereCleaner(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", player, 7)
-
-	def fill_slot_data(self):
-		slot_data = {
-			"kill_sanity": bool(self.options.kill_sanity),
-			"Kyle": str("Best Boi")
-		}
-		return slot_data
+		match options.goal_type:
+			case 0:
+				self.multiworld.completion_condition[self.player] = lambda state: has(state, player, options, "FinalBoss_Kill")
+			case 1:
+				self.multiworld.completion_condition[self.player] = lambda state: has(state, player, options, "DLCF_FearEnded")
+		
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 
