@@ -64,7 +64,7 @@ def gen_create_regions(world):
 		else:
 			region_map["Menu"].connect(region_map[stage], rule = lambda state, stage_name=stage: has_stage(state, player, options, f"{stage_name}"))
 	for character in characters:
-		make_location(world, f'Beat with {character}', region_map['Characters'], rule_map)
+		make_location(world, f'Beat with {character}', 'Characters', region_map, rule_map)
 	if options.enemysanity:
 		for enemy, raw_find_locs in enemy_map.items():
 			if enemy in enemy_arcana_map and not options.enemysanity_arcana_enemies:
@@ -73,7 +73,7 @@ def gen_create_regions(world):
 				continue
 			if not any(loc in stages for loc in raw_find_locs):
 				continue
-			make_location(world, f"Kill {enemy}", region_map['Enemies'], rule_map)
+			make_location(world, f"Kill {enemy}", 'Enemies', region_map, rule_map)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)
