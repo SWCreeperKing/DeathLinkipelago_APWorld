@@ -9,13 +9,26 @@ class GoalType(Choice):
 	What criteria to goal
 	notes = read all notes
 	7Zee = buy all 7Zee ranks
-	credits = get credits
+	credits = get to the end credits
+	mail = mcguffin hunt, Casey's Letters 
 	"""
 	display_name = "Goal Type"
 	option_notes = 0
 	option_7Zee = 1
 	option_credits = 2
+	option_mail = 3
 	default = 0
+
+
+class MailCount(Range):
+	"""
+	How many Casey's Letters to add to the pool for mcguffin hunt
+	8-20
+	"""
+	display_name = "Mail Count"
+	range_start = 8
+	range_end = 20
+	default = 8
 
 
 class StartWithDryReef(DefaultOnToggle):
@@ -27,8 +40,11 @@ class StartWithDryReef(DefaultOnToggle):
 
 class EnableStylishDlcTreasurePods(Toggle):
 	"""
-	note: THIS WILL NOT GIVE YOU DLC
-	YOU MUST __***OWN***__ THE DLC
+	Whether the Secret Style DLC Treasure Pods are locations in the pool.
+	
+	This will add approximately 17 checks
+	
+	note: THIS WILL NOT GIVE YOU DLC\nYOU MUST __***OWN***__ THE DLC
 	"""
 	display_name = "Enable Stylish Dlc Treasure Pods"
 
@@ -51,6 +67,8 @@ class Include7z(Toggle):
 	"""
 	Include unlockables behind 7z as checks
 	estimated to appear in sphere 2 and above
+	
+	This will add 54 checks
 	"""
 	display_name = "Include 7z"
 
@@ -58,6 +76,8 @@ class Include7z(Toggle):
 class Plortsanity(Choice):
 	"""
 	Selling a plort for the first time will send a check
+	
+	This will add approximately 16 checks
 	"""
 	display_name = "Plortsanity"
 	option_off = 0
@@ -95,6 +115,8 @@ class TrapPercent(Range):
 class IncludeOgden(Toggle):
 	"""
 	Include Ogden's Retreat
+	
+	This will add 10 checks
 	"""
 	display_name = "Include Ogden"
 
@@ -102,6 +124,8 @@ class IncludeOgden(Toggle):
 class IncludeMochi(Toggle):
 	"""
 	Include Mochi's Manor
+	
+	This will add 7 checks
 	"""
 	display_name = "Include Mochi"
 
@@ -109,6 +133,8 @@ class IncludeMochi(Toggle):
 class IncludeViktor(Toggle):
 	"""
 	Include Viktor's Workshop
+	
+	This will add 13 checks
 	"""
 	display_name = "Include Viktor"
 
@@ -116,6 +142,8 @@ class IncludeViktor(Toggle):
 class Postgame(Toggle):
 	"""
 	Include Post-Credit Locations, i.e. Item Vaults
+	
+	This will add 42 checks
 	"""
 	display_name = "Postgame"
 
@@ -172,6 +200,7 @@ class MarketLogic(Toggle):
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
 	goal_type: GoalType
+	mail_count: MailCount
 	start_with_dry_reef: StartWithDryReef
 	enable_stylish_dlc_treasure_pods: EnableStylishDlcTreasurePods
 	treasure_cracker_checks: TreasureCrackerChecks
@@ -196,6 +225,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 		match option:
 			case "goal_type":
 				return self.goal_type
+			case "mail_count":
+				return self.mail_count
 			case "start_with_dry_reef":
 				return self.start_with_dry_reef
 			case "enable_stylish_dlc_treasure_pods":

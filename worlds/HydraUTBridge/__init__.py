@@ -33,8 +33,8 @@ def run_tracker():
         print("missing_locations")
         tracker_core.set_missing_locations(set(parse_ids(input())))
         
+        print("start")
         while True:
-            print("next")
             nxt = input()
             if nxt == "stop": return
             split = nxt.split('|')

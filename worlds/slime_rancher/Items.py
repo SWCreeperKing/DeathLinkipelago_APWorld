@@ -67,7 +67,8 @@ item_table = {
 	**{item: ItemClassification.useful for item in progressive_useful_item_count},
 	**{item: ItemClassification.progression for item in progressive_progression_item_count},
 	**{item: ItemClassification.filler for item in filler_items},
-	"Trap Slime": ItemClassification.trap
+	"Trap Slime": ItemClassification.trap,
+	"Casey's Letter": ItemClassification.progression_skip_balancing
 }
 
 raw_items = [item for item, classification in item_table.items()]
@@ -105,5 +106,9 @@ def gen_create_items(world):
 		world.location_count -= 1
 		pool.append(world.create_item("Trap Slime"))
 	
+	if options.goal_type == 3:
+		for _ in range(options.mail_count):
+			world.location_count -= 1
+			pool.append(world.create_item("Casey's Letter"))
 	for _ in range(world.location_count):
 		pool.append(world.create_item(world.random.choice(filler_items)))

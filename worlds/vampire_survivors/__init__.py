@@ -130,7 +130,7 @@ class VampireSurvivors(World):
 		slot_data = {
 			"goal_requirement": int(self.options.goal_requirement),
 			"chest_checks_per_stage": int(self.options.chest_checks_per_stage),
-			"egg_inclusion": int(self.options.egg_inclusion.value),
+			"egg_inclusion": int(self.options.egg_inclusion),
 			"lock_hyper_behind_item": bool(self.options.lock_hyper_behind_item),
 			"lock_hurry_behind_item": bool(self.options.lock_hurry_behind_item),
 			"lock_arcanas_behind_item": bool(self.options.lock_arcanas_behind_item),
@@ -162,9 +162,6 @@ class VampireSurvivors(World):
 			"starting_character": str(self.starting_character),
 			"starting_stage": str(self.starting_stage),
 			"stages_to_beat": str(self.final_included_stages_list),
-			"is_hyper_locked": bool(self.options.lock_hyper_behind_item),
-			"is_hurry_locked": bool(self.options.lock_hurry_behind_item),
-			"is_arcanas_locked": bool(self.options.lock_arcanas_behind_item),
 			"final_stages": self.final_included_stages_list,
 			"final_chars": self.final_included_characters_list,
 			"ending_stage_count": int(self.ending_stage_count)

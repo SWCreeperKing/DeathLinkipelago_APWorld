@@ -52,6 +52,9 @@ class SlimeRancher(World):
 			if "goal_type" in passthrough:
 				options.goal_type = GoalType(passthrough["goal_type"])
 			
+			if "mail_count" in passthrough:
+				options.mail_count = MailCount(passthrough["mail_count"])
+			
 			if "start_with_dry_reef" in passthrough:
 				options.start_with_dry_reef = StartWithDryReef(passthrough["start_with_dry_reef"])
 			
@@ -140,11 +143,13 @@ class SlimeRancher(World):
 		options = self.options
 		match self.options.goal_type:
 			case 0:
-				self.multiworld.completion_condition[self.player] = lambda state: state.has("Note Read", player, 28)
+				self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Note Read", 30)
 			case 1:
-				self.multiworld.completion_condition[self.player] = lambda state: state.has("7Zee Bought", player, len(corporate_locations))
+				self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "7Zee Bought", len(corporate_locations))
 			case 2:
-				self.multiworld.completion_condition[self.player] = lambda state: state.has_all(credits_unlocks, player)
+				self.multiworld.completion_condition[self.player] = lambda state: has_all(state, player, options, credits_unlocks)
+			case 3:
+				self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Casey's Letter", options.mail_count)
 		
 
 	def fill_slot_data(self):
@@ -153,6 +158,7 @@ class SlimeRancher(World):
 		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
 		slot_data = {
 			"goal_type": int(self.options.goal_type),
+			"mail_count": int(self.options.mail_count),
 			"start_with_dry_reef": bool(self.options.start_with_dry_reef),
 			"enable_stylish_dlc_treasure_pods": bool(self.options.enable_stylish_dlc_treasure_pods),
 			"treasure_cracker_checks": int(self.options.treasure_cracker_checks),

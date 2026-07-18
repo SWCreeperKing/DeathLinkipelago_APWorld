@@ -219,6 +219,7 @@ def gen_create_regions(world):
 	make_event_location(world, "Rock (Dry Reef - Ring Island)", "''", "Rock Plort", None, "Dry Reef - Ring Island", region_map, rule_map)
 	make_event_location(world, "Phosphor (Dry Reef - Ring Island)", "''", "Phosphor Plort", None, "Dry Reef - Ring Island", region_map, rule_map)
 	make_event_location(world, "Lucky (Dry Reef - Ring Island)", "''", "Lucky Plort", None, "Dry Reef - Ring Island", region_map, rule_map)
+	make_event_location(world, "Puddle (Dry Reef - Ring Island)", "''", "Puddle Plort", None, "Dry Reef - Ring Island", region_map, rule_map)
 	make_event_location(world, "Pink (The Slime Sea - Between Grotto and Dry Reef Island 2)", "''", "Pink Plort", None, "The Slime Sea - Between Grotto and Dry Reef Island 2", region_map, rule_map)
 	make_event_location(world, "Phosphor (The Slime Sea - Between Grotto and Dry Reef Island 2)", "''", "Phosphor Plort", None, "The Slime Sea - Between Grotto and Dry Reef Island 2", region_map, rule_map)
 	make_event_location(world, "Lucky (The Slime Sea - Between Grotto and Dry Reef Island 2)", "''", "Lucky Plort", None, "The Slime Sea - Between Grotto and Dry Reef Island 2", region_map, rule_map)
