@@ -22,9 +22,10 @@ def run_tracker():
         tracker_core = TrackerCore(logger, False, False)
         tracker_core.enforce_deferred_connections = DeferredEntranceMode.disabled
 
+        tracker_core.run_generator(None, None)
+        
         print("slot_data")
         slot_data = json.loads(input())
-        tracker_core.run_generator(slot_data, None)
 
         connected_cls = AutoWorldRegister.world_types.get(game)
         tracker_core.set_slot_params(game, 1, slot_name, 1)
