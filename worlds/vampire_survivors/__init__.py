@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class VampireSurvivors(World):
 	"""
 	Vampire Survivors
 	"""
+	class VampireSurvivorsWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Vampire Survivors"
 	options_dataclass = VampireSurvivorsOptions
 	options: VampireSurvivorsOptions
