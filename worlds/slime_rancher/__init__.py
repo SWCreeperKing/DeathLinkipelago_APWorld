@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class SlimeRancher(World):
 	"""
 	Slime Rancher
 	"""
+	class SlimeRancherWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Slime Rancher"
 	options_dataclass = SlimeRancherOptions
 	options: SlimeRancherOptions

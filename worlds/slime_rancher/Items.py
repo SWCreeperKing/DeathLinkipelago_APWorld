@@ -102,13 +102,13 @@ def gen_create_items(world):
 		for _ in range(amt):
 			pool.append(world.create_item(item))
 	
-	for _ in range(int(world.location_count * (options.trap_percent / 100))):
-		world.location_count -= 1
-		pool.append(world.create_item("Trap Slime"))
-	
 	if options.goal_type == 3:
 		for _ in range(options.mail_count):
 			world.location_count -= 1
 			pool.append(world.create_item("Casey's Letter"))
+	
+	for _ in range(int(world.location_count * (options.trap_percent / 100))):
+		world.location_count -= 1
+		pool.append(world.create_item("Trap Slime"))
 	for _ in range(world.location_count):
 		pool.append(world.create_item(world.random.choice(filler_items)))
