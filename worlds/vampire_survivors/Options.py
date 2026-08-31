@@ -391,9 +391,9 @@ class VampireSurvivorsOptions(PerGameCommonOptions):
 
 	def flatten_locations(self, world, list, self_list):
 		if "Random" in self_list:
-			return world.random.sample(list, world.random.randint(int(len(list) / 2), len(list)))
+			return sorted(world.random.sample(list, world.random.randint(int(len(list) / 2), len(list))))
 		else:
-			return list if "All" in self_list else [loc for loc in self_list if loc != "Random"]
+			return list if "All" in self_list else sorted([loc for loc in self_list if loc != "Random"])
 
 	def get_included_characters(self, world):
 		return (self.flatten_locations(world, base_characters, self.included_base_characters) + self.flatten_locations(world, moonspell_characters, self.included_moonspell_characters) + self.flatten_locations(world, foscari_characters, self.included_foscari_characters) + self.flatten_locations(world, amongus_characters, self.included_amongus_characters) + self.flatten_locations(world, operation_guns_characters, self.included_operation_guns_characters) + self.flatten_locations(world, castlevania_characters, self.included_castlevania_characters) + self.flatten_locations(world, emerald_characters, self.included_emerald_characters) + self.flatten_locations(world, balatro_characters, self.included_balatro_characters))

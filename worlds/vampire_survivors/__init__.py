@@ -46,6 +46,99 @@ class VampireSurvivors(World):
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Vampire Survivors" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Vampire Survivors"]
+			if "goal_requirement" in passthrough:
+				options.goal_requirement = GoalRequirement(passthrough["goal_requirement"])
+			
+			if "chest_checks_per_stage" in passthrough:
+				options.chest_checks_per_stage = ChestChecksPerStage(passthrough["chest_checks_per_stage"])
+			
+			if "egg_inclusion" in passthrough:
+				options.egg_inclusion = EggInclusion(passthrough["egg_inclusion"])
+			
+			if "lock_hyper_behind_item" in passthrough:
+				options.lock_hyper_behind_item = LockHyperBehindItem(passthrough["lock_hyper_behind_item"])
+			
+			if "lock_hurry_behind_item" in passthrough:
+				options.lock_hurry_behind_item = LockHurryBehindItem(passthrough["lock_hurry_behind_item"])
+			
+			if "lock_arcanas_behind_item" in passthrough:
+				options.lock_arcanas_behind_item = LockArcanasBehindItem(passthrough["lock_arcanas_behind_item"])
+			
+			if "enemysanity" in passthrough:
+				options.enemysanity = Enemysanity(passthrough["enemysanity"])
+			
+			if "enemysanity_arcana_enemies" in passthrough:
+				options.enemysanity_arcana_enemies = EnemysanityArcanaEnemies(passthrough["enemysanity_arcana_enemies"])
+			
+			if "character_pool_size" in passthrough:
+				options.character_pool_size = CharacterPoolSize(passthrough["character_pool_size"])
+			
+			if "stage_pool_size" in passthrough:
+				options.stage_pool_size = StagePoolSize(passthrough["stage_pool_size"])
+			
+			if "allow_secret_characters" in passthrough:
+				options.allow_secret_characters = AllowSecretCharacters(passthrough["allow_secret_characters"])
+			
+			if "allow_megalo_characters" in passthrough:
+				options.allow_megalo_characters = AllowMegaloCharacters(passthrough["allow_megalo_characters"])
+			
+			if "allow_unfair_characters" in passthrough:
+				options.allow_unfair_characters = AllowUnfairCharacters(passthrough["allow_unfair_characters"])
+			
+			if "included_base_characters" in passthrough:
+				options.included_base_characters = IncludedBaseCharacters(passthrough["included_base_characters"])
+			
+			if "included_moonspell_characters" in passthrough:
+				options.included_moonspell_characters = IncludedMoonspellCharacters(passthrough["included_moonspell_characters"])
+			
+			if "included_foscari_characters" in passthrough:
+				options.included_foscari_characters = IncludedFoscariCharacters(passthrough["included_foscari_characters"])
+			
+			if "included_amongus_characters" in passthrough:
+				options.included_amongus_characters = IncludedAmongusCharacters(passthrough["included_amongus_characters"])
+			
+			if "included_operation_guns_characters" in passthrough:
+				options.included_operation_guns_characters = IncludedOperationGunsCharacters(passthrough["included_operation_guns_characters"])
+			
+			if "included_castlevania_characters" in passthrough:
+				options.included_castlevania_characters = IncludedCastlevaniaCharacters(passthrough["included_castlevania_characters"])
+			
+			if "included_emerald_characters" in passthrough:
+				options.included_emerald_characters = IncludedEmeraldCharacters(passthrough["included_emerald_characters"])
+			
+			if "included_balatro_characters" in passthrough:
+				options.included_balatro_characters = IncludedBalatroCharacters(passthrough["included_balatro_characters"])
+			
+			if "included_normal_stages" in passthrough:
+				options.included_normal_stages = IncludedNormalStages(passthrough["included_normal_stages"])
+			
+			if "included_bonus_stages" in passthrough:
+				options.included_bonus_stages = IncludedBonusStages(passthrough["included_bonus_stages"])
+			
+			if "included_challenge_stages" in passthrough:
+				options.included_challenge_stages = IncludedChallengeStages(passthrough["included_challenge_stages"])
+			
+			if "included_moonspell_stages" in passthrough:
+				options.included_moonspell_stages = IncludedMoonspellStages(passthrough["included_moonspell_stages"])
+			
+			if "included_foscari_stages" in passthrough:
+				options.included_foscari_stages = IncludedFoscariStages(passthrough["included_foscari_stages"])
+			
+			if "included_amongus_stages" in passthrough:
+				options.included_amongus_stages = IncludedAmongusStages(passthrough["included_amongus_stages"])
+			
+			if "included_operation_guns_stages" in passthrough:
+				options.included_operation_guns_stages = IncludedOperationGunsStages(passthrough["included_operation_guns_stages"])
+			
+			if "included_castlevania_stages" in passthrough:
+				options.included_castlevania_stages = IncludedCastlevaniaStages(passthrough["included_castlevania_stages"])
+			
+			if "included_emerald_stages" in passthrough:
+				options.included_emerald_stages = IncludedEmeraldStages(passthrough["included_emerald_stages"])
+			
+			if "included_balatro_stages" in passthrough:
+				options.included_balatro_stages = IncludedBalatroStages(passthrough["included_balatro_stages"])
+			
 			if "starting_character" in passthrough:
 				self.starting_character = passthrough["starting_character"]
 			
@@ -67,7 +160,7 @@ class VampireSurvivors(World):
 			    self.multiworld.push_precollected(self.create_item("Gamemode Unlock: Arcanas"))
 			if self.options.lock_hurry_behind_item.value:
 			    self.multiworld.push_precollected(self.create_item("Gamemode Unlock: Hurry"))
-		check_options(self)
+		else: check_options(self)
 		stages = [stage for stage in self.final_included_stages_list if stage != EUDAI]
 		characters = self.final_included_characters_list
 		
@@ -145,24 +238,24 @@ class VampireSurvivors(World):
 			"allow_secret_characters": bool(self.options.allow_secret_characters),
 			"allow_megalo_characters": bool(self.options.allow_megalo_characters),
 			"allow_unfair_characters": bool(self.options.allow_unfair_characters),
-			"included_base_characters": str(self.options.included_base_characters),
-			"included_moonspell_characters": str(self.options.included_moonspell_characters),
-			"included_foscari_characters": str(self.options.included_foscari_characters),
-			"included_amongus_characters": str(self.options.included_amongus_characters),
-			"included_operation_guns_characters": str(self.options.included_operation_guns_characters),
-			"included_castlevania_characters": str(self.options.included_castlevania_characters),
-			"included_emerald_characters": str(self.options.included_emerald_characters),
-			"included_balatro_characters": str(self.options.included_balatro_characters),
-			"included_normal_stages": str(self.options.included_normal_stages),
-			"included_bonus_stages": str(self.options.included_bonus_stages),
-			"included_challenge_stages": str(self.options.included_challenge_stages),
-			"included_moonspell_stages": str(self.options.included_moonspell_stages),
-			"included_foscari_stages": str(self.options.included_foscari_stages),
-			"included_amongus_stages": str(self.options.included_amongus_stages),
-			"included_operation_guns_stages": str(self.options.included_operation_guns_stages),
-			"included_castlevania_stages": str(self.options.included_castlevania_stages),
-			"included_emerald_stages": str(self.options.included_emerald_stages),
-			"included_balatro_stages": str(self.options.included_balatro_stages),
+			"included_base_characters": str(sorted(self.options.included_base_characters)),
+			"included_moonspell_characters": str(sorted(self.options.included_moonspell_characters)),
+			"included_foscari_characters": str(sorted(self.options.included_foscari_characters)),
+			"included_amongus_characters": str(sorted(self.options.included_amongus_characters)),
+			"included_operation_guns_characters": str(sorted(self.options.included_operation_guns_characters)),
+			"included_castlevania_characters": str(sorted(self.options.included_castlevania_characters)),
+			"included_emerald_characters": str(sorted(self.options.included_emerald_characters)),
+			"included_balatro_characters": str(sorted(self.options.included_balatro_characters)),
+			"included_normal_stages": str(sorted(self.options.included_normal_stages)),
+			"included_bonus_stages": str(sorted(self.options.included_bonus_stages)),
+			"included_challenge_stages": str(sorted(self.options.included_challenge_stages)),
+			"included_moonspell_stages": str(sorted(self.options.included_moonspell_stages)),
+			"included_foscari_stages": str(sorted(self.options.included_foscari_stages)),
+			"included_amongus_stages": str(sorted(self.options.included_amongus_stages)),
+			"included_operation_guns_stages": str(sorted(self.options.included_operation_guns_stages)),
+			"included_castlevania_stages": str(sorted(self.options.included_castlevania_stages)),
+			"included_emerald_stages": str(sorted(self.options.included_emerald_stages)),
+			"included_balatro_stages": str(sorted(self.options.included_balatro_stages)),
 			"starting_character": str(self.starting_character),
 			"starting_stage": str(self.starting_stage),
 			"stages_to_beat": str(self.final_included_stages_list),
