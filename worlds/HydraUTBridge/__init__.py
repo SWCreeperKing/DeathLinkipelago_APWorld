@@ -2,8 +2,6 @@ import json
 
 from NetUtils import NetworkItem
 from worlds.LauncherComponents import Component, components, Type
-from worlds.powerwashsimulator import raw_location_dict
-
 
 def run_tracker():
     try:
@@ -53,6 +51,11 @@ def run_tracker():
         while True:
             nxt = input()
             if nxt == "stop": return
+
+            if nxt.startswith("missing "):
+                parse = nxt.replace("missing ", "", 1)
+                if parse.strip() != "": tracker_core.set_missing_locations(set(parse_ids(parse)))
+                continue
 
             if nxt.startswith("entrance "):
                 entrances_got = json.loads(nxt.replace("entrance ", "", 1))
