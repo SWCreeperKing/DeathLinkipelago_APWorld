@@ -140,13 +140,13 @@ def gen_create_regions(world):
 	make_location(world, "Buy Personal Upgrade (Power Core lv.2)", "Dry Reef - Main", region_map, rule_map, False)
 	make_location(world, "Buy Personal Upgrade (Power Core lv.3)", "Dry Reef - Main", region_map, rule_map, False)
 	if 1 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "The Lab", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "Ancient Ruins Transition", region_map, rule_map, False)
 	
 	if 2 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "The Lab", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "Ancient Ruins Transition", region_map, rule_map, False)
 	
 	if 3 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "The Lab", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "Ancient Ruins Transition", region_map, rule_map, False)
 	
 	make_location(world, "Buy Personal Upgrade (Jetpack)", "Menu", region_map, rule_map, False)
 	make_location(world, "Buy Personal Upgrade (Air Drive)", "Dry Reef - Main", region_map, rule_map, False)

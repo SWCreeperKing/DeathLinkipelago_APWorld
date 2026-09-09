@@ -5,9 +5,9 @@ from .Locations import *
 
 def get_rule_map(player, options):
 	return {
-		"Buy Personal Upgrade (Treasure Cracker lv.1)": lambda state: has_region(state, player, options, "Dry Reef"),
-		"Buy Personal Upgrade (Treasure Cracker lv.2)": lambda state: has_region(state, player, options, "Dry Reef"),
-		"Buy Personal Upgrade (Treasure Cracker lv.3)": lambda state: has_region(state, player, options, "Dry Reef"),
+		"Buy Personal Upgrade (Treasure Cracker lv.1)": lambda state: has_region(state, player, options, "The Lab"),
+		"Buy Personal Upgrade (Treasure Cracker lv.2)": lambda state: has_region(state, player, options, "The Lab"),
+		"Buy Personal Upgrade (Treasure Cracker lv.3)": lambda state: has_region(state, player, options, "The Lab"),
 		"The Grotto - Overlooking the Slime Sea": lambda state: has_cracker(state, player, options, 2),
 		"The Lab - Tinkerer's Starting Cache": lambda state: has_cracker(state, player, options, 1),
 		"Ogden's Retreat - That's a Whole Lotta Kookabobas": lambda state: has_cracker(state, player, options, 1),

@@ -48,8 +48,8 @@ class SlimeRancher(World):
 		self.location_count = 0
 
 	def generate_early(self):
-		check_options(self)
 		options = self.options
+		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
