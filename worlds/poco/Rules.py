@@ -19,7 +19,7 @@ def get_rule_map(player, options):
 		"Pickup Cymbal Button": lambda state: done_quest(state, player, options, "Weevilton"),
 		"Complete Nari's Quest": lambda state: has(state, player, options, "Magenta Blossom"),
 		"Complete Ojet's Quest": lambda state: has(state, player, options, "Red Paint") and has(state, player, options, "Blue Paint") and has(state, player, options, "Green Paint"),
-		"Complete Gultch's Quest": lambda state: has(state, player, options, "Cooked Fish Dinner"),
+		"Complete Gultch's Quest": lambda state: has(state, player, options, "Cooked Fish Dinner") and has(state, player, options, "Coal") and has(state, player, options, "Match") and has(state, player, options, "Frying Pan") and has(state, player, options, "Beetle Milk") and has(state, player, options, "Fish") and has(state, player, options, "Carrot"),
 		"Complete Jaz's Quest": lambda state: has(state, player, options, "Pacifier") and has(state, player, options, "Bug Steak") and has(state, player, options, "Dog Treat") and done_quest(state, player, options, "Cerberus"),
 		"Complete Dungsworth's Quest": lambda state: has(state, player, options, "Cymbal Button"),
 		"Complete Weevilton's Quest": lambda state: has(state, player, options, "Fancy Button") and has(state, player, options, "Cute Button") and has(state, player, options, "Basic Button"),
