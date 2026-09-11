@@ -28,7 +28,8 @@ class Poco(World):
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	location_name_groups = {
 		"Rat Skulls": ["Rat Skull #1", "Rat Skull #6", "Rat Skull #3", "Rat Skull #2", "Rat Skull #7", "Rat Skull #8", "Rat Skull #5", "Rat Skull #4", "Rat Skull #9"],
-		"Photos": ["Pickup Photo #5", "Pickup Photo #3", "Pickup Photo #2", "Pickup Photo #1", "Pickup Photo #6", "Pickup Photo #4"]
+		"Photos": ["Pickup Photo #5", "Pickup Photo #3", "Pickup Photo #2", "Pickup Photo #1", "Pickup Photo #6", "Pickup Photo #4"],
+		"Achievements": ["Honk-Happy", "Worm Crime", "Clownhood Confirmed"]
 	}
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
