@@ -134,12 +134,12 @@ def gen_create_regions(world):
 	for location in evolutions:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map, False)
-	make_event_location(world, "Clean the GUPPI Campus", "", "Biomes Cleaned", None, "GUPPI Campus", region_map, rule_map, False)
-	make_event_location(world, "Clean the Ripple Reef", "", "Biomes Cleaned", None, "Ripple Reef", region_map, rule_map, False)
-	make_event_location(world, "Clean the Tangle Bay", "", "Biomes Cleaned", None, "Tangle Bay", region_map, rule_map, False)
-	make_event_location(world, "Clean the Flotsam Flats", "", "Biomes Cleaned", None, "Flotsam Flats", region_map, rule_map, False)
-	make_event_location(world, "Clean the Grimy Gulf", "", "Biomes Cleaned", None, "Grimy Gulf", region_map, rule_map, False)
-	make_event_location(world, "Clean the Goddle Grotto", "", "Biomes Cleaned", None, "Goddle Grotto", region_map, rule_map, False)
+	make_event_location(world, "Clean the GUPPI Campus", "Clean GUPPI Campus 100%", "Biomes Cleaned", None, "GUPPI Campus", region_map, rule_map, False)
+	make_event_location(world, "Clean the Ripple Reef", "Clean Ripple Reef 100%", "Biomes Cleaned", None, "Ripple Reef", region_map, rule_map, False)
+	make_event_location(world, "Clean the Tangle Bay", "Clean Tangle Bay 100%", "Biomes Cleaned", None, "Tangle Bay", region_map, rule_map, False)
+	make_event_location(world, "Clean the Flotsam Flats", "Clean Flotsam Flats 100%", "Biomes Cleaned", None, "Flotsam Flats", region_map, rule_map, False)
+	make_event_location(world, "Clean the Grimy Gulf", "Clean Grimy Gulf 100%", "Biomes Cleaned", None, "Grimy Gulf", region_map, rule_map, False)
+	make_event_location(world, "Clean the Goddle Grotto", "Clean Goddle Grotto 100%", "Biomes Cleaned", None, "Goddle Grotto", region_map, rule_map, False)
 	
 	make_event_location(world, "Event Pick: Tubey Melon (GUPPI Ravine)", "", "Tubey Melon", None, "GUPPI Ravine", region_map, rule_map, False)
 	make_event_location(world, "Event Pick: Pearl Berries (GUPPI Ravine)", "", "Pearl Berries", None, "GUPPI Ravine", region_map, rule_map, False)
