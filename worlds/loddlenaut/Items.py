@@ -37,7 +37,7 @@ region_unlocks = [
 	"North of GUPPI Campus",
 	"North GUPPI Ravine",
 	"Tangle Bay",
-	"East of Flotsam Flats",
+	"West of Flotsam Flats",
 	"Flotsam Flats",
 	"North of Flotsam Flats",
 	"Grimy Gulf",
