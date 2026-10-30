@@ -112,6 +112,8 @@ def gen_create_regions(world):
 	connect_region("Goddle Grotto Entrance", "North of GUPPI Campus", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "North of GUPPI Campus"), False)
 	connect_region("GUPPI Campus", "Goddle Grotto Entrance", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "Goddle Grotto Entrance"), False)
 	connect_region("Goddle Grotto Entrance", "GUPPI Campus", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "GUPPI Campus"), False)
+	connect_region("GUPPI Ravine", "Goddle Grotto Entrance", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "Goddle Grotto Entrance"), False)
+	connect_region("Goddle Grotto Entrance", "GUPPI Ravine", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "GUPPI Ravine"), False)
 	connect_region("Menu", "Upgrades", region_map, None, None, False)
 	connect_region("Menu", "Evolutions", region_map, None, lambda state: has_any(state, player, options, ["GUPPI Campus", "Ripple Reef", "Tangle Bay", "Flotsam Flats", "Grimy Gulf", "Goddle Grotto"]), False)
 	connect_region("Menu", "Cooking", region_map, None, lambda state: has(state, player, options, "Cooking Module"), False)
