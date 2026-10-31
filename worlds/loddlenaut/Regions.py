@@ -14,6 +14,7 @@ def gen_create_regions(world):
 	region_map = {
 		"Menu": Region("Menu", world.player, world.multiworld),
 		"Upgrades": Region("Upgrades", world.player, world.multiworld),
+		"Cooking": Region("Cooking", world.player, world.multiworld),
 		"GUPPI Ravine": Region("GUPPI Ravine", world.player, world.multiworld),
 		"GUPPI Campus": Region("GUPPI Campus", world.player, world.multiworld),
 		"North of GUPPI Campus": Region("North of GUPPI Campus", world.player, world.multiworld),
@@ -34,8 +35,6 @@ def gen_create_regions(world):
 		"Goddle Grotto": Region("Goddle Grotto", world.player, world.multiworld)
 	}
 	
-	if options.cooksanity:
-		region_map["Cooking"] = Region("Cooking", world.player, world.multiworld)
 	if options.evolutionsanity:
 		region_map["Evolutions"] = Region("Evolutions", world.player, world.multiworld)
 	connect_region("Home Cave", "North West of Home Cave", region_map, None, None, False)
@@ -115,7 +114,7 @@ def gen_create_regions(world):
 	connect_region("GUPPI Ravine", "Goddle Grotto Entrance", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "Goddle Grotto Entrance"), False)
 	connect_region("Goddle Grotto Entrance", "GUPPI Ravine", region_map, None, lambda state: has_depth(state, player, options) and has(state, player, options, "GUPPI Ravine"), False)
 	connect_region("Menu", "Upgrades", region_map, None, None, False)
-	connect_region("Menu", "Evolutions", region_map, None, lambda state: has_any(state, player, options, ["GUPPI Campus", "Ripple Reef", "Tangle Bay", "Flotsam Flats", "Grimy Gulf", "Goddle Grotto"]), False)
+	connect_region("Menu", "Evolutions", region_map, None, None, False)
 	connect_region("Menu", "Cooking", region_map, None, lambda state: has(state, player, options, "Cooking Module"), False)
 	connect_region("Menu", "Home Cave", region_map, None, None, False)
 	for location in clean_biomes:
@@ -130,9 +129,11 @@ def gen_create_regions(world):
 	for location in badges:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map, False)
-	for location in recipes:
-		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+	if options.cooksanity:
+		for location in recipes:
+			if location[1] in region_map:
+				make_location(world, location[0], location[1], region_map, rule_map, False)
+	
 	for location in evolutions:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map, False)
