@@ -1,3 +1,4 @@
+import math
 from BaseClasses import ItemClassification
 from .Locations import *
 from .Options import *
@@ -563,21 +564,125 @@ def gen_create_items(world):
 		world.location_count -= amt
 		for _ in range(amt):
 			pool.append(world.create_item(item))
+	for item, amt in fighter_progressives.items():
+		world.location_count -= amt
+		for _ in range(amt):
+			pool.append(world.create_item(item))
 	if options.is_class('fighter'):
-		for item, amt in fighter_progressives.items():
-			world.location_count -= amt
-			for _ in range(amt):
-				pool.append(world.create_item(item))
+		def gen_create_items(world):
+			pool = world.multiworld.itempool
+			options = world.options
+			random = world.random
+			for item, amt in any_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			for item, amt in fighter_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+	for item, amt in mystic_progressives.items():
+		world.location_count -= amt
+		for _ in range(amt):
+			pool.append(world.create_item(item))
 	if options.is_class('mystic'):
-		for item, amt in mystic_progressives.items():
-			world.location_count -= amt
-			for _ in range(amt):
-				pool.append(world.create_item(item))
+		def gen_create_items(world):
+			pool = world.multiworld.itempool
+			options = world.options
+			random = world.random
+			for item, amt in any_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			for item, amt in fighter_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			if options.is_class('fighter'):
+				def gen_create_items(world):
+					pool = world.multiworld.itempool
+					options = world.options
+					random = world.random
+					for item, amt in any_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+					for item, amt in fighter_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+			for item, amt in mystic_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+	for item, amt in bandit_progressives.items():
+		world.location_count -= amt
+		for _ in range(amt):
+			pool.append(world.create_item(item))
 	if options.is_class('bandit'):
-		for item, amt in bandit_progressives.items():
-			world.location_count -= amt
-			for _ in range(amt):
-				pool.append(world.create_item(item))
+		def gen_create_items(world):
+			pool = world.multiworld.itempool
+			options = world.options
+			random = world.random
+			for item, amt in any_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			for item, amt in fighter_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			if options.is_class('fighter'):
+				def gen_create_items(world):
+					pool = world.multiworld.itempool
+					options = world.options
+					random = world.random
+					for item, amt in any_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+					for item, amt in fighter_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+			for item, amt in mystic_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
+			if options.is_class('mystic'):
+				def gen_create_items(world):
+					pool = world.multiworld.itempool
+					options = world.options
+					random = world.random
+					for item, amt in any_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+					for item, amt in fighter_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+					if options.is_class('fighter'):
+						def gen_create_items(world):
+							pool = world.multiworld.itempool
+							options = world.options
+							random = world.random
+							for item, amt in any_progressives.items():
+								world.location_count -= amt
+								for _ in range(amt):
+									pool.append(world.create_item(item))
+							for item, amt in fighter_progressives.items():
+								world.location_count -= amt
+								for _ in range(amt):
+									pool.append(world.create_item(item))
+					for item, amt in mystic_progressives.items():
+						world.location_count -= amt
+						for _ in range(amt):
+							pool.append(world.create_item(item))
+			for item, amt in bandit_progressives.items():
+				world.location_count -= amt
+				for _ in range(amt):
+					pool.append(world.create_item(item))
 	for item, amt in item_counts_useful.items():
 		world.location_count -= amt
 		for _ in range(amt):

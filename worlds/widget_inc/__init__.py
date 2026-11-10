@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class WidgetInc(World):
 	"""
 	Widget Inc
 	"""
+	class WidgetIncWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Widget Inc"
 	options_dataclass = WidgetIncOptions
 	options: WidgetIncOptions
@@ -22,10 +26,13 @@ class WidgetInc(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 
 	def generate_early(self):
 		options = self.options
@@ -41,7 +48,7 @@ class WidgetInc(World):
 			if "scout_hint_tier_producers" in passthrough:
 				options.scout_hint_tier_producers = ScoutHintTierProducers(passthrough["scout_hint_tier_producers"])
 			
-		check_options(self)
+		else: check_options(self)
 		self.multiworld.push_precollected(self.create_item("Widget Factory"))
 		if options.scout_hint_tier_producers > 0:
 			options.start_hints = StartHints([*options.start_hints, "Iron Mine", "Iron Smelter", "Widget Factory"])
@@ -94,6 +101,9 @@ class WidgetInc(World):
 			"uuid": str(shuffled)
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return "Motivational Poster"
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 

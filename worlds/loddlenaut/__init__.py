@@ -26,10 +26,13 @@ class Loddlenaut(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 		self.starting_region = ""
 
 	def generate_early(self):
@@ -57,7 +60,7 @@ class Loddlenaut(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Biomes Cleaned", player, 6)
+		self.multiworld.completion_condition[self.player] = lambda state: has(state, player, options, "Biomes Cleaned", 6)
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]

@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class ConbunnCardboard(World):
 	"""
 	Conbunn Cardboard
 	"""
+	class ConbunnCardboardWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Conbunn Cardboard"
 	options_dataclass = ConbunnCardboardOptions
 	options: ConbunnCardboardOptions
@@ -22,10 +26,13 @@ class ConbunnCardboard(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 
 	def generate_early(self):
 		options = self.options
@@ -35,7 +42,7 @@ class ConbunnCardboard(World):
 			if "cds_required_to_goal" in passthrough:
 				options.cds_required_to_goal = CDsRequiredToGoal(passthrough["cds_required_to_goal"])
 			
-		check_options(self)
+		else: check_options(self)
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -49,7 +56,7 @@ class ConbunnCardboard(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("CD", player, self.options.cds_required_to_goal)
+		self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "CD", self.options.cds_required_to_goal)
 
 	def fill_slot_data(self):
 		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]
@@ -60,6 +67,9 @@ class ConbunnCardboard(World):
 			"uuid": str(shuffled)
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return "Cardboard Coin"
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 

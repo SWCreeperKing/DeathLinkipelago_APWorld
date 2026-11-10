@@ -26,15 +26,17 @@ class SlimeRancher(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = True
 	item_name_groups = {
-		"unlocks": region_unlocks
+		"unlocks": region_unlocks,
+		"blueprints": blueprint_items
 	}
 	location_name_groups = {
-		"The Ranch": ["The Grotto - The Limitless Black of Space", "The Grotto - Overlooking the Slime Sea", "The Overgrowth - Artifical Moss Blanket", "The Lab - The Wonders of Plort Technology", "The Lab - Tinkerer's Starting Cache", "The Docks - Our Greater Purpose"],
+		"The Ranch": ["The Grotto - The Limitless Black of Space", "The Overgrowth - Artifical Moss Blanket", "The Lab - The Wonders of Plort Technology", "The Lab - Tinkerer's Starting Cache", "The Docks - Our Greater Purpose"],
 		"Ogden's Retreat": ["Ogden's Retreat - That's a Whole Lotta Kookabobas", "The Wilds - Across From the Hunter's Sakura Tree", "The Wilds - On a Cliff Dividing Two Entrances", "The Wilds - A Precarious Ledge By the Waterfall", "The Wilds - An Outcropping Near the Beach", "The Wilds - Inside a Pink Tree Stump", "The Wilds - Hidden Bridge Behind a Triangular Staircase", "The Wilds - Double Waterfall Treasure", "The Wilds - On a Tiny Ledge Overlooking the Underground River", "The Wilds - Coral Ring Island Exit"],
 		"Dry Reef": ["Dry Reef - Hobson's Greetings", "Dry Reef - Indigo Quarry Entrance", "Dry Reef - Great Big Tree", "Dry Reef - A Darn Good Boot", "Dry Reef - Map Data Node", "Dry Reef - Hidden Behind a Short Wall", "Dry Reef - Phosphor Gordo's Personal Pod", "Dry Reef - In the Cliff Tree's Roots", "Dry Reef - Nested by Tabby Gordo", "Dry Reef - Stony Hen Hen Coop", "Dry Reef - Hidden Away on an ARCH-ipelago", "Dry Reef - Overlooking the Tarr Hotspot", "Dry Reef - Hidden Crevice Under the Hidden Cliff", "Dry Reef - Hidden Treasure of the Pink Gordo", "Dry Reef - Nested in Crystal", "Dry Reef - Ruminating on the Beach", "Dry Reef - Carrot Patch Cache", "Dry Reef - Tiny Not-Huge Island", "Ring Island - We'd Get Along Just Fine", "Ring Island - Flower Viewing on a Cliff", "Ring Island - Perilously Perched Pod", "Ring Island - Hidden on the Backside of the Island", "Ring Island - King of the Hill", "Dry Reef - Hidden in the Shade", "Dry Reef - Beneath the Wooden Scaffolding", "The Slime Sea - Island Alone in the Sea"],
 		"Post-Game": ["Ring Island Vault - Don't Get Too Greedy Pod 1", "Ring Island Vault - Don't Get Too Greedy Pod 2", "Ring Island Vault - Don't Get Too Greedy Pod 3", "Ring Island Vault - Don't Get Too Greedy Pod 4", "Ring Island Vault - The Quintessential Quintuplet #1", "Ring Island Vault - The Quintessential Quintuplet #2", "Ring Island Vault - The Quintessential Quintuplet #3", "Ring Island Vault - The Quintessential Quintuplet #4", "Ring Island Vault - The Quintessential Quintuplet #5", "Ring Island Vault - Mushroom Column Riches #1", "Ring Island Vault - Mushroom Column Riches #2", "Ring Island Vault - Mushroom Column Riches #3", "Ring Island Vault - Boring Column Riches #1", "Ring Island Vault - Boring Column Riches #2", "Ash Isle Vault - The Lone Pod Stands Alone", "Ash Isle Vault - Daniel #1", "Ash Isle Vault - Daniel #2", "Ash Isle Vault - Daniel #3", "Ash Isle Vault - The Cooler Daniel #1", "Ash Isle Vault - The Cooler Daniel #2", "Ash Isle Vault - The Cooler Daniel #3", "Ash Isle Vault - The Cooler Daniel #4", "Ash Isle Vault - The Cooler Daniel #5", "Ash Isle Vault - Golden Rain #1", "Ash Isle Vault - Golden Rain #2", "Ash Isle Vault - Golden Rain #3", "Ash Isle Vault - Golden Rain #4", "Ash Isle Vault - Golden Rain #5", "Ash Isle Vault - Okay Listen, I'm Running Out of Good Names For These Treasure Pods, And They All Look The Same So Hopefully You Can Take This As My Apology #1", "Ash Isle Vault - Okay Listen, I'm Running Out of Good Names For These Treasure Pods, And They All Look The Same So Hopefully You Can Take This As My Apology #2", "Ash Isle Vault - Okay Listen, I'm Running Out of Good Names For These Treasure Pods, And They All Look The Same So Hopefully You Can Take This As My Apology #3", "Ash Isle Vault - The Council Member 1", "Ash Isle Vault - The Council Member 2", "Ash Isle Vault - The Council Member 3", "Ash Isle Vault - The Council Member 4", "Moss Blanket Vault - The Slime Central's Left-Hand Man", "Moss Blanket Vault - The Slime Central's Right-Hand Man", "Moss Blanket Vault - What's Left of the Riches #1", "Moss Blanket Vault - What's Left of the Riches #2", "Moss Blanket Vault - What's Right of the Riches #1", "Moss Blanket Vault - What's Right of the Riches #2", "Moss Blanket Vault - A Mountain of Gold #1", "Moss Blanket Vault - A Mountain of Gold #2", "Moss Blanket Vault - A Mountain of Gold #3", "Moss Blanket Vault - A Mountain of Gold #4", "Moss Blanket Vault - A Mountain of Gold #5"],
-		"The Slime Sea": ["The Slime Sea - In Between a Rock and an Island", "The Mustache Shrine - Mustache Stache Cache", "The Slime Sea - On the Giant Tree Stump"],
+		"The Slime Sea": ["The Grotto - Overlooking the Slime Sea", "The Slime Sea - In Between a Rock and an Island", "The Mustache Shrine - Mustache Stache Cache", "The Slime Sea - On the Giant Tree Stump"],
 		"Indigo Quarry": ["Indigo Quarry - I Liked Her Laugh", "Indigo Quarry - Crystal Wind Chime", "Indigo Quarry - Peeping Puddle Slimes", "Indigo Quarry - Map Data Node", "Indigo Quarry - Skate Fast Eat Grass", "Indigo Quarry - Coral Tube Treasure", "Indigo Quarry - The Boom Zone", "Indigo Quarry - Above the Smoke and Ashes", "Indigo Quarry - Personal Puddle Pod", "Indigo Quarry - Hidden Behind Stalagtmites", "Indigo Quarry - On a Cliff Before Puddle Lake", "Indigo Quarry - Across Hexium Crystal Formations", "Indigo Quarry - Ashore Near Puddle Lake", "Indigo Quarry - Under a Hexium Crystal", "Indigo Quarry - Under Crumbled Scaffolding", "Indigo Quarry - Slightly Irradiated Reward", "Indigo Quarry - Through the Radiation Cave", "Indigo Quarry - Crystal Cache behind Rickety Bridges", "Ash Isles - Looking to the Stars", "Ash Isles - Atop a Firey Perch", "Ash Isles - The Edge of the World", "Ash Isles - Blooming from Fire Flowers", "Indigo Quarry - Treasure After the End", "Indigo Quarry - Follow the Ravine"],
 		"Moss Blanket": ["Moss Blanket - New Ancient Jungle", "Moss Blanket - MOSS BLANKET STUCK", "Moss Blanket - Map Data Node", "Moss Blanket - Surrounded by Mushrooms", "Moss Blanket - Flowery Dead End", "Moss Blanket - Above the Hungry Hungry Largos", "Moss Blanket - In the Honey Heaven", "Moss Blanket - The Cupboard under the Stairs", "Moss Blanket - Under the Log River", "Moss Blanket - Behind a Lonely Mountain", "Moss Blanket - In the Roots of a Huge Tree", "Moss Blanket - Overlooking the Tiny Pond", "Moss Blanket - Under the Log Bridge", "Moss Blanket - Fairy Circle Treasure", "Moss Blanket - Not Quite Hidden", "Moss Blanket - Can't Recommend Love Enough", "Moss Blanket - Just Under a Ledge", "Moss Blanket - At the Bottom of a Sheer Wall", "Moss Blanket - Sunken Treasure", "Moss Blanket - Off the Unbeaten Path", "Moss Blanket - Peepers Peeled!", "Moss Blanket - Very, Very, Very Tall Tree", "Moss Blanket - The Lost Archipelago", "Moss Blanket - The 'Missed the Jump' Crevice"],
 		"Ancient Ruins": ["Ancient Ruins Transition - Slime Buddy", "Ancient Ruins - These Folks Like Slimes", "Ancient Ruins - You Gotta Choose a Path", "Ancient Ruins - Ice-Cold Lemonade", "Ancient Ruins - Map Data Node", "Ancient Ruins - Tree Memorial", "Ancient Ruins - A Flowery Respite", "Ancient Ruins - Hidden Nook", "Ancient Ruins - The Hidden Turnabout", "Ancient Ruins - Caught Up in the Explosion", "Ancient Ruins - The End of a Long and Arduous Journey", "Ancient Ruins - In a Crumbled Pile", "Ancient Ruins - At the End of a Broken Pillar Path", "Ancient Ruins - Everything Quiet on the Western Front", "Ancient Ruins - Above the Ancient Teleporter", "Ancient Ruins - There's Slimes in the Walls", "Ancient Ruins - Collapsed Upper Staircase", "Ancient Ruins - The Room With No Door", "Ancient Ruins - Shrine Overlooking the Ancient Ruins", "Ancient Ruins - Hidden Nook on a High Up Platform", "Ancient Ruins - Follow the Sunken Pillars", "Ancient Ruins - Truly Untamed Country"],
@@ -46,10 +48,11 @@ class SlimeRancher(World):
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
+		self.local_fill_loc = []
 
 	def generate_early(self):
 		options = self.options
-		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Slime Rancher" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Slime Rancher"]
@@ -73,6 +76,9 @@ class SlimeRancher(World):
 			
 			if "plortsanity" in passthrough:
 				options.plortsanity = Plortsanity(passthrough["plortsanity"])
+			
+			if "gadgetsanity" in passthrough:
+				options.gadgetsanity = Gadgetsanity(passthrough["gadgetsanity"])
 			
 			if "fix_market_rates" in passthrough:
 				options.fix_market_rates = FixMarketRates(passthrough["fix_market_rates"])
@@ -116,6 +122,7 @@ class SlimeRancher(World):
 			if "market_logic" in passthrough:
 				options.market_logic = MarketLogic(passthrough["market_logic"])
 			
+		else: check_options(self)
 		if self.options.start_with_dry_reef:
 		    self.multiworld.push_precollected(self.create_item("Region Unlock: Dry Reef"))
 		if self.options.start_with_drone:
@@ -149,7 +156,7 @@ class SlimeRancher(World):
 			case 0:
 				self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Note Read", 30)
 			case 1:
-				self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "7Zee Bought", len(corporate_locations))
+				self.multiworld.completion_condition[self.player] = lambda state: has_7zeeLevel(state, player, options, 28)
 			case 2:
 				self.multiworld.completion_condition[self.player] = lambda state: has_all(state, player, options, credits_unlocks)
 			case 3:
@@ -168,6 +175,7 @@ class SlimeRancher(World):
 			"treasure_cracker_checks": int(self.options.treasure_cracker_checks),
 			"include_7z": bool(self.options.include_7z),
 			"plortsanity": int(self.options.plortsanity),
+			"gadgetsanity": bool(self.options.gadgetsanity),
 			"fix_market_rates": bool(self.options.fix_market_rates),
 			"start_with_drone": bool(self.options.start_with_drone),
 			"trap_percent": int(self.options.trap_percent),
@@ -185,6 +193,9 @@ class SlimeRancher(World):
 			"uuid": str(shuffled)
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return ["75x Newbucks","81x Newbucks","99x Newbucks","100x Newbucks"][self.random.randint(0,3)]
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 

@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class Atlyss(World):
 	"""
 	Atlyss
 	"""
+	class AtlyssWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Atlyss"
 	options_dataclass = AtlyssOptions
 	options: AtlyssOptions
@@ -22,14 +26,17 @@ class Atlyss(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 
 	def generate_early(self):
-		check_options(self)
 		options = self.options
+		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Atlyss" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Atlyss"]

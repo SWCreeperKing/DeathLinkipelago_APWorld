@@ -23,6 +23,7 @@ def gen_create_regions(world):
 		"Dry Reef - Ring Island": Region("Dry Reef - Ring Island", world.player, world.multiworld),
 		"The Slime Sea - Between Grotto and Dry Reef Island 2": Region("The Slime Sea - Between Grotto and Dry Reef Island 2", world.player, world.multiworld),
 		"Dry Reef - Offshoot": Region("Dry Reef - Offshoot", world.player, world.multiworld),
+		"The Slime Sea - That One Platform I Refused To Put As A Region Until Now": Region("The Slime Sea - That One Platform I Refused To Put As A Region Until Now", world.player, world.multiworld),
 		"The Slime Sea - Between Grotto and Dry Reef Island 1": Region("The Slime Sea - Between Grotto and Dry Reef Island 1", world.player, world.multiworld),
 		"Moss Blanket - Hunter's Domain": Region("Moss Blanket - Hunter's Domain", world.player, world.multiworld),
 		"The Slime Sea - Off Moss Blanket": Region("The Slime Sea - Off Moss Blanket", world.player, world.multiworld),
@@ -72,7 +73,9 @@ def gen_create_regions(world):
 	connect_region("Dry Reef - Main", "Dry Reef - Beach", region_map, None, lambda state: has_region(state, player, options, "Dry Reef"), False)
 	connect_region("Dry Reef - Beach", "Dry Reef - Ring Island", region_map, None, lambda state: (has_region(state, player, options, "Dry Reef") and get_yaml_option(state, player, options, 'easy_skips')) or (has_region(state, player, options, "Dry Reef") and has_jetpack(state, player, options)), False)
 	connect_region("The Slime Sea - Between Grotto and Dry Reef Island 2", "Dry Reef - Offshoot", region_map, None, lambda state: has_region(state, player, options, "Dry Reef") and has_jetpack(state, player, options), False)
-	connect_region("The Grotto", "The Slime Sea - Between Grotto and Dry Reef Island 1", region_map, None, lambda state: (get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'obscure_locations')) or has_jetpack(state, player, options), False)
+	connect_region("The Grotto", "The Slime Sea - That One Platform I Refused To Put As A Region Until Now", region_map, None, lambda state: True, False)
+	connect_region("The Slime Sea - Between Grotto and Dry Reef Island 1", "The Slime Sea - That One Platform I Refused To Put As A Region Until Now", region_map, None, lambda state: (get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'dangerous_skips')) or has_jetpack(state, player, options), False)
+	connect_region("The Slime Sea - That One Platform I Refused To Put As A Region Until Now", "The Slime Sea - Between Grotto and Dry Reef Island 1", region_map, None, lambda state: (get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'dangerous_skips')) or has_jetpack(state, player, options), False)
 	connect_region("The Slime Sea - Between Grotto and Dry Reef Island 2", "The Slime Sea - Between Grotto and Dry Reef Island 1", region_map, None, lambda state: has_jetpack(state, player, options), False)
 	connect_region("The Slime Sea - Between Grotto and Dry Reef Island 1", "The Slime Sea - Between Grotto and Dry Reef Island 2", region_map, None, lambda state: has_jetpack(state, player, options) or (get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'dangerous_skips')), False)
 	connect_region("Dry Reef - Offshoot", "The Slime Sea - Between Grotto and Dry Reef Island 2", region_map, None, lambda state: has_jetpack(state, player, options), False)
@@ -90,7 +93,7 @@ def gen_create_regions(world):
 	connect_region("Moss Blanket - Main", "Ancient Ruins Transition", region_map, None, lambda state: has_region(state, player, options, "Ancient Ruins Transition"), False)
 	connect_region("Indigo Quarry - Ancient Ruins Transition Overlap", "Ancient Ruins Transition", region_map, None, lambda state: has_region(state, player, options, "Ancient Ruins Transition"), False)
 	connect_region("Ancient Ruins Transition", "Ancient Ruins - Main", region_map, None, lambda state: has_region(state, player, options, "Ancient Ruins") and has(state, player, options, 'Tabby Plort') and has(state, player, options, 'Rock Plort') and has(state, player, options, 'Phosphor Plort') and has(state, player, options, 'Boom Plort') and has(state, player, options, 'Rad Plort') and has(state, player, options, 'Honey Plort'), False)
-	connect_region("Ancient Ruins - Main", "Ancient Ruins - Teleporter Room", region_map, None, lambda state: has_region(state, player, options, "Ancient Ruins"), False)
+	connect_region("Ancient Ruins - Main", "Ancient Ruins - Teleporter Room", region_map, None, lambda state: has_region(state, player, options, "Glass Desert"), False)
 	connect_region("Ancient Ruins - Teleporter Room", "Glass Desert - First Half", region_map, None, lambda state: has_region(state, player, options, "Glass Desert") and has(state, player, options, 'Quantum Plort'), False)
 	connect_region("Glass Desert - First Half", "Glass Desert - Second Half", region_map, None, lambda state: has_region(state, player, options, "Glass Desert") or (has_region(state, player, options, "Glass Desert") and has_jetpack(state, player, options) and get_yaml_option(state, player, options, 'precise_movement') and get_yaml_option(state, player, options, 'obscure_locations')) or (has_region(state, player, options, "Glass Desert") and has_jetpack(state, player, options) and has_energy(state, player, options, 1) and get_yaml_option(state, player, options, 'obscure_locations')), False)
 	connect_region("Ogden's Retreat", "The Wilds", region_map, None, lambda state: has_region(state, player, options, "The Wilds"), False)
@@ -198,10 +201,39 @@ def gen_create_regions(world):
 			if location[1] in region_map:
 				make_location(world, location[0], location[1], region_map, rule_map, False)
 	
-	if world.options.include_7z and world.options.goal_type == 1:
-		for location in corporate_locations:
+	if world.options.gadgetsanity:
+		for location in gadget_blueprints:
 			if location[1] in region_map:
-				make_event_location(world, f"Bought: {location[0]}", location[0], "7Zee Bought", None, location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False)
+	
+	make_event_location(world, "Bought Level: 1", "''", "7Zee Level 1", None, "Menu", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 2", "''", "7Zee Level 2", None, "Menu", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 3", "''", "7Zee Level 3", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 4", "''", "7Zee Level 4", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 5", "''", "7Zee Level 5", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 6", "''", "7Zee Level 6", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 7", "''", "7Zee Level 7", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 8", "''", "7Zee Level 8", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 9", "''", "7Zee Level 9", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 10", "''", "7Zee Level 10", None, "Dry Reef - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 11", "''", "7Zee Level 11", None, "Ancient Ruins Transition", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 12", "''", "7Zee Level 12", None, "Ancient Ruins Transition", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 13", "''", "7Zee Level 13", None, "Ancient Ruins Transition", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 14", "''", "7Zee Level 14", None, "Ancient Ruins Transition", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 15", "''", "7Zee Level 15", None, "Ancient Ruins Transition", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 16", "''", "7Zee Level 16", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 17", "''", "7Zee Level 17", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 18", "''", "7Zee Level 18", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 19", "''", "7Zee Level 19", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 20", "''", "7Zee Level 20", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 21", "''", "7Zee Level 21", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 22", "''", "7Zee Level 22", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 23", "''", "7Zee Level 23", None, "Ancient Ruins - Main", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 24", "''", "7Zee Level 24", None, "Glass Desert - First Half", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 25", "''", "7Zee Level 25", None, "Glass Desert - First Half", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 26", "''", "7Zee Level 26", None, "Glass Desert - First Half", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 27", "''", "7Zee Level 27", None, "Glass Desert - First Half", region_map, rule_map, False)
+	make_event_location(world, "Bought Level: 28", "''", "7Zee Level 28", None, "Glass Desert - First Half", region_map, rule_map, False)
 	
 	make_event_location(world, "Pink (The Ranch)", "''", "Pink Plort", None, "The Ranch", region_map, rule_map, False)
 	make_event_location(world, "Pink (Dry Reef - Main)", "''", "Pink Plort", None, "Dry Reef - Main", region_map, rule_map, False)
@@ -319,6 +351,29 @@ def gen_create_regions(world):
 		make_event_location(world, "ML_Puddle (Dry Reef - Main)", "''", "Puddle Plort", None, "Dry Reef - Main", region_map, rule_map, False)
 		
 	
+	if options.gadgetsanity:
+		make_event_location(world, "Jellystone", "Jellystone", "Jellystone", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Slime Fossil", "Slime Fossil", "Slime Fossil", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Strange Diamond", "Strange Diamond", "Strange Diamond", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Indigonium", "Indigonium", "Indigonium", None, "Indigo Quarry - Before First Bridge", region_map, rule_map, False)
+		make_event_location(world, "Indigonium", "Indigonium", "Indigonium", None, "Indigo Quarry - After The Bridge", region_map, rule_map, False)
+		make_event_location(world, "Glass Shard", "Glass Shard", "Glass Shard", None, "Glass Desert - First Half", region_map, rule_map, False)
+		make_event_location(world, "Buzz Wax", "Buzz Wax", "Buzz Wax", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Hexacomb", "Hexacomb", "Hexacomb", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Royal Jelly", "Royal Jelly", "Royal Jelly", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Wild Honey", "Wild Honey", "Wild Honey", None, "Moss Blanket - Main", region_map, rule_map, False)
+		make_event_location(world, "Wild Honey", "Wild Honey", "Wild Honey", None, "Moss Blanket - Hunter's Domain", region_map, rule_map, False)
+		make_event_location(world, "Pepper Jam", "Pepper Jam", "Pepper Jam", None, "Glass Desert - First Half", region_map, rule_map, False)
+		make_event_location(world, "Primordy Oil", "Primordy Oil", "Primordy Oil", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Spiral Steam", "Spiral Steam", "Spiral Steam", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Lava Dust", "Lava Dust", "Lava Dust", None, "The Ranch", region_map, rule_map, False)
+		make_event_location(world, "Deep Brine", "Deep Brine", "Deep Brine", None, "Dry Reef - Main", region_map, rule_map, False)
+		make_event_location(world, "Deep Brine", "Deep Brine", "Deep Brine", None, "Dry Reef - Beach", region_map, rule_map, False)
+		make_event_location(world, "Deep Brine", "Deep Brine", "Deep Brine", None, "Dry Reef - Offshoot", region_map, rule_map, False)
+		make_event_location(world, "Silky Sand", "Silky Sand", "Silky Sand", None, "Glass Desert - First Half", region_map, rule_map, False)
+		make_event_location(world, "Manifold Cube", "Manifold Cube", "Manifold Cube", None, "Viktor's Workshop", region_map, rule_map, False)
+		
+	
 	for location in gates:
 		if location[1] in region_map:
 			make_event_location(world, f"Event: {location[0]}", location[0], f"Opened Gate: {location[0]}", None, location[1], region_map, rule_map, False)
@@ -361,7 +416,11 @@ def connect_region(from_region, to_region, region_map, name, rule, is_connection
 
 def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial):
 	loc = make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map, is_location_crucial)
-	if loc is not None: world.location_count += 1
+	if loc is not None: 
+	   world.location_count += 1
+	   
+	   if world.enable_local_fill:
+	       world.local_fill_loc.append(loc)
 	return loc
 
 def make_event_location(world, location_name_a, location_name_b, item_name, id, region_name, region_map, rule_map, is_location_crucial):

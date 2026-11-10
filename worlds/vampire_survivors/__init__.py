@@ -29,10 +29,13 @@ class VampireSurvivors(World):
 	}
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 		self.starting_character = ""
 		self.starting_stage = ""
 		self.stage_goal_amount = 0
@@ -154,12 +157,6 @@ class VampireSurvivors(World):
 			if "ending_stage_count" in passthrough:
 				self.ending_stage_count = passthrough["ending_stage_count"]
 			
-			self.multiworld.push_precollected(self.create_item(f"Stage Unlock: {self.starting_stage}"))
-			self.multiworld.push_precollected(self.create_item(f"Character Unlock: {self.starting_character}"))
-			if self.options.lock_arcanas_behind_item.value:
-			    self.multiworld.push_precollected(self.create_item("Gamemode Unlock: Arcanas"))
-			if self.options.lock_hurry_behind_item.value:
-			    self.multiworld.push_precollected(self.create_item("Gamemode Unlock: Hurry"))
 		else: check_options(self)
 		stages = [stage for stage in self.final_included_stages_list if stage != EUDAI]
 		characters = self.final_included_characters_list
@@ -218,10 +215,14 @@ class VampireSurvivors(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
+		self.multiworld.completion_condition[self.player] = lambda state: has_stage(state, player, options, EUDAI) and has_amount(state, player, options, "Beat a Stage", self.ending_stage_count)
 		if self.options.goal_requirement == 0:
 			self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Beat a Stage", self.stage_goal_amount)
 		elif self.options.goal_requirement == 1:
-			self.multiworld.completion_condition[self.player] = lambda state: has_stage(state, player, options, EUDAI) and has_amount(state, player, options, "Beat a Stage", self.ending_stage_count)
+			def set_rules(self):
+				player = self.player
+				options = self.options
+				self.multiworld.completion_condition[self.player] = lambda state: has_stage(state, player, options, EUDAI) and has_amount(state, player, options, "Beat a Stage", self.ending_stage_count)
 
 	def fill_slot_data(self):
 		slot_data = {
@@ -264,6 +265,9 @@ class VampireSurvivors(World):
 			"ending_stage_count": int(self.ending_stage_count)
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return ["Empty Coffins","Floor Chickens","Suspiciously Clean Skull","Easter Eggs","Progressive Nothing"][self.random.randint(0,4)]
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 

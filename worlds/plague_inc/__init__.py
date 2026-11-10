@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class PlagueInc(World):
 	"""
 	Plague Inc
 	"""
+	class PlagueIncWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Plague Inc"
 	options_dataclass = PlagueIncOptions
 	options: PlagueIncOptions
@@ -22,10 +26,13 @@ class PlagueInc(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 		self.starting_diff = ""
 		self.starting_disease = ""
 		self.victories_needed = 0
@@ -62,7 +69,7 @@ class PlagueInc(World):
 			if "victories_needed" in passthrough:
 				victories_needed = passthrough["victories_needed"]
 			
-		check_options(self)
+		else: check_options(self)
 		self.multiworld.push_precollected(self.create_item(self.starting_diff))
 		self.multiworld.push_precollected(self.create_item(self.starting_disease))
 		for always_avail_tech in always_tech:
@@ -80,7 +87,7 @@ class PlagueInc(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", player, self.victories_needed)
+		self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Victory", self.victories_needed)
 
 	def fill_slot_data(self):
 		slot_data = {

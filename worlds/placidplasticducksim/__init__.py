@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class PlacidPlasticDuckSimulator(World):
 	"""
 	Placid Plastic Duck Simulator
 	"""
+	class PlacidPlasticDuckSimulatorWeb(WebWorld):
+		tutorials = []
+
+
 	game = "Placid Plastic Duck Simulator"
 	options_dataclass = PlacidPlasticDuckSimulatorOptions
 	options: PlacidPlasticDuckSimulatorOptions
@@ -22,6 +26,8 @@ class PlacidPlasticDuckSimulator(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 	item_name_groups = {
 		"column": ["Progressive Column Unlock"]
 	}
@@ -29,6 +35,7 @@ class PlacidPlasticDuckSimulator(World):
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 
 	def generate_early(self):
 		options = self.options
@@ -50,7 +57,7 @@ class PlacidPlasticDuckSimulator(World):
 			if "ducklings" in passthrough:
 				options.ducklings = Ducklings(passthrough["ducklings"])
 			
-		check_options(self)
+		else: check_options(self)
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -75,6 +82,9 @@ class PlacidPlasticDuckSimulator(World):
 			"ducklings": bool(self.options.ducklings)
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return "Random Duck"
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 

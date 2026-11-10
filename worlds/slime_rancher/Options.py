@@ -86,6 +86,17 @@ class Plortsanity(Choice):
 	default = 1
 
 
+class Gadgetsanity(Toggle):
+	"""
+	A setting to included checks related to the lab gadgets
+	
+	- Blueprints as items
+	- Finding the blueprints that allow you to craft the gadgets
+	- Crafting the gadgets themselves after finding the blueprints
+	"""
+	display_name = "Gadgetsanity"
+
+
 class FixMarketRates(DefaultOnToggle):
 	"""
 	Overrides the default market behavior:
@@ -197,6 +208,16 @@ class MarketLogic(Toggle):
 	display_name = "Market Logic"
 
 
+class LocalFill(Range):
+	"""
+	% of filler to be made local
+	"""
+	display_name = "Local Fill"
+	range_start = 0
+	range_end = 0
+	default = 0
+
+
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
 	goal_type: GoalType
@@ -206,6 +227,7 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	treasure_cracker_checks: TreasureCrackerChecks
 	include_7z: Include7z
 	plortsanity: Plortsanity
+	gadgetsanity: Gadgetsanity
 	fix_market_rates: FixMarketRates
 	start_with_drone: StartWithDrone
 	trap_percent: TrapPercent
@@ -220,6 +242,7 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	largo_jumps: LargoJumps
 	jetpack_boosts: JetpackBoosts
 	market_logic: MarketLogic
+	local_fill: LocalFill
 
 	def get_options_map(self, option):
 		match option:
@@ -237,6 +260,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.include_7z
 			case "plortsanity":
 				return self.plortsanity
+			case "gadgetsanity":
+				return self.gadgetsanity
 			case "fix_market_rates":
 				return self.fix_market_rates
 			case "start_with_drone":
@@ -265,6 +290,8 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.jetpack_boosts
 			case "market_logic":
 				return self.market_logic
+			case "local_fill":
+				return self.local_fill
 		
 
 def check_options(world):

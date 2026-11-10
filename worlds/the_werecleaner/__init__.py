@@ -1,4 +1,4 @@
-from worlds.AutoWorld import World
+from worlds.AutoWorld import *
 from .Locations import *
 from .Rules import *
 from .Options import *
@@ -13,6 +13,10 @@ class TheWereCleaner(World):
 	"""
 	The WereCleaner
 	"""
+	class TheWereCleanerWeb(WebWorld):
+		tutorials = []
+
+
 	game = "The WereCleaner"
 	options_dataclass = TheWereCleanerOptions
 	options: TheWereCleanerOptions
@@ -22,10 +26,13 @@ class TheWereCleaner(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
+	enable_local_fill = False
+	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
 		self.location_count = 0
+		self.local_location_count = 0
 		self.starting_stage = ""
 
 	def generate_early(self):
@@ -36,7 +43,7 @@ class TheWereCleaner(World):
 			if "kill_sanity" in passthrough:
 				options.kill_sanity = KillSanity(passthrough["kill_sanity"])
 			
-		check_options(self)
+		else: check_options(self)
 
 	def create_regions(self):
 		gen_create_regions(self)
@@ -50,7 +57,7 @@ class TheWereCleaner(World):
 	def set_rules(self):
 		player = self.player
 		options = self.options
-		self.multiworld.completion_condition[self.player] = lambda state: state.has("Nights Survived", player, 7)
+		self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Nights Survived", 7)
 
 	def fill_slot_data(self):
 		slot_data = {
@@ -58,6 +65,9 @@ class TheWereCleaner(World):
 			"Kyle": str("Best Boi")
 		}
 		return slot_data
+
+	def get_filler_item_name(self):
+		return "Floor Penny"
 
 	def generate_output(self, output_directory: str):
 		if self.gen_puml: 
