@@ -27,7 +27,6 @@ class PlacidPlasticDuckSimulator(World):
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	enable_local_fill = False
-	local_fill_loc = []
 	item_name_groups = {
 		"column": ["Progressive Column Unlock"]
 	}

@@ -55,11 +55,11 @@ def has_any(state, player, options, items) -> bool:
 def has_all(state, player, options, items) -> bool:
 	return all(has(state, player, options, item) for item in items)
 
-def has_crowbar(state, player, options) -> bool:
-	return True
-
 def has_diy_simple_lockpick(state, player, options) -> bool:
 	return has(state, player, options, "DIY Simple Lockpick")
+
+def has_crowbar(state, player, options) -> bool:
+	return has(state, player, options, "Crowbar")
 
 def has_lockpick(state, player, options) -> bool:
 	return has(state, player, options, "Lockpick")
@@ -111,3 +111,6 @@ def has_front_door_key_102(state, player, options) -> bool:
 
 def has_front_door_key_113(state, player, options) -> bool:
 	return has(state, player, options, "Front door key 113")
+
+def has_flashlight(state, player, options) -> bool:
+	return has(state, player, options, "Flashlight")

@@ -26,7 +26,7 @@ class SlimeRancher(World):
 	gen_puml = False
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
-	enable_local_fill = True
+	enable_local_fill = False
 	item_name_groups = {
 		"unlocks": region_unlocks,
 		"blueprints": blueprint_items
@@ -49,7 +49,6 @@ class SlimeRancher(World):
 		super().__init__(multiworld, player)
 		self.location_count = 0
 		self.local_location_count = 0
-		self.local_fill_loc = []
 
 	def generate_early(self):
 		options = self.options

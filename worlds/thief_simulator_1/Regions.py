@@ -79,6 +79,11 @@ def gen_create_regions(world):
 	for location in locs:
 		if location[1] in region_map:
 			make_location(world, location[0], location[1], region_map, rule_map, False, True)
+	make_event_location(world, "Event: [Crowbar]", "Crowbar", "Crowbar", None, "Greenview St", region_map, rule_map, False)
+	make_event_location(world, "Event: [Flashlight]", "Flashlight", "Flashlight", None, "Greenview St", region_map, rule_map, False)
+	make_event_location(world, "Event: [House 102: Front Door Key to 102]", "House 102: Front Door Key to 102", "Front door key 102", None, "102", region_map, rule_map, False)
+	make_event_location(world, "Event: [House 113 Bedroom: Front Door Key 113]", "House 113 Bedroom: Front Door Key 113", "Front door key 113", None, "113 Bedroom", region_map, rule_map, False)
+	
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)

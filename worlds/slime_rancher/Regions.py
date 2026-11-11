@@ -123,41 +123,41 @@ def gen_create_regions(world):
 	if options.postgame:
 		connect_region("Glass Desert - Second Half", "Post-Game", region_map, None, lambda state: get_yaml_option(state, player, options, 'postgame'), False)
 	
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.1)", "Menu", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.2)", "Dry Reef - Main", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Heart Module lv.3)", "Dry Reef - Main", region_map, rule_map, False)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.1)", "Menu", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.2)", "Dry Reef - Main", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Heart Module lv.3)", "Dry Reef - Main", region_map, rule_map, False, True)
 	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Heart Module lv.4)", "Ancient Ruins - Main", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Heart Module lv.4)", "Ancient Ruins - Main", region_map, rule_map, False, True)
 	
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.1)", "Menu", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.2)", "Dry Reef - Main", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Tank Booster lv.3)", "Dry Reef - Main", region_map, rule_map, False)
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.1)", "Menu", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.2)", "Dry Reef - Main", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Tank Booster lv.3)", "Dry Reef - Main", region_map, rule_map, False, True)
 	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Tank Booster lv.4)", "Ancient Ruins - Main", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Tank Booster lv.4)", "Ancient Ruins - Main", region_map, rule_map, False, True)
 	
-	make_location(world, "Buy Personal Upgrade (Dash Boots lv.1)", "Menu", region_map, rule_map, False)
+	make_location(world, "Buy Personal Upgrade (Dash Boots lv.1)", "Menu", region_map, rule_map, False, True)
 	if world.options.include_7z:
-		make_location(world, "Buy Personal Upgrade (Dash Boots lv.2)", "Ancient Ruins - Main", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Dash Boots lv.2)", "Ancient Ruins - Main", region_map, rule_map, False, True)
 	
-	make_location(world, "Buy Personal Upgrade (Power Core lv.1)", "Menu", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Power Core lv.2)", "Dry Reef - Main", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Power Core lv.3)", "Dry Reef - Main", region_map, rule_map, False)
+	make_location(world, "Buy Personal Upgrade (Power Core lv.1)", "Menu", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Power Core lv.2)", "Dry Reef - Main", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Power Core lv.3)", "Dry Reef - Main", region_map, rule_map, False, True)
 	if 1 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "Ancient Ruins Transition", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.1)", "Ancient Ruins Transition", region_map, rule_map, False, True)
 	
 	if 2 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "Ancient Ruins Transition", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.2)", "Ancient Ruins Transition", region_map, rule_map, False, True)
 	
 	if 3 <= world.options.treasure_cracker_checks:
-		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "Ancient Ruins Transition", region_map, rule_map, False)
+		make_location(world, "Buy Personal Upgrade (Treasure Cracker lv.3)", "Ancient Ruins Transition", region_map, rule_map, False, True)
 	
-	make_location(world, "Buy Personal Upgrade (Jetpack)", "Menu", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Air Drive)", "Dry Reef - Main", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Pulse Wave)", "Menu", region_map, rule_map, False)
-	make_location(world, "Buy Personal Upgrade (Liquid Slot)", "Menu", region_map, rule_map, False)
+	make_location(world, "Buy Personal Upgrade (Jetpack)", "Menu", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Air Drive)", "Dry Reef - Main", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Pulse Wave)", "Menu", region_map, rule_map, False, True)
+	make_location(world, "Buy Personal Upgrade (Liquid Slot)", "Menu", region_map, rule_map, False, True)
 	for location in interactables:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	if world.options.goal_type == 0:
 		make_event_location(world, "Read: The Grotto - The Limitless Black of Space", "The Grotto - The Limitless Black of Space", "Note Read", None, "The Grotto", region_map, rule_map, False)
 		make_event_location(world, "Read: The Overgrowth - Artifical Moss Blanket", "The Overgrowth - Artifical Moss Blanket", "Note Read", None, "The Overgrowth", region_map, rule_map, False)
@@ -194,17 +194,17 @@ def gen_create_regions(world):
 	if world.options.enable_stylish_dlc_treasure_pods:
 		for location in dlc_interactables:
 			if location[1] in region_map:
-				make_location(world, location[0], location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	if world.options.include_7z:
 		for location in corporate_locations:
 			if location[1] in region_map:
-				make_location(world, location[0], location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	if world.options.gadgetsanity:
 		for location in gadget_blueprints:
 			if location[1] in region_map:
-				make_location(world, location[0], location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	make_event_location(world, "Bought Level: 1", "''", "7Zee Level 1", None, "Menu", region_map, rule_map, False)
 	make_event_location(world, "Bought Level: 2", "''", "7Zee Level 2", None, "Menu", region_map, rule_map, False)
@@ -378,28 +378,28 @@ def gen_create_regions(world):
 		if location[1] in region_map:
 			make_event_location(world, f"Event: {location[0]}", location[0], f"Opened Gate: {location[0]}", None, location[1], region_map, rule_map, False)
 	if options.plortsanity > 0:
-		make_location(world, "Sell a Pink Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Tabby Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Rock Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Phosphor Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Boom Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Rad Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Crystal Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Honey Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Hunter Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Quantum Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Dervish Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Tangle Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Mosaic Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Puddle Plort", "Menu", region_map, rule_map, False)
-		make_location(world, "Sell a Fire Plort", "Menu", region_map, rule_map, False)
+		make_location(world, "Sell a Pink Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Tabby Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Rock Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Phosphor Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Boom Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Rad Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Crystal Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Honey Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Hunter Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Quantum Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Dervish Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Tangle Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Mosaic Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Puddle Plort", "Menu", region_map, rule_map, False, True)
+		make_location(world, "Sell a Fire Plort", "Menu", region_map, rule_map, False, True)
 		
 	
 	if options.include_ogden and options.plortsanity > 0:
-		make_location(world, "Sell a Saber Plort", "Menu", region_map, rule_map, False)
+		make_location(world, "Sell a Saber Plort", "Menu", region_map, rule_map, False, True)
 	
 	if options.plortsanity > 1:
-		make_location(world, "Sell a Gold Plort", "Menu", region_map, rule_map, False)
+		make_location(world, "Sell a Gold Plort", "Menu", region_map, rule_map, False, True)
 	
 	
 	for region in region_map.values():
@@ -414,12 +414,12 @@ def connect_region(from_region, to_region, region_map, name, rule, is_connection
 	   return
 	region_map[from_region].connect(region_map[to_region], name, rule = rule)
 
-def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial):
+def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial, is_location_local):
 	loc = make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map, is_location_crucial)
 	if loc is not None: 
 	   world.location_count += 1
 	   
-	   if world.enable_local_fill:
+	   if world.enable_local_fill and is_location_local:
 	       world.local_fill_loc.append(loc)
 	return loc
 

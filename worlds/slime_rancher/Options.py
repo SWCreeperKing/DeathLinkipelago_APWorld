@@ -208,16 +208,6 @@ class MarketLogic(Toggle):
 	display_name = "Market Logic"
 
 
-class LocalFill(Range):
-	"""
-	% of filler to be made local
-	"""
-	display_name = "Local Fill"
-	range_start = 0
-	range_end = 0
-	default = 0
-
-
 @dataclass
 class SlimeRancherOptions(PerGameCommonOptions):
 	goal_type: GoalType
@@ -242,7 +232,6 @@ class SlimeRancherOptions(PerGameCommonOptions):
 	largo_jumps: LargoJumps
 	jetpack_boosts: JetpackBoosts
 	market_logic: MarketLogic
-	local_fill: LocalFill
 
 	def get_options_map(self, option):
 		match option:
@@ -290,8 +279,6 @@ class SlimeRancherOptions(PerGameCommonOptions):
 				return self.jetpack_boosts
 			case "market_logic":
 				return self.market_logic
-			case "local_fill":
-				return self.local_fill
 		
 
 def check_options(world):

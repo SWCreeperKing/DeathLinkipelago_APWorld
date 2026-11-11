@@ -27,7 +27,6 @@ class WidgetInc(World):
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	enable_local_fill = False
-	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
@@ -39,12 +38,6 @@ class WidgetInc(World):
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Widget Inc" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Widget Inc"]
-			if "production_multiplier" in passthrough:
-				options.production_multiplier = ProductionMultiplier(passthrough["production_multiplier"])
-			
-			if "hand_crafting_multiplier" in passthrough:
-				options.hand_crafting_multiplier = HandCraftingMultiplier(passthrough["hand_crafting_multiplier"])
-			
 			if "scout_hint_tier_producers" in passthrough:
 				options.scout_hint_tier_producers = ScoutHintTierProducers(passthrough["scout_hint_tier_producers"])
 			
@@ -95,8 +88,6 @@ class WidgetInc(World):
 		self.random.shuffle(characters)
 		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
 		slot_data = {
-			"production_multiplier": int(self.options.production_multiplier),
-			"hand_crafting_multiplier": int(self.options.hand_crafting_multiplier),
 			"scout_hint_tier_producers": int(self.options.scout_hint_tier_producers),
 			"uuid": str(shuffled)
 		}

@@ -56,44 +56,44 @@ def gen_create_regions(world):
 	if options.shop_sanity:
 		for location in merchants:
 			if location[1] in region_map:
-				make_location(world, location[0], location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	for location in quests:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	for location in levels:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	for location in professions:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
-	make_location(world, "A New Journey", "Sanctum", region_map, rule_map, False)
-	make_location(world, "Clearing Catacombs (1-6)", "Sanctum Catacombs lvl 1", region_map, rule_map, False)
-	make_location(world, "Clearing Catacombs (6-12)", "Sanctum Catacombs lvl 2", region_map, rule_map, False)
-	make_location(world, "Clearing Catacombs (12-18)", "Sanctum Catacombs lvl 3", region_map, rule_map, False)
-	make_location(world, "Clearing Grove (15-20)", "Cresent Grove lvl 1", region_map, rule_map, False)
-	make_location(world, "Clearing Grove (20-25)", "Cresent Grove lvl 2", region_map, rule_map, False)
-	make_location(world, "Altered Vision", "Sanctum", region_map, rule_map, False)
-	make_location(world, "Scaling the Tower", "Sanctum", region_map, rule_map, False)
-	make_location(world, "Scaling Stars", "Trial of the Stars", region_map, rule_map, False)
-	make_location(world, "Rude!", "Sanctum", region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
+	make_location(world, "A New Journey", "Sanctum", region_map, rule_map, False, True)
+	make_location(world, "Clearing Catacombs (1-6)", "Sanctum Catacombs lvl 1", region_map, rule_map, False, True)
+	make_location(world, "Clearing Catacombs (6-12)", "Sanctum Catacombs lvl 2", region_map, rule_map, False, True)
+	make_location(world, "Clearing Catacombs (12-18)", "Sanctum Catacombs lvl 3", region_map, rule_map, False, True)
+	make_location(world, "Clearing Grove (15-20)", "Cresent Grove lvl 1", region_map, rule_map, False, True)
+	make_location(world, "Clearing Grove (20-25)", "Cresent Grove lvl 2", region_map, rule_map, False, True)
+	make_location(world, "Altered Vision", "Sanctum", region_map, rule_map, False, True)
+	make_location(world, "Scaling the Tower", "Sanctum", region_map, rule_map, False, True)
+	make_location(world, "Scaling Stars", "Trial of the Stars", region_map, rule_map, False, True)
+	make_location(world, "Rude!", "Sanctum", region_map, rule_map, False, True)
 	
 	for location in quests:
 		if location[1] in region_map:
 			make_event_location(world, f"Quest Completion: {location[0]}", location[0], f"Complete: {location[0]}", None, location[1], region_map, rule_map, False)
 	if options.is_class("fighter"):
-		make_location(world, "Becoming a Fighter", "Sanctum", region_map, rule_map, False)
-		make_location(world, "Judgement", "Sanctum", region_map, rule_map, False)
+		make_location(world, "Becoming a Fighter", "Sanctum", region_map, rule_map, False, True)
+		make_location(world, "Judgement", "Sanctum", region_map, rule_map, False, True)
 		
 	
 	if options.is_class("mystic"):
-		make_location(world, "Becoming a Mystic", "Sanctum", region_map, rule_map, False)
-		make_location(world, "Corrupted Arcana", "Sanctum", region_map, rule_map, False)
-		make_location(world, "Holier than Thou", "Sanctum", region_map, rule_map, False)
+		make_location(world, "Becoming a Mystic", "Sanctum", region_map, rule_map, False, True)
+		make_location(world, "Corrupted Arcana", "Sanctum", region_map, rule_map, False, True)
+		make_location(world, "Holier than Thou", "Sanctum", region_map, rule_map, False, True)
 		
 	
 	if options.is_class("bandit"):
-		make_location(world, "Becoming a Bandit", "Sanctum", region_map, rule_map, False)
+		make_location(world, "Becoming a Bandit", "Sanctum", region_map, rule_map, False, True)
 		
 	
 	
@@ -109,13 +109,13 @@ def connect_region(from_region, to_region, region_map, name, rule, is_connection
 	   return
 	region_map[from_region].connect(region_map[to_region], name, rule = rule)
 
-def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial):
+def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial, is_location_local):
 	loc = make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map, is_location_crucial)
 	if loc is not None: 
 	   world.location_count += 1
 	   
-	   if world.enable_local_fill:
-	       local_fill_loc.append(loc)
+	   if world.enable_local_fill and is_location_local:
+	       world.local_fill_loc.append(loc)
 	return loc
 
 def make_event_location(world, location_name_a, location_name_b, item_name, id, region_name, region_map, rule_map, is_location_crucial):

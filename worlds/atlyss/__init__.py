@@ -27,7 +27,6 @@ class Atlyss(World):
 	location_name_to_id = {value: location_dict.index(value) + 1 for value in location_dict}
 	item_name_to_id = {value: raw_items.index(value) + 1 for value in raw_items}
 	enable_local_fill = False
-	local_fill_loc = []
 
 	def __init__(self, multiworld: "MultiWorld", player: int):
 		super().__init__(multiworld, player)
@@ -36,7 +35,6 @@ class Atlyss(World):
 
 	def generate_early(self):
 		options = self.options
-		check_options(self)
 		if hasattr(self.multiworld, "re_gen_passthrough"):
 			if "Atlyss" not in self.multiworld.re_gen_passthrough: return
 			passthrough = self.multiworld.re_gen_passthrough["Atlyss"]
@@ -55,6 +53,7 @@ class Atlyss(World):
 			if "secondary_class" in passthrough:
 				options.secondary_class = SecondaryClass(passthrough["secondary_class"])
 			
+		else: check_options(self)
 
 	def create_regions(self):
 		gen_create_regions(self)

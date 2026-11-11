@@ -41,7 +41,7 @@ def gen_create_regions(world):
 	connect_region("Tier 11", "Tier 12", region_map, None, lambda state: has_tier(state, player, options, 12), False)
 	for location in tech_tree:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	for region in region_map.values():
 		world.multiworld.regions.append(region)
@@ -55,13 +55,13 @@ def connect_region(from_region, to_region, region_map, name, rule, is_connection
 	   return
 	region_map[from_region].connect(region_map[to_region], name, rule = rule)
 
-def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial):
+def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial, is_location_local):
 	loc = make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map, is_location_crucial)
 	if loc is not None: 
 	   world.location_count += 1
 	   
-	   if world.enable_local_fill:
-	       local_fill_loc.append(loc)
+	   if world.enable_local_fill and is_location_local:
+	       world.local_fill_loc.append(loc)
 	return loc
 
 def make_event_location(world, location_name_a, location_name_b, item_name, id, region_name, region_map, rule_map, is_location_crucial):

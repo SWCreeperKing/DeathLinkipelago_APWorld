@@ -23,9 +23,7 @@ items = [
 	"Hacking laptop",
 	"Hacking laptop Pro",
 	"Bolt Cutters",
-	"Van",
-	"Front door key 102",
-	"Front door key 113"
+	"Van"
 ]
 
 item_table = {

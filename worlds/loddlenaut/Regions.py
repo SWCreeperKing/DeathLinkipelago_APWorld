@@ -119,24 +119,24 @@ def gen_create_regions(world):
 	connect_region("Menu", "Home Cave", region_map, None, None, False)
 	for location in clean_biomes:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	for location in find_biomes:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	for location in upgrades:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	for location in badges:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	if options.cooksanity:
 		for location in recipes:
 			if location[1] in region_map:
-				make_location(world, location[0], location[1], region_map, rule_map, False)
+				make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	
 	for location in evolutions:
 		if location[1] in region_map:
-			make_location(world, location[0], location[1], region_map, rule_map, False)
+			make_location(world, location[0], location[1], region_map, rule_map, False, True)
 	make_event_location(world, "Clean the GUPPI Campus", "Clean GUPPI Campus 100%", "Biomes Cleaned", None, "GUPPI Campus", region_map, rule_map, False)
 	make_event_location(world, "Clean the Ripple Reef", "Clean Ripple Reef 100%", "Biomes Cleaned", None, "Ripple Reef", region_map, rule_map, False)
 	make_event_location(world, "Clean the Tangle Bay", "Clean Tangle Bay 100%", "Biomes Cleaned", None, "Tangle Bay", region_map, rule_map, False)
@@ -214,13 +214,13 @@ def connect_region(from_region, to_region, region_map, name, rule, is_connection
 	   return
 	region_map[from_region].connect(region_map[to_region], name, rule = rule)
 
-def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial):
+def make_location(world, location_name, region_name, region_map, rule_map, is_location_crucial, is_location_local):
 	loc = make_location_adv(world, location_name, location_name, world.location_name_to_id[location_name], region_name, region_map, rule_map, is_location_crucial)
 	if loc is not None: 
 	   world.location_count += 1
 	   
-	   if world.enable_local_fill:
-	       local_fill_loc.append(loc)
+	   if world.enable_local_fill and is_location_local:
+	       world.local_fill_loc.append(loc)
 	return loc
 
 def make_event_location(world, location_name_a, location_name_b, item_name, id, region_name, region_map, rule_map, is_location_crucial):

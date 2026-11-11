@@ -4,26 +4,6 @@ from .Locations import *
 
 # File is Auto-generated, see: [https://github.com/SWCreeperKing/ApWorldFactories/tree/master/ApWorldFactories/Games]
 
-class ProductionMultiplier(Range):
-	"""
-	Gives a production multiplier
-	"""
-	display_name = "Production Multiplier"
-	range_start = 1
-	range_end = 10
-	default = 4
-
-
-class HandCraftingMultiplier(Range):
-	"""
-	Gives a multiplier to hand crafting
-	"""
-	display_name = "Hand Crafting Multiplier"
-	range_start = 1
-	range_end = 10
-	default = 2
-
-
 class ScoutHintTierProducers(Range):
 	"""
 	Scout hint upto [1-13] Tier resource producers
@@ -37,16 +17,10 @@ class ScoutHintTierProducers(Range):
 
 @dataclass
 class WidgetIncOptions(PerGameCommonOptions):
-	production_multiplier: ProductionMultiplier
-	hand_crafting_multiplier: HandCraftingMultiplier
 	scout_hint_tier_producers: ScoutHintTierProducers
 
 	def get_options_map(self, option):
 		match option:
-			case "production_multiplier":
-				return self.production_multiplier
-			case "hand_crafting_multiplier":
-				return self.hand_crafting_multiplier
 			case "scout_hint_tier_producers":
 				return self.scout_hint_tier_producers
 		
