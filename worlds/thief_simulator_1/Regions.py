@@ -26,6 +26,7 @@ def gen_create_regions(world):
 		"106 Backyard": Region("106 Backyard", world.player, world.multiworld),
 		"106 Sideroom": Region("106 Sideroom", world.player, world.multiworld),
 		"107": Region("107", world.player, world.multiworld),
+		"": Region("", world.player, world.multiworld),
 		"107 Yard": Region("107 Yard", world.player, world.multiworld),
 		"108": Region("108", world.player, world.multiworld),
 		"108 Backyard": Region("108 Backyard", world.player, world.multiworld),
@@ -59,7 +60,8 @@ def gen_create_regions(world):
 	connect_region("Greenview St", "106", region_map, None, lambda state: has_lockpick(state, player, options), False)
 	connect_region("Greenview St", "106 Backyard", region_map, None, lambda state: has_lockpick(state, player, options), False)
 	connect_region("106 Backyard", "106 Sideroom", region_map, None, lambda state: True, False)
-	connect_region("107 Yard", "107", region_map, None, lambda state: has_glass_knife(state, player, options) or has_lockpick(state, player, options) or has_mini_electric_lock_pick(state, player, options), False)
+	connect_region("107 Yard", "107", region_map, None, lambda state: has_glass_knife(state, player, options) or has_mini_electric_lock_pick(state, player, options), False)
+	connect_region("Menu", "", region_map, None, lambda state: True, False)
 	connect_region("Greenview St", "107 Yard", region_map, None, lambda state: has_diy_simple_lockpick(state, player, options) or has_climbing_gloves(state, player, options), False)
 	connect_region("108 Backyard", "108", region_map, None, lambda state: has_glass_knife(state, player, options), False)
 	connect_region("Greenview St", "108", region_map, None, lambda state: has_mini_electric_lock_pick(state, player, options) or has_climbing_gloves(state, player, options) or has_glass_knife(state, player, options), False)
@@ -82,6 +84,7 @@ def gen_create_regions(world):
 	make_event_location(world, "Event: [Crowbar]", "Crowbar", "Crowbar", None, "Greenview St", region_map, rule_map, False)
 	make_event_location(world, "Event: [Flashlight]", "Flashlight", "Flashlight", None, "Greenview St", region_map, rule_map, False)
 	make_event_location(world, "Event: [House 102: Front Door Key to 102]", "House 102: Front Door Key to 102", "Front door key 102", None, "102", region_map, rule_map, False)
+	make_event_location(world, "Event: [House 109: Front Door Key 109]", "House 109: Front Door Key 109", "Front door key 109", None, "109", region_map, rule_map, False)
 	make_event_location(world, "Event: [House 113 Bedroom: Front Door Key 113]", "House 113 Bedroom: Front Door Key 113", "Front door key 113", None, "113 Bedroom", region_map, rule_map, False)
 	
 	

@@ -22,7 +22,6 @@ def get_rule_map(player, options):
 		"House 103: $50 Cash in Bedroom safe on top shelf left side": lambda state: has_safecracking_tools(state, player, options),
 		"House 103: $50 Cash in Bedroom safe on top shelf right side": lambda state: has_safecracking_tools(state, player, options),
 		"House 103: $50 Cash in Bedroom safe on bottom shelf": lambda state: has_safecracking_tools(state, player, options),
-		"House 105: Huway": lambda state: has_hacking_tools(state, player, options),
 		"House 105: Amethyst Bracelet": lambda state: has_jewelry_tools(state, player, options) and has_safecracking_tools(state, player, options),
 		"House 106: Huway": lambda state: has_hacking_tools(state, player, options),
 		"House 106: SomeSung": lambda state: has_hacking_tools(state, player, options),
@@ -55,56 +54,23 @@ def has_any(state, player, options, items) -> bool:
 def has_all(state, player, options, items) -> bool:
 	return all(has(state, player, options, item) for item in items)
 
-def has_diy_simple_lockpick(state, player, options) -> bool:
-	return has(state, player, options, "DIY Simple Lockpick")
+def has_car_key_signal_cloner(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Car theft", 3)
+
+def has_car_lock_pick_gun(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Car theft", 1)
+
+def has_climbing_gloves(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Agility", 2)
 
 def has_crowbar(state, player, options) -> bool:
 	return has(state, player, options, "Crowbar")
 
-def has_lockpick(state, player, options) -> bool:
-	return has(state, player, options, "Lockpick")
+def has_diy_simple_lockpick(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 1)
 
-def has_climbing_gloves(state, player, options) -> bool:
-	return has(state, player, options, "Climbing Gloves")
-
-def has_mini_electric_lock_pick(state, player, options) -> bool:
-	return has(state, player, options, "Mini electric lock pick")
-
-def has_jewelry_tools(state, player, options) -> bool:
-	return has(state, player, options, "Jewelry tools")
-
-def has_safecracking_tools(state, player, options) -> bool:
-	return has(state, player, options, "Safecracking tools")
-
-def has_glass_knife(state, player, options) -> bool:
-	return has(state, player, options, "Glass knife")
-
-def has_hacking_tools(state, player, options) -> bool:
-	return has(state, player, options, "Hacking tools")
-
-def has_car_lock_pick_gun(state, player, options) -> bool:
-	return has(state, player, options, "Car lock pick gun")
-
-def has_hacking_pda(state, player, options) -> bool:
-	return has(state, player, options, "Hacking PDA")
-
-def has_car_key_signal_cloner(state, player, options) -> bool:
-	return has(state, player, options, "Car key signal cloner")
-
-def has_round_lockpick(state, player, options) -> bool:
-	return has(state, player, options, "Round lockpick")
-
-def has_hacking_laptop(state, player, options) -> bool:
-	return has(state, player, options, "Hacking laptop")
-
-def has_hacking_laptop_pro(state, player, options) -> bool:
-	return has(state, player, options, "Hacking laptop Pro")
-
-def has_bolt_cutters(state, player, options) -> bool:
-	return has(state, player, options, "Bolt Cutters")
-
-def has_van(state, player, options) -> bool:
-	return has(state, player, options, "Van")
+def has_flashlight(state, player, options) -> bool:
+	return has(state, player, options, "Flashlight")
 
 def has_front_door_key_102(state, player, options) -> bool:
 	return has(state, player, options, "Front door key 102")
@@ -112,5 +78,35 @@ def has_front_door_key_102(state, player, options) -> bool:
 def has_front_door_key_113(state, player, options) -> bool:
 	return has(state, player, options, "Front door key 113")
 
-def has_flashlight(state, player, options) -> bool:
-	return has(state, player, options, "Flashlight")
+def has_front_door_key_109(state, player, options) -> bool:
+	return has(state, player, options, "Front door key 109")
+
+def has_glass_knife(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 4)
+
+def has_hacking_laptop(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Electronics", 3)
+
+def has_hacking_laptop_pro(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Electronics", 3)
+
+def has_hacking_pda(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Electronics", 2)
+
+def has_hacking_tools(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Electronics", 1)
+
+def has_jewelry_tools(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Appraisal", 2)
+
+def has_lockpick(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 2)
+
+def has_mini_electric_lock_pick(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 3)
+
+def has_round_lockpick(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 4)
+
+def has_safecracking_tools(state, player, options) -> bool:
+	return has_amount(state, player, options, "Progressive Lockpicking", 4)

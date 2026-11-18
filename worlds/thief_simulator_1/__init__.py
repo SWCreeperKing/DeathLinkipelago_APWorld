@@ -54,6 +54,15 @@ class ThiefSimulator1(World):
 		options = self.options
 		self.multiworld.completion_condition[self.player] = lambda state: has_amount(state, player, options, "Diamond", 40)
 
+	def fill_slot_data(self):
+		characters = [char for char in f"{self.multiworld.seed}{self.player_name}"]
+		self.random.shuffle(characters)
+		shuffled = f"ap_uuid_{''.join(characters).replace(" ", "_")}"
+		slot_data = {
+			"uuid": str(shuffled)
+		}
+		return slot_data
+
 	def get_filler_item_name(self):
 		return "$15"
 

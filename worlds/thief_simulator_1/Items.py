@@ -7,28 +7,18 @@ from .Options import *
 
 unlocks = []
 
-items = [
-	"DIY Simple Lockpick",
-	"Lockpick",
-	"Climbing Gloves",
-	"Mini electric lock pick",
-	"Jewelry tools",
-	"Safecracking tools",
-	"Glass knife",
-	"Hacking tools",
-	"Car lock pick gun",
-	"Hacking PDA",
-	"Car key signal cloner",
-	"Round lockpick",
-	"Hacking laptop",
-	"Hacking laptop Pro",
-	"Bolt Cutters",
-	"Van"
-]
+progressive_abilities = {
+	"Progressive Appraisal": 4,
+	"Progressive Backpack": 4,
+	"Progressive Car theft": 3,
+	"Progressive Lockpicking": 4,
+	"Progressive Agility": 4,
+	"Progressive Electronics": 3
+}
 
 item_table = {
 	**{item: ItemClassification.progression for item in unlocks},
-	**{item: ItemClassification.progression for item in items},
+	**{item: ItemClassification.progression for item in progressive_abilities},
 	"$15": ItemClassification.filler,
 	"Diamond": ItemClassification.progression
 }
@@ -41,9 +31,10 @@ def gen_create_items(world):
 	for item in unlocks:
 		world.location_count -= 1
 		pool.append(world.create_item(item))
-	for item in items:
-		world.location_count -= 1
-		pool.append(world.create_item(item))
+	for item, amt in progressive_abilities.items():
+		world.location_count -= amt
+		for _ in range(amt):
+			pool.append(world.create_item(item))
 	for _ in range(50):
 		world.location_count -= 1
 		pool.append(world.create_item("Diamond"))
